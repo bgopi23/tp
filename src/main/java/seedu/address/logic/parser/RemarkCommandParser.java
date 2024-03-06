@@ -12,10 +12,11 @@ import seedu.address.model.person.Remark;
 
 public class RemarkCommandParser {
     /**
+     * Parses args
      *
-     * @param args
-     * @return
-     * @throws ParseException
+     * @param args item to parse
+     * @return RemarkCommand object
+     * @throws ParseException if needed
      */
     public RemarkCommand parse(String args) throws ParseException {
         requireNonNull(args);
