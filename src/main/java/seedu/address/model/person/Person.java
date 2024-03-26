@@ -32,22 +32,27 @@ public class Person {
     private final Email email;
     // Data fields
     private final Address address;
-    private final TagSet tags;
+    private final Height height;
+    private final Weight weight;
     private final Note note;
+    private final TagSet tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, Height height,
+                  Weight weight, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.height = height;
+        this.weight = weight;
+        this.note = note;
         Set<Tag> tagSet = new HashSet<>();
         tagSet.addAll(tags);
         this.tags = new TagSet(tagSet);
-        this.note = note;
     }
 
     /**
@@ -66,10 +71,15 @@ public class Person {
             return this.email;
         case ADDRESS:
             return this.address;
-        case TAGS:
-            return this.tags;
         case NOTE:
             return this.note;
+        case HEIGHT:
+            return this.height;
+        case WEIGHT:
+            return this.weight;
+        case TAGS:
+            return this.tags;
+
         default:
             throw new AttributeNotFoundException();
         }
@@ -91,6 +101,19 @@ public class Person {
         return address;
     }
 
+    public Height getHeight() {
+        return this.height;
+    }
+
+    public Weight getWeight() {
+        return this.weight;
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}
@@ -98,10 +121,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return this.tags.getValue();
-    }
-
-    public Note getNote() {
-        return this.note;
     }
 
     /**
@@ -223,6 +242,14 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
+        if (!(height.getValue() == 0f)) {
+            sb.append(" | Height: ").append(height);
+        }
+
+        if (!(weight.getValue() == 0f)) {
+            sb.append(" | Weight: ").append(weight);
+        }
+
         if (!getTags().isEmpty()) {
             sb.append(" | Tags: ").append(tags);
         }
@@ -238,7 +265,9 @@ public class Person {
         PHONE,
         EMAIL,
         ADDRESS,
-        TAGS,
-        NOTE
+        HEIGHT,
+        WEIGHT,
+        NOTE,
+        TAGS
     }
 }
