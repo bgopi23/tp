@@ -50,7 +50,8 @@ class HeightCommandTest {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withHeight(UNINITIALIZED_HEIGHT).build();
 
-        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON, new Height(editedPerson.getHeight().getValue()));
+        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
+                new Height(editedPerson.getHeight().getValue()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
@@ -66,7 +67,8 @@ class HeightCommandTest {
         Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withHeight(HEIGHT_STUB).build();
 
-        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON, new Height(editedPerson.getHeight().getValue()));
+        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
+                new Height(editedPerson.getHeight().getValue()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
@@ -96,7 +98,7 @@ class HeightCommandTest {
         // same height details => return true
         assertEquals(firstHeight, firstHeightClone);
 
-        // height not equal to number => return false
-        assertNotEquals(firstHeight, 10);
+        // same height but different person => return false
+        assertNotEquals(firstHeight, secondHeight);
     }
 }

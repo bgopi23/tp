@@ -95,7 +95,7 @@ class NoteCommandTest {
         // same note details => return true
         assertEquals(firstNote, firstNoteClone);
 
-        // note not equal to number => return false
-        assertNotEquals(firstNote, 10);
+        // same note but different person => return false
+        assertNotEquals(firstNote, secondNote);
     }
 }
