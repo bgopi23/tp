@@ -24,12 +24,15 @@ public class HeightCommand extends Command {
             + "by the index number used in the last person listing. "
             + "Existing height will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
-            + "w/ WEIGHT\n"
+            + "w/ HEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "w/ 182";
 
-    public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
+    public static final String MESSAGE_ADD_HEIGHT_SUCCESS =
             "Successfully added height to client!\n---------------------------------\n%1$s";
+
+    public static final String MESSAGE_DELETE_HEIGHT_SUCCESS =
+            "Successfully removed height from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
     private final Height height;
@@ -66,11 +69,13 @@ public class HeightCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message when a height is added.
+     * Generates a command execution success message based on whether
+     * the height is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(this.height.getValue().toString(), personToEdit.getFormattedMessage());
+        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
+        return String.format(message, personToEdit.getFormattedMessage());
     }
 
     @Override

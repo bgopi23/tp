@@ -31,6 +31,9 @@ public class WeightCommand extends Command {
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added weight to client!\n---------------------------------\n%1$s";
 
+    public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
+            "Successfully removed weight from client!\n--------------------------------------\n%1$s";
+
     private final Index index;
     private final Weight weight;
 
@@ -66,11 +69,13 @@ public class WeightCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message when a weight is added.
+     * Generates a command execution success message based on whether
+     * the weight is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(this.weight.getValue().toString(), personToEdit.getFormattedMessage());
+        String message = !(weight.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
+        return String.format(message, personToEdit.getFormattedMessage());
     }
 
     @Override
