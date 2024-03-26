@@ -11,6 +11,7 @@ import javafx.util.Pair;
 public class Height extends Attribute<Float> {
 
     public static final String MESSAGE_CONSTRAINTS = "Heights can only take decimals (float)";
+    public static final String VALIDATION_REGEX = "([0-9]+([.][0-9]*)?|[.][0-9]+)";
 
     /**
      * Constructs a {@code height}.
@@ -20,6 +21,13 @@ public class Height extends Attribute<Float> {
     public Height(Float height) {
         super(height);
         requireNonNull(height);
+    }
+
+    /**
+     * Returns true if a given string is a valid height.
+     */
+    public static boolean isValidHeight(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**

@@ -124,21 +124,37 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<Float> note} into a {@code Height}.
+     * Parses a {@code Optional<String> height} into a {@code Height}.
      * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
      */
-    public static Height parseHeight(Optional<Float> height) {
+    public static Height parseHeight(Optional<String> height) throws ParseException {
         requireNonNull(height);
-        return height.isEmpty() ? new Height(0f) : new Height(height.get());
+
+        if (!height.isEmpty()) {
+            String trimmedHeight = height.get().trim();
+            if (!Height.isValidHeight(trimmedHeight)) {
+                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+            }
+            return new Height(Float.valueOf(trimmedHeight));
+        }
+        return new Height(0f);
     }
 
     /**
-     * Parses a {@code Optional<Float> note} into a {@code Weight}.
+     * Parses a {@code Optional<String> weight} into a {@code Weight}.
      * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
      */
-    public static Weight parseWeight(Optional<Float> weight) {
+    public static Weight parseWeight(Optional<String> weight) throws ParseException {
         requireNonNull(weight);
-        return weight.isEmpty() ? new Weight(0f) : new Weight(weight.get());
+
+        if (!weight.isEmpty()) {
+            String trimmedWeight = weight.get().trim();
+            if (!Weight.isValidWeight(trimmedWeight)) {
+                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+            }
+            return new Weight(Float.valueOf(trimmedWeight));
+        }
+        return new Weight(0f);
     }
 
     /**

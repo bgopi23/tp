@@ -11,6 +11,7 @@ import static java.util.Objects.requireNonNull;
 public class Weight extends Attribute<Float> {
 
     public static final String MESSAGE_CONSTRAINTS = "Weights can only take decimals (float)";
+    public static final String VALIDATION_REGEX = "([0-9]+([.][0-9]*)?|[.][0-9]+)";
 
     /**
      * Constructs a {@code weight}.
@@ -20,6 +21,13 @@ public class Weight extends Attribute<Float> {
     public Weight(Float weight) {
         super(weight);
         requireNonNull(weight);
+    }
+
+    /**
+     * Returns true if a given string is a valid weight.
+     */
+    public static boolean isValidWeight(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     /**
