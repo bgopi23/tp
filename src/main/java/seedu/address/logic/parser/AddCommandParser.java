@@ -49,7 +49,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, , , note, tagList);
+        Person person = new Person(name, phone, email, address, height, weight, note, tagList);
 
         return new AddCommand(person);
     }

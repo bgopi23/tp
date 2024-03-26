@@ -1,12 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.Collections;
@@ -21,13 +17,16 @@ import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +43,8 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
@@ -81,9 +82,12 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Height height = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+        Weight weight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, , , updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                height, weight, updatedNote, updatedTags);
     }
 
     @Override
@@ -141,8 +145,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Height height;
+        private Weight weight;
         private Note note;
+        private Set<Tag> tags;
 
         public EditPersonDescriptor() {
         }
@@ -156,6 +162,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setHeight(toCopy.height);
+            setWeight(toCopy.weight);
             setNote(toCopy.note);
             setTags(toCopy.tags);
         }
@@ -164,7 +172,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, height, weight, note, tags);
         }
 
         public Optional<Name> getName() {
@@ -206,6 +214,20 @@ public class EditCommand extends Command {
         public void setNote(Note note) {
             this.note = note;
         }
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
+        }
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(weight);
+        }
+
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
 
         /**
          * Returns an unmodifiable tag set, which throws
@@ -241,6 +263,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(height, otherEditPersonDescriptor.height)
+                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -252,6 +276,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("height", height)
+                    .add("weight", weight)
                     .add("note", note)
                     .add("tags", tags)
                     .toString();
