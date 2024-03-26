@@ -72,11 +72,11 @@ public class AddressBookParser {
         case FindCommand.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case WeightCommand.COMMAND_WORD:
-            return new WeightCommand();
-
         case HeightCommand.COMMAND_WORD:
-            return new HeightCommand();
+            return new HeightCommandParser().parse(arguments);
+
+        case WeightCommand.COMMAND_WORD:
+            return new WeightCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
