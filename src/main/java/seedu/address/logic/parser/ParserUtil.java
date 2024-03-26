@@ -12,9 +12,11 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -119,6 +121,24 @@ public class ParserUtil {
     public static Note parseNote(Optional<String> note) {
         requireNonNull(note);
         return note.isEmpty() ? new Note("") : new Note(note.get().trim());
+    }
+
+    /**
+     * Parses a {@code Optional<Float> note} into a {@code Height}.
+     * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
+     */
+    public static Height parseHeight(Optional<Float> height) {
+        requireNonNull(height);
+        return height.isEmpty() ? new Height(0f) : new Height(height.get());
+    }
+
+    /**
+     * Parses a {@code Optional<Float> note} into a {@code Weight}.
+     * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
+     */
+    public static Weight parseWeight(Optional<Float> weight) {
+        requireNonNull(weight);
+        return weight.isEmpty() ? new Weight(0f) : new Weight(weight.get());
     }
 
     /**
