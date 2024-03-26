@@ -64,6 +64,17 @@ public class Height extends Attribute<Float> {
         return this.getValue().toString();
     }
 
+    /**
+     * Adds a heading for the height field.
+     * Empty height values (i.e. 0f) will be formatted as "N/A" for better clarity.
+     */
+    public String getFormattedHeight() {
+        if (this.getValue() == 0f) {
+            return "N/A";
+        }
+        return "Height: " + this.getValue().toString();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (other == this) {

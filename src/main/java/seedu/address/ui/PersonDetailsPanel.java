@@ -28,11 +28,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label height;
+    @FXML
+    private Label weight;
+    @FXML
+    private Label note;
+    @FXML
     private FlowPane tags;
     @FXML
     private ImageView qrcode;
-    @FXML
-    private Label note;
+
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
@@ -61,16 +66,22 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(Tag::toString))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
+        height.setText(person.getHeight().getFormattedHeight());
+        weight.setText(person.getWeight().getFormattedWeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
+        height.setVisible(person.getHeight().getValue() != 0f);
+        weight.setVisible(person.getWeight().getValue() != 0f);
         note.setVisible(!person.getNote().getValue().isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
+        height.managedProperty().bind(height.visibleProperty());
+        weight.managedProperty().bind(weight.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
     }
 
@@ -83,6 +94,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setText("");
         email.setText("");
         note.setText("");
+        height.setText("");
+        weight.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
     }
