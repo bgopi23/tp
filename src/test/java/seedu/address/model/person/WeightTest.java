@@ -1,11 +1,12 @@
 package seedu.address.model.person;
 
-import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import javafx.util.Pair;
 
 public class WeightTest {
 
@@ -16,10 +17,10 @@ public class WeightTest {
 
     @Test
     public void equals() {
-        Weight weight = new Weight(92.5);
+        Weight weight = new Weight(92.5f);
 
         // same values -> returns true
-        assertTrue(weight.equals(new Weight(92.5)));
+        assertTrue(weight.equals(new Weight(92.5f)));
 
         // same object -> returns true
         assertTrue(weight.equals(weight));
@@ -31,7 +32,7 @@ public class WeightTest {
         assertFalse(weight.equals("hello"));
 
         // different values -> returns false
-        assertFalse(weight.equals(new Weight(69.5)));
+        assertFalse(weight.equals(new Weight(69.5f)));
     }
 
 

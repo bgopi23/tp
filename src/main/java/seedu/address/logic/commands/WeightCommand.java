@@ -1,16 +1,16 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Weight;
-
-import java.util.List;
-
-import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 /**
  * Changes the weight of an existing person in the address book.
@@ -65,12 +65,11 @@ public class WeightCommand extends Command {
     }
 
     /**
-     * Generates a command execution success message based on whether
-     * the weight is added to or removed from
+     * Generates a command execution success message when a weight is added.
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        return String.format(this.weight.getValue(), personToEdit.getFormattedMessage());
+        return String.format(this.weight.getValue().toString(), personToEdit.getFormattedMessage());
     }
 
     @Override
