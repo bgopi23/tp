@@ -72,7 +72,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code Optional<String> address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
@@ -92,17 +92,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> note} into a {@code Note}.
-     * Leading and trailing whitespaces will be trimmed.
-     * If the {@code Optional} is empty, return a {@code Note} with an empty string.
-     */
-    public static Note parseNote(Optional<String> note) {
-        requireNonNull(note);
-        return note.isEmpty() ? new Note("") : new Note(note.get().trim());
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code Optional<String> email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
@@ -119,6 +109,16 @@ public class ParserUtil {
         }
 
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code Optional<String> note} into a {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     * If the {@code Optional} is empty, return a {@code Note} with an empty string.
+     */
+    public static Note parseNote(Optional<String> note) {
+        requireNonNull(note);
+        return note.isEmpty() ? new Note("") : new Note(note.get().trim());
     }
 
     /**
