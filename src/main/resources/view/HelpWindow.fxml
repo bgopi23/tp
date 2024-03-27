@@ -33,8 +33,10 @@
                     <Label text="${'Available commands:\n'}"/>
                     <VBox fx:id="helpMessageContainer"/>
                     <VBox>
-                        <Label text="${'\nTo view more information about a specific command, enter the command into the input box and press &lt;Enter&gt;'}"></Label>
-                        <Label text="${'\nNeed more help? Refer to the user guide at https://ay2324s2-cs2103t-t17-3.github.io/tp/UserGuide.html'}"/>
+                        <Label text="${'\nTo view more information about a specific command,
+                        enter the command into the input box and press &lt;Enter&gt;'}"></Label>
+                        <Label text="${'\nNeed more help? Refer to the user guide at
+                        https://ay2324s2-cs2103t-t17-3.github.io/tp/UserGuide.html'}"/>
                     </VBox>
                 </VBox>
                 <AnchorPane>
