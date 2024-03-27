@@ -1,5 +1,7 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Date;
 
@@ -246,8 +248,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         heightChart.getData().add(heightSeries);
 
         // Set notes
-        Label noteLabel = new Label(new Date() + ": " + "Random text");
-        noteLabel.setStyle("-fx-text-fill: white");
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yy HH:mm:ss");
+        Label noteLabel = new Label((LocalDateTime.now()).format(dateTimeFormatter) + " - " + "Random text");
+        noteLabel.setStyle("-fx-text-fill: white; -fx-font-size: 12");
+
         notesBox.getChildren().clear();
         notesBox.getChildren().add(noteLabel);
 
