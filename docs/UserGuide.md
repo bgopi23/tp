@@ -3,8 +3,8 @@ layout: page
 title: User Guide
 ---
 
-FitBook is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still 
-having the benefits of a Graphical User Interface (GUI). If you are a personal trainer that prefers typing over mouse 
+FitBook is a **desktop app for managing clients, optimized for use via a Command Line Interface** (CLI) while still
+having the benefits of a Graphical User Interface (GUI). If you are a personal trainer that prefers typing over mouse
 interactions, FitBook is the perfect application for you to manage your clients!
 
 * Table of Contents
@@ -37,14 +37,14 @@ interactions, FitBook is the perfect application for you to manage your clients!
 
 6. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
- 
+
    * `add n/John p/98765432` Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
 
    * `delete 3` : Deletes the third client shown in the list.
-   
+
    * `exit` : Exits the app.
 
    * `list` : Lists all clients.
@@ -115,7 +115,7 @@ Edits information tagged to an existing client
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
 
-* Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list. 
+* Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -201,14 +201,14 @@ Format: `exit`
 
 ### Saving the data
 
-FitBook data is saved in the hard disk automatically after any command that changes the data. 
+FitBook data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 <hr>
 
 ### Editing the data file
 
-FitBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. 
+FitBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="span" class="alert alert-warning">:exclamation: **Caution:**
@@ -224,7 +224,7 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g.,
 To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact.
 
 <img src="images/QRScanning.png" height="480">
-<img src="images/QRContact.png" height="480"> 
+<img src="images/QRContact.png" height="480">
 <hr>
 
 ### Archiving data files `[coming in v2.0]`

@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
-import java.util.Date;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -63,6 +62,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
         private final Label label = createDataThresholdLabel();
         private final Node point = createDataPoint();
 
+        /**
+         * Creates a new HoveredThresholdNode.
+         */
         public HoveredThresholdNode(String value, String prefix, String postfix) {
             setPrefSize(10, 10);
 
@@ -197,8 +199,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Clear tags and set new ones
         tags.getChildren().clear();
         person.getTags().stream()
-                .sorted(Comparator.comparing(Tag::toString))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
+            .sorted(Comparator.comparing(Tag::toString))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
