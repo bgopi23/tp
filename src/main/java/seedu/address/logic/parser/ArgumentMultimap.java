@@ -44,6 +44,13 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the string value of {@code prefix}.
+     */
+    public String getStringValue(Prefix prefix) {
+        return getValue(prefix).get();
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
@@ -60,6 +67,13 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return getValue(new Prefix("")).orElse("");
+    }
+
+    /**
+     * Returns the number of segments in a preamble split by a single whitespace
+     */
+    public Integer getPreambleSegmentNumber() {
+        return getPreamble().split(" ").length;
     }
 
     /**
