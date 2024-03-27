@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Date;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
@@ -16,7 +17,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -48,8 +52,47 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private TabPane trackableFieldsTabPane;
 
     private LineChart<String, Number> weightChart;
+    private NumberAxis weightYAxis;
     private LineChart<String, Number> heightChart;
+    private NumberAxis heightYAxis;
     private VBox notesBox;
+
+    private static class HoveredThresholdNode extends StackPane {
+        private final Label label = createDataThresholdLabel();
+        private final Node point = createDataPoint();
+
+        public HoveredThresholdNode(String value, String prefix, String postfix) {
+            setPrefSize(10, 10);
+
+            setOnMouseEntered(event -> {
+                getChildren().setAll(point, label);
+                label.setText(String.format("%s%s%s", prefix, value, postfix));
+                toFront();
+            });
+            setOnMouseExited(event -> {
+                getChildren().setAll(point);
+            });
+
+            setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
+            getChildren().setAll(point);
+        }
+
+        private Node createDataPoint() {
+            final Circle point = new Circle(5);
+            point.setFill(Color.TRANSPARENT);
+            point.setStroke(Color.TRANSPARENT);
+            point.setStrokeWidth(0);
+            return point;
+        }
+
+        private Label createDataThresholdLabel() {
+            final Label label = new Label();
+            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+            label.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;");
+            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+            return label;
+        }
+    }
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
@@ -66,40 +109,63 @@ public class PersonDetailsPanel extends UiPart<Region> {
     public void initialize() {
         // Initialize weight chart
         CategoryAxis xAxis = new CategoryAxis();
-        NumberAxis yAxis = new NumberAxis();
-        weightChart = new LineChart<>(xAxis, yAxis);
+        weightYAxis = new NumberAxis();
+
+        xAxis.setAnimated(false); // fixes the collapsed categories bug
+        xAxis.setLabel("Date");
+        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        weightYAxis.setAnimated(false);
+        weightYAxis.setAutoRanging(false);
+        weightYAxis.setLabel("Weight (kg)");
+        weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        weightChart = new LineChart<>(xAxis, weightYAxis);
+        weightChart.setAnimated(false);
+        weightChart.setHorizontalGridLinesVisible(false);
+        weightChart.setVerticalGridLinesVisible(false);
         weightChart.setTitle("Weight Tracking");
         weightChart.setLegendVisible(false);
         weightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
-        weightChart.setPrefHeight(200); // Set a specific height for the weight chart
-        xAxis.setLabel("Date");
-        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-        yAxis.setLabel("Weight (kg)");
-        yAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        weightChart.setPrefHeight(200);
+        weightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
+        weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
+        weightChart.requestLayout();
 
         // Initialize height chart
         CategoryAxis hxAxis = new CategoryAxis();
-        NumberAxis hyAxis = new NumberAxis();
-        heightChart = new LineChart<>(hxAxis, hyAxis);
+        heightYAxis = new NumberAxis();
+
+        hxAxis.setAnimated(false);
+        hxAxis.setLabel("Date");
+        hxAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        heightYAxis.setAnimated(false);
+        heightYAxis.setAutoRanging(false);
+        heightYAxis.setLabel("Height (cm)");
+        heightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        heightChart = new LineChart<>(hxAxis, heightYAxis);
+        heightChart.setAnimated(false);
+        heightChart.setHorizontalGridLinesVisible(false);
+        heightChart.setVerticalGridLinesVisible(false);
         heightChart.setTitle("Height Tracking");
         heightChart.setLegendVisible(false);
         heightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
-        heightChart.setPrefHeight(200); // Set a specific height for the height chart
-        hxAxis.setLabel("Date");
-        hxAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-        hyAxis.setLabel("Height (cm)");
-        hyAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        heightChart.setPrefHeight(200);
+        heightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
+        heightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
+        heightChart.requestLayout();
 
         // Initialize notes box
         notesBox = new VBox();
         notesBox.setSpacing(5);
-        notesBox.setPrefHeight(200); // Set a specific height for the notes box
-        notesBox.setStyle("-fx-background-color: white;"); // Set a background color for the notes box
+        notesBox.setPrefHeight(200);
 
         // Create a scroll pane and set the notes box as its content
         ScrollPane notesScrollPane = new ScrollPane(notesBox);
-        notesScrollPane.setFitToWidth(true); // Enable horizontal scrolling if needed
-        notesScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED); // Show vertical scroll bar as needed
+        notesScrollPane.setFitToWidth(true);
+        notesScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
         Tab weightTab = trackableFieldsTabPane.getTabs().get(0);
@@ -139,33 +205,51 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         // Set weight
         XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
-//        for (Weight weight : client.getWeights()) {
-//            weightSeries.getData().add(new XYChart.Data<>(weight.getDate().toString(), weight.getValue()));
-//        }
-        weightSeries.getData().add(new XYChart.Data<>("Jan 2023", 60));
-        weightSeries.getData().add(new XYChart.Data<>("Feb 2023", 70));
+
+        weightYAxis.setLowerBound(50);
+        weightYAxis.setUpperBound(110);
+
+        XYChart.Data<String, Number> weightData = new XYChart.Data<>("Jan 2024", 60);
+        weightData.setNode(new HoveredThresholdNode("", "60", " kg"));
+        weightSeries.getData().add(weightData);
+
+        weightData = new XYChart.Data<>("Feb 2024", 100);
+        weightData.setNode(new HoveredThresholdNode("", "100", " kg"));
+        weightSeries.getData().add(weightData);
+
+        weightData = new XYChart.Data<>("Mar 2024", 80);
+        weightData.setNode(new HoveredThresholdNode("", "80", " kg"));
+        weightSeries.getData().add(weightData);
 
         weightChart.getData().clear();
         weightChart.getData().add(weightSeries);
 
         // Set height
         XYChart.Series<String, Number> heightSeries = new XYChart.Series<>();
-//        for (Height height : client.getHeights()) {
-//            heightSeries.getData().add(new XYChart.Data<>(height.getDate().toString(), height.getValue()));
-//        }
-        heightSeries.getData().add(new XYChart.Data<>("Mar 2023", 170));
-        heightSeries.getData().add(new XYChart.Data<>("Apr 2023", 180));
+
+        heightYAxis.setLowerBound(160);
+        heightYAxis.setUpperBound(190);
+
+        XYChart.Data<String, Number> heightData = new XYChart.Data<>("Mar 2024", 170);
+        heightData.setNode(new HoveredThresholdNode("", "170", " cm"));
+        heightSeries.getData().add(heightData);
+
+        heightData = new XYChart.Data<>("Apr 2024", 175);
+        heightData.setNode(new HoveredThresholdNode("", "175", " cm"));
+        heightSeries.getData().add(heightData);
+
+        heightData = new XYChart.Data<>("May 2024", 178);
+        heightData.setNode(new HoveredThresholdNode("", "178", " cm"));
+        heightSeries.getData().add(heightData);
 
         heightChart.getData().clear();
         heightChart.getData().add(heightSeries);
 
         // Set notes
+        Label noteLabel = new Label(new Date() + ": " + "Random text");
+        noteLabel.setStyle("-fx-text-fill: white");
         notesBox.getChildren().clear();
-//        for (Note note : client.getNotes()) {
-//            Label noteLabel = new Label(note.getDate() + ": " + note.getText());
-//            notesBox.getChildren().add(noteLabel);
-//        }
-        notesBox.getChildren().add(new Label(new Date() + ": " + "Random text"));
+        notesBox.getChildren().add(noteLabel);
 
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
