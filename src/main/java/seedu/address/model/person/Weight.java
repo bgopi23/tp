@@ -1,8 +1,8 @@
 package seedu.address.model.person;
 
-import javafx.util.Pair;
-
 import static java.util.Objects.requireNonNull;
+
+import javafx.util.Pair;
 
 /**
  * Represents a Person's weight in the address book.
