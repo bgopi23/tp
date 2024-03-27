@@ -38,6 +38,10 @@ public class CommandTestUtil {
     public static final String VALID_ADDRESS_AMY = "Block 312, Amy Street 1";
     public static final String VALID_ADDRESS_BOB = "Block 123, Bobby Street 3";
     public static final String VALID_ADDRESS_EMPTY = "";
+    public static final Float VALID_HEIGHT_AMY = 170f;
+    public static final Float VALID_HEIGHT_BOB = 180f;
+    public static final Float VALID_WEIGHT_AMY = 60f;
+    public static final Float VALID_WEIGHT_BOB = 85f;
 
     public static final String VALID_NOTE_BOB = "";
     public static final String VALID_NOTE_AMY = "";
