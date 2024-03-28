@@ -1,7 +1,6 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
@@ -23,23 +22,20 @@ public class NoteCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Updates and overrides the note of the client identified "
             + "by their corresponding index.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NOTE + "NOTE]\n"
+            + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "nt/ Likes to swim.";
+            + "Likes to swim.";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS =
-            "Successfully added note to client!\n---------------------------------\n%1$s";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Successfully added note to client!\n---------------------------------\n%1$s";
 
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS =
-            "Successfully removed note from client!\n--------------------------------------\n%1$s";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
     private final Note note;
 
     /**
      * @param index of the person in the filtered person list to edit the note
-     * @param note of the person to be updated to
+     * @param note  of the person to be updated to
      */
     public NoteCommand(Index index, Note note) {
         requireAllNonNull(index, note);
