@@ -47,7 +47,7 @@ public class WeightTest {
         assertTrue(weight.isMatch(new Pair<Float, Float>(90f, 100f)));
 
         // Falls outside of range -> returns false
-        assertTrue(weight.isMatch(new Pair<Float, Float>(80f, 90f)));
+        assertFalse(weight.isMatch(new Pair<Float, Float>(80f, 90f)));
 
         // Incorrect generic types -> returns false
         assertFalse(weight.isMatch(new Pair<Object, Object>("foo", "bar")));

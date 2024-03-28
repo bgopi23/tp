@@ -47,7 +47,7 @@ public class HeightTest {
         assertTrue(height.isMatch(new Pair<Float, Float>(180f, 185f)));
 
         // Falls outside of range -> returns false
-        assertTrue(height.isMatch(new Pair<Float, Float>(160f, 169f)));
+        assertFalse(height.isMatch(new Pair<Float, Float>(160f, 169f)));
 
         // Incorrect generic types -> returns false
         assertFalse(height.isMatch(new Pair<Object, Object>("foo", "bar")));
