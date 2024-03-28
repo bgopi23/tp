@@ -1,12 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.Messages;
@@ -22,6 +17,8 @@ public class FindCommand extends Command {
 
     public static final String COMMAND_WORD = "find";
 
+    public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
+
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists all clients whose specified attribute contains the specified keyword.\n"
             + "Parameters: "
@@ -29,15 +26,32 @@ public class FindCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_HEIGHT + "FROM, TO] "
+            + "[" + PREFIX_WEIGHT + "FROM, TO] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG] "
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "lewis@hotmail.com";
 
+
+    public static final String MESSAGE_USAGE_RANGE = COMMAND_WORD
+            + ": Finds using a specified range that is comma-delimited."
+            + "Parameters: FROM, TO (must be a positive float) "
+            + "w/ FROM, TO\n"
+            + "Example: " + COMMAND_WORD + " 1 "
+            + "w/ 70, 80";
+
     private final CombinedPredicates predicates;
 
     public FindCommand(CombinedPredicates predicates) {
         this.predicates = predicates;
+    }
+
+    /**
+     * Returns if a given string is a valid email.
+     */
+    public static boolean isValidRange(String test) {
+        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

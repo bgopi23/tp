@@ -4,11 +4,14 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.NavigableMap;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -185,15 +188,39 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code searchString} into a string.
+     * Parses a {@code String searchString} into a string.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param searchString String to search
+     * @param searchString String to search.
      *
-     * @return The string ready to be used for searching
+     * @return The string ready to be used for searching.
      */
     public static String parseSearchString(String searchString) {
         requireNonNull(searchString);
         return searchString.trim();
+    }
+
+    /**
+     * Parses a {@code Optional<String> searchRange} into a Pair of Floats.
+     *
+     * @param searchRange Range to search.
+     *
+     * @return The Pair instance ready to be used for searching.
+     */
+    public static Pair<Float, Float> parseSearchRange(Optional<String> searchRange) throws ParseException {
+        requireNonNull(searchRange);
+
+        if (searchRange.isPresent() && !searchRange.get().isEmpty()) {
+            String trimmedRange = searchRange.get().trim();
+            if (!FindCommand.isValidRange(trimmedRange)) {
+                throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
+            }
+
+            String[] range = searchRange.get().split(",\\s*");
+
+            return new Pair<>(Float.valueOf(range[0]), Float.valueOf(range[1]));
+        }
+
+        throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
     }
 }
