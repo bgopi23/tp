@@ -15,36 +15,36 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HeightMapTest {
+    private static LocalDateTime timeStub = HeightMap.getTimeOfExecution();
+    private static Height heightStub = new Height(182f);
+
     @Test
     public void isMatch() {
-        LocalDateTime timeStub = LocalDateTime.now();
-        Height heightStub = new Height(182f);
-
         TreeMap<LocalDateTime, Height> treeMap = new TreeMap<>();
         treeMap.put(timeStub, heightStub);
 
         HeightMap heightMap = new HeightMap(treeMap);
 
         // Exact range -> returns true
-        assertTrue(heightMap.isMatch(new Pair<>(new Height(182f), new Height(182f))));
+        assertTrue(heightMap.isMatch(new Pair<>(182f, 182f)));
 
         // Falls within range -> returns true
-        assertTrue(heightMap.isMatch(new Pair<>(new Height(180f), new Height(185f))));
+        assertTrue(heightMap.isMatch(new Pair<>(180f, 185f)));
 
         // Falls outside of range -> returns false
-        assertFalse(heightMap.isMatch(new Pair<>(new Height(160f), new Height(169f))));
+        assertFalse(heightMap.isMatch(new Pair<>(160f, 169f)));
 
         // Incorrect generic types -> returns false
         assertFalse(heightMap.isMatch(new Pair<Object, Object>("foo", "bar")));
-        assertFalse(heightMap.isMatch(new Pair<Height, Object>(new Height(182f), "bar")));
-        assertFalse(heightMap.isMatch(new Pair<Object, Height>("foo", new Height(182f))));
+        assertFalse(heightMap.isMatch(new Pair<Float, Object>(182f, "bar")));
+        assertFalse(heightMap.isMatch(new Pair<Object, Float>("foo", 182f)));
 
         // Null pair -> returns false
-        assertFalse(heightMap.isMatch(new Pair<Height, Height>(null, null)));
+        assertFalse(heightMap.isMatch(new Pair<Float, Float>(null, null)));
 
         // Either value is null -> returns false
-        assertFalse(heightMap.isMatch(new Pair<Height, Height>(new Height(180f), null)));
-        assertFalse(heightMap.isMatch(new Pair<Height, Height>(null, new Height(180f))));
+        assertFalse(heightMap.isMatch(new Pair<Float, Float>(180f, null)));
+        assertFalse(heightMap.isMatch(new Pair<Float, Float>(null, 180f)));
     }
 
     @Test

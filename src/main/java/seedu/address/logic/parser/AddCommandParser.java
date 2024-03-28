@@ -10,7 +10,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
+import java.time.LocalDateTime;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
@@ -18,6 +20,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.HeightMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -52,12 +55,14 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
+        TreeMap<LocalDateTime, Height> heightMap = new TreeMap<>();
+        heightMap.put(HeightMap.getTimeOfExecution(), ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, height, weight, note, tagList);
+        Person person = new Person(name, phone, email, address, heightMap, weight, note, tagList);
 
         return new AddCommand(person);
     }

@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
@@ -27,6 +28,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.HeightMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -87,12 +89,18 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        Height height = editPersonDescriptor.getHeight().orElse(personToEdit.getLatestHeight());
-        Weight weight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
+        TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
+        if (this.height.getValue() == 0f) {
+            toEditHeightMap.pollLastEntry();
+        } else {
+            toEditHeightMap.put(HeightMap.getTimeOfExecution(), this.height);
+        }
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getLatestHeight());
+        Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                height, weight, updatedNote, updatedTags);
+                updatedHeight, updatedWeight, updatedNote, updatedTags);
     }
 
     @Override

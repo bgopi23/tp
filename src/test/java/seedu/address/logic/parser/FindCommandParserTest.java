@@ -13,12 +13,14 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import java.util.Arrays;
 import java.util.HashSet;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.HeightMapContainsHeightRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -51,8 +53,9 @@ public class FindCommandParserTest {
     private static final EmailContainsSubstringPredicate EMAIL_PREDICATE_EMPTY = new EmailContainsSubstringPredicate(
             "");
     private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE_EMPTY =
-
             new AddressContainsSubstringPredicate("");
+    private static final HeightMapContainsHeightRangePredicate HEIGHTS_PREDICATE_EMPTY =
+            new HeightMapContainsHeightRangePredicate(new Pair<>(0f, 0f));
     private static final NoteContainsSubstringPredicate NOTE_PREDICATE_EMPTY = new NoteContainsSubstringPredicate(
             "");
     private static final TagSetContainsAllTagsPredicate TAGS_PREDICATE_EMPTY = new TagSetContainsAllTagsPredicate(
@@ -118,8 +121,7 @@ public class FindCommandParserTest {
     public void parse_noteFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY,
-                ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE, TAGS_PREDICATE_EMPTY));
+                ADDRESS_PREDICATE_EMPTY, HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_NOTE, NOTE), expectedCommand);
 

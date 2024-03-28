@@ -33,10 +33,10 @@ public class HeightCommandParser implements Parser<HeightCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEIGHT);
 
-        if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
-            return new HeightCommand(index, new Height(Float.valueOf(argMultimap.getValue(PREFIX_HEIGHT).get())));
+        if (!argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
+            return new HeightCommand(index, new Height(0f));
         }
 
-        return new HeightCommand(index, new Height(0f));
+        return new HeightCommand(index, new Height(Float.valueOf(argMultimap.getValue(PREFIX_HEIGHT).get())));
     }
 }

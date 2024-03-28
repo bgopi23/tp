@@ -4,12 +4,14 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
+import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.HeightMap;
 import seedu.address.model.person.Person;
 
 /**
@@ -57,9 +59,17 @@ public class HeightCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
+        if (this.height.getValue() == 0f) {
+            toEditHeightMap.pollLastEntry();
+        } else {
+            toEditHeightMap.put(HeightMap.getTimeOfExecution(), this.height);
+        }
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), this.height, personToEdit.getWeight(),
+                personToEdit.getAddress(), toEditHeightMap, personToEdit.getWeight(),
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

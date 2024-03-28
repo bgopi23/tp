@@ -23,6 +23,13 @@ public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
     }
 
     /**
+     * Returns a {@code LocalDateTime} that is rounded down to the nearest second.
+     */
+    public static LocalDateTime getTimeOfExecution() {
+        return LocalDateTime.now().withNano(0);
+    }
+
+    /**
      * Returns an immutable height map, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
      */
@@ -32,7 +39,7 @@ public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
     }
 
     /**
-     * Determine if the height values stored falls within the range specified.
+     * Determines if the height values stored falls within the range specified.
      * Returns true if any values in the height map falls within the specified range.
      *
      * @param otherValue Other value to check against

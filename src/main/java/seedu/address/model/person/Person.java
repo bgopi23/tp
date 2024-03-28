@@ -43,16 +43,14 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Height height,
+    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Height> heights,
                   Weight weight, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, height, weight, note, tags);
+        requireAllNonNull(name, phone, email, address, heights, weight, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        NavigableMap<LocalDateTime, Height> heightMap = new TreeMap<>();
-        heightMap.put(LocalDateTime.now(), height);
-        this.height = new HeightMap(heightMap);
+        this.height = new HeightMap(heights);
         this.weight = weight;
         this.note = note;
         Set<Tag> tagSet = new HashSet<>();
