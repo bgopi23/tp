@@ -21,8 +21,9 @@ public class NoteCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified (note John)
-        assertParseFailure(parser, VALID_NOTE_NOT_EMPTY, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                NoteCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, VALID_NOTE_NOT_EMPTY,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        NoteCommand.MESSAGE_USAGE));
 
         // no index and no field specified (note)
         assertParseFailure(parser, "", String.format(Messages.MESSAGE_NO_INDEX, NoteCommand.MESSAGE_USAGE));
@@ -50,6 +51,16 @@ public class NoteCommandParserTest {
         String userInput = targetIndex.getOneBased() + " " + VALID_NOTE_NOT_EMPTY;
 
         NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(VALID_NOTE_NOT_EMPTY));
+
+        assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_missingNote_success() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = String.format("%s", targetIndex.getOneBased());
+
+        NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(""));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
