@@ -51,7 +51,7 @@ public class FindCommand extends Command {
      * Returns if a given string is a valid email.
      */
     public static boolean isValidRange(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(FindCommand.VALIDATION_REGEX_RANGE);
     }
 
     @Override

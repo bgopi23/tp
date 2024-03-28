@@ -17,7 +17,7 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.height.Height;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Person;
 import seedu.address.testutil.PersonBuilder;
 
@@ -34,7 +34,7 @@ class HeightCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withHeight(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new Height(editedPerson.getHeight().getValue()));
+                new Height(editedPerson.getLatestHeight().getValue()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
@@ -51,7 +51,7 @@ class HeightCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withHeight(UNINITIALIZED_HEIGHT).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new Height(editedPerson.getHeight().getValue()));
+                new Height(editedPerson.getLatestHeight().getValue()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
@@ -68,7 +68,7 @@ class HeightCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withHeight(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new Height(editedPerson.getHeight().getValue()));
+                new Height(editedPerson.getLatestHeight().getValue()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());

@@ -46,14 +46,14 @@ public class FindCommandParser implements Parser<FindCommand> {
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_ADDRESS).orElse("")));
         HeightMapContainsHeightRangePredicate heightsPredicate = new HeightMapContainsHeightRangePredicate(
-                ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_HEIGHT).orElse("")));
+                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil
                 .parseSearchString(argMultimap.getValue(PREFIX_NOTE).orElse("")));
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(
                 ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
-                addressPredicate, notePredicate, tagsPredicate);
+                addressPredicate, heightsPredicate, notePredicate, tagsPredicate);
 
         return new FindCommand(predicates);
 

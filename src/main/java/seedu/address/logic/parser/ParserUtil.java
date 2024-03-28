@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.NavigableMap;
 import java.util.Optional;
 import java.util.Set;
 
@@ -15,7 +14,7 @@ import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.height.Height;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
@@ -221,6 +220,6 @@ public class ParserUtil {
             return new Pair<>(Float.valueOf(range[0]), Float.valueOf(range[1]));
         }
 
-        throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
+        return new Pair<>(0f, 0f);
     }
 }

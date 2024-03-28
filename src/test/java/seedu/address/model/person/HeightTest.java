@@ -6,9 +6,6 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import javafx.util.Pair;
-import seedu.address.model.height.Height;
-
 public class HeightTest {
 
     @Test
@@ -41,25 +38,19 @@ public class HeightTest {
     public void isMatch() {
         Height height = new Height(182f);
 
-        // Exact range -> returns true
-        assertTrue(height.isMatch(new Pair<Float, Float>(182f, 182f)));
+        // Exact match -> returns true
+        assertTrue(height.isMatch(new Height(182f)));
 
-        // Falls within range -> returns true
-        assertTrue(height.isMatch(new Pair<Float, Float>(180f, 185f)));
+        // Just above match -> returns false
+        assertFalse(height.isMatch(new Height(183f)));
 
-        // Falls outside of range -> returns false
-        assertFalse(height.isMatch(new Pair<Float, Float>(160f, 169f)));
+        // Just below match -> returns false
+        assertFalse(height.isMatch(new Height(181f)));
 
-        // Incorrect generic types -> returns false
-        assertFalse(height.isMatch(new Pair<Object, Object>("foo", "bar")));
-        assertFalse(height.isMatch(new Pair<Float, Object>(180f, "bar")));
-        assertFalse(height.isMatch(new Pair<Object, Object>("foo", 180f)));
+        // Negative input -> returns false
+        assertFalse(height.isMatch(new Height(-182f)));
 
-        // Null pair -> returns false
-        assertFalse(height.isMatch(new Pair<Float, Float>(null, null)));
-
-        // Either value is null -> returns false
-        assertFalse(height.isMatch(new Pair<Float, Float>(180f, null)));
-        assertFalse(height.isMatch(new Pair<Float, Float>(null, 180f)));
+        // Incorrect type -> returns false
+        assertFalse(height.isMatch("hello"));
     }
 }

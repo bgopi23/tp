@@ -12,7 +12,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.height.Height;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -64,7 +64,7 @@ class JsonAdaptedPerson {
         phone = source.getPhone().getValue();
         email = source.getEmail().getValue();
         address = source.getAddress().getValue();
-        height = source.getHeight().getValue().toString();
+        height = source.getLatestHeight().getValue().toString();
         weight = source.getWeight().getValue().toString();
         note = source.getNote().getValue();
         tags.addAll(source.getTags().stream()

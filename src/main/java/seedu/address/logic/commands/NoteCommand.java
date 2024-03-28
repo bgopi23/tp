@@ -59,7 +59,7 @@ public class NoteCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getHeight(),
+                personToEdit.getAddress(), personToEdit.getLatestHeight(),
                 personToEdit.getWeight(), this.note, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

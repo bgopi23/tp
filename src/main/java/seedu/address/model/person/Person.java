@@ -5,9 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.google.zxing.WriterException;
@@ -16,7 +19,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
-import seedu.address.model.height.Height;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
@@ -33,7 +35,7 @@ public class Person {
     private final Email email;
     // Data fields
     private final Address address;
-    private final Height height;
+    private final HeightMap height;
     private final Weight weight;
     private final Note note;
     private final TagSet tags;
@@ -48,7 +50,9 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.height = height;
+        NavigableMap<LocalDateTime, Height> heightMap = new TreeMap<>();
+        heightMap.put(LocalDateTime.now(), height);
+        this.height = new HeightMap(heightMap);
         this.weight = weight;
         this.note = note;
         Set<Tag> tagSet = new HashSet<>();
@@ -102,8 +106,17 @@ public class Person {
         return address;
     }
 
-    public Height getHeight() {
-        return this.height;
+    public Height getLatestHeight() {
+        return this.height.getValue().lastEntry().getValue();
+    }
+
+    /**
+     * Returns an immutable navigable map, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public NavigableMap<LocalDateTime, Height> getHeights() {
+        return this.height.getValue();
     }
 
     public Weight getWeight() {
@@ -243,7 +256,7 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
-        if (!(height.getValue() == 0f)) {
+        if (!(this.getLatestHeight().getValue() == 0f)) {
             sb.append(" | Height: ").append(height);
         }
 
@@ -251,7 +264,7 @@ public class Person {
             sb.append(" | Weight: ").append(weight);
         }
 
-        if (!getTags().isEmpty()) {
+        if (!this.getTags().isEmpty()) {
             sb.append(" | Tags: ").append(tags);
         }
 

@@ -66,7 +66,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(Tag::toString))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
-        height.setText(person.getHeight().getFormattedHeight());
+        height.setText(person.getLatestHeight().getFormattedHeight());
         weight.setText(person.getWeight().getFormattedWeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
@@ -74,7 +74,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
-        height.setVisible(person.getHeight().getValue() != 0f);
+        height.setVisible(person.getLatestHeight().getValue() != 0f);
         weight.setVisible(person.getWeight().getValue() != 0f);
         note.setVisible(!person.getNote().getValue().isEmpty());
 

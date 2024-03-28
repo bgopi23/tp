@@ -5,7 +5,7 @@ import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.height.Height;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -58,7 +58,7 @@ public class PersonBuilder {
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
-        this.height = personToCopy.getHeight();
+        this.height = personToCopy.getLatestHeight();
         this.weight = personToCopy.getWeight();
         this.note = personToCopy.getNote();
         this.tags = new HashSet<>(personToCopy.getTags());

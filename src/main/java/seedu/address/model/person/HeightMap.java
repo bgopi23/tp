@@ -1,4 +1,4 @@
-package seedu.address.model.height;
+package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,7 +8,6 @@ import java.util.NavigableMap;
 import java.util.function.Predicate;
 
 import javafx.util.Pair;
-import seedu.address.model.person.Attribute;
 
 /**
  * Represents a map of date-height values in the address book belonging to a Person.
@@ -49,21 +48,17 @@ public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
 
         Pair<?, ?> pair = (Pair<?, ?>) otherValue;
 
-        if (!(pair.getKey() instanceof Height) || !(pair.getValue() instanceof Height)) {
+        if (!(pair.getKey() instanceof Float) || !(pair.getValue() instanceof Float)) {
             return false;
         }
 
-        Pair<Height, Height> heightRange = (Pair<Height, Height>) otherValue;
+        Pair<Float, Float> heightRange = (Pair<Float, Float>) otherValue;
 
-        assert (heightRange.getKey().getValue() - heightRange.getValue().getValue() >= 0)
+        assert (heightRange.getValue() - heightRange.getKey() >= 0)
                 : "Range should be more than or equals to zero. Should have been handled in Parser class";
 
-        return this.getValue().values().stream().anyMatch(isInRange(heightRange));
-    }
-
-    private static Predicate<Height> isInRange(Pair<Height, Height> range) {
-        return value -> (value.getValue() >= range.getKey().getValue())
-                && (value.getValue() <= range.getValue().getValue());
+        Float latestHeight = this.getValue().lastEntry().getValue().getValue();
+        return (latestHeight >= heightRange.getKey()) && (latestHeight <= heightRange.getValue());
     }
 
     /**
