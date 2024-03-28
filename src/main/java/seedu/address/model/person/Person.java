@@ -16,6 +16,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
+import seedu.address.model.height.Height;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
@@ -42,7 +43,7 @@ public class Person {
      */
     public Person(Name name, Phone phone, Email email, Address address, Height height,
                   Weight weight, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+        requireAllNonNull(name, phone, email, address, height, weight, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;

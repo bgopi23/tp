@@ -7,6 +7,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
+import seedu.address.model.height.Height;
 
 public class HeightTest {
 

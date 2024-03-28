@@ -1,8 +1,9 @@
-package seedu.address.model.person;
+package seedu.address.model.height;
 
 import static java.util.Objects.requireNonNull;
 
 import javafx.util.Pair;
+import seedu.address.model.person.Attribute;
 
 /**
  * Represents a Person's height in the address book.

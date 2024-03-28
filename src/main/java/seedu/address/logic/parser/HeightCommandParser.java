@@ -8,7 +8,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.HeightCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.Height;
+import seedu.address.model.height.Height;
 
 /**
  * Parses input arguments and creates a new {@code HeightCommand} object
