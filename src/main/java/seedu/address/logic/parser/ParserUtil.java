@@ -194,8 +194,6 @@ public class ParserUtil {
      */
     public static String parseSearchString(String searchString) {
         requireNonNull(searchString);
-        String trimmedAddress = searchString.trim();
-
-        return trimmedAddress;
+        return searchString.trim();
     }
 }
