@@ -57,7 +57,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
         TreeMap<LocalDateTime, Height> heightMap = new TreeMap<>();
         heightMap.put(HeightMap.getTimeOfExecution(), ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
-        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

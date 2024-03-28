@@ -59,7 +59,7 @@ public class WeightCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getLatestHeight(), this.weight,
+                personToEdit.getAddress(), personToEdit.getHeights(), this.weight,
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

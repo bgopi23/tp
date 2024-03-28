@@ -90,17 +90,18 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
-        if (this.height.getValue() == 0f) {
-            toEditHeightMap.pollLastEntry();
-        } else {
-            toEditHeightMap.put(HeightMap.getTimeOfExecution(), this.height);
+        if (editPersonDescriptor.getHeight().isPresent()) {
+            if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
+                toEditHeightMap.pollLastEntry();
+            } else {
+                toEditHeightMap.put(HeightMap.getTimeOfExecution(), editPersonDescriptor.getHeight());
+            }
         }
-        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getLatestHeight());
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                updatedHeight, updatedWeight, updatedNote, updatedTags);
+                toEditHeightMap, updatedWeight, updatedNote, updatedTags);
     }
 
     @Override

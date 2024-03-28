@@ -1,9 +1,14 @@
 package seedu.address.storage;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
@@ -13,6 +18,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
+import seedu.address.model.person.HeightMap;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -81,6 +87,11 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
+        for (JsonAdaptedTag tag : tags) {
+            personTags.add(tag.toModelType());
+        }
+
+        final NavigableMap<LocalDateTime, Height> personHeights = new TreeMap<>();
         for (JsonAdaptedTag tag : tags) {
             personTags.add(tag.toModelType());
         }
