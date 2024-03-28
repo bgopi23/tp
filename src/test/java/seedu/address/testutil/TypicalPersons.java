@@ -98,7 +98,31 @@ public class TypicalPersons {
         return ab;
     }
 
+    public static AddressBook getTypicalAddressBookWithSinglePerson() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getSingleTypicalPerson()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    public static AddressBook getTypicalAddressBookWithNothing() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getEmptyTypicalPerson()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
     public static List<Person> getTypicalPersonsWithoutEmail() {
         return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL, BENSON_WITHOUT_EMAIL));
+    }
+
+    public static List<Person> getSingleTypicalPerson() {
+        return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL));
+    }
+
+    public static List<Person> getEmptyTypicalPerson() {
+        return new ArrayList<>(Arrays.asList());
     }
 }
