@@ -52,3 +52,4 @@ jobs:
       - uses: gaurav-nelson/github-action-markdown-link-check@v1
         with:
           check-modified-files-only: "yes"
+          config-file: "./config/markdown-link-check_config.json"
