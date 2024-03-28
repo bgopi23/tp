@@ -51,6 +51,8 @@ interactions, FitBook is the perfect application for you to manage your clients!
 
 1. Refer to the [Features](#intentionallybrokenlink) below for details of each command.
 
+<a href="http://fakesite.abc">fake link</a>
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Features
