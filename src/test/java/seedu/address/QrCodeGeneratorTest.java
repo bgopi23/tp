@@ -25,8 +25,7 @@ class QrCodeGeneratorTest {
     @Test
     void getQrCodePath_validPerson_success() {
         Path path = QrCodeGenerator.getQrCodePath(ALICE);
-        String expected = Paths.get(QrCodeGenerator.QR_CODE_FOLDER.toString(),
-                ALICE.getName().toString() + "_" + ALICE.getPhone().toString() + ".png").toString();
+        String expected = Paths.get(QrCodeGenerator.QR_CODE_FOLDER.toString(), ALICE.hashCode() + ".png").toString();
         assertEquals(expected, path.toString());
     }
 }
