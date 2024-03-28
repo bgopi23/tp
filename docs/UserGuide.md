@@ -142,19 +142,23 @@ Examples:
 *  `note 2 nt/Previously sprained both ankles` - Edits the note of the 2nd client to `Previously sprained both ankles`.
 <hr>
 
-### Locating clients by name: `find`
+### Searching clients: `find`
 
-Finds all clients whose specified attribute contains the specified keyword.
+Finds all clients that match the specified attributes.
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Any fields can be searched.
 * Multiple fields can be search in one command
-  * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name contains `wendy` and phone number contains `91234567`)
+    * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name contains `wendy` and phone number contains `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
-* `TAG` must be an exact match (case-insensitive)
-  * E.g `find t/fri` will not match the tag `friend`
+<div markdown="block" class="alert alert-warning">:warning: **Take note:**
+* Unlike other fields, `TAG` must be an exact match (case-insensitive)
+* E.g `find t/fri` will not match the tag `friend`
+* But `find t/fRieNd` will match the tag `friend`
+</div>
+
 
 Examples:
 * `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
