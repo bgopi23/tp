@@ -211,13 +211,20 @@ public class ParserUtil {
 
         if (searchRange.isPresent() && !searchRange.get().isEmpty()) {
             String trimmedRange = searchRange.get().trim();
+
             if (!FindCommand.isValidRange(trimmedRange)) {
                 throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
             }
 
             String[] range = searchRange.get().split(",\\s*");
+            Float fromRange = Float.valueOf(range[0]);
+            Float toRange = Float.valueOf(range[1]);
 
-            return new Pair<>(Float.valueOf(range[0]), Float.valueOf(range[1]));
+            if (fromRange > toRange) {
+                throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
+            }
+
+            return new Pair<>(fromRange, toRange);
         }
 
         return new Pair<>(0f, 0f);

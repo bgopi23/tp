@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.NavigableMap;
-import java.util.function.Predicate;
 
 import javafx.util.Pair;
 
@@ -59,22 +58,6 @@ public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
 
         Float latestHeight = this.getValue().lastEntry().getValue().getValue();
         return (latestHeight >= heightRange.getKey()) && (latestHeight <= heightRange.getValue());
-    }
-
-    /**
-     * Determine if the heightMap contains the specified height.
-     *
-     * @param otherValue Height to check against
-     * @return True if heightMap contains the specified height, false otherwise
-     */
-    public boolean contains(Object otherValue) {
-        if (!(otherValue instanceof Height)) {
-            return false;
-        }
-
-        Height height = ((Height) otherValue);
-
-        return this.getValue().containsValue(height);
     }
 
     @Override

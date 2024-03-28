@@ -36,10 +36,11 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE_RANGE = COMMAND_WORD
             + ": Finds using a specified range that is comma-delimited."
-            + "Parameters: FROM, TO (must be a positive float) "
-            + "w/ FROM, TO\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "w/ 70, 80";
+            + " FROM parameter must be less than or equal to TO parameter.\n"
+            + " This range function only works for the HEIGHT " + PREFIX_HEIGHT
+            + " and WEIGHT " + PREFIX_WEIGHT + " attributes.\n"
+            + "Parameters: FROM, TO (both of them must be a positive number greater than or equals to 0).\n"
+            + "Example: " + COMMAND_WORD + " " + PREFIX_WEIGHT + " 70, 80";
 
     private final CombinedPredicates predicates;
 
