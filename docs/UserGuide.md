@@ -49,7 +49,7 @@ interactions, FitBook is the perfect application for you to manage your clients!
 
    * `list` : Lists all clients.
 
-1. Refer to the [Features](#intentionallybrokenlink) below for details of each command.
+1. Refer to the [Features](#features) below for details of each command.
 
 --------------------------------------------------------------------------------------------------------------------
 
