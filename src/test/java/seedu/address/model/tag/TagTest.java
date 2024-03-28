@@ -32,8 +32,11 @@ public class TagTest {
         // Exact match -> returns true
         assertTrue(tag.isMatch("Lover"));
 
-        // Substring partial word -> returns true
-        assertTrue(tag.isMatch("Love"));
+        // Case-insensitive match -> returns true
+        assertTrue(tag.isMatch("lOvEr"));
+
+        // Substring partial word -> returns false
+        assertFalse(tag.isMatch("Love"));
 
         // Additional whitespace
         assertTrue(tag.isMatch(" Lover\n"));
