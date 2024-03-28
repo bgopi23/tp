@@ -1,6 +1,8 @@
 package seedu.address.model.tag;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -46,6 +48,17 @@ public class TagTest {
 
         // Different type
         assertFalse(tag.isMatch(1));
+    }
+
+    @Test
+    public void equals() {
+        Tag tag1 = new Tag("taggy1");
+        Tag tag2 = new Tag("taggy1");
+        Integer fakeTag = 1;
+
+        assertEquals(tag1, tag2);
+
+        assertNotEquals(tag1, fakeTag);
     }
 
 }
