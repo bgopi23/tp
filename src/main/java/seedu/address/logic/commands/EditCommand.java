@@ -99,7 +99,7 @@ public class EditCommand extends Command {
                 toEditHeightMap.pollLastEntry();
             } else {
                 // Otherwise, user has added a new height value.
-                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight());
+                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight().get());
             }
         }
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
