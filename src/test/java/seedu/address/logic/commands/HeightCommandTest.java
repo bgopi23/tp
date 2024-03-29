@@ -51,10 +51,10 @@ class HeightCommandTest {
     @Test
     public void execute_deleteHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_DELETE).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeights().build();
 
-        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new HeightEntry(editedPerson.getLatestHeight()));
+        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON, new HeightEntry(
+                new AbstractMap.SimpleEntry<>(HeightEntry.getTimeOfExecution(), new Height(0f))));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());

@@ -1,21 +1,27 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "height": "180",
-    "weight": "70",
-    "note" : "This is a note",
-    "tags": [ "friends" ]
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "heights" : [ {
+      "heightDate" : "2023-06-20T10:15:30",
+      "heightValue" : "176.0"
+    } ],
+    "weight" : "67.5",
+    "note" : "Likes to swim",
+    "tags" : [ "neighbours" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
-    "email": "alice@example.com",
-    "address": "123, Jurong West Ave 6, #08-111",
-    "height": "180",
-    "weight": "70",
-    "note" : "This is a note",
-    "tags": [ "friends" ]
+    "name" : "Charlotte Oliveiro",
+    "phone" : "93210283",
+    "email" : "charlotte@example.com",
+    "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
+    "heights" : [ {
+      "heightDate" : "2023-06-20T10:15:30",
+      "heightValue" : "176.0"
+    } ],
+    "weight" : "67.5",
+    "note" : "Likes to swim",
+    "tags" : [ "neighbours" ]
   } ]
 }
