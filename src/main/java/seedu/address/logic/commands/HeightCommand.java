@@ -15,6 +15,7 @@ import seedu.address.model.Model;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.height.HeightMap;
 
 /**
  * Changes the height of an existing person in the address book.
@@ -39,7 +40,7 @@ public class HeightCommand extends Command {
             "Successfully removed height from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
-    private final HeightEntry height;
+    private final HeightEntry heightEntry;
 
     /**
      * @param index of the person in the filtered person list to edit the height
@@ -49,7 +50,7 @@ public class HeightCommand extends Command {
         requireAllNonNull(index, height);
 
         this.index = index;
-        this.height = height;
+        this.heightEntry = height;
     }
 
     @Override
@@ -63,10 +64,13 @@ public class HeightCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
-        if (this.height.getValue().getValue().getValue() == 0f) {
+        if (this.heightEntry.getValue().getValue().getValue() == 0f) {
+            if (toEditHeightMap.isEmpty()) {
+                throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
+            }
             toEditHeightMap.pollLastEntry();
         } else {
-            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.height.getValue().getValue());
+            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.heightEntry.getValue().getValue());
         }
 
         Person editedPerson = new Person(
@@ -86,7 +90,7 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(height.getValue().getValue().getValue() == 0f)
+        String message = !(heightEntry.getValue().getValue().getValue() == 0f)
                 ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
@@ -104,6 +108,6 @@ public class HeightCommand extends Command {
 
         HeightCommand e = (HeightCommand) other;
         return this.index.equals(e.index)
-                && this.height.equals(e.height);
+                && this.heightEntry.equals(e.heightEntry);
     }
 }

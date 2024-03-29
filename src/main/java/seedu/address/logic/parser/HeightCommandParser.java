@@ -38,7 +38,7 @@ public class HeightCommandParser implements Parser<HeightCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEIGHT);
 
         // If there is no value specified for the height, user is deleting the last added height value.
-        if (!argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
+        if (argMultimap.getValue(PREFIX_HEIGHT).get().isEmpty()) {
             return new HeightCommand(index, new HeightEntry(new AbstractMap.SimpleEntry<>(
                     HeightEntry.getTimeOfExecution(), new Height(0f))));
         }

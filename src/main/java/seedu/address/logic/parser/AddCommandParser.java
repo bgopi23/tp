@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.time.LocalDateTime;
+import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.stream.Stream;
@@ -55,8 +56,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
-        TreeMap<LocalDateTime, Height> heightMap = new TreeMap<>();
-        heightMap.put(HeightEntry.getTimeOfExecution(), ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
+        NavigableMap<LocalDateTime, Height> heightMap = new TreeMap<>();
+        if (ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)).getValue() != 0f) {
+            heightMap.put(HeightEntry.getTimeOfExecution(),
+                    ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
+        }
         Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

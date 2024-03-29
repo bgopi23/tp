@@ -13,6 +13,10 @@ import seedu.address.model.person.Attribute;
  * Represents a map of date-height values in the address book belonging to a Person.
  */
 public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
+
+    public static final String MESSAGE_EMPTY_HEIGHT_MAP = "There are no more weight values to be removed. "
+            + "This client has no more height values associated with them.";
+
     /**
      * Constructs a {@code HeightMap}
      *
