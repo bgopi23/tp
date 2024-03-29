@@ -45,6 +45,7 @@ public class CommandTestUtil {
 
     public static final String VALID_NOTE_BOB = "";
     public static final String VALID_NOTE_AMY = "";
+    public static final String VALID_NOTE_NOT_EMPTY = "valid note";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 
@@ -71,6 +72,7 @@ public class CommandTestUtil {
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
+    public static final String PREAMBLE_EMPTY = "";
 
     public static final EditCommand.EditPersonDescriptor DESC_AMY;
     public static final EditCommand.EditPersonDescriptor DESC_BOB;

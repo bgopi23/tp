@@ -45,7 +45,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_NOTE);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate(
-                ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_NAME).orElse(argMultimap.getPreamble())));
+                ParserUtil.parseSearchString(
+                        argMultimap.getValue(PREFIX_NAME).orElse(argMultimap.getPreamble())));
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_PHONE).orElse("")));
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate(

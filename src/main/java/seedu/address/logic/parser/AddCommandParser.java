@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
+import static seedu.address.logic.Messages.MESSAGE_NAME_PARAMETER_MISSING;
+import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETERS;
+import static seedu.address.logic.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -14,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
-import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,11 +46,28 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
                         PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_PHONE)
-                || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+        // (add)
+        if (args.isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_NO_PARAMETERS, AddCommand.MESSAGE_USAGE));
         }
 
+        // (add John)
+        if (!argMultimap.containsAll(PREFIX_NAME, PREFIX_PHONE)
+                || !argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommand.MESSAGE_USAGE));
+        }
+
+        // (add p/99898888)
+        if (!argMultimap.contains(PREFIX_NAME)) {
+            throw new ParseException(String.format(MESSAGE_NAME_PARAMETER_MISSING, AddCommand.MESSAGE_USAGE));
+        }
+
+        // (add n/John)
+        if (!argMultimap.contains(PREFIX_PHONE)) {
+            throw new ParseException(String.format(MESSAGE_PHONE_PARAMETER_MISSING, AddCommand.MESSAGE_USAGE));
+        }
+
+        // (add n/John p/98988898...)
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
                 PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_ADDRESS);
 
@@ -68,13 +87,5 @@ public class AddCommandParser implements Parser<AddCommand> {
         Person person = new Person(name, phone, email, address, heightMap, weight, note, tagList);
 
         return new AddCommand(person);
-    }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
