@@ -229,11 +229,11 @@ Thus, we chose to only generate QR codes when the person is successfully added t
 
 This approach was also taken for the editing/deleting of QR codes.
 
-#### QR Code Image Naming
+#### QR Code Image File Naming
 
-QR codes associated with a client are named according to the format: [FULL NAME]_[PHONE_NUMBER].png
+QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format: 
 
-This format was chosen as clients with the same name and phone number are not allowed in FitBook, so these two fields are enough to uniquely identify every client.
+* [HASHCODE].png, where [HASHCODE] is the result of the `hashCode()` function of a `Person`.
 
 ### Deleting a client from FitBook
 

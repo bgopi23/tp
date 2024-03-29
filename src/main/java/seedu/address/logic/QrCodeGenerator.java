@@ -84,7 +84,6 @@ public class QrCodeGenerator {
      * @return the file path for the QR code
      */
     public static Path getQrCodePath(Person person) {
-        return Paths.get(QR_CODE_FOLDER.toString(),
-                person.getName().toString() + "_" + person.getPhone().toString() + ".png");
+        return Paths.get(QR_CODE_FOLDER.toString(), person.hashCode() + ".png");
     }
 }
