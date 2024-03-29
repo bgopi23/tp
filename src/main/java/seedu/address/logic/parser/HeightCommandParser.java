@@ -9,6 +9,10 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.HeightCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightEntry;
+
+import java.time.LocalDateTime;
+import java.util.AbstractMap;
 
 /**
  * Parses input arguments and creates a new {@code HeightCommand} object
@@ -34,9 +38,12 @@ public class HeightCommandParser implements Parser<HeightCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEIGHT);
 
         if (!argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
-            return new HeightCommand(index, new Height(0f));
+            return new HeightCommand(index, new HeightEntry(new AbstractMap.SimpleEntry<>(
+                    HeightEntry.getTimeOfExecution(), new Height(0f))));
         }
 
-        return new HeightCommand(index, new Height(Float.valueOf(argMultimap.getValue(PREFIX_HEIGHT).get())));
+        return new HeightCommand(index, new HeightEntry(new AbstractMap.SimpleEntry<>(
+                HeightEntry.getTimeOfExecution(),
+                new Height(Float.valueOf(argMultimap.getValue(PREFIX_HEIGHT).get())))));
     }
 }

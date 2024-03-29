@@ -47,11 +47,11 @@ public class HeightEntry extends Attribute<Map.Entry<LocalDateTime, Height>> {
         }
 
         // instanceof handles null types as well.
-        if (!(other instanceof HeightEntry)) {
+        if (!(other instanceof Height)) {
             return false;
         }
 
-        HeightEntry otherHeight = (HeightEntry) other;
+        Height otherHeight = (Height) other;
 
         // Use the equals() method of the underlying attribute to compare values
         return this.getValue().equals(otherHeight.getValue());

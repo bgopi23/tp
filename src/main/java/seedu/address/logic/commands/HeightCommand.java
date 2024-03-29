@@ -3,7 +3,9 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
@@ -11,8 +13,8 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.height.HeightEntry;
 
 /**
  * Changes the height of an existing person in the address book.
@@ -37,13 +39,13 @@ public class HeightCommand extends Command {
             "Successfully removed height from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
-    private final Height height;
+    private final HeightEntry height;
 
     /**
      * @param index of the person in the filtered person list to edit the height
      * @param height of the person to be updated to
      */
-    public HeightCommand(Index index, Height height) {
+    public HeightCommand(Index index, HeightEntry height) {
         requireAllNonNull(index, height);
 
         this.index = index;
@@ -60,11 +62,11 @@ public class HeightCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
-        if (this.height.getValue() == 0f) {
+        NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
+        if (this.height.getValue().getValue().getValue() == 0f) {
             toEditHeightMap.pollLastEntry();
         } else {
-            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.height);
+            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.height.getValue().getValue());
         }
 
         Person editedPerson = new Person(
@@ -84,7 +86,8 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
+        String message = !(height.getValue().getValue().getValue() == 0f)
+                ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 

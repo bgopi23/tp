@@ -1,7 +1,10 @@
 package seedu.address.testutil;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -31,7 +34,7 @@ public class PersonBuilder {
     private Phone phone;
     private Email email;
     private Address address;
-    private Height height;
+    private NavigableMap<LocalDateTime, Height> heights;
     private Weight weight;
     private Note note;
     private Set<Tag> tags;
@@ -44,7 +47,7 @@ public class PersonBuilder {
         this.phone = new Phone(DEFAULT_PHONE);
         this.email = new Email(DEFAULT_EMAIL);
         this.address = new Address(DEFAULT_ADDRESS);
-        this.height = new Height(DEFAULT_HEIGHT);
+        this.heights = new TreeMap<>();
         this.weight = new Weight(DEFAULT_WEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();
@@ -58,7 +61,7 @@ public class PersonBuilder {
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
-        this.height = personToCopy.getLatestHeight();
+        this.heights = new TreeMap<>(personToCopy.getHeights());
         this.weight = personToCopy.getWeight();
         this.note = personToCopy.getNote();
         this.tags = new HashSet<>(personToCopy.getTags());
@@ -108,8 +111,8 @@ public class PersonBuilder {
     /**
      * Sets the {@code Height} of the {@code Person} that we are building.
      */
-    public PersonBuilder withHeight(Float height) {
-        this.height = new Height(height);
+    public PersonBuilder withHeights(String... heights) {
+        this.heights = SampleDataUtil.getHeightMap(heights);
         return this;
     }
 
@@ -134,7 +137,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(this.name, this.phone, this.email, this.address,
-                this.height, this.weight, this.note, this.tags);
+                this.heights, this.weight, this.note, this.tags);
     }
 
 }

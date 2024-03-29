@@ -71,6 +71,7 @@ class JsonAdaptedPerson {
         email = source.getEmail().getValue();
         address = source.getAddress().getValue();
         heights.addAll(source.getHeights().entrySet().stream()
+                .map(HeightEntry::new)
                 .map(JsonAdaptedHeight::new)
                 .collect(Collectors.toList()));
         weight = source.getWeight().getValue().toString();

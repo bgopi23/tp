@@ -7,6 +7,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Set;
@@ -36,7 +37,7 @@ public class Person {
     private final Email email;
     // Data fields
     private final Address address;
-    private final HeightMap height;
+    private final HeightMap heights;
     private final Weight weight;
     private final Note note;
     private final TagSet tags;
@@ -51,7 +52,7 @@ public class Person {
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.height = new HeightMap(heights);
+        this.heights = new HeightMap(heights);
         this.weight = weight;
         this.note = note;
         Set<Tag> tagSet = new HashSet<>();
@@ -78,7 +79,7 @@ public class Person {
         case NOTE:
             return this.note;
         case HEIGHT:
-            return this.height;
+            return this.heights;
         case WEIGHT:
             return this.weight;
         case TAGS:
@@ -105,8 +106,8 @@ public class Person {
         return address;
     }
 
-    public Height getLatestHeight() {
-        return this.height.getValue().lastEntry().getValue();
+    public Map.Entry<LocalDateTime, Height> getLatestHeight() {
+        return this.heights.getValue().lastEntry();
     }
 
     /**
@@ -115,7 +116,7 @@ public class Person {
      * if modification is attempted.
      */
     public NavigableMap<LocalDateTime, Height> getHeights() {
-        return this.height.getValue();
+        return this.heights.getValue();
     }
 
     public Weight getWeight() {
@@ -255,8 +256,8 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
-        if (!(this.getLatestHeight().getValue() == 0f)) {
-            sb.append(" | Height: ").append(height);
+        if (!(this.getHeights().isEmpty())) {
+            sb.append(" | Height: ").append(heights);
         }
 
         if (!(weight.getValue() == 0f)) {
