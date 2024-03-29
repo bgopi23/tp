@@ -1,11 +1,11 @@
 package seedu.address.model.person.height;
 
-import seedu.address.model.person.Attribute;
+import static java.util.Objects.requireNonNull;
 
 import java.time.LocalDateTime;
 import java.util.Map;
 
-import static java.util.Objects.requireNonNull;
+import seedu.address.model.person.Attribute;
 
 /**
  * Represents a Person's height in the address book.

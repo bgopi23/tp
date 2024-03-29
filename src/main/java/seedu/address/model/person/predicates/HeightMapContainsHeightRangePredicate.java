@@ -1,10 +1,10 @@
 package seedu.address.model.person.predicates;
 
+import static java.util.Objects.requireNonNull;
+
 import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person.PersonAttribute;
-
-import static java.util.Objects.requireNonNull;
 
 /**
  * Tests that a {@code Person}'s {@code HeightMap} contains a height within a range specified by a Pair.

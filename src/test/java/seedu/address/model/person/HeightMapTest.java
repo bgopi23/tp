@@ -1,12 +1,7 @@
 package seedu.address.model.person;
 
-import javafx.util.Pair;
-import org.junit.jupiter.api.Test;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
-import seedu.address.model.person.height.HeightMap;
-import seedu.address.model.tag.Tag;
-import seedu.address.model.tag.TagSet;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
@@ -14,8 +9,14 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.Test;
+
+import javafx.util.Pair;
+import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.height.HeightMap;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.TagSet;
 
 public class HeightMapTest {
     private static LocalDateTime timeStub = HeightEntry.getTimeOfExecution();

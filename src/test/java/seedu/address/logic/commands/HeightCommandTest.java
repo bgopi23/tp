@@ -9,6 +9,8 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithoutEmail;
 
+import java.util.AbstractMap;
+
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -17,12 +19,10 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.person.height.Height;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.height.Height;
 import seedu.address.model.person.height.HeightEntry;
 import seedu.address.testutil.PersonBuilder;
-
-import java.util.AbstractMap;
 
 class HeightCommandTest {
 
