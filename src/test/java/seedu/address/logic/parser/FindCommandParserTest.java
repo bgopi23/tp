@@ -1,12 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.*;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 
@@ -32,6 +27,7 @@ public class FindCommandParserTest {
     private static final String PHONE = "11111111";
     private static final String EMAIL = "test@example.com";
     private static final String ADDRESS = "street";
+    private static final String HEIGHT_RANGE = "0, 200";
     private static final String NOTE = "best";
     private static final String TAG = "friends";
 
@@ -42,6 +38,8 @@ public class FindCommandParserTest {
             EMAIL);
     private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE = new AddressContainsSubstringPredicate(
             ADDRESS);
+    private static final HeightMapContainsHeightRangePredicate HEIGHTS_PREDICATE =
+            new HeightMapContainsHeightRangePredicate(new Pair<>(0f, 200f));
     private static final NoteContainsSubstringPredicate NOTE_PREDICATE = new NoteContainsSubstringPredicate(NOTE);
     private static final TagSetContainsAllTagsPredicate TAGS_PREDICATE = new TagSetContainsAllTagsPredicate(
             new HashSet<Tag>(Arrays.asList(new Tag(TAG))));
@@ -73,7 +71,7 @@ public class FindCommandParserTest {
     public void parse_nameFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_NAME, NAME), expectedCommand);
 
@@ -85,7 +83,7 @@ public class FindCommandParserTest {
     public void parse_phoneFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE_EMPTY, PHONE_PREDICATE, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_PHONE, PHONE), expectedCommand);
 
@@ -97,7 +95,7 @@ public class FindCommandParserTest {
     public void parse_emailFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_EMAIL, EMAIL), expectedCommand);
 
@@ -109,7 +107,7 @@ public class FindCommandParserTest {
     public void parse_addressFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_ADDRESS, ADDRESS), expectedCommand);
 
@@ -120,8 +118,8 @@ public class FindCommandParserTest {
     @Test
     public void parse_noteFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
-                NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY,
-                ADDRESS_PREDICATE_EMPTY, HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE, TAGS_PREDICATE_EMPTY));
+                NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_NOTE, NOTE), expectedCommand);
 
@@ -130,11 +128,22 @@ public class FindCommandParserTest {
     }
 
     @Test
+    public void parse_heightFieldPresent_returnsFindCommand() {
+        FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
+                NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
+                HEIGHTS_PREDICATE, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+
+        assertParseSuccess(parser, String.format(" %s%s", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
+
+        // multiple whitespaces
+        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
+    }
+
+    @Test
     public void parse_tagFieldPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE_EMPTY, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY,
-                ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
+                ADDRESS_PREDICATE_EMPTY, HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
 
         assertParseSuccess(parser, String.format(" %s%s", PREFIX_TAG, TAG), expectedCommand);
 
@@ -146,7 +155,7 @@ public class FindCommandParserTest {
     public void parse_multipleFieldsPresent_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE, PHONE_PREDICATE, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format(" %s%s %s%s", PREFIX_NAME, NAME, PREFIX_PHONE, PHONE),
                 expectedCommand);
@@ -158,12 +167,13 @@ public class FindCommandParserTest {
 
     /**
      * Tests for valid searching even when no prefix is specified for searching via a certain attribute.
-     * This would default to seraching via the {@code Name} attribute.
+     * This would default to searching via the {@code Name} attribute.
      */
     @Test
     public void parse_noAttributeSpecified_returnsFindCommand() {
         CombinedPredicates expectedPredicates = new CombinedPredicates(NAME_PREDICATE, PHONE_PREDICATE_EMPTY,
-                EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY);
+                EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY, HEIGHTS_PREDICATE_EMPTY,
+                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY);
         FindCommand expectedCommand = new FindCommand(expectedPredicates);
 
         assertParseSuccess(parser, NAME, expectedCommand);
@@ -173,7 +183,7 @@ public class FindCommandParserTest {
     public void parse_preambleWithTagSpecified_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
 
         assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_TAG, TAG),
                 expectedCommand);
@@ -183,7 +193,7 @@ public class FindCommandParserTest {
     public void parse_preambleWithEmailSpecified_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE, ADDRESS_PREDICATE_EMPTY,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_EMAIL, EMAIL),
                 expectedCommand);
@@ -193,7 +203,7 @@ public class FindCommandParserTest {
     public void parse_preambleWithAddressSpecified_returnsFindCommand() {
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 NAME_PREDICATE, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE,
-                NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
+                HEIGHTS_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
         assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_ADDRESS, ADDRESS),
                 expectedCommand);

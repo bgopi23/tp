@@ -10,6 +10,7 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.HashSet;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
@@ -26,6 +27,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.HeightMapContainsHeightRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -82,10 +84,13 @@ public class AddressBookParserTest {
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
+        HeightMapContainsHeightRangePredicate heightPredicate =
+                new HeightMapContainsHeightRangePredicate(new Pair<>(0f, 0f));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
-                namePredicate, phonePredicate, emailPredicate, addressPredicate, notePredicate, tagsPredicate));
+                namePredicate, phonePredicate, emailPredicate, addressPredicate,
+                heightPredicate, notePredicate, tagsPredicate));
         assertEquals(expectedCommand, command);
     }
 
