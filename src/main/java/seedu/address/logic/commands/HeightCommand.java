@@ -10,8 +10,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.person.Height;
-import seedu.address.model.person.HeightMap;
+import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.person.Person;
 
 /**
@@ -64,7 +64,7 @@ public class HeightCommand extends Command {
         if (this.height.getValue() == 0f) {
             toEditHeightMap.pollLastEntry();
         } else {
-            toEditHeightMap.put(HeightMap.getTimeOfExecution(), this.height);
+            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.height);
         }
 
         Person editedPerson = new Person(

@@ -10,7 +10,6 @@ import java.util.HashSet;
 import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Set;
-import java.util.TreeMap;
 import java.util.logging.Logger;
 
 import com.google.zxing.WriterException;
@@ -19,6 +18,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
+import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 

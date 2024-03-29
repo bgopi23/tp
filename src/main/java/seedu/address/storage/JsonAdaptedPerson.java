@@ -1,9 +1,7 @@
 package seedu.address.storage;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.NavigableMap;
@@ -17,13 +15,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Height;
-import seedu.address.model.person.HeightMap;
+import seedu.address.model.person.height.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -37,7 +35,7 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final String height;
+    private final List<JsonAdaptedHeight> heights = new ArrayList<>();
     private final String weight;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
@@ -48,13 +46,15 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("height") String height, @JsonProperty("weight") String weight,
+            @JsonProperty("heights") List<JsonAdaptedHeight> heights, @JsonProperty("weight") String weight,
             @JsonProperty("note") String note, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.height = height;
+        if (heights != null) {
+            this.heights.addAll(heights);
+        }
         this.weight = weight;
         this.note = note;
         if (tags != null) {
@@ -70,7 +70,9 @@ class JsonAdaptedPerson {
         phone = source.getPhone().getValue();
         email = source.getEmail().getValue();
         address = source.getAddress().getValue();
-        height = source.getLatestHeight().getValue().toString();
+        heights.addAll(source.getHeights().entrySet().stream()
+                .map(JsonAdaptedHeight::new)
+                .collect(Collectors.toList()));
         weight = source.getWeight().getValue().toString();
         note = source.getNote().getValue();
         tags.addAll(source.getTags().stream()
@@ -87,13 +89,13 @@ class JsonAdaptedPerson {
      */
     public Person toModelType() throws IllegalValueException {
         final List<Tag> personTags = new ArrayList<>();
-        for (JsonAdaptedTag tag : tags) {
+        for (JsonAdaptedTag tag : this.tags) {
             personTags.add(tag.toModelType());
         }
 
-        final NavigableMap<LocalDateTime, Height> personHeights = new TreeMap<>();
-        for (JsonAdaptedTag tag : tags) {
-            personTags.add(tag.toModelType());
+        final List<HeightEntry> personHeights = new ArrayList<>();
+        for (JsonAdaptedHeight height : this.heights) {
+            personHeights.add(height.toModelType());
         }
 
         if (name == null) {
@@ -128,13 +130,11 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        if (height == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+        final NavigableMap<LocalDateTime, Height> modelHeights = new TreeMap<>();
+        for (JsonAdaptedHeight jsonAdaptedHeight : heights) {
+            HeightEntry heightEntry = jsonAdaptedHeight.toModelType();
+            modelHeights.put(heightEntry.getValue().getKey(), heightEntry.getValue().getValue());
         }
-        if (!height.isEmpty() && !Height.isValidHeight(height)) {
-            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
-        }
-        final Height modelHeight = new Height(Float.valueOf(height));
 
         if (weight == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -150,7 +150,7 @@ class JsonAdaptedPerson {
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHeight,
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHeights,
                 modelWeight, modelNote, modelTags);
     }
 

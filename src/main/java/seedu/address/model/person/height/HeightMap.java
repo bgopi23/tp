@@ -1,4 +1,4 @@
-package seedu.address.model.person;
+package seedu.address.model.person.height;
 
 import static java.util.Objects.requireNonNull;
 
@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.NavigableMap;
 
 import javafx.util.Pair;
+import seedu.address.model.person.Attribute;
 
 /**
  * Represents a map of date-height values in the address book belonging to a Person.
@@ -20,13 +21,6 @@ public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
     public HeightMap(NavigableMap<LocalDateTime, Height> heightMap) {
         super(heightMap);
         requireNonNull(heightMap);
-    }
-
-    /**
-     * Returns a {@code LocalDateTime} that is rounded down to the nearest second.
-     */
-    public static LocalDateTime getTimeOfExecution() {
-        return LocalDateTime.now().withNano(0);
     }
 
     /**

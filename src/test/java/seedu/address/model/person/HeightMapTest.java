@@ -2,6 +2,9 @@ package seedu.address.model.person;
 
 import javafx.util.Pair;
 import org.junit.jupiter.api.Test;
+import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.height.HeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
@@ -15,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HeightMapTest {
-    private static LocalDateTime timeStub = HeightMap.getTimeOfExecution();
+    private static LocalDateTime timeStub = HeightEntry.getTimeOfExecution();
     private static Height heightStub = new Height(182f);
 
     @Test

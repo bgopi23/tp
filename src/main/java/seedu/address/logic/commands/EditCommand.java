@@ -27,8 +27,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Height;
-import seedu.address.model.person.HeightMap;
+import seedu.address.model.person.height.Height;
+import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -94,7 +94,7 @@ public class EditCommand extends Command {
             if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
                 toEditHeightMap.pollLastEntry();
             } else {
-                toEditHeightMap.put(HeightMap.getTimeOfExecution(), editPersonDescriptor.getHeight());
+                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight());
             }
         }
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
