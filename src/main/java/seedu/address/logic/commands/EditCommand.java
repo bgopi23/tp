@@ -11,9 +11,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -34,6 +36,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
 import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.height.HeightMap;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -82,23 +85,22 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
-        // If the heights are modified
-        if (editPersonDescriptor.getHeight().isPresent()) {
-            // If the last updated value of the height is 0, user has deleted the last updated value.
-            if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
-                toEditHeightMap.pollLastEntry();
-            } else {
-                // Otherwise, user has added a new height value.
-                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight().get());
+        NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
+        if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
+            if (toEditHeightMap.isEmpty()) {
+                throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
             }
+            toEditHeightMap.pollLastEntry();
+        } else {
+            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight().get());
         }
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
