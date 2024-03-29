@@ -94,13 +94,16 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
-        if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
-            if (toEditHeightMap.isEmpty()) {
-                throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
+        if (editPersonDescriptor.getHeight().isPresent()) {
+            Height updatedHeight = editPersonDescriptor.getHeight().get();
+            if (updatedHeight.getValue() == 0f) {
+                if (toEditHeightMap.isEmpty()) {
+                    throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
+                }
+                toEditHeightMap.pollLastEntry();
+            } else {
+                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), updatedHeight);
             }
-            toEditHeightMap.pollLastEntry();
-        } else {
-            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight().get());
         }
         Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
