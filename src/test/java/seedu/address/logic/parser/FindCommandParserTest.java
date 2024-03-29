@@ -156,6 +156,10 @@ public class FindCommandParserTest {
                 expectedCommand);
     }
 
+    /**
+     * Tests for valid searching even when no prefix is specified for searching via a certain attribute.
+     * This would default to seraching via the {@code Name} attribute.
+     */
     @Test
     public void parse_noAttributeSpecified_returnsFindCommand() {
         CombinedPredicates expectedPredicates = new CombinedPredicates(NAME_PREDICATE, PHONE_PREDICATE_EMPTY,
