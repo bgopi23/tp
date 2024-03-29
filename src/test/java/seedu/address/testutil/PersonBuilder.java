@@ -1,9 +1,7 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
-import java.util.AbstractMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;

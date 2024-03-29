@@ -1,6 +1,10 @@
 package seedu.address.ui;
 
+import java.time.LocalDateTime;
+import java.util.AbstractMap;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.Optional;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -9,6 +13,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.height.Height;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,7 +71,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(Tag::toString))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
-        height.setText(person.getLatestHeight().getValue().getFormattedHeight());
+        Optional<Map.Entry<LocalDateTime, Height>> latestHeight = person.getLatestHeight();
+        height.setText(latestHeight.isPresent() ? latestHeight.get().getValue().getFormattedHeight() : "");
         weight.setText(person.getWeight().getFormattedWeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
@@ -74,7 +80,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
-        height.setVisible(person.getLatestHeight().getValue().getValue() != 0f);
+        height.setVisible(latestHeight.isPresent());
         weight.setVisible(person.getWeight().getValue() != 0f);
         note.setVisible(!person.getNote().getValue().isEmpty());
 

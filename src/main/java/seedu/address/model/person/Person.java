@@ -10,6 +10,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -23,6 +24,8 @@ import seedu.address.model.person.height.Height;
 import seedu.address.model.person.height.HeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
+
+import javax.swing.text.html.Option;
 
 /**
  * Represents a Person in the address book.
@@ -61,7 +64,7 @@ public class Person {
     }
 
     /**
-     * Get the valued of the specified attribute.
+     * Get the value of the specified attribute.
      *
      * @param attribute Attribute to retrieve
      * @return Value of the specified attribute
@@ -106,8 +109,8 @@ public class Person {
         return address;
     }
 
-    public Map.Entry<LocalDateTime, Height> getLatestHeight() {
-        return this.heights.getValue().lastEntry();
+    public Optional<Map.Entry<LocalDateTime, Height>> getLatestHeight() {
+        return Optional.of(this.heights.getValue().lastEntry());
     }
 
     /**
@@ -257,7 +260,7 @@ public class Person {
         }
 
         if (!heights.getValue().isEmpty()) {
-            sb.append(" | Latest Height: ").append(this.getLatestHeight().getValue().toString());
+            sb.append(" | Latest Height: ").append(this.getLatestHeight().get().getValue().toString());
         }
 
         if (!(weight.getValue() == 0f)) {

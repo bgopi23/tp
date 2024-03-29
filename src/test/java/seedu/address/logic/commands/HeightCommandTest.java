@@ -37,7 +37,7 @@ class HeightCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new HeightEntry(editedPerson.getLatestHeight()));
+                new HeightEntry(editedPerson.getLatestHeight().get()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
@@ -71,7 +71,7 @@ class HeightCommandTest {
         Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new HeightEntry(editedPerson.getLatestHeight()));
+                new HeightEntry(editedPerson.getLatestHeight().get()));
 
         String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());

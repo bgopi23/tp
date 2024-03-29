@@ -40,7 +40,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setHeight(person.getLatestHeight().getValue());
+        descriptor.setHeight(person.getLatestHeight().get().getValue());
         descriptor.setWeight(person.getWeight());
         descriptor.setNote(person.getNote());
         descriptor.setTags(person.getTags());
