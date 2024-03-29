@@ -1,7 +1,9 @@
 package seedu.address.testutil;
 
 import java.time.LocalDateTime;
+import java.util.AbstractMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
@@ -14,6 +16,7 @@ import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
 import seedu.address.model.person.Weight;
+import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -27,7 +30,7 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final Float DEFAULT_HEIGHT = 182f;
+    public static final Height DEFAULT_HEIGHT = new Height(182f);
     public static final Float DEFAULT_WEIGHT = 92.5f;
 
     private Name name;
@@ -48,6 +51,7 @@ public class PersonBuilder {
         this.email = new Email(DEFAULT_EMAIL);
         this.address = new Address(DEFAULT_ADDRESS);
         this.heights = new TreeMap<>();
+        this.heights.put(HeightEntry.getTimeOfExecution(), DEFAULT_HEIGHT);
         this.weight = new Weight(DEFAULT_WEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();

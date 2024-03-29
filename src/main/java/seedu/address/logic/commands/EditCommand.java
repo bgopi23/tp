@@ -11,9 +11,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
@@ -90,10 +92,13 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
         TreeMap toEditHeightMap = new TreeMap(personToEdit.getHeights());
+        // If the heights are modified
         if (editPersonDescriptor.getHeight().isPresent()) {
+            // If the last updated value of the height is 0, user has deleted the last updated value.
             if (editPersonDescriptor.getHeight().get().getValue() == 0f) {
                 toEditHeightMap.pollLastEntry();
             } else {
+                // Otherwise, user has added a new height value.
                 toEditHeightMap.put(HeightEntry.getTimeOfExecution(), editPersonDescriptor.getHeight());
             }
         }
@@ -228,13 +233,15 @@ public class EditCommand extends Command {
         public void setNote(Note note) {
             this.note = note;
         }
+
         public Optional<Height> getHeight() {
-            return Optional.ofNullable(height);
+            return Optional.ofNullable(this.height);
         }
 
         public void setHeight(Height height) {
             this.height = height;
         }
+
         public Optional<Weight> getWeight() {
             return Optional.ofNullable(weight);
         }

@@ -27,7 +27,7 @@ import java.util.AbstractMap;
 class HeightCommandTest {
 
     private static final String HEIGHT_STUB = "2024-01-20T10:15:33=169f";
-    private static final String UNINITIALIZED_HEIGHT = "2024-01-20T10:15:33=0f";
+    private static final String HEIGHT_DELETE = "2024-01-20T10:15:33=0f";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
@@ -51,7 +51,7 @@ class HeightCommandTest {
     @Test
     public void execute_deleteHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeights(UNINITIALIZED_HEIGHT).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_DELETE).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new HeightEntry(editedPerson.getLatestHeight()));
@@ -84,10 +84,11 @@ class HeightCommandTest {
 
     @Test
     public void execute_invalidIndex_failure() {
-        Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        HeightEntry heightEntry = new HeightEntry(
+                new AbstractMap.SimpleEntry<>(HeightEntry.getTimeOfExecution(), new Height(180f)));
 
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        HeightCommand heightCommand = new HeightCommand(invalidIndex, new HeightEntry(firstPerson.getLatestHeight()));
+        HeightCommand heightCommand = new HeightCommand(invalidIndex, heightEntry);
         assertCommandFailure(heightCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 

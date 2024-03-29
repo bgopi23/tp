@@ -256,8 +256,8 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
-        if (!(this.getHeights().isEmpty())) {
-            sb.append(" | Height: ").append(heights);
+        if (!heights.getValue().isEmpty()) {
+            sb.append(" | Latest Height: ").append(this.getLatestHeight().getValue().toString());
         }
 
         if (!(weight.getValue() == 0f)) {
