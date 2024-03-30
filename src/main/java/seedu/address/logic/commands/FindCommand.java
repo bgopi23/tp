@@ -6,7 +6,6 @@ import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIEN
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.CombinedPredicates;
 
