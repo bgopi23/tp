@@ -1,9 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT_FIND;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
-import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIXES_NAME_PHONE_EMAIL_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
