@@ -23,20 +23,20 @@ import seedu.address.testutil.PersonBuilder;
 
 class HeightCommandTest {
 
-    private static final Float WEIGHT_STUB = 92.5f;
-    private static final Float UNINITIALIZED_WEIGHT = 0f;
+    private static final Float HEIGHT_STUB = 169.5f;
+    private static final Float UNINITIALIZED_HEIGHT = 0f;
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
     @Test
     public void execute_addHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeight(WEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -48,12 +48,12 @@ class HeightCommandTest {
     @Test
     public void execute_deleteHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeight(UNINITIALIZED_WEIGHT).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(UNINITIALIZED_HEIGHT).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -65,12 +65,12 @@ class HeightCommandTest {
     @Test
     public void execute_addHeightUnfilteredListWithoutEmail_success() {
         Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeight(WEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(HEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
@@ -82,15 +82,15 @@ class HeightCommandTest {
     @Test
     public void execute_invalidIndex_failure() {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        HeightCommand heightCommand = new HeightCommand(invalidIndex, new Height(WEIGHT_STUB));
+        HeightCommand heightCommand = new HeightCommand(invalidIndex, new Height(HEIGHT_STUB));
         assertCommandFailure(heightCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        HeightCommand firstHeight = new HeightCommand(INDEX_FIRST_PERSON, new Height(WEIGHT_STUB));
-        HeightCommand secondHeight = new HeightCommand(INDEX_SECOND_PERSON, new Height(WEIGHT_STUB));
-        HeightCommand firstHeightClone = new HeightCommand(INDEX_FIRST_PERSON, new Height(WEIGHT_STUB));
+        HeightCommand firstHeight = new HeightCommand(INDEX_FIRST_PERSON, new Height(HEIGHT_STUB));
+        HeightCommand secondHeight = new HeightCommand(INDEX_SECOND_PERSON, new Height(HEIGHT_STUB));
+        HeightCommand firstHeightClone = new HeightCommand(INDEX_FIRST_PERSON, new Height(HEIGHT_STUB));
 
         // same height => return true
         assertEquals(firstHeight, firstHeight);

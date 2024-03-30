@@ -2,6 +2,8 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_NO_INDEX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.AbstractMap;
@@ -9,6 +11,8 @@ import java.util.AbstractMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.WeightCommand;
+import seedu.address.logic.messages.EditCommandMessages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.weight.Weight;
@@ -26,13 +30,19 @@ public class WeightCommandParser implements Parser<WeightCommand> {
      */
     public WeightCommand parse(String args) throws ParseException {
         requireNonNull(args);
+
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEIGHT);
+
+        if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(
+                    String.format(Messages.MESSAGE_NO_INDEX, WeightCommandMessages.MESSAGE_USAGE));
+        }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                     WeightCommandMessages.MESSAGE_USAGE), ive);
         }
 

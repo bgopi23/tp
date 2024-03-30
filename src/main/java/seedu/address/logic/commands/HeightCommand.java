@@ -29,10 +29,10 @@ public class HeightCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_HEIGHT + "172.5";
 
-    public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
+    public static final String MESSAGE_ADD_HEIGHT_SUCCESS =
             "Successfully added height to client!\n---------------------------------\n%1$s";
 
-    public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
+    public static final String MESSAGE_DELETE_HEIGHT_SUCCESS =
             "Successfully removed height from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
@@ -75,7 +75,7 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
+        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 

@@ -28,7 +28,6 @@ import seedu.address.testutil.PersonBuilder;
 class WeightCommandTest {
 
     private static final String WEIGHT_STUB = "2024-01-20T10:15:33=169f";
-    private static final String WEIGHT_DELETE = "2024-01-20T10:15:33=0f";
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());

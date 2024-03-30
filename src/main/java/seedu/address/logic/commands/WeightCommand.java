@@ -25,6 +25,7 @@ public class WeightCommand extends Command {
 
     private final Index index;
     private final WeightEntry weightEntry;
+    private LocalDateTime timeOfExecution = null;
 
     /**
      * @param index of the person in the filtered person list to edit the weight
@@ -35,6 +36,18 @@ public class WeightCommand extends Command {
 
         this.index = index;
         this.weightEntry = weight;
+    }
+
+    /**
+     * @param index of the person in the filtered person list to edit the weight
+     * @param weight of the person to be updated to
+     * @param timeOfExecution of the weight
+     */
+    public WeightCommand(Index index, WeightEntry weight, LocalDateTime timeOfExecution) {
+        requireAllNonNull(index, weight, timeOfExecution);
+        this.index = index;
+        this.weightEntry = weight;
+        this.timeOfExecution = timeOfExecution;
     }
 
     @Override
@@ -54,7 +67,12 @@ public class WeightCommand extends Command {
             }
             toEditWeightMap.pollLastEntry();
         } else {
-            toEditWeightMap.put(WeightEntry.getTimeOfExecution(), this.weightEntry.getValue().getValue());
+            // If user created this instance without specifying time of execution.
+            if (this.timeOfExecution == null) {
+                toEditWeightMap.put(WeightEntry.getTimeOfExecution(), this.weightEntry.getValue().getValue());
+            } else {
+                toEditWeightMap.put(this.timeOfExecution, this.weightEntry.getValue().getValue());
+            }
         }
 
         Person editedPerson = new Person(
