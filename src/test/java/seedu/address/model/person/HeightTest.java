@@ -6,7 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.model.person.height.Height;
+import javafx.util.Pair;
 
 public class HeightTest {
 
@@ -17,10 +17,10 @@ public class HeightTest {
 
     @Test
     public void equals() {
-        Height height = new Height(182f);
+        Height height = new Height(92.5f);
 
         // same values -> returns true
-        assertTrue(height.equals(new Height(182f)));
+        assertTrue(height.equals(new Height(92.5f)));
 
         // same object -> returns true
         assertTrue(height.equals(height));
@@ -38,21 +38,27 @@ public class HeightTest {
 
     @Test
     public void isMatch() {
-        Height height = new Height(182f);
+        Height height = new Height(92.5f);
 
-        // Exact match -> returns true
-        assertTrue(height.isMatch(new Height(182f)));
+        // Exact range -> returns true
+        assertTrue(height.isMatch(new Pair<Float, Float>(92.5f, 92.5f)));
 
-        // Just above match -> returns false
-        assertFalse(height.isMatch(new Height(183f)));
+        // Falls within range -> returns true
+        assertTrue(height.isMatch(new Pair<Float, Float>(90f, 100f)));
 
-        // Just below match -> returns false
-        assertFalse(height.isMatch(new Height(181f)));
+        // Falls outside of range -> returns false
+        assertFalse(height.isMatch(new Pair<Float, Float>(80f, 90f)));
 
-        // Negative input -> returns false
-        assertFalse(height.isMatch(new Height(-182f)));
+        // Incorrect generic types -> returns false
+        assertFalse(height.isMatch(new Pair<Object, Object>("foo", "bar")));
+        assertFalse(height.isMatch(new Pair<Float, Object>(80f, "bar")));
+        assertFalse(height.isMatch(new Pair<Object, Object>("foo", 80f)));
 
-        // Incorrect type -> returns false
-        assertFalse(height.isMatch("hello"));
+        // Null pair -> returns false
+        assertFalse(height.isMatch(new Pair<Float, Float>(null, null)));
+
+        // Either value is null -> returns false
+        assertFalse(height.isMatch(new Pair<Float, Float>(90f, null)));
+        assertFalse(height.isMatch(new Pair<Float, Float>(null, 100f)));
     }
 }

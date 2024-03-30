@@ -12,28 +12,28 @@ import seedu.address.commons.util.ToStringBuilder;
  */
 public class GuiSettings implements Serializable {
 
-    private static final double DEFAULT_HEIGHT = 600;
+    private static final double DEFAULT_WEIGHT = 600;
     private static final double DEFAULT_WIDTH = 740;
 
     private final double windowWidth;
-    private final double windowHeight;
+    private final double windowWeight;
     private final Point windowCoordinates;
 
     /**
-     * Constructs a {@code GuiSettings} with the default height, width and position.
+     * Constructs a {@code GuiSettings} with the default weight, width and position.
      */
     public GuiSettings() {
         windowWidth = DEFAULT_WIDTH;
-        windowHeight = DEFAULT_HEIGHT;
+        windowWeight = DEFAULT_WEIGHT;
         windowCoordinates = null; // null represent no coordinates
     }
 
     /**
-     * Constructs a {@code GuiSettings} with the specified height, width and position.
+     * Constructs a {@code GuiSettings} with the specified weight, width and position.
      */
-    public GuiSettings(double windowWidth, double windowHeight, int xPosition, int yPosition) {
+    public GuiSettings(double windowWidth, double windowWeight, int xPosition, int yPosition) {
         this.windowWidth = windowWidth;
-        this.windowHeight = windowHeight;
+        this.windowWeight = windowWeight;
         windowCoordinates = new Point(xPosition, yPosition);
     }
 
@@ -41,8 +41,8 @@ public class GuiSettings implements Serializable {
         return windowWidth;
     }
 
-    public double getWindowHeight() {
-        return windowHeight;
+    public double getWindowWeight() {
+        return windowWeight;
     }
 
     public Point getWindowCoordinates() {
@@ -62,20 +62,20 @@ public class GuiSettings implements Serializable {
 
         GuiSettings otherGuiSettings = (GuiSettings) other;
         return windowWidth == otherGuiSettings.windowWidth
-                && windowHeight == otherGuiSettings.windowHeight
+                && windowWeight == otherGuiSettings.windowWeight
                 && Objects.equals(windowCoordinates, otherGuiSettings.windowCoordinates);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(windowWidth, windowHeight, windowCoordinates);
+        return Objects.hash(windowWidth, windowWeight, windowCoordinates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
                 .add("windowWidth", windowWidth)
-                .add("windowHeight", windowHeight)
+                .add("windowWeight", windowWeight)
                 .add("windowCoordinates", windowCoordinates)
                 .toString();
     }

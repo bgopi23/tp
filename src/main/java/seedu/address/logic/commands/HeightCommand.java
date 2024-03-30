@@ -3,19 +3,14 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.NavigableMap;
-import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
-import seedu.address.model.person.height.HeightMap;
+import seedu.address.model.person.Height;
 
 /**
  * Changes the height of an existing person in the address book.
@@ -25,32 +20,32 @@ public class HeightCommand extends Command {
     public static final String COMMAND_WORD = "height";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the height (in centimeters) of the person identified "
+            + ": Edits the height (in kilograms) of the person identified "
             + "by the index number used in the last person listing. "
             + "Existing height will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
-            + "w/ HEIGHT\n"
+            + "w/ WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "w/ 182";
+            + "w/ 92.5";
 
-    public static final String MESSAGE_ADD_HEIGHT_SUCCESS =
+    public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added height to client!\n---------------------------------\n%1$s";
 
-    public static final String MESSAGE_DELETE_HEIGHT_SUCCESS =
+    public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
             "Successfully removed height from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
-    private final HeightEntry heightEntry;
+    private final Height height;
 
     /**
      * @param index of the person in the filtered person list to edit the height
      * @param height of the person to be updated to
      */
-    public HeightCommand(Index index, HeightEntry height) {
+    public HeightCommand(Index index, Height height) {
         requireAllNonNull(index, height);
 
         this.index = index;
-        this.heightEntry = height;
+        this.height = height;
     }
 
     @Override
@@ -62,20 +57,9 @@ public class HeightCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-
-        NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
-        if (this.heightEntry.getValue().getValue().getValue() == 0f) {
-            if (toEditHeightMap.isEmpty()) {
-                throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
-            }
-            toEditHeightMap.pollLastEntry();
-        } else {
-            toEditHeightMap.put(HeightEntry.getTimeOfExecution(), this.heightEntry.getValue().getValue());
-        }
-
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), toEditHeightMap, personToEdit.getWeightTemp(),
+                personToEdit.getAddress(), personToEdit.getWeights(), this.height,
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -90,8 +74,7 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(heightEntry.getValue().getValue().getValue() == 0f)
-                ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
+        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 
@@ -108,6 +91,6 @@ public class HeightCommand extends Command {
 
         HeightCommand e = (HeightCommand) other;
         return this.index.equals(e.index)
-                && this.heightEntry.equals(e.heightEntry);
+                && this.height.equals(e.height);
     }
 }

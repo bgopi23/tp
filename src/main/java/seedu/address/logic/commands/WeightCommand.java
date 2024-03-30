@@ -3,49 +3,54 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.NavigableMap;
+import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.WeightTemp;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
+import seedu.address.model.person.weight.WeightMap;
 
 /**
- * Changes the weightTemp of an existing person in the address book.
+ * Changes the weight of an existing person in the address book.
  */
-public class WeightTempCommand extends Command {
+public class WeightCommand extends Command {
 
-    public static final String COMMAND_WORD = "weightTemp";
+    public static final String COMMAND_WORD = "weight";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weightTemp (in kilograms) of the person identified "
+            + ": Edits the weight (in centimeters) of the person identified "
             + "by the index number used in the last person listing. "
-            + "Existing weightTemp will be overwritten by the input.\n"
+            + "Existing weight will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
             + "w/ WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "w/ 92.5";
+            + "w/ 182";
 
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
-            "Successfully added weightTemp to client!\n---------------------------------\n%1$s";
+            "Successfully added weight to client!\n---------------------------------\n%1$s";
 
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
-            "Successfully removed weightTemp from client!\n--------------------------------------\n%1$s";
+            "Successfully removed weight from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
-    private final WeightTemp weightTemp;
+    private final WeightEntry weightEntry;
 
     /**
-     * @param index of the person in the filtered person list to edit the weightTemp
-     * @param weightTemp of the person to be updated to
+     * @param index of the person in the filtered person list to edit the weight
+     * @param weight of the person to be updated to
      */
-    public WeightTempCommand(Index index, WeightTemp weightTemp) {
-        requireAllNonNull(index, weightTemp);
+    public WeightCommand(Index index, WeightEntry weight) {
+        requireAllNonNull(index, weight);
 
         this.index = index;
-        this.weightTemp = weightTemp;
+        this.weightEntry = weight;
     }
 
     @Override
@@ -57,9 +62,20 @@ public class WeightTempCommand extends Command {
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
+        if (this.weightEntry.getValue().getValue().getValue() == 0f) {
+            if (toEditWeightMap.isEmpty()) {
+                throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
+            }
+            toEditWeightMap.pollLastEntry();
+        } else {
+            toEditWeightMap.put(WeightEntry.getTimeOfExecution(), this.weightEntry.getValue().getValue());
+        }
+
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getHeights(), this.weightTemp,
+                personToEdit.getAddress(), toEditWeightMap, personToEdit.getHeight(),
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -70,11 +86,12 @@ public class WeightTempCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the weightTemp is added to or removed from
+     * the weight is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(weightTemp.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
+        String message = !(weightEntry.getValue().getValue().getValue() == 0f)
+                ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 
@@ -85,12 +102,12 @@ public class WeightTempCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof WeightTempCommand)) {
+        if (!(other instanceof WeightCommand)) {
             return false;
         }
 
-        WeightTempCommand e = (WeightTempCommand) other;
+        WeightCommand e = (WeightCommand) other;
         return this.index.equals(e.index)
-                && this.weightTemp.equals(e.weightTemp);
+                && this.weightEntry.equals(e.weightEntry);
     }
 }

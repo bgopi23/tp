@@ -19,9 +19,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -35,8 +35,8 @@ class JsonAdaptedPerson {
     private final String phone;
     private final String email;
     private final String address;
-    private final List<JsonAdaptedHeight> heights = new ArrayList<>();
-    private final String weightTemp;
+    private final List<JsonAdaptedWeight> weights = new ArrayList<>();
+    private final String height;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
@@ -46,16 +46,16 @@ class JsonAdaptedPerson {
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
             @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("heights") List<JsonAdaptedHeight> heights, @JsonProperty("weightTemp") String weightTemp,
+            @JsonProperty("weights") List<JsonAdaptedWeight> weights, @JsonProperty("height") String height,
             @JsonProperty("note") String note, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        if (heights != null) {
-            this.heights.addAll(heights);
+        if (weights != null) {
+            this.weights.addAll(weights);
         }
-        this.weightTemp = weightTemp;
+        this.height = height;
         this.note = note;
         if (tags != null) {
             this.tags.addAll(tags);
@@ -70,11 +70,11 @@ class JsonAdaptedPerson {
         phone = source.getPhone().getValue();
         email = source.getEmail().getValue();
         address = source.getAddress().getValue();
-        heights.addAll(source.getHeights().entrySet().stream()
-                .map(HeightEntry::new)
-                .map(JsonAdaptedHeight::new)
+        weights.addAll(source.getWeights().entrySet().stream()
+                .map(WeightEntry::new)
+                .map(JsonAdaptedWeight::new)
                 .collect(Collectors.toList()));
-        weightTemp = source.getWeightTemp().getValue().toString();
+        height = source.getHeight().getValue().toString();
         note = source.getNote().getValue();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -94,9 +94,9 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        final List<HeightEntry> personHeights = new ArrayList<>();
-        for (JsonAdaptedHeight height : this.heights) {
-            personHeights.add(height.toModelType());
+        final List<WeightEntry> personWeights = new ArrayList<>();
+        for (JsonAdaptedWeight weight : this.weights) {
+            personWeights.add(weight.toModelType());
         }
 
         if (name == null) {
@@ -131,19 +131,19 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final NavigableMap<LocalDateTime, Height> modelHeights = new TreeMap<>();
-        for (JsonAdaptedHeight jsonAdaptedHeight : heights) {
-            HeightEntry heightEntry = jsonAdaptedHeight.toModelType();
-            modelHeights.put(heightEntry.getValue().getKey(), heightEntry.getValue().getValue());
+        final NavigableMap<LocalDateTime, Weight> modelWeights = new TreeMap<>();
+        for (JsonAdaptedWeight jsonAdaptedWeight : weights) {
+            WeightEntry weightEntry = jsonAdaptedWeight.toModelType();
+            modelWeights.put(weightEntry.getValue().getKey(), weightEntry.getValue().getValue());
         }
 
-        if (weightTemp == null) {
+        if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!weightTemp.isEmpty() && !WeightTemp.isValidWeightTemp(weightTemp)) {
-            throw new IllegalValueException(WeightTemp.MESSAGE_CONSTRAINTS);
+        if (!height.isEmpty() && !Height.isValidHeight(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
-        final WeightTemp modelWeightTemp = new WeightTemp(Float.valueOf(weightTemp));
+        final Height modelHeight = new Height(Float.valueOf(height));
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
@@ -151,8 +151,8 @@ class JsonAdaptedPerson {
         final Note modelNote = new Note(note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelHeights,
-                modelWeightTemp, modelNote, modelTags);
+        return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWeights,
+                modelHeight, modelNote, modelTags);
     }
 
 }

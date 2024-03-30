@@ -1,4 +1,4 @@
-package seedu.address.model.person.height;
+package seedu.address.model.person.weight;
 
 import static java.util.Objects.requireNonNull;
 
@@ -8,19 +8,19 @@ import java.util.Map;
 import seedu.address.model.person.Attribute;
 
 /**
- * Represents a Person's height in the address book.
+ * Represents a Person's weight in the address book.
  * Guarantees: immutable; is always valid.
  */
-public class HeightEntry extends Attribute<Map.Entry<LocalDateTime, Height>> {
+public class WeightEntry extends Attribute<Map.Entry<LocalDateTime, Weight>> {
 
     /**
-     * Constructs a {@code HeightEntry}.
+     * Constructs a {@code WeightEntry}.
      *
-     * @param heightEntry A height entry containing the date of the recorded height.
+     * @param weightEntry A weight entry containing the date of the recorded weight.
      */
-    public HeightEntry(Map.Entry<LocalDateTime, Height> heightEntry) {
-        super(heightEntry);
-        requireNonNull(heightEntry);
+    public WeightEntry(Map.Entry<LocalDateTime, Weight> weightEntry) {
+        super(weightEntry);
+        requireNonNull(weightEntry);
     }
 
     /**
@@ -36,8 +36,8 @@ public class HeightEntry extends Attribute<Map.Entry<LocalDateTime, Height>> {
     }
 
     @Override
-    public boolean isMatch(Object heightRange) {
-        return (this.equals(heightRange));
+    public boolean isMatch(Object weightRange) {
+        return (this.equals(weightRange));
     }
 
     @Override
@@ -47,14 +47,14 @@ public class HeightEntry extends Attribute<Map.Entry<LocalDateTime, Height>> {
         }
 
         // instanceof handles null types as well.
-        if (!(other instanceof Height)) {
+        if (!(other instanceof Weight)) {
             return false;
         }
 
-        Height otherHeight = (Height) other;
+        Weight otherWeight = (Weight) other;
 
         // Use the equals() method of the underlying attribute to compare values
-        return this.getValue().equals(otherHeight.getValue());
+        return this.getValue().equals(otherWeight.getValue());
     }
 
     @Override

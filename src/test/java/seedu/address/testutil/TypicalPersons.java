@@ -29,13 +29,13 @@ public class TypicalPersons {
             .withPhone("94351253")
             .withTags("friends")
             .withNote("Best friend")
-            .withHeights("2024-01-20T10:15:33=169f")
+            .withWeights("2024-01-20T10:15:33=85f")
             .build();
     public static final Person BENSON = new PersonBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
             .withEmail("johnd@example.com").withPhone("98765432")
             .withTags("owesMoney", "friends")
-            .withHeights("2023-02-22T13:11:32=183f")
+            .withWeights("2023-02-22T13:11:32=83f")
             .build();
     public static final Person CARL = new PersonBuilder().withName("Carl Kurz").withPhone("95352563")
             .withEmail("heinz@example.com").withAddress("wall street").build();

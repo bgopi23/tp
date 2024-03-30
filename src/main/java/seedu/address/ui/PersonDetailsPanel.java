@@ -12,7 +12,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.height.Height;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -32,9 +32,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label height;
+    private Label weight;
     @FXML
-    private Label weightTemp;
+    private Label height;
     @FXML
     private Label note;
     @FXML
@@ -70,23 +70,23 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .sorted(Comparator.comparing(Tag::toString))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
-        Optional<Map.Entry<LocalDateTime, Height>> latestHeight = person.getLatestHeight();
-        height.setText(latestHeight.isPresent() ? latestHeight.get().getValue().getFormattedHeight() : "");
-        weightTemp.setText(person.getWeightTemp().getFormattedWeightTemp());
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
+        weight.setText(latestWeight.isPresent() ? latestWeight.get().getValue().getFormattedWeight() : "");
+        height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
-        height.setVisible(latestHeight.isPresent());
-        weightTemp.setVisible(person.getWeightTemp().getValue() != 0f);
+        weight.setVisible(latestWeight.isPresent());
+        height.setVisible(person.getHeight().getValue() != 0f);
         note.setVisible(!person.getNote().getValue().isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
+        weight.managedProperty().bind(weight.visibleProperty());
         height.managedProperty().bind(height.visibleProperty());
-        weightTemp.managedProperty().bind(weightTemp.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
     }
 
@@ -99,8 +99,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setText("");
         email.setText("");
         note.setText("");
+        weight.setText("");
         height.setText("");
-        weightTemp.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
     }

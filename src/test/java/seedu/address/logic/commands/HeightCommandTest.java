@@ -9,8 +9,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithoutEmail;
 
-import java.util.AbstractMap;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -20,26 +18,25 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.Height;
 import seedu.address.testutil.PersonBuilder;
 
 class HeightCommandTest {
 
-    private static final String HEIGHT_STUB = "2024-01-20T10:15:33=169f";
-    private static final String HEIGHT_DELETE = "2024-01-20T10:15:33=0f";
+    private static final Float WEIGHT_STUB = 92.5f;
+    private static final Float UNINITIALIZED_WEIGHT = 0f;
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
     @Test
     public void execute_addHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(WEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new HeightEntry(editedPerson.getLatestHeight().get()));
+                new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -51,12 +48,12 @@ class HeightCommandTest {
     @Test
     public void execute_deleteHeightUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeights().build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(UNINITIALIZED_WEIGHT).build();
 
-        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON, new HeightEntry(
-                new AbstractMap.SimpleEntry<>(HeightEntry.getTimeOfExecution(), new Height(0f))));
+        HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
+                new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_WEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -68,12 +65,12 @@ class HeightCommandTest {
     @Test
     public void execute_addHeightUnfilteredListWithoutEmail_success() {
         Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withHeights(HEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withHeight(WEIGHT_STUB).build();
 
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
-                new HeightEntry(editedPerson.getLatestHeight().get()));
+                new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
@@ -84,22 +81,16 @@ class HeightCommandTest {
 
     @Test
     public void execute_invalidIndex_failure() {
-        HeightEntry heightEntry = new HeightEntry(
-                new AbstractMap.SimpleEntry<>(HeightEntry.getTimeOfExecution(), new Height(180f)));
-
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        HeightCommand heightCommand = new HeightCommand(invalidIndex, heightEntry);
+        HeightCommand heightCommand = new HeightCommand(invalidIndex, new Height(WEIGHT_STUB));
         assertCommandFailure(heightCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        HeightEntry heightEntry = new HeightEntry(
-                new AbstractMap.SimpleEntry<>(HeightEntry.getTimeOfExecution(), new Height(180f)));
-
-        HeightCommand firstHeight = new HeightCommand(INDEX_FIRST_PERSON, heightEntry);
-        HeightCommand secondHeight = new HeightCommand(INDEX_SECOND_PERSON, heightEntry);
-        HeightCommand firstHeightClone = new HeightCommand(INDEX_FIRST_PERSON, heightEntry);
+        HeightCommand firstHeight = new HeightCommand(INDEX_FIRST_PERSON, new Height(WEIGHT_STUB));
+        HeightCommand secondHeight = new HeightCommand(INDEX_SECOND_PERSON, new Height(WEIGHT_STUB));
+        HeightCommand firstHeightClone = new HeightCommand(INDEX_FIRST_PERSON, new Height(WEIGHT_STUB));
 
         // same height => return true
         assertEquals(firstHeight, firstHeight);

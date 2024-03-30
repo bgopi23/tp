@@ -12,9 +12,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -28,15 +28,15 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final Height DEFAULT_HEIGHT = new Height(182f);
-    public static final Float DEFAULT_WEIGHT = 92.5f;
+    public static final Weight DEFAULT_WEIGHT = new Weight(182f);
+    public static final Float DEFAULT_HEIGHT = 92.5f;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private NavigableMap<LocalDateTime, Height> heights;
-    private WeightTemp weightTemp;
+    private NavigableMap<LocalDateTime, Weight> weights;
+    private Height height;
     private Note note;
     private Set<Tag> tags;
 
@@ -48,9 +48,9 @@ public class PersonBuilder {
         this.phone = new Phone(DEFAULT_PHONE);
         this.email = new Email(DEFAULT_EMAIL);
         this.address = new Address(DEFAULT_ADDRESS);
-        this.heights = new TreeMap<>();
-        this.heights.put(HeightEntry.getTimeOfExecution(), DEFAULT_HEIGHT);
-        this.weightTemp = new WeightTemp(DEFAULT_WEIGHT);
+        this.weights = new TreeMap<>();
+        this.weights.put(WeightEntry.getTimeOfExecution(), DEFAULT_WEIGHT);
+        this.height = new Height(DEFAULT_HEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();
     }
@@ -63,8 +63,8 @@ public class PersonBuilder {
         this.phone = personToCopy.getPhone();
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
-        this.heights = new TreeMap<>(personToCopy.getHeights());
-        this.weightTemp = personToCopy.getWeightTemp();
+        this.weights = new TreeMap<>(personToCopy.getWeights());
+        this.height = personToCopy.getHeight();
         this.note = personToCopy.getNote();
         this.tags = new HashSet<>(personToCopy.getTags());
     }
@@ -111,18 +111,18 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Height} of the {@code Person} that we are building.
+     * Sets the {@code Weight} of the {@code Person} that we are building.
      */
-    public PersonBuilder withHeights(String... heights) {
-        this.heights = SampleDataUtil.getHeightMap(heights);
+    public PersonBuilder withWeights(String... weights) {
+        this.weights = SampleDataUtil.getWeightMap(weights);
         return this;
     }
 
     /**
-     * Sets the {@code WeightTemp} of the {@code Person} that we are building.
+     * Sets the {@code Height} of the {@code Person} that we are building.
      */
-    public PersonBuilder withWeightTemp(Float weightTemp) {
-        this.weightTemp = new WeightTemp(weightTemp);
+    public PersonBuilder withHeight(Float height) {
+        this.height = new Height(height);
         return this;
     }
 
@@ -139,7 +139,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(this.name, this.phone, this.email, this.address,
-                this.heights, this.weightTemp, this.note, this.tags);
+                this.weights, this.height, this.note, this.tags);
     }
 
 }

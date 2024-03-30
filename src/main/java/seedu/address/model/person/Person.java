@@ -20,8 +20,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightMap;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
@@ -38,23 +38,23 @@ public class Person {
     private final Email email;
     // Data fields
     private final Address address;
-    private final HeightMap heights;
-    private final WeightTemp weightTemp;
+    private final WeightMap weights;
+    private final Height height;
     private final Note note;
     private final TagSet tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Height> heights,
-                  WeightTemp weightTemp, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, heights, weightTemp, note, tags);
+    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Weight> weights,
+                  Height height, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
-        this.heights = new HeightMap(heights);
-        this.weightTemp = weightTemp;
+        this.weights = new WeightMap(weights);
+        this.height = height;
         this.note = note;
         Set<Tag> tagSet = new HashSet<>();
         tagSet.addAll(tags);
@@ -79,10 +79,10 @@ public class Person {
             return this.address;
         case NOTE:
             return this.note;
-        case HEIGHT:
-            return this.heights;
         case WEIGHT:
-            return this.weightTemp;
+            return this.weights;
+        case HEIGHT:
+            return this.height;
         case TAGS:
             return this.tags;
 
@@ -107,8 +107,8 @@ public class Person {
         return address;
     }
 
-    public Optional<Map.Entry<LocalDateTime, Height>> getLatestHeight() {
-        return Optional.of(this.heights.getValue().lastEntry());
+    public Optional<Map.Entry<LocalDateTime, Weight>> getLatestWeight() {
+        return Optional.of(this.weights.getValue().lastEntry());
     }
 
     /**
@@ -116,12 +116,12 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public NavigableMap<LocalDateTime, Height> getHeights() {
-        return this.heights.getValue();
+    public NavigableMap<LocalDateTime, Weight> getWeights() {
+        return this.weights.getValue();
     }
 
-    public WeightTemp getWeightTemp() {
-        return this.weightTemp;
+    public Height getHeight() {
+        return this.height;
     }
 
     public Note getNote() {
@@ -257,12 +257,12 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
-        if (!heights.getValue().isEmpty()) {
-            sb.append(" | Latest Height: ").append(this.getLatestHeight().get().getValue().toString());
+        if (!weights.getValue().isEmpty()) {
+            sb.append(" | Latest Weight: ").append(this.getLatestWeight().get().getValue().toString());
         }
 
-        if (!(weightTemp.getValue() == 0f)) {
-            sb.append(" | WeightTemp: ").append(weightTemp);
+        if (!(height.getValue() == 0f)) {
+            sb.append(" | Height: ").append(height);
         }
 
         if (!this.getTags().isEmpty()) {
@@ -280,8 +280,8 @@ public class Person {
         PHONE,
         EMAIL,
         ADDRESS,
-        HEIGHT,
         WEIGHT,
+        HEIGHT,
         NOTE,
         TAGS
     }

@@ -4,11 +4,11 @@
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
-    "heights" : [ {
-      "heightDate" : "2023-06-20T10:15:30",
-      "heightValue" : "176.0"
+    "weights" : [ {
+      "weightDate" : "2023-06-20T10:15:30",
+      "weightValue" : "176.0"
     } ],
-    "weightTemp" : "67.5",
+    "height" : "67.5",
     "note" : "Likes to swim",
     "tags" : [ "neighbours" ]
   }, {
@@ -16,11 +16,11 @@
     "phone" : "93210283",
     "email" : "charlotte@example.com",
     "address" : "Blk 11 Ang Mo Kio Street 74, #11-04",
-    "heights" : [ {
-      "heightDate" : "2023-06-20T10:15:30",
-      "heightValue" : "176.0"
+    "weights" : [ {
+      "weightDate" : "2023-06-20T10:15:30",
+      "weightValue" : "176.0"
     } ],
-    "weightTemp" : "67.5",
+    "height" : "67.5",
     "note" : "Likes to swim",
     "tags" : [ "neighbours" ]
   } ]

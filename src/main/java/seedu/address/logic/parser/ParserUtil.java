@@ -17,8 +17,8 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -126,6 +126,23 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> weight} into a {@code Weight}.
+     * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
+     */
+    public static Weight parseWeight(Optional<String> weight) throws ParseException {
+        requireNonNull(weight);
+
+        if (!weight.isEmpty()) {
+            String trimmedWeight = weight.get().trim();
+            if (!Weight.isValidWeight(trimmedWeight)) {
+                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+            }
+            return trimmedWeight.isEmpty() ? new Weight(0f) : new Weight(Float.valueOf(trimmedWeight));
+        }
+        return new Weight(0f);
+    }
+
+    /**
      * Parses a {@code Optional<String> height} into a {@code Height}.
      * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
      */
@@ -137,26 +154,9 @@ public class ParserUtil {
             if (!Height.isValidHeight(trimmedHeight)) {
                 throw new ParseException(Height.MESSAGE_CONSTRAINTS);
             }
-            return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
+            return new Height(Float.valueOf(trimmedHeight));
         }
         return new Height(0f);
-    }
-
-    /**
-     * Parses a {@code Optional<String> weightTemp} into a {@code WeightTemp}.
-     * If the {@code Optional} is empty, return a {@code WeightTemp} with an uninitialized value of 0f.
-     */
-    public static WeightTemp parseWeightTemp(Optional<String> weightTemp) throws ParseException {
-        requireNonNull(weightTemp);
-
-        if (!weightTemp.isEmpty()) {
-            String trimmedWeightTemp = weightTemp.get().trim();
-            if (!WeightTemp.isValidWeightTemp(trimmedWeightTemp)) {
-                throw new ParseException(WeightTemp.MESSAGE_CONSTRAINTS);
-            }
-            return new WeightTemp(Float.valueOf(trimmedWeightTemp));
-        }
-        return new WeightTemp(0f);
     }
 
     /**

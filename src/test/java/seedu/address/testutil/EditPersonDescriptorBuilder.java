@@ -11,8 +11,8 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,8 +40,8 @@ public class EditPersonDescriptorBuilder {
         descriptor.setPhone(person.getPhone());
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
-        descriptor.setHeight(person.getLatestHeight().get().getValue());
-        descriptor.setWeightTemp(person.getWeightTemp());
+        descriptor.setWeight(person.getLatestWeight().get().getValue());
+        descriptor.setHeight(person.getHeight());
         descriptor.setNote(person.getNote());
         descriptor.setTags(person.getTags());
     }
@@ -83,20 +83,20 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
+     * Sets the {@code Weight} of the {@code EditPersonDescriptor} that we are
+     * building.
+     */
+    public EditPersonDescriptorBuilder withWeight(Float weight) {
+        descriptor.setWeight(new Weight(weight));
+        return this;
+    }
+
+    /**
      * Sets the {@code Height} of the {@code EditPersonDescriptor} that we are
      * building.
      */
     public EditPersonDescriptorBuilder withHeight(Float height) {
         descriptor.setHeight(new Height(height));
-        return this;
-    }
-
-    /**
-     * Sets the {@code WeightTemp} of the {@code EditPersonDescriptor} that we are
-     * building.
-     */
-    public EditPersonDescriptorBuilder withWeightTemp(Float weightTemp) {
-        descriptor.setWeightTemp(new WeightTemp(weightTemp));
         return this;
     }
 

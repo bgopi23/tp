@@ -1,21 +1,14 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.HeightMapContainsHeightRangePredicate;
+import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -39,10 +32,10 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                PREFIX_ADDRESS, PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_TAG);
+                PREFIX_ADDRESS, PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_NOTE, PREFIX_TAG);
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_NOTE);
+                PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_NOTE);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate(
                 ParserUtil.parseSearchString(
@@ -53,18 +46,16 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_EMAIL).orElse("")));
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_ADDRESS).orElse("")));
-        HeightMapContainsHeightRangePredicate heightsPredicate = new HeightMapContainsHeightRangePredicate(
-                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)));
+        WeightMapContainsWeightRangePredicate weightsPredicate = new WeightMapContainsWeightRangePredicate(
+                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil
                 .parseSearchString(argMultimap.getValue(PREFIX_NOTE).orElse("")));
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(
                 ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
-                addressPredicate, heightsPredicate, notePredicate, tagsPredicate);
+                addressPredicate, weightsPredicate, notePredicate, tagsPredicate);
 
         return new FindCommand(predicates);
-
     }
-
 }

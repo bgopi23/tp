@@ -2,16 +2,13 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-
-import java.util.AbstractMap;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.HeightCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.Height;
 
 /**
  * Parses input arguments and creates a new {@code HeightCommand} object
@@ -25,7 +22,7 @@ public class HeightCommandParser implements Parser<HeightCommand> {
      */
     public HeightCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_HEIGHT);
+        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEIGHT);
 
         Index index;
         try {
@@ -34,16 +31,12 @@ public class HeightCommandParser implements Parser<HeightCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HeightCommand.MESSAGE_USAGE), ive);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_HEIGHT);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEIGHT);
 
-        // If there is no value specified for the height, user is deleting the last added height value.
-        if (argMultimap.getValue(PREFIX_HEIGHT).get().isEmpty()) {
-            return new HeightCommand(index, new HeightEntry(new AbstractMap.SimpleEntry<>(
-                    HeightEntry.getTimeOfExecution(), new Height(0f))));
+        if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
+            return new HeightCommand(index, new Height(Float.valueOf(argMultimap.getValue(PREFIX_WEIGHT).get())));
         }
 
-        return new HeightCommand(index, new HeightEntry(new AbstractMap.SimpleEntry<>(
-                HeightEntry.getTimeOfExecution(),
-                new Height(Float.valueOf(argMultimap.getValue(PREFIX_HEIGHT).get())))));
+        return new HeightCommand(index, new Height(0f));
     }
 }

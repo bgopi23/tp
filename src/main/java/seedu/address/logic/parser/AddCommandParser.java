@@ -4,14 +4,7 @@ import static seedu.address.logic.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
 import static seedu.address.logic.Messages.MESSAGE_NAME_PARAMETER_MISSING;
 import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETERS;
 import static seedu.address.logic.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.parser.CliSyntax.*;
 
 import java.time.LocalDateTime;
 import java.util.NavigableMap;
@@ -26,9 +19,9 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_ADDRESS,
-                        PREFIX_HEIGHT, PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_TAG);
+                        PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_NOTE, PREFIX_TAG);
 
         // (add)
         if (args.isEmpty()) {
@@ -68,23 +61,23 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // (add n/John p/98988898...)
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
-                PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_WEIGHT,
+                PREFIX_HEIGHT, PREFIX_NOTE, PREFIX_ADDRESS);
 
         Name name = ParserUtil.parseName(argMultimap.getStringValue(PREFIX_NAME));
         Phone phone = ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
-        NavigableMap<LocalDateTime, Height> heightMap = new TreeMap<>();
-        if (ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)).getValue() != 0f) {
-            heightMap.put(HeightEntry.getTimeOfExecution(),
-                    ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
+        NavigableMap<LocalDateTime, Weight> weightMap = new TreeMap<>();
+        if (ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).getValue() != 0f) {
+            weightMap.put(WeightEntry.getTimeOfExecution(),
+                    ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
         }
-        WeightTemp weightTemp = ParserUtil.parseWeightTemp(argMultimap.getValue(PREFIX_WEIGHT));
+        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, heightMap, weightTemp, note, tagList);
+        Person person = new Person(name, phone, email, address, weightMap, height, note, tagList);
 
         return new AddCommand(person);
     }

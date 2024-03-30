@@ -12,43 +12,43 @@ import java.util.TreeMap;
 import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
-import seedu.address.model.person.height.HeightMap;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
+import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
-public class HeightMapTest {
-    private static LocalDateTime timeStub = HeightEntry.getTimeOfExecution();
-    private static Height heightStub = new Height(182f);
+public class WeightMapTest {
+    private static LocalDateTime timeStub = WeightEntry.getTimeOfExecution();
+    private static Weight weightStub = new Weight(182f);
 
     @Test
     public void isMatch() {
-        TreeMap<LocalDateTime, Height> treeMap = new TreeMap<>();
-        treeMap.put(timeStub, heightStub);
+        TreeMap<LocalDateTime, Weight> treeMap = new TreeMap<>();
+        treeMap.put(timeStub, weightStub);
 
-        HeightMap heightMap = new HeightMap(treeMap);
+        WeightMap weightMap = new WeightMap(treeMap);
 
         // Exact range -> returns true
-        assertTrue(heightMap.isMatch(new Pair<>(182f, 182f)));
+        assertTrue(weightMap.isMatch(new Pair<>(182f, 182f)));
 
         // Falls within range -> returns true
-        assertTrue(heightMap.isMatch(new Pair<>(180f, 185f)));
+        assertTrue(weightMap.isMatch(new Pair<>(180f, 185f)));
 
         // Falls outside of range -> returns false
-        assertFalse(heightMap.isMatch(new Pair<>(160f, 169f)));
+        assertFalse(weightMap.isMatch(new Pair<>(160f, 169f)));
 
         // Incorrect generic types -> returns false
-        assertFalse(heightMap.isMatch(new Pair<Object, Object>("foo", "bar")));
-        assertFalse(heightMap.isMatch(new Pair<Float, Object>(182f, "bar")));
-        assertFalse(heightMap.isMatch(new Pair<Object, Float>("foo", 182f)));
+        assertFalse(weightMap.isMatch(new Pair<Object, Object>("foo", "bar")));
+        assertFalse(weightMap.isMatch(new Pair<Float, Object>(182f, "bar")));
+        assertFalse(weightMap.isMatch(new Pair<Object, Float>("foo", 182f)));
 
         // Null pair -> returns false
-        assertFalse(heightMap.isMatch(new Pair<Float, Float>(null, null)));
+        assertFalse(weightMap.isMatch(new Pair<Float, Float>(null, null)));
 
         // Either value is null -> returns false
-        assertFalse(heightMap.isMatch(new Pair<Float, Float>(180f, null)));
-        assertFalse(heightMap.isMatch(new Pair<Float, Float>(null, 180f)));
+        assertFalse(weightMap.isMatch(new Pair<Float, Float>(180f, null)));
+        assertFalse(weightMap.isMatch(new Pair<Float, Float>(null, 180f)));
     }
 
     @Test

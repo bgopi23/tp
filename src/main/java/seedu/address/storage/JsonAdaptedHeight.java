@@ -7,48 +7,48 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 
 /**
- * Jackson-friendly version of {@link Height} with {@code LocalDateTime} as key.
+ * Jackson-friendly version of {@link Weight} with {@code LocalDateTime} as key.
  */
-class JsonAdaptedHeight {
+class JsonAdaptedWeight {
 
-    private final String heightDate;
-    private final String heightValue;
+    private final String weightDate;
+    private final String weightValue;
 
     /**
-     * Constructs a {@code JsonAdaptedHeight} with the given {@code heightDate} and {@code heightValue}.
+     * Constructs a {@code JsonAdaptedWeight} with the given {@code weightDate} and {@code weightValue}.
      */
     @JsonCreator
-    public JsonAdaptedHeight(@JsonProperty("heightDate") String heightDate,
-                             @JsonProperty("heightValue") String heightValue) {
-        this.heightDate = heightDate;
-        this.heightValue = heightValue;
+    public JsonAdaptedWeight(@JsonProperty("weightDate") String weightDate,
+                             @JsonProperty("weightValue") String weightValue) {
+        this.weightDate = weightDate;
+        this.weightValue = weightValue;
     }
 
     /**
      * Converts a given {@code Tag} into this class for Jackson use.
      */
-    public JsonAdaptedHeight(HeightEntry source) {
-        this.heightDate = source.getValue().getKey().toString();
-        this.heightValue = source.getValue().getValue().toString();
+    public JsonAdaptedWeight(WeightEntry source) {
+        this.weightDate = source.getValue().getKey().toString();
+        this.weightValue = source.getValue().getValue().toString();
     }
 
     /**
-     * Converts this Jackson-friendly adapted date-height key-value pair into the model's
-     * {@code Entry<LocalDateTime, Height>} object.
+     * Converts this Jackson-friendly adapted date-weight key-value pair into the model's
+     * {@code Entry<LocalDateTime, Weight>} object.
      *
      * @throws IllegalValueException if there were any data constraints violated in
      *                               the adapted tag.
      */
-    public HeightEntry toModelType() throws IllegalValueException {
-        if (!Height.isValidHeight(this.heightValue)) {
+    public WeightEntry toModelType() throws IllegalValueException {
+        if (!Weight.isValidWeight(this.weightValue)) {
             throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
         }
-        return new HeightEntry(new AbstractMap.SimpleEntry<>(
-                LocalDateTime.parse(this.heightDate), new Height(Float.valueOf(this.heightValue))));
+        return new WeightEntry(new AbstractMap.SimpleEntry<>(
+                LocalDateTime.parse(this.weightDate), new Weight(Float.valueOf(this.weightValue))));
     }
 }

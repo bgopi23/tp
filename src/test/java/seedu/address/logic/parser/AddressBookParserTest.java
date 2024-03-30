@@ -27,11 +27,11 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.HeightMapContainsHeightRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
+import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -84,13 +84,13 @@ public class AddressBookParserTest {
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
-        HeightMapContainsHeightRangePredicate heightPredicate =
-                new HeightMapContainsHeightRangePredicate(new Pair<>(0f, 0f));
+        WeightMapContainsWeightRangePredicate weightPredicate =
+                new WeightMapContainsWeightRangePredicate(new Pair<>(0f, 0f));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 namePredicate, phonePredicate, emailPredicate, addressPredicate,
-                heightPredicate, notePredicate, tagsPredicate));
+                weightPredicate, notePredicate, tagsPredicate));
         assertEquals(expectedCommand, command);
     }
 

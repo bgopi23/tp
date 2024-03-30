@@ -3,7 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -33,10 +33,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.WeightTemp;
-import seedu.address.model.person.height.Height;
-import seedu.address.model.person.height.HeightEntry;
-import seedu.address.model.person.height.HeightMap;
+import seedu.address.model.person.Height;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
+import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -53,7 +53,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_WEIGHT + "WEIGHT] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG]...\n"
@@ -93,23 +93,23 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        NavigableMap<LocalDateTime, Height> toEditHeightMap = new TreeMap<>(personToEdit.getHeights());
-        if (editPersonDescriptor.getHeight().isPresent()) {
-            Height updatedHeight = editPersonDescriptor.getHeight().get();
-            if (updatedHeight.getValue() == 0f) {
-                if (toEditHeightMap.isEmpty()) {
-                    throw new CommandException(HeightMap.MESSAGE_EMPTY_HEIGHT_MAP);
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
+        if (editPersonDescriptor.getWeight().isPresent()) {
+            Weight updatedWeight = editPersonDescriptor.getWeight().get();
+            if (updatedWeight.getValue() == 0f) {
+                if (toEditWeightMap.isEmpty()) {
+                    throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
                 }
-                toEditHeightMap.pollLastEntry();
+                toEditWeightMap.pollLastEntry();
             } else {
-                toEditHeightMap.put(HeightEntry.getTimeOfExecution(), updatedHeight);
+                toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
             }
         }
-        WeightTemp updatedWeightTemp = editPersonDescriptor.getWeightTemp().orElse(personToEdit.getWeightTemp());
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                toEditHeightMap, updatedWeightTemp, updatedNote, updatedTags);
+                toEditWeightMap, updatedHeight, updatedNote, updatedTags);
     }
 
     @Override
@@ -168,8 +168,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
+        private Weight weight;
         private Height height;
-        private WeightTemp weightTemp;
         private Note note;
         private Set<Tag> tags;
 
@@ -185,8 +185,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setWeight(toCopy.weight);
             setHeight(toCopy.height);
-            setWeightTemp(toCopy.weightTemp);
             setNote(toCopy.note);
             setTags(toCopy.tags);
         }
@@ -195,7 +195,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, height, weightTemp, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, weight, height, note, tags);
         }
 
         public Optional<Name> getName() {
@@ -238,20 +238,20 @@ public class EditCommand extends Command {
             this.note = note;
         }
 
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(this.weight);
+        }
+
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
+
         public Optional<Height> getHeight() {
-            return Optional.ofNullable(this.height);
+            return Optional.ofNullable(height);
         }
 
         public void setHeight(Height height) {
             this.height = height;
-        }
-
-        public Optional<WeightTemp> getWeightTemp() {
-            return Optional.ofNullable(weightTemp);
-        }
-
-        public void setWeightTemp(WeightTemp weightTemp) {
-            this.weightTemp = weightTemp;
         }
 
         /**
@@ -288,8 +288,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
-                    && Objects.equals(weightTemp, otherEditPersonDescriptor.weightTemp)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -301,8 +301,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("weight", weight)
                     .add("height", height)
-                    .add("weightTemp", weightTemp)
                     .add("note", note)
                     .add("tags", tags)
                     .toString();

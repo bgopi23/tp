@@ -1,20 +1,13 @@
 package seedu.address.testutil;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
-
 import java.util.Set;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
+
+import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * A utility class for Person.
@@ -37,6 +30,8 @@ public class PersonUtil {
         sb.append(PREFIX_PHONE + person.getPhone().getValue() + " ");
         sb.append(PREFIX_EMAIL + person.getEmail().getValue() + " ");
         sb.append(PREFIX_ADDRESS + person.getAddress().getValue() + " ");
+        sb.append(PREFIX_WEIGHT + person.getLatestWeight().get().getValue().toString() + " ");
+        sb.append(PREFIX_HEIGHT + person.getHeight().getValue().toString() + " ");
         sb.append(PREFIX_NOTE + person.getNote().getValue() + " ");
         person.getTags().stream().forEach(
                 s -> sb.append(PREFIX_TAG + s.getValue() + " "));
@@ -53,8 +48,8 @@ public class PersonUtil {
         descriptor.getPhone().ifPresent(phone -> sb.append(PREFIX_PHONE).append(phone.getValue()).append(" "));
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.getValue()).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.getValue()).append(" "));
+        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.getValue()).append(" "));
         descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.getValue()).append(" "));
-        descriptor.getWeightTemp().ifPresent(weightTemp -> sb.append(PREFIX_WEIGHT).append(weightTemp.getValue()).append(" "));
         descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.getValue()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();
