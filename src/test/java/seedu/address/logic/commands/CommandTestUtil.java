@@ -36,7 +36,6 @@ public class CommandTestUtil {
     public static final Float VALID_WEIGHT_AMY = 170f;
     public static final Float VALID_WEIGHT_BOB = 180f;
     public static final Float VALID_HEIGHT_AMY = 60f;
-    public static final Float VALID_HEIGHT_BOB = 85f;
 
     public static final String VALID_NOTE_BOB = "";
     public static final String VALID_NOTE_AMY = "";
@@ -55,6 +54,7 @@ public class CommandTestUtil {
     public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
     public static final String ADDRESS_DESC_EMPTY = " " + PREFIX_ADDRESS + VALID_ADDRESS_EMPTY;
     public static final String WEIGHT_DESC_AMY = " " + PREFIX_WEIGHT + VALID_WEIGHT_AMY;
+    public static final String HEIGHT_DESC_AMY = " " + PREFIX_HEIGHT + VALID_HEIGHT_AMY;
 
     public static final String NOTE_DESC_AMY = " " + PREFIX_NOTE + VALID_NOTE_AMY;
     public static final String NOTE_DESC_BOB = " " + PREFIX_NOTE + VALID_NOTE_BOB;
