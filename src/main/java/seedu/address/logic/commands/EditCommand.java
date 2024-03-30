@@ -63,6 +63,21 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNote, updatedTags);
     }
 
+    /**
+     * Gets the warning message for the command's execution.
+     *
+     * @return The warning message, or an empty string if none.
+     */
+    private String getMessageWarn(Person editedPerson) {
+        boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
+
+        if (!isPhoneOfExpectedFormat) {
+            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+        }
+
+        return "";
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -82,7 +97,13 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage()));
+
+        String messageSuccess = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage());
+        String messageWarn = this.getMessageWarn(editedPerson);
+
+        String messageResult = String.format("%s%s", messageSuccess, messageWarn);
+
+        return new CommandResult(messageResult);
     }
 
     @Override

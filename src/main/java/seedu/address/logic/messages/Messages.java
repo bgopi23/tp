@@ -23,6 +23,8 @@ public class Messages {
     public static final String MESSAGE_NAME_PARAMETER_MISSING = "Name parameter missing! \n%1$s";
     public static final String MESSAGE_PHONE_PARAMETER_MISSING = "Phone number parameter missing! \n%1$s";
 
+    public static final String MESSAGE_WARN = "\n\nWARNING: %s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */
