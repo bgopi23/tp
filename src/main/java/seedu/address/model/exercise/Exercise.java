@@ -12,8 +12,12 @@ public class Exercise {
 
     public static final String NAME_CONSTRAINT = "Exercise names should not be empty";
     public static final String SETS_CONSTRAINT = "Number of sets should be a number greater than 0";
-    public static final String REPS_CONSTRAINT = "Number of reps should be a number greater than 0";
+    public static final String REPS_CONSTRAINT = "Number of repetitions should be a number greater than 0";
     public static final String REST_CONSTRAINT = "Rest time in minutes should be a number greater or equals to 0";
+
+    public static final Integer DEFAULT_SETS = 1;
+    public static final Integer DEFAULT_REPS = 1;
+    public static final Integer DEFAULT_REST = 0;
 
 
     private final String name;
@@ -37,8 +41,8 @@ public class Exercise {
 
         checkArgument(isValidName(name), NAME_CONSTRAINT);
         checkArgument(isValidSets(sets), SETS_CONSTRAINT);
-        checkArgument(isValidSets(reps), REPS_CONSTRAINT);
-        checkArgument(isValidSets(rest), REST_CONSTRAINT);
+        checkArgument(isValidReps(reps), REPS_CONSTRAINT);
+        checkArgument(isValidRest(rest), REST_CONSTRAINT);
 
         this.name = name;
         this.sets = sets;
@@ -102,15 +106,12 @@ public class Exercise {
         }
 
         Exercise otherExercise = (Exercise) other;
-        return name.equals(otherExercise.getName())
-            && sets == otherExercise.getSets()
-            && reps == otherExercise.getReps()
-            && rest == otherExercise.getRest();
+        return name.equals(otherExercise.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, sets, reps, rest);
+        return Objects.hash(name);
     }
 
     @Override

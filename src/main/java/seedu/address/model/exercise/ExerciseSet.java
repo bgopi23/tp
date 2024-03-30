@@ -51,7 +51,7 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
         @SuppressWarnings("unchecked")
         Set<Exercise> otherExercises = (Set<Exercise>) otherSet;
 
-        return otherExercises.stream().allMatch(exercise -> this.contains(exercise));
+        return otherExercises.stream().allMatch(this::contains);
     }
 
     /**

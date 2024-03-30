@@ -13,6 +13,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -188,11 +189,90 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code Optional<String> exerciseNameOpt} into a {@code String }.
+     * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
+     */
+    public static String parseExerciseName(Optional<String> exerciseNameOpt) throws ParseException {
+        requireNonNull(exerciseNameOpt);
+
+        return exerciseNameOpt.orElse("").trim();
+    }
+
+    public static Integer parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
+        requireNonNull(exerciseSetsOpt);
+
+        if (exerciseSetsOpt.isEmpty()) {
+            return Exercise.DEFAULT_SETS;
+        }
+
+        String exerciseSetsTrimmed = exerciseSetsOpt.get().trim();
+        if (!StringUtil.isInteger(exerciseSetsTrimmed)) {
+            throw new ParseException(Exercise.SETS_CONSTRAINT);
+        }
+
+        return Integer.valueOf(exerciseSetsTrimmed);
+    }
+
+    public static Integer parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
+        requireNonNull(exerciseRepsOpt);
+
+        if (exerciseRepsOpt.isEmpty()) {
+            return Exercise.DEFAULT_REPS;
+        }
+
+        String exerciseRepsTrimmed = exerciseRepsOpt.orElse("").trim();
+        if (!StringUtil.isInteger(exerciseRepsTrimmed)) {
+            throw new ParseException(Exercise.REPS_CONSTRAINT);
+        }
+
+        return Integer.valueOf(exerciseRepsTrimmed);
+    }
+
+    public static Integer parseExerciseRest(Optional<String> exerciseRestOpt) throws ParseException {
+        requireNonNull(exerciseRestOpt);
+
+        if (exerciseRestOpt.isEmpty()) {
+            return Exercise.DEFAULT_REST;
+        }
+
+        String exerciseRestTrimmed = exerciseRestOpt.orElse("").trim();
+        if (!StringUtil.isInteger(exerciseRestTrimmed)) {
+            throw new ParseException(Exercise.REST_CONSTRAINT);
+        }
+
+        return Integer.valueOf(exerciseRestTrimmed);
+    }
+
+    public static Exercise parseExercise(String name, Integer sets, Integer reps, Integer rest) throws ParseException {
+        requireNonNull(name);
+        requireNonNull(sets);
+        requireNonNull(reps);
+        requireNonNull(rest);
+
+        if (!Exercise.isValidName(name)) {
+            throw new ParseException(Exercise.NAME_CONSTRAINT);
+        }
+
+        if (!Exercise.isValidSets(sets)) {
+            throw new ParseException(Exercise.SETS_CONSTRAINT);
+        }
+
+        if (!Exercise.isValidSets(reps)) {
+            throw new ParseException(Exercise.REPS_CONSTRAINT);
+        }
+
+        if (!Exercise.isValidRest(rest)) {
+            throw new ParseException(Exercise.REST_CONSTRAINT);
+        }
+
+        return new Exercise(name, sets, reps, rest);
+    }
+
+    /**
      * Parses a {@code String searchString} into a string.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @param searchString String to search.
-     *
      * @return The string ready to be used for searching.
      */
     public static String parseSearchString(String searchString) {
@@ -204,7 +284,6 @@ public class ParserUtil {
      * Parses a {@code Optional<String> searchRange} into a Pair of Floats.
      *
      * @param searchRange Range to search.
-     *
      * @return The Pair instance ready to be used for searching.
      */
     public static Pair<Float, Float> parseSearchRange(Optional<String> searchRange) throws ParseException {

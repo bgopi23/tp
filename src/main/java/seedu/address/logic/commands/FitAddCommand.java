@@ -1,0 +1,78 @@
+package seedu.address.logic.commands;
+
+import static java.util.Objects.requireNonNull;
+
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import seedu.address.commons.core.index.Index;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.FitAddCommandMessages;
+import seedu.address.model.Model;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseSet;
+import seedu.address.model.person.Person;
+
+/**
+ * Adds an exercise to an existing person in the address book.
+ */
+public class FitAddCommand extends Command {
+    private final Index index;
+    private final Exercise exercise;
+
+    /**
+     * @param index of the person in the filtered person list to add exercise
+     * @param exercise exercise to be added to the person
+     */
+    public FitAddCommand(Index index, Exercise exercise) {
+        requireNonNull(index);
+        requireNonNull(exercise);
+
+        this.index = index;
+        this.exercise = exercise;
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        List<Person> lastShownList = model.getFilteredPersonList();
+
+        if (index.getZeroBased() >= lastShownList.size()) {
+            throw new CommandException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
+        }
+
+        Person personToEdit = lastShownList.get(index.getZeroBased());
+
+        Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExercises().getValue());
+
+        updatedExercises.remove(exercise);
+        updatedExercises.add(exercise);
+
+        ExerciseSet updatedExerciseSet = new ExerciseSet(updatedExercises);
+
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+            personToEdit.getAddress(), personToEdit.getWeights(), personToEdit.getHeight(),
+            personToEdit.getNote(), personToEdit.getTags(), updatedExerciseSet);
+
+        model.setPerson(personToEdit, editedPerson);
+        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
+
+        return new CommandResult(String.format(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS, exercise.getName()));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof FitAddCommand)) {
+            return false;
+        }
+
+        FitAddCommand otherFitAddCommand = (FitAddCommand) other;
+        return index.equals(otherFitAddCommand.index)
+            && exercise.equals(otherFitAddCommand.exercise);
+    }
+}

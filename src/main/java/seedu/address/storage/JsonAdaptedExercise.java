@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -20,7 +21,8 @@ class JsonAdaptedExercise {
      * Constructs a {@code JsonAdaptedExercise} with the given {@code exerciseName}.
      */
     @JsonCreator
-    public JsonAdaptedExercise(String name, Integer sets, Integer reps, Integer rest) {
+    public JsonAdaptedExercise(@JsonProperty("name") String name, @JsonProperty("sets") Integer sets,
+                               @JsonProperty("reps") Integer reps, @JsonProperty("rest") Integer rest) {
         this.name = name;
         this.sets = sets;
         this.reps = reps;
@@ -35,11 +37,6 @@ class JsonAdaptedExercise {
         sets = source.getSets();
         reps = source.getReps();
         rest = source.getRest();
-    }
-
-    @JsonValue
-    public String getName() {
-        return name;
     }
 
     /**

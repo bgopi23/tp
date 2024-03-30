@@ -65,4 +65,14 @@ public class StringUtil {
             return false;
         }
     }
+
+    public static boolean isInteger(String s) {
+        try {
+            Integer i = Integer.valueOf(s);
+        } catch (NumberFormatException nfe) {
+            return false;
+        }
+
+        return true;
+    }
 }
