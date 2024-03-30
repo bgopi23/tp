@@ -95,7 +95,7 @@ class JsonAdaptedPerson {
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
 
-        exercises.addAll(source.getExercises().getValue().stream()
+        exercises.addAll(source.getExerciseSet().getValue().stream()
             .map(JsonAdaptedExercise::new)
             .collect(Collectors.toList()));
     }
@@ -117,6 +117,12 @@ class JsonAdaptedPerson {
         for (JsonAdaptedWeight weight : this.weights) {
             personWeights.add(weight.toModelType());
         }
+
+        final List<Exercise> personExercises = new ArrayList<>();
+        for (JsonAdaptedExercise exercise : exercises) {
+            personExercises.add(exercise.toModelType());
+        }
+        final Set<Exercise> peronExerciseHashSet = new HashSet<>(personExercises);
 
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
@@ -169,14 +175,10 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
-        final List<Exercise> personExercises = new ArrayList<>();
-        for (JsonAdaptedExercise exercise : exercises) {
-            personExercises.add(exercise.toModelType());
-        }
-        final Set<Exercise> modelExercises = new HashSet<>(personExercises);
-        final ExerciseSet modelExerciseSet = new ExerciseSet(modelExercises);
-
         final Set<Tag> modelTags = new HashSet<>(personTags);
+
+        final ExerciseSet modelExerciseSet = new ExerciseSet(peronExerciseHashSet);
+
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWeights,
             modelHeight, modelNote, modelTags, modelExerciseSet);
     }

@@ -9,7 +9,8 @@
       "weight": "85",
       "height": "165",
       "note": "Best friend",
-      "tags": ["friends"]
+      "tags": ["friends"],
+      "exercises": []
     },
     {
       "name": "Benson Meier",
@@ -19,7 +20,15 @@
       "weight": "75",
       "height": "169",
       "note": "",
-      "tags": ["owesMoney", "friends"]
+      "tags": ["owesMoney", "friends"],
+      "exercises": [
+        {
+          "name": "squats",
+          "sets": 3,
+          "reps": 5,
+          "rest": 1
+        }
+      ]
     },
     {
       "name": "Carl Kurz",
@@ -29,7 +38,8 @@
       "weight": "68",
       "height": "160",
       "note": "",
-      "tags": []
+      "tags": [],
+      "exercises": []
     },
     {
       "name": "Daniel Meier",
@@ -39,7 +49,8 @@
       "weight": "80",
       "height": "175.5",
       "note": "Best man",
-      "tags": ["friends"]
+      "tags": ["friends"],
+      "exercises": []
     },
     {
       "name": "Elle Meyer",
@@ -49,7 +60,8 @@
       "weight": "112",
       "height": "191",
       "note": "",
-      "tags": []
+      "tags": [],
+      "exercises": []
     },
     {
       "name": "Fiona Kunz",
@@ -59,7 +71,8 @@
       "weight": "100",
       "height": "188",
       "note": "lover",
-      "tags": []
+      "tags": [],
+      "exercises": []
     },
     {
       "name": "George Best",
@@ -69,7 +82,8 @@
       "weight": "91",
       "height": "175",
       "note": "",
-      "tags": []
+      "tags": [],
+      "exercises": []
     }
   ]
 }

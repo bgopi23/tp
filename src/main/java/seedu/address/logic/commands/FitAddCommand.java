@@ -47,7 +47,7 @@ public class FitAddCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
         Exercise exerciseToAdd = exercise;
-        Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExercises().getValue());
+        Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
         for (Exercise e : updatedExercises) {
             if (e.getName().equals(exercise.getName())) {

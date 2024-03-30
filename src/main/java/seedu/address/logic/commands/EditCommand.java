@@ -91,7 +91,7 @@ public class EditCommand extends Command {
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         // Modification of exercises cannot be performed as part of the edit command
-        ExerciseSet exerciseSet = personToEdit.getExercises();
+        ExerciseSet exerciseSet = personToEdit.getExerciseSet();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
                 toEditWeightMap, updatedHeight, updatedNote, updatedTags, exerciseSet);

@@ -11,6 +11,7 @@ import java.util.stream.Stream;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -74,6 +75,13 @@ public class SampleDataUtil {
         return Arrays.stream(strings)
             .map(Tag::new)
             .collect(Collectors.toSet());
+    }
+
+    /**
+     * Returns an exercise set containing the list of exercises given.
+     */
+    public static Set<Exercise> getExerciseHashSet(Exercise... exercises) {
+        return new HashSet<>(Arrays.asList(exercises));
     }
 
     /**

@@ -46,7 +46,7 @@ public class FitDeleteCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExercises().getValue());
+        Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
         if (!updatedExercises.contains(exercise)) {
             throw new CommandException(
