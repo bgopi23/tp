@@ -10,8 +10,6 @@ import java.util.stream.Stream;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
@@ -46,22 +44,27 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns the last value of {@code prefix}.
+     * Gets  Gets the value associated with the prefix or an empty string
+     * @param prefix the associated prefix
+     * @return a string value or empty string
      */
     public String getValueOrEmpty(Prefix prefix) {
         return this.getValue(prefix).orElse("");
     }
 
     /**
-     * Returns the last value of {@code prefix}.
+     * Gets the value associated with the prefix or a preamble if the value does not exist
+     * @param prefix the associated prefix
+     * @return the associated value or preamble
      */
     public String getValueOrPreamble(Prefix prefix) {
         return this.getValue(prefix).orElse(getPreamble());
     }
 
     /**
-
-     * Returns the string value of {@code prefix}.
+     * Gets string value associated with the given prefix
+     * @param prefix the associated prefix
+     * @return a string
      */
     public String getStringValue(Prefix prefix) {
         return getValue(prefix).get();
@@ -116,11 +119,11 @@ public class ArgumentMultimap {
 
     /**
      * Checks if every single one of the prefixes exists in the map
-     * @param prefixes
+     * @param prefixes a list of prefixes
      * @return true if all the prefixes exists in the map
      */
     public boolean containsAll(Prefix... prefixes) {
-        return Stream.of(prefixes).anyMatch(prefix -> contains(prefix));
+        return Stream.of(prefixes).anyMatch(this::contains);
     }
 
     /**
@@ -129,9 +132,5 @@ public class ArgumentMultimap {
      */
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
-    }
-
-    public boolean isPreambleAlone(){
-       return this.getPreamble().split(" ").length == 1;
     }
 }
