@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
-import seedu.address.model.Model;
-
 import static seedu.address.logic.messages.ExitCommandMessages.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+
+import seedu.address.model.Model;
 
 /**
  * Terminates the program.

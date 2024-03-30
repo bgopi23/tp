@@ -1,9 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
-import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
-import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_EMPTY;
@@ -31,6 +27,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
+import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
+import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -43,9 +43,9 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.Messages;
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;

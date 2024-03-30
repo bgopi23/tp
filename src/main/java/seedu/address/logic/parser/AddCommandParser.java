@@ -4,10 +4,6 @@ import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_INVALID_PA
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NAME_PARAMETER_MISSING_ADD;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NO_PARAMETERS_ADD;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_PHONE_PARAMETER_MISSING_ADD;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
-import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
-import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;

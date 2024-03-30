@@ -1,8 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_SUCCESS;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_SUCCESS;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;

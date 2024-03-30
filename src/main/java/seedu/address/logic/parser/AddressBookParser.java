@@ -12,7 +12,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.ClearCommandMessages;
 import seedu.address.logic.messages.DeleteCommandMessages;
