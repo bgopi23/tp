@@ -283,6 +283,34 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_searchPartialTag_noPersonsFound() {
+        // No persons found
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+
+        TagSetContainsAllTagsPredicate predicate = new TagSetContainsAllTagsPredicate(
+                new HashSet<>(Arrays.asList(new Tag("fri"))));
+
+        FindCommand command = new FindCommand(new CombinedPredicates(predicate));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_searchCaseInsensitiveTag_personsFound() {
+        // No persons found
+        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+
+        TagSetContainsAllTagsPredicate predicate = new TagSetContainsAllTagsPredicate(
+                new HashSet<>(Arrays.asList(new Tag("FrIenDs"))));
+
+        FindCommand command = new FindCommand(new CombinedPredicates(predicate));
+        expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+    }
+
+    @Test
     public void execute_searchNote_noPersonsFound() {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         NoteContainsSubstringPredicate predicate = new NoteContainsSubstringPredicate("enemy");
