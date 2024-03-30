@@ -7,6 +7,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
+/**
+ * Messages used by AddCommand and associated classes.
+ */
 public class AddCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "add";

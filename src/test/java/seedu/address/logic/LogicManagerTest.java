@@ -23,6 +23,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.DeleteCommandMessages;
+import seedu.address.logic.messages.ListCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -70,7 +71,7 @@ public class LogicManagerTest {
     @Test
     public void execute_validCommand_success() throws Exception {
         String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, Messages.MESSAGE_NO_CLIENTS_TO_LIST, model);
+        assertCommandSuccess(listCommand, ListCommandMessages.MESSAGE_NO_CLIENTS_TO_LIST, model);
     }
 
     @Test

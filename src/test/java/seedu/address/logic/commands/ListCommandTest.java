@@ -10,7 +10,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithSin
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.ListCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -40,20 +40,20 @@ public class ListCommandTest {
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
         int listSize = expectedModel.getFilteredPersonList().size();
-        String expectedMessage = String.format(Messages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
+        String expectedMessage = String.format(ListCommandMessages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
         assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_emptyList_showsNothing() {
-        String expectedMessage = String.format(Messages.MESSAGE_NO_CLIENTS_TO_LIST);
+        String expectedMessage = String.format(ListCommandMessages.MESSAGE_NO_CLIENTS_TO_LIST);
         assertCommandSuccess(new ListCommand(), emptyModel, expectedMessage, expectedEmptyModel);
     }
 
     @Test
     public void execute_singlePersonList_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        String expectedMessage = String.format(Messages.MESSAGE_ONE_CLIENT_LISTED);
+        String expectedMessage = String.format(ListCommandMessages.MESSAGE_ONE_CLIENT_LISTED);
         assertCommandSuccess(new ListCommand(), singlePersonModel, expectedMessage, expectedSinglePersonModel);
     }
 
@@ -61,7 +61,7 @@ public class ListCommandTest {
     public void execute_listIsFiltered_showsEverything() {
         showPersonAtIndex(model, INDEX_FIRST_PERSON);
         int listSize = expectedModel.getFilteredPersonList().size();
-        String expectedMessage = String.format(Messages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
+        String expectedMessage = String.format(ListCommandMessages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
         assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
     }
 }

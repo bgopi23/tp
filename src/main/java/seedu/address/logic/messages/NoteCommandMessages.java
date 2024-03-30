@@ -1,4 +1,8 @@
 package seedu.address.logic.messages;
+
+/**
+ * Messages used by ListCommand and associated classes.
+ */
 public class NoteCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "note";

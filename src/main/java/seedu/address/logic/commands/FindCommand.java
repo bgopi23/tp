@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.messages.Messages;
@@ -10,7 +13,7 @@ import seedu.address.model.person.predicates.CombinedPredicates;
 /**
  * Finds and lists all persons in address book whose name contains any of the
  * argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
 
@@ -27,15 +30,15 @@ public class FindCommand extends Command {
         int listSize = model.getFilteredPersonList().size();
 
         if (listSize == 0) {
-            return new CommandResult(Messages.MESSAGE_NO_CLIENTS_FOUND);
+            return new CommandResult(MESSAGE_NO_CLIENTS_FOUND);
         }
 
         if (listSize == 1) {
-            return new CommandResult(Messages.MESSAGE_ONE_CLIENT_FOUND);
+            return new CommandResult(MESSAGE_ONE_CLIENT_FOUND);
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, listSize));
+                String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, listSize));
     }
 
     @Override
