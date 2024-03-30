@@ -29,6 +29,8 @@ public class Messages {
     public static final String MESSAGE_ONE_CLIENT_LISTED = "1 client listed!";
     public static final String MESSAGE_ALL_CLIENTS_LISTED = "%1$d clients listed!";
 
+    public static final String MESSAGE_WARN = "\n\nWARNING: %s";
+
     /**
      * Returns an error message indicating the duplicate prefixes.
      */

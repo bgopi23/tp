@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
+import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -59,7 +60,7 @@ public class AddCommand extends Command {
         boolean isPhoneOfExpectedFormat = toAdd.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
         }
 
         return "";
