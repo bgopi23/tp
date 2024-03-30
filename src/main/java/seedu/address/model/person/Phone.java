@@ -9,9 +9,11 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Phone extends Attribute<String> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Phone numbers should only contain numbers,"
-            + "starts with either '6', '8' or '9' and be a total of 8 digits long";
-    public static final String VALIDATION_REGEX = "^[689]\\d{7}$";
+    public static final String MESSAGE_CONSTRAINTS = "Phone numbers should only contain digits and have a minimum length of 1.";
+    public static final String MESSAGE_EXPECTED =
+        "The phone number supplied does not appear to be from Singapore,\nfor other types of numbers, please ensure that you have keyed it in correctly.";
+    public static final String EXPECTED_FORMAT_REGEX = "^[689]\\d{7}$";
+    public static final String REQUIRED_REGEX = "^\\d+$";
 
     /**
      * Constructs a {@code Phone}.
@@ -28,7 +30,22 @@ public class Phone extends Attribute<String> {
      * Returns true if a given string is a valid phone number.
      */
     public static boolean isValidPhone(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(REQUIRED_REGEX);
+    }
+
+    /**
+     * Determines if the phone value stored is of an expected format.
+     *
+     * @return true if the phone number is of an expected format, false otherwise.
+     */
+    public boolean isExpectedFormat() {
+        String phoneNumber = this.getValue();
+
+        if (!phoneNumber.isEmpty()) {
+            return phoneNumber.matches(EXPECTED_FORMAT_REGEX);
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -36,7 +53,6 @@ public class Phone extends Attribute<String> {
      * Returns true if specified value is a substring of the phone value stored.
      *
      * @param otherValue Other value to check against
-     *
      * @return True if specified value is a match, False otherwise
      */
     @Override

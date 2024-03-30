@@ -12,6 +12,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Phone;
 
 /**
  * Adds a person to the address book.
@@ -36,6 +37,8 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "friend ";
 
     public static final String MESSAGE_SUCCESS = "Client successfully added!\n--------------------------\n%1$s";
+    public static final String MESSAGE_WARN = "\n\nWARNING: %s";
+
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book";
     private final Person toAdd;
 
@@ -47,6 +50,21 @@ public class AddCommand extends Command {
         toAdd = person;
     }
 
+    /**
+     * Gets the warning message for the command's execution.
+     *
+     * @return The warning message, or an empty string if none.
+     */
+    public String getMessageWarn() {
+        boolean isPhoneOfExpectedFormat = toAdd.getPhone().isExpectedFormat();
+
+        if (!isPhoneOfExpectedFormat) {
+            return String.format(MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+        }
+
+        return "";
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -56,7 +74,13 @@ public class AddCommand extends Command {
         }
 
         model.addPerson(toAdd);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.getFormattedMessage()));
+
+        String messageSuccess = String.format(MESSAGE_SUCCESS, toAdd.getFormattedMessage());
+        String messageWarn = this.getMessageWarn();
+
+        String messageResult = String.format("%s%s", messageSuccess, messageWarn);
+
+        return new CommandResult(messageResult);
     }
 
     @Override

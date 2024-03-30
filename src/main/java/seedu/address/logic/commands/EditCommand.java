@@ -52,6 +52,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_PERSON_SUCCESS =
             "Successfully edited client!\n--------------------------\n%1$s";
+    public static final String MESSAGE_WARN = "\n\nWARNING: %s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.\n%1$s";
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
 
@@ -86,6 +87,21 @@ public class EditCommand extends Command {
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNote, updatedTags);
     }
 
+    /**
+     * Gets the warning message for the command's execution.
+     *
+     * @return The warning message, or an empty string if none.
+     */
+    public String getMessageWarn(Person editedPerson) {
+        boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
+
+        if (!isPhoneOfExpectedFormat) {
+            return String.format(MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+        }
+
+        return "";
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
@@ -106,7 +122,13 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage()));
+
+        String messageSuccess = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage());
+        String messageWarn = this.getMessageWarn(editedPerson);
+
+        String messageResult = String.format("%s%s", messageSuccess, messageWarn);
+
+        return new CommandResult(messageResult);
     }
 
     @Override
