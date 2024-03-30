@@ -22,4 +22,7 @@ public class WeightCommandMessages extends Messages {
             "Successfully removed weight from client!\n--------------------------------------\n%1$s";
 
     public static final String MESSAGE_NO_INDEX_WEIGHT = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
+
+    // Represents an empty weight field in the UI that needs extra clarity (instead of not showing the field at all)
+    public static final String EMPTY_FIELD = "Weight: " + Messages.EMPTY_FIELD;
 }

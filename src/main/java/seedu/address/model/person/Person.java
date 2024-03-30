@@ -20,7 +20,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
-import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
@@ -39,15 +38,15 @@ public class Person {
     // Data fields
     private final Address address;
     private final WeightMap weights;
-    private final Height height;
+    private final Weight height;
     private final Note note;
     private final TagSet tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Weight> weights,
-                  Height height, Note note, Set<Tag> tags) {
+    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> weights,
+                  Weight height, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;
         this.phone = phone;
@@ -107,8 +106,8 @@ public class Person {
         return address;
     }
 
-    public Optional<Map.Entry<LocalDateTime, Weight>> getLatestWeight() {
-        return Optional.of(this.weights.getValue().lastEntry());
+    public Optional<Map.Entry<LocalDateTime, seedu.address.model.person.weight.Weight>> getLatestWeight() {
+        return Optional.ofNullable(this.weights.getValue().lastEntry());
     }
 
     /**
@@ -116,11 +115,11 @@ public class Person {
      * {@code UnsupportedOperationException}
      * if modification is attempted.
      */
-    public NavigableMap<LocalDateTime, Weight> getWeights() {
+    public NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> getWeights() {
         return this.weights.getValue();
     }
 
-    public Height getHeight() {
+    public Weight getHeight() {
         return this.height;
     }
 

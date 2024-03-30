@@ -9,9 +9,8 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.HeightCommandMessages;
 import seedu.address.logic.messages.Messages;
-import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Height;
+import seedu.address.model.person.Weight;
 import seedu.address.model.person.Person;
 
 /**
@@ -19,13 +18,13 @@ import seedu.address.model.person.Person;
  */
 public class HeightCommand extends Command {
     private final Index index;
-    private final Height height;
+    private final Weight height;
 
     /**
      * @param index of the person in the filtered person list to edit the height
      * @param height of the person to be updated to
      */
-    public HeightCommand(Index index, Height height) {
+    public HeightCommand(Index index, Weight height) {
         requireAllNonNull(index, height);
 
         this.index = index;

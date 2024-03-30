@@ -15,11 +15,10 @@ import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Height;
+import seedu.address.model.person.Weight;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -130,34 +129,34 @@ public class ParserUtil {
      * Parses a {@code Optional<String> weight} into a {@code Weight}.
      * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
      */
-    public static Weight parseWeight(Optional<String> weight) throws ParseException {
+    public static seedu.address.model.person.weight.Weight parseWeight(Optional<String> weight) throws ParseException {
         requireNonNull(weight);
 
         if (!weight.isEmpty()) {
             String trimmedWeight = weight.get().trim();
-            if (!Weight.isValidWeight(trimmedWeight)) {
-                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+            if (!seedu.address.model.person.weight.Weight.isValidWeight(trimmedWeight)) {
+                throw new ParseException(seedu.address.model.person.weight.Weight.MESSAGE_CONSTRAINTS);
             }
-            return trimmedWeight.isEmpty() ? new Weight(0f) : new Weight(Float.valueOf(trimmedWeight));
+            return trimmedWeight.isEmpty() ? new seedu.address.model.person.weight.Weight(0f) : new seedu.address.model.person.weight.Weight(Float.valueOf(trimmedWeight));
         }
-        return new Weight(0f);
+        return new seedu.address.model.person.weight.Weight(0f);
     }
 
     /**
      * Parses a {@code Optional<String> height} into a {@code Height}.
      * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
      */
-    public static Height parseHeight(Optional<String> height) throws ParseException {
+    public static Weight parseHeight(Optional<String> height) throws ParseException {
         requireNonNull(height);
 
         if (!height.isEmpty()) {
             String trimmedHeight = height.get().trim();
-            if (!Height.isValidHeight(trimmedHeight)) {
-                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+            if (!Weight.isValidHeight(trimmedHeight)) {
+                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
             }
-            return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
+            return trimmedHeight.isEmpty() ? new Weight(0f) : new Weight(Float.valueOf(trimmedHeight));
         }
-        return new Height(0f);
+        return new Weight(0f);
     }
 
     /**

@@ -11,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
@@ -71,7 +72,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
-        weight.setText(latestWeight.get().getValue().getFormattedWeight());
+        if (latestWeight.isEmpty()) {
+            weight.setText(WeightCommandMessages.EMPTY_FIELD);
+        } else {
+            weight.setText(latestWeight.get().getValue().getFormattedWeight());
+        }
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
@@ -79,8 +84,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
-        weight.setVisible(latestWeight.isPresent());
-        height.setVisible(!person.getHeight().getValue().isNaN());
         note.setVisible(!person.getNote().getValue().isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
