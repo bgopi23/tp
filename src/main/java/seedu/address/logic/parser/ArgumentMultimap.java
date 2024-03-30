@@ -60,6 +60,7 @@ public class ArgumentMultimap {
     }
 
     /**
+
      * Returns the string value of {@code prefix}.
      */
     public String getStringValue(Prefix prefix) {
@@ -83,6 +84,13 @@ public class ArgumentMultimap {
      */
     public String getPreamble() {
         return this.getValue(new Prefix("")).orElse("");
+    }
+
+    /**
+     * Returns the number of segments in a preamble split by a single whitespace
+     */
+    public Integer getPreambleSegmentNumber() {
+        return getPreamble().split(" ").length;
     }
 
     /**

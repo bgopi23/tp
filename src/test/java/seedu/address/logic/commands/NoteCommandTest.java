@@ -28,6 +28,7 @@ class NoteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
+
     @Test
     public void execute_addNoteUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -52,7 +53,7 @@ class NoteCommandTest {
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
         String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
-               editedPerson.getFormattedMessage());
+                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -90,11 +91,14 @@ class NoteCommandTest {
         NoteCommand secondNote = new NoteCommand(INDEX_SECOND_PERSON, new Note(NOTE_STUB));
         NoteCommand firstNoteClone = new NoteCommand(INDEX_FIRST_PERSON, new Note(NOTE_STUB));
 
-        // same note => return true
+        // same object => return true
         assertEquals(firstNote, firstNote);
 
         // same note details => return true
         assertEquals(firstNote, firstNoteClone);
+
+        // same note, different person => return false
+        assertNotEquals(firstNote, secondNote);
 
         // note not equal to number => return false
         assertNotEquals(firstNote, 10);

@@ -44,10 +44,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // (edit 1 name) or (edit name 1)
-        if (argMultimap.getPreamble().split(" ").length != 1) {
+        if (argMultimap.getPreambleSegmentNumber() != 1) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

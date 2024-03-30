@@ -35,7 +35,7 @@ public class Tag extends Attribute<String> {
 
     /**
      * Determine if the tag value stored is a match with a specified string.
-     * Returns true if specified value is a substring of the tag value stored.
+     * Returns true if specified value is an exact match of the tag value stored (case-insensitive).
      *
      * @param otherValue Other value to check against
      *
@@ -49,7 +49,7 @@ public class Tag extends Attribute<String> {
 
         String other = (String) otherValue;
 
-        return this.getValue().trim().toLowerCase().contains(other.trim().toLowerCase());
+        return this.getValue().trim().equalsIgnoreCase(other.trim());
     }
 
     @Override
