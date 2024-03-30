@@ -46,7 +46,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns the last value of {@code prefix}.
+     * Returns the string value of {@code prefix}.
      */
     public String getStringValue(Prefix prefix) {
         return getValue(prefix).get();

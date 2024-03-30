@@ -63,8 +63,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         // (add n/John p/98988898...)
         argMultimap.verifyNoDuplicatePrefixesFor(ALL_PREFIXES_EXCEPT_TAG);
 
-        Name name = ParserUtil.parseName(argMultimap.getStringValue());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Name name = ParserUtil.parseName(argMultimap.getStringValue(PREFIX_NAME));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
