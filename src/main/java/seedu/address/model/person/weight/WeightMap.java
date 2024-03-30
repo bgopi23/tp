@@ -56,6 +56,8 @@ public class WeightMap extends Attribute<NavigableMap<LocalDateTime, Weight>> {
             return false;
         }
 
+        // Already checked that set contains Float objects, so it is safe to cast
+        @SuppressWarnings("unchecked")
         Pair<Float, Float> weightRange = (Pair<Float, Float>) otherValue;
 
         assert (weightRange.getValue() - weightRange.getKey() >= 0)

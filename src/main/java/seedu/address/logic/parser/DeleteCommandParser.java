@@ -3,8 +3,9 @@ package seedu.address.logic.parser;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.messages.DeleteCommandMessages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -20,7 +21,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
     public DeleteCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_NO_INDEX, DeleteCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_NO_INDEX, DeleteCommandMessages.MESSAGE_USAGE));
         }
 
         try {
@@ -29,7 +30,7 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
         } catch (ParseException pe) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                            DeleteCommand.MESSAGE_USAGE), pe);
+                            DeleteCommandMessages.MESSAGE_USAGE), pe);
         }
 
     }

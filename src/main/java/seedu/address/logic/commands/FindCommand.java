@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -10,17 +13,15 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.CombinedPredicates;
 
 /**
  * Finds and lists all persons in address book whose name contains any of the
  * argument keywords.
- * Keyword matching is case insensitive.
+ * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String COMMAND_WORD = "find";
 
     public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
@@ -68,15 +69,15 @@ public class FindCommand extends Command {
         int listSize = model.getFilteredPersonList().size();
 
         if (listSize == 0) {
-            return new CommandResult(Messages.MESSAGE_NO_CLIENTS_FOUND);
+            return new CommandResult(MESSAGE_NO_CLIENTS_FOUND);
         }
 
         if (listSize == 1) {
-            return new CommandResult(Messages.MESSAGE_ONE_CLIENT_FOUND);
+            return new CommandResult(MESSAGE_ONE_CLIENT_FOUND);
         }
 
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, listSize));
+                String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, listSize));
     }
 
     @Override

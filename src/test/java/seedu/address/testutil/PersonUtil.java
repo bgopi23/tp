@@ -11,8 +11,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
+import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.model.person.Person;
 import seedu.address.model.tag.Tag;
 
@@ -26,7 +26,7 @@ public class PersonUtil {
      * Returns an add command string for adding the {@code person}.
      */
     public static String getAddCommand(Person person) {
-        return AddCommand.COMMAND_WORD + " " + getPersonDetails(person);
+        return AddCommandMessages.COMMAND_WORD + " " + getPersonDetails(person);
     }
 
     /**
