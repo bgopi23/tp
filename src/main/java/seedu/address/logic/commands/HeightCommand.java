@@ -75,7 +75,7 @@ public class HeightCommand extends Command {
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), toEditHeightMap, personToEdit.getWeight(),
+                personToEdit.getAddress(), toEditHeightMap, personToEdit.getWeightTemp(),
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);

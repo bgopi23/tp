@@ -8,7 +8,7 @@
       "heightDate" : "2023-06-20T10:15:30",
       "heightValue" : "176.0"
     } ],
-    "weight" : "67.5",
+    "weightTemp" : "67.5",
     "note" : "Likes to swim",
     "tags" : [ "neighbours" ]
   }, {
@@ -20,7 +20,7 @@
       "heightDate" : "2023-06-20T10:15:30",
       "heightValue" : "176.0"
     } ],
-    "weight" : "67.5",
+    "weightTemp" : "67.5",
     "note" : "Likes to swim",
     "tags" : [ "neighbours" ]
   } ]

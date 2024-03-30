@@ -54,7 +54,7 @@ public class PersonUtil {
         descriptor.getEmail().ifPresent(email -> sb.append(PREFIX_EMAIL).append(email.getValue()).append(" "));
         descriptor.getAddress().ifPresent(address -> sb.append(PREFIX_ADDRESS).append(address.getValue()).append(" "));
         descriptor.getHeight().ifPresent(height -> sb.append(PREFIX_HEIGHT).append(height.getValue()).append(" "));
-        descriptor.getWeight().ifPresent(weight -> sb.append(PREFIX_WEIGHT).append(weight.getValue()).append(" "));
+        descriptor.getWeightTemp().ifPresent(weightTemp -> sb.append(PREFIX_WEIGHT).append(weightTemp.getValue()).append(" "));
         descriptor.getNote().ifPresent(note -> sb.append(PREFIX_NOTE).append(note.getValue()).append(" "));
         if (descriptor.getTags().isPresent()) {
             Set<Tag> tags = descriptor.getTags().get();

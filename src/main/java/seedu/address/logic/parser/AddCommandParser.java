@@ -26,7 +26,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.tag.Tag;
@@ -80,11 +80,11 @@ public class AddCommandParser implements Parser<AddCommand> {
             heightMap.put(HeightEntry.getTimeOfExecution(),
                     ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
         }
-        Weight weight = ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
+        WeightTemp weightTemp = ParserUtil.parseWeightTemp(argMultimap.getValue(PREFIX_WEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, heightMap, weight, note, tagList);
+        Person person = new Person(name, phone, email, address, heightMap, weightTemp, note, tagList);
 
         return new AddCommand(person);
     }

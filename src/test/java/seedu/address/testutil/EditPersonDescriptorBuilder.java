@@ -11,7 +11,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.tag.Tag;
 
@@ -41,7 +41,7 @@ public class EditPersonDescriptorBuilder {
         descriptor.setEmail(person.getEmail());
         descriptor.setAddress(person.getAddress());
         descriptor.setHeight(person.getLatestHeight().get().getValue());
-        descriptor.setWeight(person.getWeight());
+        descriptor.setWeightTemp(person.getWeightTemp());
         descriptor.setNote(person.getNote());
         descriptor.setTags(person.getTags());
     }
@@ -92,11 +92,11 @@ public class EditPersonDescriptorBuilder {
     }
 
     /**
-     * Sets the {@code Weight} of the {@code EditPersonDescriptor} that we are
+     * Sets the {@code WeightTemp} of the {@code EditPersonDescriptor} that we are
      * building.
      */
-    public EditPersonDescriptorBuilder withWeight(Float weight) {
-        descriptor.setWeight(new Weight(weight));
+    public EditPersonDescriptorBuilder withWeightTemp(Float weightTemp) {
+        descriptor.setWeightTemp(new WeightTemp(weightTemp));
         return this;
     }
 

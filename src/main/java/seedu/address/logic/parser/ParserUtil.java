@@ -17,7 +17,7 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.tag.Tag;
 
@@ -143,20 +143,20 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> weight} into a {@code Weight}.
-     * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
+     * Parses a {@code Optional<String> weightTemp} into a {@code WeightTemp}.
+     * If the {@code Optional} is empty, return a {@code WeightTemp} with an uninitialized value of 0f.
      */
-    public static Weight parseWeight(Optional<String> weight) throws ParseException {
-        requireNonNull(weight);
+    public static WeightTemp parseWeightTemp(Optional<String> weightTemp) throws ParseException {
+        requireNonNull(weightTemp);
 
-        if (!weight.isEmpty()) {
-            String trimmedWeight = weight.get().trim();
-            if (!Weight.isValidWeight(trimmedWeight)) {
-                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+        if (!weightTemp.isEmpty()) {
+            String trimmedWeightTemp = weightTemp.get().trim();
+            if (!WeightTemp.isValidWeightTemp(trimmedWeightTemp)) {
+                throw new ParseException(WeightTemp.MESSAGE_CONSTRAINTS);
             }
-            return new Weight(Float.valueOf(trimmedWeight));
+            return new WeightTemp(Float.valueOf(trimmedWeightTemp));
         }
-        return new Weight(0f);
+        return new WeightTemp(0f);
     }
 
     /**

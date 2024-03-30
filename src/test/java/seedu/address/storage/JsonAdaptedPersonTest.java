@@ -36,7 +36,7 @@ public class JsonAdaptedPersonTest {
             .map(HeightEntry::new)
             .map(JsonAdaptedHeight::new)
             .collect(Collectors.toList());
-    private static final String VALID_WEIGHT = BENSON.getWeight().toString();
+    private static final String VALID_WEIGHT = BENSON.getWeightTemp().toString();
     private static final List<JsonAdaptedTag> VALID_TAGS = BENSON.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList());
@@ -126,7 +126,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_invalidWeight_throwsIllegalValueException() {
+    public void toModelType_invalidWeightTemp_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =
@@ -136,7 +136,7 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
-    public void toModelType_nullWeight_throwsIllegalValueException() {
+    public void toModelType_nullWeightTemp_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
         invalidTags.add(new JsonAdaptedTag(INVALID_TAG));
         JsonAdaptedPerson person =

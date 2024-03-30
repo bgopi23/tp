@@ -10,42 +10,42 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 
 /**
- * Changes the weight of an existing person in the address book.
+ * Changes the weightTemp of an existing person in the address book.
  */
-public class WeightCommand extends Command {
+public class WeightTempCommand extends Command {
 
-    public static final String COMMAND_WORD = "weight";
+    public static final String COMMAND_WORD = "weightTemp";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weight (in kilograms) of the person identified "
+            + ": Edits the weightTemp (in kilograms) of the person identified "
             + "by the index number used in the last person listing. "
-            + "Existing weight will be overwritten by the input.\n"
+            + "Existing weightTemp will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
             + "w/ WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "w/ 92.5";
 
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
-            "Successfully added weight to client!\n---------------------------------\n%1$s";
+            "Successfully added weightTemp to client!\n---------------------------------\n%1$s";
 
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
-            "Successfully removed weight from client!\n--------------------------------------\n%1$s";
+            "Successfully removed weightTemp from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
-    private final Weight weight;
+    private final WeightTemp weightTemp;
 
     /**
-     * @param index of the person in the filtered person list to edit the weight
-     * @param weight of the person to be updated to
+     * @param index of the person in the filtered person list to edit the weightTemp
+     * @param weightTemp of the person to be updated to
      */
-    public WeightCommand(Index index, Weight weight) {
-        requireAllNonNull(index, weight);
+    public WeightTempCommand(Index index, WeightTemp weightTemp) {
+        requireAllNonNull(index, weightTemp);
 
         this.index = index;
-        this.weight = weight;
+        this.weightTemp = weightTemp;
     }
 
     @Override
@@ -59,7 +59,7 @@ public class WeightCommand extends Command {
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getHeights(), this.weight,
+                personToEdit.getAddress(), personToEdit.getHeights(), this.weightTemp,
                 personToEdit.getNote(), personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
@@ -70,11 +70,11 @@ public class WeightCommand extends Command {
 
     /**
      * Generates a command execution success message based on whether
-     * the weight is added to or removed from
+     * the weightTemp is added to or removed from
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(weight.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
+        String message = !(weightTemp.getValue() == 0f) ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 
@@ -85,12 +85,12 @@ public class WeightCommand extends Command {
         }
 
         // instanceof handles nulls
-        if (!(other instanceof WeightCommand)) {
+        if (!(other instanceof WeightTempCommand)) {
             return false;
         }
 
-        WeightCommand e = (WeightCommand) other;
+        WeightTempCommand e = (WeightTempCommand) other;
         return this.index.equals(e.index)
-                && this.weight.equals(e.weight);
+                && this.weightTemp.equals(e.weightTemp);
     }
 }

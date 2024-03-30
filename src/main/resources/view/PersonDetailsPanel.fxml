@@ -28,7 +28,7 @@
                   <Label fx:id="address" styleClass="cell_small_label" text="address" />
                   <Label fx:id="email" styleClass="cell_small_label" text="email" />
                   <Label fx:id="height" styleClass="cell_small_label" text="height" />
-                  <Label fx:id="weight" styleClass="cell_small_label" text="weight" />
+                  <Label fx:id="weightTemp" styleClass="cell_small_label" text="weightTemp" />
                   <Label fx:id="note" styleClass="cell_small_label" text="note" />
                </children>
                <GridPane.margin>

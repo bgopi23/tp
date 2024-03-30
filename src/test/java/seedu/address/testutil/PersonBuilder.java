@@ -12,7 +12,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.tag.Tag;
@@ -36,7 +36,7 @@ public class PersonBuilder {
     private Email email;
     private Address address;
     private NavigableMap<LocalDateTime, Height> heights;
-    private Weight weight;
+    private WeightTemp weightTemp;
     private Note note;
     private Set<Tag> tags;
 
@@ -50,7 +50,7 @@ public class PersonBuilder {
         this.address = new Address(DEFAULT_ADDRESS);
         this.heights = new TreeMap<>();
         this.heights.put(HeightEntry.getTimeOfExecution(), DEFAULT_HEIGHT);
-        this.weight = new Weight(DEFAULT_WEIGHT);
+        this.weightTemp = new WeightTemp(DEFAULT_WEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();
     }
@@ -64,7 +64,7 @@ public class PersonBuilder {
         this.email = personToCopy.getEmail();
         this.address = personToCopy.getAddress();
         this.heights = new TreeMap<>(personToCopy.getHeights());
-        this.weight = personToCopy.getWeight();
+        this.weightTemp = personToCopy.getWeightTemp();
         this.note = personToCopy.getNote();
         this.tags = new HashSet<>(personToCopy.getTags());
     }
@@ -119,10 +119,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Weight} of the {@code Person} that we are building.
+     * Sets the {@code WeightTemp} of the {@code Person} that we are building.
      */
-    public PersonBuilder withWeight(Float weight) {
-        this.weight = new Weight(weight);
+    public PersonBuilder withWeightTemp(Float weightTemp) {
+        this.weightTemp = new WeightTemp(weightTemp);
         return this;
     }
 
@@ -139,7 +139,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(this.name, this.phone, this.email, this.address,
-                this.heights, this.weight, this.note, this.tags);
+                this.heights, this.weightTemp, this.note, this.tags);
     }
 
 }

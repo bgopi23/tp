@@ -18,10 +18,10 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.testutil.PersonBuilder;
 
-class WeightCommandTest {
+class WeightTempCommandTest {
 
     private static final Float WEIGHT_STUB = 92.5f;
     private static final Float UNINITIALIZED_WEIGHT = 0f;
@@ -29,76 +29,76 @@ class WeightCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
     @Test
-    public void execute_addWeightUnfilteredList_success() {
+    public void execute_addWeightTempUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withWeight(WEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withWeightTemp(WEIGHT_STUB).build();
 
-        WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
-                new Weight(editedPerson.getWeight().getValue()));
+        WeightTempCommand weightTempCommand = new WeightTempCommand(INDEX_FIRST_PERSON,
+                new WeightTemp(editedPerson.getWeightTemp().getValue()));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightTempCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(weightTempCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_deleteWeightUnfilteredList_success() {
+    public void execute_deleteWeightTempUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withWeight(UNINITIALIZED_WEIGHT).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withWeightTemp(UNINITIALIZED_WEIGHT).build();
 
-        WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
-                new Weight(editedPerson.getWeight().getValue()));
+        WeightTempCommand weightTempCommand = new WeightTempCommand(INDEX_FIRST_PERSON,
+                new WeightTemp(editedPerson.getWeightTemp().getValue()));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_DELETE_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightTempCommand.MESSAGE_DELETE_WEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(weightTempCommand, model, expectedMessage, expectedModel);
     }
 
     @Test
-    public void execute_addWeightUnfilteredListWithoutEmail_success() {
+    public void execute_addWeightTempUnfilteredListWithoutEmail_success() {
         Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Person editedPerson = new PersonBuilder(firstPerson).withWeight(WEIGHT_STUB).build();
+        Person editedPerson = new PersonBuilder(firstPerson).withWeightTemp(WEIGHT_STUB).build();
 
-        WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
-                new Weight(editedPerson.getWeight().getValue()));
+        WeightTempCommand weightTempCommand = new WeightTempCommand(INDEX_FIRST_PERSON,
+                new WeightTemp(editedPerson.getWeightTemp().getValue()));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightTempCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, modelWithoutEmail, expectedMessage, expectedModel);
+        assertCommandSuccess(weightTempCommand, modelWithoutEmail, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_failure() {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
-        WeightCommand weightCommand = new WeightCommand(invalidIndex, new Weight(WEIGHT_STUB));
-        assertCommandFailure(weightCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        WeightTempCommand weightTempCommand = new WeightTempCommand(invalidIndex, new WeightTemp(WEIGHT_STUB));
+        assertCommandFailure(weightTempCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
     }
 
     @Test
     public void equals() {
-        WeightCommand firstWeight = new WeightCommand(INDEX_FIRST_PERSON, new Weight(WEIGHT_STUB));
-        WeightCommand secondWeight = new WeightCommand(INDEX_SECOND_PERSON, new Weight(WEIGHT_STUB));
-        WeightCommand firstWeightClone = new WeightCommand(INDEX_FIRST_PERSON, new Weight(WEIGHT_STUB));
+        WeightTempCommand firstWeightTemp = new WeightTempCommand(INDEX_FIRST_PERSON, new WeightTemp(WEIGHT_STUB));
+        WeightTempCommand secondWeightTemp = new WeightTempCommand(INDEX_SECOND_PERSON, new WeightTemp(WEIGHT_STUB));
+        WeightTempCommand firstWeightTempClone = new WeightTempCommand(INDEX_FIRST_PERSON, new WeightTemp(WEIGHT_STUB));
 
-        // same weight => return true
-        assertEquals(firstWeight, firstWeight);
+        // same weightTemp => return true
+        assertEquals(firstWeightTemp, firstWeightTemp);
 
-        // same weight details => return true
-        assertEquals(firstWeight, firstWeightClone);
+        // same weightTemp details => return true
+        assertEquals(firstWeightTemp, firstWeightTempClone);
 
-        // same weight but different person => return false
-        assertNotEquals(firstWeight, secondWeight);
+        // same weightTemp but different person => return false
+        assertNotEquals(firstWeightTemp, secondWeightTemp);
     }
 }

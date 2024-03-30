@@ -14,7 +14,7 @@ import seedu.address.model.person.Attribute;
  */
 public class HeightMap extends Attribute<NavigableMap<LocalDateTime, Height>> {
 
-    public static final String MESSAGE_EMPTY_HEIGHT_MAP = "There are no more weight values to be removed. "
+    public static final String MESSAGE_EMPTY_HEIGHT_MAP = "There are no more weightTemp values to be removed. "
             + "This client has no more height values associated with them.";
 
     /**

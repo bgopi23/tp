@@ -80,7 +80,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             editPersonDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
         }
         if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
-            editPersonDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
+            editPersonDescriptor.setWeightTemp(ParserUtil.parseWeightTemp(argMultimap.getValue(PREFIX_WEIGHT)));
         }
         if (argMultimap.contains(PREFIX_NOTE)) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)));

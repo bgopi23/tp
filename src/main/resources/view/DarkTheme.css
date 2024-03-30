@@ -266,7 +266,7 @@
 
 .dialog-pane > *.label.content {
     -fx-font-size: 14px;
-    -fx-font-weight: bold;
+    -fx-font-weightTemp: bold;
     -fx-text-fill: white;
 }
 

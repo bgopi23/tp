@@ -7,7 +7,7 @@
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
       "height": "170",
-      "weight": "65",
+      "weightTemp": "65",
       "note": "Best friend",
       "tags": ["friends"]
     },
@@ -17,7 +17,7 @@
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
       "height": "175",
-      "weight": "69",
+      "weightTemp": "69",
       "note": "",
       "tags": ["owesMoney", "friends"]
     },
@@ -27,7 +27,7 @@
       "email": "heinz@example.com",
       "address": "wall street",
       "height": "168",
-      "weight": "60",
+      "weightTemp": "60",
       "note": "",
       "tags": []
     },
@@ -37,7 +37,7 @@
       "email": "cornelia@example.com",
       "address": "10th street",
       "height": "180",
-      "weight": "90",
+      "weightTemp": "90",
       "note": "Best man",
       "tags": ["friends"]
     },
@@ -47,7 +47,7 @@
       "email": "werner@example.com",
       "address": "michegan ave",
       "height": "182",
-      "weight": "75",
+      "weightTemp": "75",
       "note": "",
       "tags": []
     },
@@ -57,7 +57,7 @@
       "email": "lydia@example.com",
       "address": "little tokyo",
       "height": "172",
-      "weight": "68",
+      "weightTemp": "68",
       "note": "lover",
       "tags": []
     },
@@ -67,7 +67,7 @@
       "email": "anna@example.com",
       "address": "4th street",
       "height": "191",
-      "weight": "85",
+      "weightTemp": "85",
       "note": "",
       "tags": []
     }

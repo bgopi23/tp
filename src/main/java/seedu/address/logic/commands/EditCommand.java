@@ -33,7 +33,7 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.WeightTemp;
 import seedu.address.model.person.height.Height;
 import seedu.address.model.person.height.HeightEntry;
 import seedu.address.model.person.height.HeightMap;
@@ -105,11 +105,11 @@ public class EditCommand extends Command {
                 toEditHeightMap.put(HeightEntry.getTimeOfExecution(), updatedHeight);
             }
         }
-        Weight updatedWeight = editPersonDescriptor.getWeight().orElse(personToEdit.getWeight());
+        WeightTemp updatedWeightTemp = editPersonDescriptor.getWeightTemp().orElse(personToEdit.getWeightTemp());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                toEditHeightMap, updatedWeight, updatedNote, updatedTags);
+                toEditHeightMap, updatedWeightTemp, updatedNote, updatedTags);
     }
 
     @Override
@@ -169,7 +169,7 @@ public class EditCommand extends Command {
         private Email email;
         private Address address;
         private Height height;
-        private Weight weight;
+        private WeightTemp weightTemp;
         private Note note;
         private Set<Tag> tags;
 
@@ -186,7 +186,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setAddress(toCopy.address);
             setHeight(toCopy.height);
-            setWeight(toCopy.weight);
+            setWeightTemp(toCopy.weightTemp);
             setNote(toCopy.note);
             setTags(toCopy.tags);
         }
@@ -195,7 +195,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, height, weight, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, height, weightTemp, note, tags);
         }
 
         public Optional<Name> getName() {
@@ -246,12 +246,12 @@ public class EditCommand extends Command {
             this.height = height;
         }
 
-        public Optional<Weight> getWeight() {
-            return Optional.ofNullable(weight);
+        public Optional<WeightTemp> getWeightTemp() {
+            return Optional.ofNullable(weightTemp);
         }
 
-        public void setWeight(Weight weight) {
-            this.weight = weight;
+        public void setWeightTemp(WeightTemp weightTemp) {
+            this.weightTemp = weightTemp;
         }
 
         /**
@@ -289,7 +289,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
                     && Objects.equals(height, otherEditPersonDescriptor.height)
-                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
+                    && Objects.equals(weightTemp, otherEditPersonDescriptor.weightTemp)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -302,7 +302,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("address", address)
                     .add("height", height)
-                    .add("weight", weight)
+                    .add("weightTemp", weightTemp)
                     .add("note", note)
                     .add("tags", tags)
                     .toString();

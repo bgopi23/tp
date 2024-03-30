@@ -34,7 +34,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label height;
     @FXML
-    private Label weight;
+    private Label weightTemp;
     @FXML
     private Label note;
     @FXML
@@ -72,7 +72,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         Optional<Map.Entry<LocalDateTime, Height>> latestHeight = person.getLatestHeight();
         height.setText(latestHeight.isPresent() ? latestHeight.get().getValue().getFormattedHeight() : "");
-        weight.setText(person.getWeight().getFormattedWeight());
+        weightTemp.setText(person.getWeightTemp().getFormattedWeightTemp());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
@@ -80,13 +80,13 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
         height.setVisible(latestHeight.isPresent());
-        weight.setVisible(person.getWeight().getValue() != 0f);
+        weightTemp.setVisible(person.getWeightTemp().getValue() != 0f);
         note.setVisible(!person.getNote().getValue().isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
         height.managedProperty().bind(height.visibleProperty());
-        weight.managedProperty().bind(weight.visibleProperty());
+        weightTemp.managedProperty().bind(weightTemp.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
     }
 
@@ -100,7 +100,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         email.setText("");
         note.setText("");
         height.setText("");
-        weight.setText("");
+        weightTemp.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
     }

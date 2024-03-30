@@ -39,7 +39,7 @@ public class Person {
     // Data fields
     private final Address address;
     private final HeightMap heights;
-    private final Weight weight;
+    private final WeightTemp weightTemp;
     private final Note note;
     private final TagSet tags;
 
@@ -47,14 +47,14 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Height> heights,
-                  Weight weight, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, heights, weight, note, tags);
+                  WeightTemp weightTemp, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, heights, weightTemp, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
         this.heights = new HeightMap(heights);
-        this.weight = weight;
+        this.weightTemp = weightTemp;
         this.note = note;
         Set<Tag> tagSet = new HashSet<>();
         tagSet.addAll(tags);
@@ -82,7 +82,7 @@ public class Person {
         case HEIGHT:
             return this.heights;
         case WEIGHT:
-            return this.weight;
+            return this.weightTemp;
         case TAGS:
             return this.tags;
 
@@ -120,8 +120,8 @@ public class Person {
         return this.heights.getValue();
     }
 
-    public Weight getWeight() {
-        return this.weight;
+    public WeightTemp getWeightTemp() {
+        return this.weightTemp;
     }
 
     public Note getNote() {
@@ -261,8 +261,8 @@ public class Person {
             sb.append(" | Latest Height: ").append(this.getLatestHeight().get().getValue().toString());
         }
 
-        if (!(weight.getValue() == 0f)) {
-            sb.append(" | Weight: ").append(weight);
+        if (!(weightTemp.getValue() == 0f)) {
+            sb.append(" | WeightTemp: ").append(weightTemp);
         }
 
         if (!this.getTags().isEmpty()) {

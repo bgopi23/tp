@@ -59,8 +59,8 @@ public class EditPersonDescriptorTest {
         editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withHeight(VALID_HEIGHT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
-        // different weight -> returns false
-        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeight(VALID_WEIGHT_BOB).build();
+        // different weightTemp -> returns false
+        editedAmy = new EditPersonDescriptorBuilder(DESC_AMY).withWeightTemp(VALID_WEIGHT_BOB).build();
         assertFalse(DESC_AMY.equals(editedAmy));
 
         // different note -> returns false
@@ -80,7 +80,7 @@ public class EditPersonDescriptorTest {
                 + editPersonDescriptor.getPhone().orElse(null) + ", email="
                 + editPersonDescriptor.getEmail().orElse(null) + ", address="
                 + editPersonDescriptor.getHeight().orElse(null) + ", height="
-                + editPersonDescriptor.getWeight().orElse(null) + ", weight="
+                + editPersonDescriptor.getWeightTemp().orElse(null) + ", weightTemp="
                 + editPersonDescriptor.getNote().orElse(null) + ", note="
                 + editPersonDescriptor.getAddress().orElse(null) + ", tags="
                 + editPersonDescriptor.getTags().orElse(null) + "}";
