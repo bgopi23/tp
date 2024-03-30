@@ -32,10 +32,10 @@ public class CliSyntax {
         PREFIX_PHONE,
     };
     public static final Prefix[] PREFIXES_NAME_PHONE_EMAIL_ADDRESS = {
-            PREFIX_NAME,
-            PREFIX_PHONE,
-            PREFIX_EMAIL,
-            PREFIX_ADDRESS
+        PREFIX_NAME,
+        PREFIX_PHONE,
+        PREFIX_EMAIL,
+        PREFIX_ADDRESS
     };
     public static final Prefix PREFIX_CLEAR_CONFIRM = new Prefix("/confirm");
 }
