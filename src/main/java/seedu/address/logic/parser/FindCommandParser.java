@@ -8,11 +8,11 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
+import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 
 /**
  * Parses input arguments and creates a new FindCommand object
