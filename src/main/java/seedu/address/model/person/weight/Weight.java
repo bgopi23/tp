@@ -2,6 +2,7 @@ package seedu.address.model.person.weight;
 
 import static java.util.Objects.requireNonNull;
 
+import javafx.util.Pair;
 import seedu.address.model.person.Attribute;
 
 /**
@@ -41,14 +42,38 @@ public class Weight extends Attribute<Float> {
      */
     public String getFormattedWeight() {
         if (this.getValue() == 0f) {
-            return "N/A";
+            return "Weight: N/A";
         }
         return "Weight: " + this.getValue().toString();
     }
 
+    /**
+     * Determine if the weight value stored is within the range specified in weightRange.
+     * Returns true if specified value is within weightRange.
+     *
+     * @param weightRange Range of weight to check against.
+     *
+     * @return True if value is falls within weightRange, false otherwise.
+     */
     @Override
     public boolean isMatch(Object weightRange) {
-        return (this.equals(weightRange));
+        if (!(weightRange instanceof Pair)) {
+            return false;
+        }
+
+        Pair<?, ?> pair = (Pair<?, ?>) weightRange;
+
+        if (!(pair.getKey() instanceof Float) || !(pair.getValue() instanceof Float)) {
+            return false;
+        }
+
+        Float firstVal = (Float) pair.getKey();
+        Float secondVal = (Float) pair.getValue();
+
+        assert (secondVal - firstVal >= 0) : "Range should be more than or equals to zero."
+                + "Should have been handled in Parser class";
+
+        return (this.getValue() >= firstVal && this.getValue() <= secondVal);
     }
 
     @Override

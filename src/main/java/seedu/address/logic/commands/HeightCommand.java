@@ -7,8 +7,9 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.HeightCommandMessages;
 import seedu.address.logic.messages.Messages;
-import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Height;
 import seedu.address.model.person.Person;
@@ -17,24 +18,6 @@ import seedu.address.model.person.Person;
  * Changes the height of an existing person in the address book.
  */
 public class HeightCommand extends Command {
-
-    public static final String COMMAND_WORD = "height";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the height (in centimeters) of the person identified "
-            + "by the index number used in the last person listing.\n"
-            + "Existing height will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive float) "
-            + CliSyntax.PREFIX_HEIGHT + "HEIGHT\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_HEIGHT + "172.5";
-
-    public static final String MESSAGE_ADD_HEIGHT_SUCCESS =
-            "Successfully added height to client!\n---------------------------------\n%1$s";
-
-    public static final String MESSAGE_DELETE_HEIGHT_SUCCESS =
-            "Successfully removed height from client!\n--------------------------------------\n%1$s";
-
     private final Index index;
     private final Height height;
 
@@ -54,7 +37,8 @@ public class HeightCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    HeightCommandMessages.MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -75,7 +59,7 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(height.getValue() == 0f) ? MESSAGE_ADD_HEIGHT_SUCCESS : MESSAGE_DELETE_HEIGHT_SUCCESS;
+        String message = !(height.getValue() == 0f) ? HeightCommandMessages.MESSAGE_ADD_HEIGHT_SUCCESS : HeightCommandMessages.MESSAGE_DELETE_HEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 

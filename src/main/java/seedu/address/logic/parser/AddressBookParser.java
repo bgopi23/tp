@@ -77,9 +77,6 @@ public class AddressBookParser {
         case WeightCommandMessages.COMMAND_WORD:
             return new WeightCommandParser().parse(arguments);
 
-        case HeightCommand.COMMAND_WORD:
-            return new HeightCommandParser().parse(arguments);
-
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 

@@ -12,6 +12,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithout
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
+import seedu.address.logic.messages.HeightCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -36,7 +37,7 @@ class HeightCommandTest {
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommandMessages.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -53,7 +54,7 @@ class HeightCommandTest {
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_DELETE_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommandMessages.MESSAGE_DELETE_HEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -70,7 +71,7 @@ class HeightCommandTest {
         HeightCommand heightCommand = new HeightCommand(INDEX_FIRST_PERSON,
                 new Height(editedPerson.getHeight().getValue()));
 
-        String expectedMessage = String.format(HeightCommand.MESSAGE_ADD_HEIGHT_SUCCESS,
+        String expectedMessage = String.format(HeightCommandMessages.MESSAGE_ADD_HEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());

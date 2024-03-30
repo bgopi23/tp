@@ -11,7 +11,7 @@ import javafx.util.Pair;
 public class Height extends Attribute<Float> {
 
     public static final String MESSAGE_CONSTRAINTS = "Heights can only take decimals (float)";
-    public static final String VALIDATION_REGEX = "([0-9]+([.][0-9]*)?|[.][0-9]+)";
+    public static final String VALIDATION_REGEX = "^([0-9]+([.][0-9]*)?|[.][0-9]+)?$";
 
     /**
      * Constructs a {@code height}.
@@ -70,7 +70,7 @@ public class Height extends Attribute<Float> {
      */
     public String getFormattedHeight() {
         if (this.getValue() == 0f) {
-            return "N/A";
+            return "Height: N/A";
         }
         return "Height: " + this.getValue().toString();
     }

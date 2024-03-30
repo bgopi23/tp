@@ -155,7 +155,7 @@ public class ParserUtil {
             if (!Height.isValidHeight(trimmedHeight)) {
                 throw new ParseException(Height.MESSAGE_CONSTRAINTS);
             }
-            return new Height(Float.valueOf(trimmedHeight));
+            return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
         }
         return new Height(0f);
     }
