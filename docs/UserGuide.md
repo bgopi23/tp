@@ -163,7 +163,7 @@ Format: `list`
 
 Edits information tagged to an existing client
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [w/WEIGHT] [nt/NOTE] [t/TAG]…​`
 
 * Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list. 
 * The index **must be a positive integer** 1, 2, 3, …​
