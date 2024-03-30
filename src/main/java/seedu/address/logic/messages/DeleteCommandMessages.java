@@ -3,7 +3,7 @@ package seedu.address.logic.messages;
 /**
  * Messages used by DeleteCommand and associated classes.
  */
-public class DeleteCommandMessages extends Messages{
+public class DeleteCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "delete";
 
