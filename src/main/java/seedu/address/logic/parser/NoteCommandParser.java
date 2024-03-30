@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_INVALID_INDEX_NOTE;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_NO_INDEX_NOTE;
 
 import java.util.Arrays;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Note;
@@ -28,8 +29,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
 
         // (note)
         if (args.trim().isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_NO_INDEX, NoteCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_NO_INDEX_NOTE);
         }
 
         String[] argsArray = args.trim().split(" ");
@@ -38,8 +38,7 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         try {
             index = ParserUtil.parseIndex(argsArray[0]);
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    NoteCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(MESSAGE_INVALID_INDEX_NOTE, ive);
         }
 
         Note note;
