@@ -42,6 +42,30 @@ public class PhoneTest {
     }
 
     @Test
+    public void isExpectedFormat() {
+        Phone phone = new Phone("58909832"); // exactly 8 numbers but does not start with '6', '8' or '9'
+        assertFalse(phone.isExpectedFormat());
+
+        phone = new Phone("78909832"); // exactly 8 numbers but does not start with '6', '8' or '9'
+        assertFalse(phone.isExpectedFormat());
+
+        phone = new Phone("909828"); // less than 8 digits
+        assertFalse(phone.isExpectedFormat());
+
+        phone = new Phone("909828910"); // more than 8 digits
+        assertFalse(phone.isExpectedFormat());
+
+        phone = new Phone("67392810"); // exactly 8 numbers and start with '6'
+        assertTrue(phone.isExpectedFormat());
+
+        phone = new Phone("87392810"); // exactly 8 digits and start with '8'
+        assertTrue(phone.isExpectedFormat());
+
+        phone = new Phone("93121534"); // exactly 8 digits and start with '9'
+        assertTrue(phone.isExpectedFormat());
+    }
+
+    @Test
     public void equals() {
         Phone phone = new Phone("88888888");
 
