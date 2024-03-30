@@ -56,5 +56,4 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
         return new FitDeleteCommand(index, exercise);
     }
-
 }
