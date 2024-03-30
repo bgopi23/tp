@@ -61,19 +61,19 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
+        if (argMultimap.contains(PREFIX_NAME)) {
             editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
+        if (argMultimap.contains(PREFIX_PHONE)) {
             editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+        if (argMultimap.contains(PREFIX_EMAIL)) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        if (argMultimap.contains(PREFIX_ADDRESS)) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)));
         }
-        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+        if (argMultimap.contains(PREFIX_NOTE)) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);

@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -29,6 +31,18 @@ public class Messages {
             AddCommand.MESSAGE_USAGE);
     public static final String MESSAGE_PHONE_PARAMETER_MISSING = String.format("Phone number parameter missing! \n%1$s",
             AddCommand.MESSAGE_USAGE);
+
+    // NoteCommand messages
+    public static final String MESSAGE_NO_INDEX_NOTE = String.format("No index specified! \n%1$s",
+            NoteCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_NOTE = String.format("Invalid command format! \n%1$s",
+            NoteCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+            NoteCommand.MESSAGE_USAGE);
+
+    //FindCommand messages
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_FIND = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            FindCommand.MESSAGE_USAGE);
 
     /**
      * Returns an error message indicating the duplicate prefixes.

@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
@@ -44,10 +46,24 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Returns the last value of {@code prefix}.
+     */
+    public String getValueOrEmpty(Prefix prefix) {
+        return this.getValue(prefix).orElse("");
+    }
+
+    /**
+     * Returns the last value of {@code prefix}.
+     */
+    public String getValueOrPreamble(Prefix prefix) {
+        return this.getValue(prefix).orElse(getPreamble());
+    }
+
+    /**
      * Returns the string value of {@code prefix}.
      */
     public String getStringValue(Prefix prefix) {
-        return getValue(prefix).get();
+        return this.getValue(prefix).get();
     }
 
     /**
@@ -66,7 +82,7 @@ public class ArgumentMultimap {
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
-        return getValue(new Prefix("")).orElse("");
+        return this.getValue(new Prefix("")).orElse("");
     }
 
     /**
@@ -105,5 +121,9 @@ public class ArgumentMultimap {
      */
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
+    }
+
+    public boolean isPreambleAlone(){
+       return this.getPreamble().split(" ").length == 1;
     }
 }

@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT_NOTE;
+import static seedu.address.logic.Messages.MESSAGE_INVALID_INDEX_NOTE;
+import static seedu.address.logic.Messages.MESSAGE_NO_INDEX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 
 import seedu.address.commons.core.index.Index;
@@ -25,28 +28,25 @@ public class NoteCommandParser implements Parser<NoteCommand> {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_NOTE);
 
         // (note)
-        if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_NO_INDEX, NoteCommand.MESSAGE_USAGE));
+        if (args.isEmpty() || argMultimap.isPreambleEmpty()) {
+            throw new ParseException(MESSAGE_NO_INDEX_NOTE);
         }
 
         // (note 1 2)
-        if (argMultimap.getPreamble().split(" ").length != 1) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE));
+        if (!argMultimap.isPreambleAlone()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_NOTE);
         }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    NoteCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(MESSAGE_INVALID_INDEX_NOTE, ive);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NOTE);
 
-        Note note = new Note(argMultimap.getValue(PREFIX_NOTE).orElse(""));
+        Note note = new Note(argMultimap.getValueOrEmpty(PREFIX_NOTE));
 
         return new NoteCommand(index, note);
     }
