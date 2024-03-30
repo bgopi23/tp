@@ -44,8 +44,18 @@ public class FindCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.updateFilteredPersonList(predicates);
+        int listSize = model.getFilteredPersonList().size();
+
+        if (listSize == 0) {
+            return new CommandResult(Messages.MESSAGE_NO_CLIENTS_FOUND);
+        }
+
+        if (listSize == 1) {
+            return new CommandResult(Messages.MESSAGE_ONE_CLIENT_FOUND);
+        }
+
         return new CommandResult(
-                String.format(Messages.MESSAGE_PERSONS_LISTED_OVERVIEW, model.getFilteredPersonList().size()));
+                String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, listSize));
     }
 
     @Override
