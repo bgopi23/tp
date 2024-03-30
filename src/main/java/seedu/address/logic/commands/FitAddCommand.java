@@ -24,8 +24,8 @@ public class FitAddCommand extends Command {
     /**
      * Constructs a new FitAddCommand instance.
      *
-     * @param index    of the person in the filtered person list to add exercise.
-     * @param exercise exercise to be added to the person.
+     * @param index    The index of the person in the filtered person list to add the exercise to
+     * @param exercise The exercise to be added to the person
      */
     public FitAddCommand(Index index, Exercise exercise) {
         requireNonNull(index);

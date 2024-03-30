@@ -33,11 +33,11 @@ public class ParserUtil {
 
     /**
      * Parses {@code oneBasedIndex} into an {@code Index} and returns it. Leading
-     * and trailing whitespaces will be
-     * trimmed.
+     * and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the specified index is invalid (not non-zero
-     *                        unsigned integer).
+     * @param oneBasedIndex The one-based index string to be parsed
+     * @return The parsed Index object
+     * @throws ParseException If the specified index is invalid (not non-zero unsigned integer)
      */
     public static Index parseIndex(String oneBasedIndex) throws ParseException {
         String trimmedIndex = oneBasedIndex.trim();
@@ -51,7 +51,9 @@ public class ParserUtil {
      * Parses a {@code String name} into a {@code Name}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code name} is invalid.
+     * @param name The name string to be parsed
+     * @return The parsed Name object
+     * @throws ParseException If the given {@code name} is invalid
      */
     public static Name parseName(String name) throws ParseException {
         requireNonNull(name);
@@ -66,7 +68,9 @@ public class ParserUtil {
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @param phone The phone string to be parsed
+     * @return The parsed Phone object
+     * @throws ParseException If the given {@code phone} is invalid
      */
     public static Phone parsePhone(String phone) throws ParseException {
         requireNonNull(phone);
@@ -81,7 +85,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code address} is invalid.
+     * @param address The optional address string to be parsed
+     * @return The parsed Address object
+     * @throws ParseException If the given {@code address} is invalid
      */
     public static Address parseAddress(Optional<String> address) throws ParseException {
         requireNonNull(address);
@@ -101,7 +107,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code email} is invalid.
+     * @param email The optional email string to be parsed
+     * @return The parsed Email object
+     * @throws ParseException If the given {@code email} is invalid
      */
     public static Email parseEmail(Optional<String> email) throws ParseException {
         requireNonNull(email);
@@ -121,6 +129,9 @@ public class ParserUtil {
      * Parses a {@code Optional<String> note} into a {@code Note}.
      * Leading and trailing whitespaces will be trimmed.
      * If the {@code Optional} is empty, return a {@code Note} with an empty string.
+     *
+     * @param note The optional note string to be parsed
+     * @return The parsed Note object
      */
     public static Note parseNote(Optional<String> note) {
         requireNonNull(note);
@@ -130,6 +141,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> weight} into a {@code Weight}.
      * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
+     *
+     * @param weight The optional weight string to be parsed
+     * @return The parsed Weight object
+     * @throws ParseException If the given {@code weight} is invalid
      */
     public static Weight parseWeight(Optional<String> weight) throws ParseException {
         requireNonNull(weight);
@@ -147,6 +162,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> height} into a {@code Height}.
      * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
+     *
+     * @param height The optional height string to be parsed
+     * @return The parsed Height object
+     * @throws ParseException If the given {@code height} is invalid
      */
     public static Height parseHeight(Optional<String> height) throws ParseException {
         requireNonNull(height);
@@ -165,7 +184,9 @@ public class ParserUtil {
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code tag} is invalid.
+     * @param tag The tag string to be parsed
+     * @return The parsed Tag object
+     * @throws ParseException If the given {@code tag} is invalid
      */
     public static Tag parseTag(String tag) throws ParseException {
         requireNonNull(tag);
@@ -178,6 +199,10 @@ public class ParserUtil {
 
     /**
      * Parses {@code Collection<String> tags} into a {@code Set<Tag>}.
+     *
+     * @param tags The collection of tag strings to be parsed
+     * @return The set of parsed Tag objects
+     * @throws ParseException If any of the given {@code tags} is invalid
      */
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
@@ -190,6 +215,9 @@ public class ParserUtil {
 
     /**
      * Parses a {@code Optional<String> exerciseNameOpt} into a {@code String}.
+     *
+     * @param exerciseNameOpt The optional exercise name string to be parsed
+     * @return The parsed exercise name string
      */
     public static String parseExerciseName(Optional<String> exerciseNameOpt) {
         requireNonNull(exerciseNameOpt);
@@ -200,6 +228,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> exerciseSetsOpt} into a {@code Integer}.
      * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     *
+     * @param exerciseSetsOpt The optional exercise sets string to be parsed
+     * @return The parsed exercise sets value
+     * @throws ParseException If the given {@code exerciseSetsOpt} is invalid
      */
     public static Integer parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
         requireNonNull(exerciseSetsOpt);
@@ -219,6 +251,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> exerciseRepsOpt} into a {@code Integer}.
      * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     *
+     * @param exerciseRepsOpt The optional exercise reps string to be parsed
+     * @return The parsed exercise reps value
+     * @throws ParseException If the given {@code exerciseRepsOpt} is invalid
      */
     public static Integer parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
         requireNonNull(exerciseRepsOpt);
@@ -238,6 +274,10 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> exerciseRestOpt} into a {@code Integer}.
      * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     *
+     * @param exerciseRestOpt The optional exercise rest string to be parsed
+     * @return The parsed exercise rest value
+     * @throws ParseException If the given {@code exerciseRestOpt} is invalid
      */
     public static Integer parseExerciseRest(Optional<String> exerciseRestOpt) throws ParseException {
         requireNonNull(exerciseRestOpt);
@@ -256,6 +296,13 @@ public class ParserUtil {
 
     /**
      * Parses the supplied values into a {@code Exercise}.
+     *
+     * @param name The name of the exercise
+     * @param sets The number of sets for the exercise
+     * @param reps The number of reps for the exercise
+     * @param rest The rest duration for the exercise
+     * @return The parsed Exercise object
+     * @throws ParseException If any of the supplied values are invalid
      */
     public static Exercise parseExercise(String name, Integer sets, Integer reps, Integer rest) throws ParseException {
         requireNonNull(name);
@@ -286,8 +333,8 @@ public class ParserUtil {
      * Parses a {@code String searchString} into a string.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param searchString String to search.
-     * @return The string ready to be used for searching.
+     * @param searchString The string to search
+     * @return The string ready to be used for searching
      */
     public static String parseSearchString(String searchString) {
         requireNonNull(searchString);
@@ -297,8 +344,9 @@ public class ParserUtil {
     /**
      * Parses a {@code Optional<String> searchRange} into a Pair of Floats.
      *
-     * @param searchRange Range to search.
-     * @return The Pair instance ready to be used for searching.
+     * @param searchRange The optional range string to be parsed
+     * @return The Pair instance ready to be used for searching
+     * @throws ParseException If the given {@code searchRange} is invalid
      */
     public static Pair<Float, Float> parseSearchRange(Optional<String> searchRange) throws ParseException {
         requireNonNull(searchRange);

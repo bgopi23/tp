@@ -15,7 +15,7 @@ import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a new exercise or overwrites an existing exercise of a person in the address book.
+ * Deletes an exercise from a person in the address book.
  */
 public class FitDeleteCommand extends Command {
     private final Index index;
@@ -24,8 +24,8 @@ public class FitDeleteCommand extends Command {
     /**
      * Constructs a new FitDeleteCommand instance.
      *
-     * @param index    of the person in the filtered person list to add exercise.
-     * @param exercise exercise to be added to the person.
+     * @param index    The index of the person in the filtered person list to delete the exercise from
+     * @param exercise The exercise to be deleted from the person
      */
     public FitDeleteCommand(Index index, Exercise exercise) {
         requireNonNull(index);

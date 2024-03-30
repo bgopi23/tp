@@ -10,7 +10,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exercise.Exercise;
 
 /**
- * Parses input arguments and creates a new FitDeleteCommand object
+ * Parses input arguments and creates a new FitDeleteCommand object.
  */
 public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
@@ -18,7 +18,9 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
      * Parses the given {@code String} of arguments in the context of the FitDeleteCommand
      * and returns a FitDeleteCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The string of arguments to be parsed
+     * @return The FitDeleteCommand object for execution
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public FitDeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
@@ -31,7 +33,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
             throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
         }
 
-        // Parse index of client to add exercise to
+        // Parse index of client to delete exercise from
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());

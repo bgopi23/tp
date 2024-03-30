@@ -52,6 +52,9 @@ public class Exercise {
 
     /**
      * Returns true if the given string represents a valid exercise name.
+     *
+     * @param exerciseName The exercise name to be validated.
+     * @return true if the exercise name is valid, false otherwise.
      */
     public static boolean isValidName(String exerciseName) {
         return !exerciseName.isEmpty();
@@ -59,6 +62,9 @@ public class Exercise {
 
     /**
      * Returns true if the given Integer represents a valid number of sets.
+     *
+     * @param sets The number of sets to be validated.
+     * @return true if the number of sets is valid, false otherwise.
      */
     public static boolean isValidSets(Integer sets) {
         return sets > 0;
@@ -66,6 +72,9 @@ public class Exercise {
 
     /**
      * Returns true if the given Integer represents a valid number of reps.
+     *
+     * @param reps The number of reps to be validated.
+     * @return true if the number of reps is valid, false otherwise.
      */
     public static boolean isValidReps(Integer reps) {
         return reps > 0;
@@ -73,23 +82,46 @@ public class Exercise {
 
     /**
      * Returns true if the given Integer represents a valid rest time.
+     *
+     * @param rest The rest time to be validated.
+     * @return true if the rest time is valid, false otherwise.
      */
     public static boolean isValidRest(Integer rest) {
         return rest >= 0;
     }
 
+    /**
+     * Returns the name of the exercise.
+     *
+     * @return The name of the exercise.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns the number of sets for the exercise.
+     *
+     * @return The number of sets for the exercise.
+     */
     public int getSets() {
         return sets;
     }
 
+    /**
+     * Returns the number of reps for the exercise.
+     *
+     * @return The number of reps for the exercise.
+     */
     public int getReps() {
         return reps;
     }
 
+    /**
+     * Returns the rest time in minutes for the exercise.
+     *
+     * @return The rest time in minutes for the exercise.
+     */
     public int getRest() {
         return rest;
     }

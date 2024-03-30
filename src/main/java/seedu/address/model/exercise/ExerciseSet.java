@@ -24,12 +24,20 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
     /**
      * Returns an immutable exercise set, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
+     *
+     * @return An immutable set of exercises.
      */
     @Override
     public Set<Exercise> getValue() {
         return Collections.unmodifiableSet(super.getValue());
     }
 
+    /**
+     * Checks if the given object matches the exercise set.
+     *
+     * @param other The object to check for a match.
+     * @return True if the object matches the exercise set, false otherwise.
+     */
     @Override
     public boolean isMatch(Object other) {
         // Check that the other is a Set
@@ -57,8 +65,8 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
     /**
      * Determine if the exercise set contains the specified exercise.
      *
-     * @param otherValue Exercise to check against
-     * @return True if exercise set contains the specified exercise, false otherwise
+     * @param otherValue Exercise to check against.
+     * @return True if exercise set contains the specified exercise, false otherwise.
      */
     public boolean contains(Object otherValue) {
         if (!(otherValue instanceof Exercise)) {
@@ -70,6 +78,12 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
         return this.getValue().stream().anyMatch(exercise -> exercise.equals(other));
     }
 
+    /**
+     * Checks if the exercise set is equal to another object.
+     *
+     * @param other The object to compare with.
+     * @return True if the other object is an ExerciseSet with the same set of exercises, false otherwise.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {
@@ -84,6 +98,11 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
         return this.getValue().equals(otherExerciseSet.getValue());
     }
 
+    /**
+     * Returns a string representation of the exercise set.
+     *
+     * @return A string representation of the exercise set.
+     */
     @Override
     public String toString() {
         return this.getValue().toString();

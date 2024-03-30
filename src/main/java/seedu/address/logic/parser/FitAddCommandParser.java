@@ -21,7 +21,9 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      * Parses the given {@code String} of arguments in the context of the FitAddCommand
      * and returns a FitAddCommand object for execution.
      *
-     * @throws ParseException if the user input does not conform the expected format
+     * @param args The string of arguments to be parsed
+     * @return The FitAddCommand object for execution
+     * @throws ParseException If the user input does not conform to the expected format
      */
     public FitAddCommand parse(String args) throws ParseException {
         requireNonNull(args);
