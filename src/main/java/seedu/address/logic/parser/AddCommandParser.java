@@ -71,8 +71,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_HEIGHT,
                 PREFIX_WEIGHT, PREFIX_NOTE, PREFIX_ADDRESS);
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
+        Name name = ParserUtil.parseName(argMultimap.getStringValue(PREFIX_NAME));
+        Phone phone = ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
         NavigableMap<LocalDateTime, Height> heightMap = new TreeMap<>();

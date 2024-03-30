@@ -20,9 +20,14 @@ public class Messages {
     public static final String MESSAGE_NO_PARAMETERS = "No parameters specified! \n%1$s";
     public static final String MESSAGE_NO_INDEX = "No index specified! \n%1$s";
     public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Invalid index provided. \n%1$s";
-    public static final String MESSAGE_PERSONS_LISTED_OVERVIEW = "%1$d clients listed!";
+    public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "%1$d clients found!";
+    public static final String MESSAGE_NO_CLIENTS_FOUND = "No clients found!";
+    public static final String MESSAGE_ONE_CLIENT_FOUND = "1 client found!";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
+    public static final String MESSAGE_NO_CLIENTS_TO_LIST = "No clients to list!";
+    public static final String MESSAGE_ONE_CLIENT_LISTED = "1 client listed!";
+    public static final String MESSAGE_ALL_CLIENTS_LISTED = "%1$d clients listed!";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

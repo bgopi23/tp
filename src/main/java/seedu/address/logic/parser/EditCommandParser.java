@@ -46,10 +46,11 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // (edit 1 name) or (edit name 1)
-        if (argMultimap.getPreamble().split(" ").length != 1) {
+        if (argMultimap.getPreambleSegmentNumber() != 1) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
         }
+
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -63,16 +64,16 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
-        if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+        if (argMultimap.contains(PREFIX_NAME)) {
+            editPersonDescriptor.setName(ParserUtil.parseName(argMultimap.getStringValue(PREFIX_NAME)));
         }
-        if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+        if (argMultimap.contains(PREFIX_PHONE)) {
+            editPersonDescriptor.setPhone(ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE)));
         }
-        if (argMultimap.getValue(PREFIX_EMAIL).isPresent()) {
+        if (argMultimap.contains(PREFIX_EMAIL)) {
             editPersonDescriptor.setEmail(ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL)));
         }
-        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+        if (argMultimap.contains(PREFIX_ADDRESS)) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)));
         }
         if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
@@ -81,7 +82,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
             editPersonDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
         }
-        if (argMultimap.getValue(PREFIX_NOTE).isPresent()) {
+        if (argMultimap.contains(PREFIX_NOTE)) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
