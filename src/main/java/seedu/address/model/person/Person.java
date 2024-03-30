@@ -45,7 +45,8 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> weights,
+    public Person(Name name, Phone phone, Email email, Address address,
+                  NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> weights,
                   Weight height, Note note, Set<Tag> tags) {
         requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;

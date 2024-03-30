@@ -12,11 +12,11 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Weight;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -67,7 +67,8 @@ public class SampleDataUtil {
     /**
      * Returns a NavigableMap containing the list of LocalDateTime and Weight values given as strings.
      */
-    public static NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> getWeightMap(String... strings) {
+    public static NavigableMap<LocalDateTime,
+            seedu.address.model.person.weight.Weight>getWeightMap(String... strings) {
         return Stream.of(strings)
                 .map(str -> str.split("="))
                 .collect(Collectors.toMap(

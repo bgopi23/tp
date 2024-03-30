@@ -24,11 +24,11 @@ import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Weight;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
@@ -64,7 +64,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
+        NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> toEditWeightMap =
+                new TreeMap<>(personToEdit.getWeights());
         if (editPersonDescriptor.getWeight().isPresent()) {
             seedu.address.model.person.weight.Weight updatedWeight = editPersonDescriptor.getWeight().get();
             if (updatedWeight.getValue() == 0f) {

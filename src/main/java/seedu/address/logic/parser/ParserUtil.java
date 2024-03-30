@@ -15,10 +15,10 @@ import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Weight;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -137,7 +137,8 @@ public class ParserUtil {
             if (!seedu.address.model.person.weight.Weight.isValidWeight(trimmedWeight)) {
                 throw new ParseException(seedu.address.model.person.weight.Weight.MESSAGE_CONSTRAINTS);
             }
-            return trimmedWeight.isEmpty() ? new seedu.address.model.person.weight.Weight(0f) : new seedu.address.model.person.weight.Weight(Float.valueOf(trimmedWeight));
+            return trimmedWeight.isEmpty() ? new seedu.address.model.person.weight.Weight(0f)
+                    : new seedu.address.model.person.weight.Weight(Float.valueOf(trimmedWeight));
         }
         return new seedu.address.model.person.weight.Weight(0f);
     }

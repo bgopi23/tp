@@ -10,8 +10,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.HeightCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
-import seedu.address.model.person.Weight;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.Weight;
 
 /**
  * Changes the height of an existing person in the address book.
@@ -58,8 +58,12 @@ public class HeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(height.getValue() == 0f) ? HeightCommandMessages.MESSAGE_ADD_HEIGHT_SUCCESS : HeightCommandMessages.MESSAGE_DELETE_HEIGHT_SUCCESS;
-        return String.format(message, personToEdit.getFormattedMessage());
+        if (height.getValue() == 0f) {
+            return String.format(HeightCommandMessages.MESSAGE_DELETE_HEIGHT_SUCCESS,
+                    personToEdit.getFormattedMessage());
+        }
+        return String.format(HeightCommandMessages.MESSAGE_ADD_HEIGHT_SUCCESS,
+                personToEdit.getFormattedMessage());
     }
 
     @Override
