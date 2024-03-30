@@ -19,6 +19,8 @@ import com.google.zxing.WriterException;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightMap;
@@ -42,12 +44,13 @@ public class Person {
     private final Height height;
     private final Note note;
     private final TagSet tags;
+    private final ExerciseSet exercises;
 
     /**
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Weight> weights,
-                  Height height, Note note, Set<Tag> tags) {
+                  Height height, Note note, Set<Tag> tags, ExerciseSet exercises) {
         requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;
         this.phone = phone;
@@ -59,6 +62,7 @@ public class Person {
         Set<Tag> tagSet = new HashSet<>();
         tagSet.addAll(tags);
         this.tags = new TagSet(tagSet);
+        this.exercises = exercises;
     }
 
     /**
@@ -85,6 +89,8 @@ public class Person {
             return this.height;
         case TAGS:
             return this.tags;
+        case EXERCISES:
+            return this.exercises;
 
         default:
             throw new AttributeNotFoundException();
@@ -136,6 +142,15 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return this.tags.getValue();
+    }
+
+    /**
+     * Returns an immutable exercise set, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public Set<Exercise> getExercises() {
+        return this.exercises.getValue();
     }
 
     /**
@@ -194,13 +209,14 @@ public class Person {
                 && email.equals(otherPerson.email)
                 && address.equals(otherPerson.address)
                 && tags.equals(otherPerson.tags)
-                && note.equals(otherPerson.note);
+                && note.equals(otherPerson.note)
+                && exercises.equals(otherPerson.exercises);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags);
+        return Objects.hash(name, phone, email, address, tags, exercises);
     }
 
     @Override
@@ -212,6 +228,7 @@ public class Person {
                 .add("address", address)
                 .add("note", note)
                 .add("tags", tags)
+                .add("exercises", exercises)
                 .toString();
     }
 
@@ -283,6 +300,7 @@ public class Person {
         WEIGHT,
         HEIGHT,
         NOTE,
-        TAGS
+        TAGS,
+        EXERCISES
     }
 }
