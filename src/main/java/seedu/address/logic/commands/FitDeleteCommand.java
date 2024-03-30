@@ -8,7 +8,7 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.FitAddCommandMessages;
+import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
@@ -17,17 +17,17 @@ import seedu.address.model.person.Person;
 /**
  * Adds a new exercise or overwrites an existing exercise of a person in the address book.
  */
-public class FitAddCommand extends Command {
+public class FitDeleteCommand extends Command {
     private final Index index;
     private final Exercise exercise;
 
     /**
-     * Constructs a new FitAddCommand instance.
+     * Constructs a new FitDeleteCommand instance.
      *
      * @param index    of the person in the filtered person list to add exercise.
      * @param exercise exercise to be added to the person.
      */
-    public FitAddCommand(Index index, Exercise exercise) {
+    public FitDeleteCommand(Index index, Exercise exercise) {
         requireNonNull(index);
         requireNonNull(exercise);
 
@@ -41,28 +41,18 @@ public class FitAddCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
+            throw new CommandException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Exercise exerciseToAdd = exercise;
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExercises().getValue());
 
-        for (Exercise e : updatedExercises) {
-            if (e.getName().equals(exercise.getName())) {
-                String name = exercise.getName();
-                Integer sets = exercise.getSets() != Exercise.DEFAULT_SETS ? exercise.getSets() : e.getSets();
-                Integer reps = exercise.getReps() != Exercise.DEFAULT_REPS ? exercise.getReps() : e.getReps();
-                Integer rest = exercise.getRest() != Exercise.DEFAULT_REST ? exercise.getRest() : e.getRest();
-
-                exerciseToAdd = new Exercise(name, sets, reps, rest);
-                break;
-            }
+        if (!updatedExercises.contains(exercise)) {
+            throw new CommandException(
+                String.format(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST, exercise.getName()));
         }
-
-        updatedExercises.remove(exerciseToAdd);
-        updatedExercises.add(exerciseToAdd);
+        updatedExercises.remove(exercise);
 
         ExerciseSet updatedExerciseSet = new ExerciseSet(updatedExercises);
 
@@ -74,7 +64,7 @@ public class FitAddCommand extends Command {
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(
-            String.format(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS, exerciseToAdd.getName()));
+            String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, exercise.getName()));
     }
 
     @Override
@@ -83,12 +73,12 @@ public class FitAddCommand extends Command {
             return true;
         }
 
-        if (!(other instanceof FitAddCommand)) {
+        if (!(other instanceof FitDeleteCommand)) {
             return false;
         }
 
-        FitAddCommand otherFitAddCommand = (FitAddCommand) other;
-        return index.equals(otherFitAddCommand.index)
-            && exercise.equals(otherFitAddCommand.exercise);
+        FitDeleteCommand otherFitDeleteCommand = (FitDeleteCommand) other;
+        return index.equals(otherFitDeleteCommand.index)
+            && exercise.equals(otherFitDeleteCommand.exercise);
     }
 }

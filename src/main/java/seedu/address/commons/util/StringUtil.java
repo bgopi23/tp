@@ -66,6 +66,11 @@ public class StringUtil {
         }
     }
 
+    /**
+     * Checks if {@code s} represents an integer.
+     *
+     * @return True if {@code s} represents an integer, false otherwise.
+     */
     public static boolean isInteger(String s) {
         try {
             Integer i = Integer.valueOf(s);

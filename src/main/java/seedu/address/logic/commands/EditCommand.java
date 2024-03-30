@@ -90,7 +90,7 @@ public class EditCommand extends Command {
 
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
-        // Modification of exercises is to be performed in a separate command
+        // Modification of exercises cannot be performed as part of the edit command
         ExerciseSet exerciseSet = personToEdit.getExercises();
 
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,

@@ -189,15 +189,18 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> exerciseNameOpt} into a {@code String }.
-     * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
+     * Parses a {@code Optional<String> exerciseNameOpt} into a {@code String}.
      */
-    public static String parseExerciseName(Optional<String> exerciseNameOpt) throws ParseException {
+    public static String parseExerciseName(Optional<String> exerciseNameOpt) {
         requireNonNull(exerciseNameOpt);
 
         return exerciseNameOpt.orElse("").trim();
     }
 
+    /**
+     * Parses a {@code Optional<String> exerciseSetsOpt} into a {@code Integer}.
+     * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     */
     public static Integer parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
         requireNonNull(exerciseSetsOpt);
 
@@ -213,6 +216,10 @@ public class ParserUtil {
         return Integer.valueOf(exerciseSetsTrimmed);
     }
 
+    /**
+     * Parses a {@code Optional<String> exerciseRepsOpt} into a {@code Integer}.
+     * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     */
     public static Integer parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
         requireNonNull(exerciseRepsOpt);
 
@@ -228,6 +235,10 @@ public class ParserUtil {
         return Integer.valueOf(exerciseRepsTrimmed);
     }
 
+    /**
+     * Parses a {@code Optional<String> exerciseRestOpt} into a {@code Integer}.
+     * If the {@code Optional} is empty, return a {@code Integer} with the default value.
+     */
     public static Integer parseExerciseRest(Optional<String> exerciseRestOpt) throws ParseException {
         requireNonNull(exerciseRestOpt);
 
@@ -243,6 +254,9 @@ public class ParserUtil {
         return Integer.valueOf(exerciseRestTrimmed);
     }
 
+    /**
+     * Parses the supplied values into a {@code Exercise}.
+     */
     public static Exercise parseExercise(String name, Integer sets, Integer reps, Integer rest) throws ParseException {
         requireNonNull(name);
         requireNonNull(sets);

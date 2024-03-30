@@ -10,7 +10,6 @@ import java.util.regex.Pattern;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FitAddCommand;
 import seedu.address.logic.commands.HeightCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -21,6 +20,7 @@ import seedu.address.logic.messages.EditCommandMessages;
 import seedu.address.logic.messages.ExitCommandMessages;
 import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.FitAddCommandMessages;
+import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
 import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.logic.messages.WeightCommandMessages;
@@ -93,6 +93,9 @@ public class AddressBookParser {
 
         case FitAddCommandMessages.COMMAND_WORD:
             return new FitAddCommandParser().parse(arguments);
+
+        case FitDeleteCommandMessages.COMMAND_WORD:
+            return new FitDeleteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);
