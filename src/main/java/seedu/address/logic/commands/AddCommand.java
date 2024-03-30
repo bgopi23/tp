@@ -55,7 +55,7 @@ public class AddCommand extends Command {
      *
      * @return The warning message, or an empty string if none.
      */
-    public String getMessageWarn() {
+    private String getMessageWarn() {
         boolean isPhoneOfExpectedFormat = toAdd.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {

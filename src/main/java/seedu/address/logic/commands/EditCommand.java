@@ -92,7 +92,7 @@ public class EditCommand extends Command {
      *
      * @return The warning message, or an empty string if none.
      */
-    public String getMessageWarn(Person editedPerson) {
+    private String getMessageWarn(Person editedPerson) {
         boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
