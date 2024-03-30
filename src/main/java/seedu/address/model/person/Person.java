@@ -19,7 +19,6 @@ import com.google.zxing.WriterException;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
-import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
 import seedu.address.model.person.weight.Weight;
@@ -144,13 +143,8 @@ public class Person {
         return this.tags.getValue();
     }
 
-    /**
-     * Returns an immutable exercise set, which throws
-     * {@code UnsupportedOperationException}
-     * if modification is attempted.
-     */
-    public Set<Exercise> getExercises() {
-        return this.exercises.getValue();
+    public ExerciseSet getExercises() {
+        return this.exercises;
     }
 
     /**

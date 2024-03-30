@@ -10,7 +10,12 @@ import java.util.Objects;
  */
 public class Exercise {
 
-    public static final String MESSAGE_CONSTRAINTS = "Exercise names should not be empty";
+    public static final String NAME_CONSTRAINT = "Exercise names should not be empty";
+    public static final String SETS_CONSTRAINT = "Number of sets should be a number greater than 0";
+    public static final String REPS_CONSTRAINT = "Number of reps should be a number greater than 0";
+    public static final String REST_CONSTRAINT = "Rest time in minutes should be a number greater or equals to 0";
+
+
     private final String name;
     private final Integer sets;
     private final Integer reps;
@@ -26,7 +31,15 @@ public class Exercise {
      */
     public Exercise(String name, Integer sets, Integer reps, Integer rest) {
         requireNonNull(name);
-        checkArgument(isValidName(name), MESSAGE_CONSTRAINTS);
+        requireNonNull(sets);
+        requireNonNull(reps);
+        requireNonNull(rest);
+
+        checkArgument(isValidName(name), NAME_CONSTRAINT);
+        checkArgument(isValidSets(sets), SETS_CONSTRAINT);
+        checkArgument(isValidSets(reps), REPS_CONSTRAINT);
+        checkArgument(isValidSets(rest), REST_CONSTRAINT);
+
         this.name = name;
         this.sets = sets;
         this.reps = reps;
@@ -58,7 +71,7 @@ public class Exercise {
      * Returns true if the given Integer represents a valid rest time.
      */
     public static boolean isValidRest(Integer rest) {
-        return rest > 0;
+        return rest >= 0;
     }
 
     public String getName() {

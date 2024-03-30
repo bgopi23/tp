@@ -13,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -39,15 +41,18 @@ class JsonAdaptedPerson {
     private final String height;
     private final String note;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
+    private final List<JsonAdaptedExercise> exercises = new ArrayList<>();
 
     /**
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
     public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("address") String address,
-            @JsonProperty("weights") List<JsonAdaptedWeight> weights, @JsonProperty("height") String height,
-            @JsonProperty("note") String note, @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+                             @JsonProperty("email") String email, @JsonProperty("address") String address,
+                             @JsonProperty("weights") List<JsonAdaptedWeight> weights,
+                             @JsonProperty("height") String height,
+                             @JsonProperty("note") String note, @JsonProperty("tags") List<JsonAdaptedTag> tags,
+                             @JsonProperty("exercises") List<JsonAdaptedExercise> exercises) {
         this.name = name;
         this.phone = phone;
         this.email = email;
@@ -60,6 +65,9 @@ class JsonAdaptedPerson {
         if (tags != null) {
             this.tags.addAll(tags);
         }
+        if (exercises != null) {
+            this.exercises.addAll(exercises);
+        }
     }
 
     /**
@@ -67,18 +75,29 @@ class JsonAdaptedPerson {
      */
     public JsonAdaptedPerson(Person source) {
         name = source.getName().getValue();
+
         phone = source.getPhone().getValue();
+
         email = source.getEmail().getValue();
+
         address = source.getAddress().getValue();
+
         weights.addAll(source.getWeights().entrySet().stream()
-                .map(WeightEntry::new)
-                .map(JsonAdaptedWeight::new)
-                .collect(Collectors.toList()));
+            .map(WeightEntry::new)
+            .map(JsonAdaptedWeight::new)
+            .collect(Collectors.toList()));
+
         height = source.getHeight().getValue().toString();
+
         note = source.getNote().getValue();
+
         tags.addAll(source.getTags().stream()
-                .map(JsonAdaptedTag::new)
-                .collect(Collectors.toList()));
+            .map(JsonAdaptedTag::new)
+            .collect(Collectors.toList()));
+
+        exercises.addAll(source.getExercises().getValue().stream()
+            .map(JsonAdaptedExercise::new)
+            .collect(Collectors.toList()));
     }
 
     /**
@@ -150,9 +169,16 @@ class JsonAdaptedPerson {
         }
         final Note modelNote = new Note(note);
 
+        final List<Exercise> personExercises = new ArrayList<>();
+        for (JsonAdaptedExercise exercise : exercises) {
+            personExercises.add(exercise.toModelType());
+        }
+        final Set<Exercise> modelExercises = new HashSet<>(personExercises);
+        final ExerciseSet modelExerciseSet = new ExerciseSet(modelExercises);
+
         final Set<Tag> modelTags = new HashSet<>(personTags);
         return new Person(modelName, modelPhone, modelEmail, modelAddress, modelWeights,
-                modelHeight, modelNote, modelTags);
+            modelHeight, modelNote, modelTags, modelExerciseSet);
     }
 
 }
