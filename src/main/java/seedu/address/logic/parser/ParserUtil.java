@@ -11,6 +11,7 @@ import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -213,7 +214,7 @@ public class ParserUtil {
             String trimmedRange = searchRange.get().trim();
 
             if (!FindCommand.isValidRange(trimmedRange)) {
-                throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
+                throw new ParseException(FindCommandMessages.MESSAGE_USAGE_RANGE);
             }
 
             String[] range = searchRange.get().split(",\\s*");
@@ -221,7 +222,7 @@ public class ParserUtil {
             Float toRange = Float.valueOf(range[1]);
 
             if (fromRange > toRange) {
-                throw new ParseException(FindCommand.MESSAGE_USAGE_RANGE);
+                throw new ParseException(FindCommandMessages.MESSAGE_USAGE_RANGE);
             }
 
             return new Pair<>(fromRange, toRange);

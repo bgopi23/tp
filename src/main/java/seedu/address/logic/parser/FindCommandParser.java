@@ -49,7 +49,7 @@ public class FindCommandParser implements Parser<FindCommand> {
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_EMAIL)));
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
-                ParserUtil.parseSearchString(argMultimap.getValue(PREFIX_ADDRESS).orElse("")));
+                ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_ADDRESS)));
         WeightMapContainsWeightRangePredicate weightsPredicate = new WeightMapContainsWeightRangePredicate(
                 ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil

@@ -13,7 +13,6 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.HeightCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.WeightCommand;
 import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.ClearCommandMessages;
 import seedu.address.logic.messages.DeleteCommandMessages;
@@ -22,6 +21,7 @@ import seedu.address.logic.messages.ExitCommandMessages;
 import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
 import seedu.address.logic.messages.NoteCommandMessages;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -74,7 +74,7 @@ public class AddressBookParser {
         case FindCommandMessages.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case WeightCommand.COMMAND_WORD:
+        case WeightCommandMessages.COMMAND_WORD:
             return new WeightCommandParser().parse(arguments);
 
         case HeightCommand.COMMAND_WORD:

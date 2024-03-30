@@ -9,6 +9,7 @@ import java.util.AbstractMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.WeightCommand;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
@@ -31,7 +32,7 @@ public class WeightCommandParser implements Parser<WeightCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WeightCommand.MESSAGE_USAGE), ive);
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, WeightCommandMessages.MESSAGE_USAGE), ive);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEIGHT);

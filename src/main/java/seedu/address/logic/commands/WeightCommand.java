@@ -11,7 +11,7 @@ import java.util.TreeMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.Messages;
-import seedu.address.logic.parser.CliSyntax;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.weight.Weight;
@@ -22,23 +22,6 @@ import seedu.address.model.person.weight.WeightMap;
  * Changes the weight of an existing person in the address book.
  */
 public class WeightCommand extends Command {
-
-    public static final String COMMAND_WORD = "weight";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weight (in kilograms) of the person identified "
-            + "by the index number used in the last person listing.\n"
-            + "Existing weight will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive float) "
-            + CliSyntax.PREFIX_WEIGHT + "WEIGHT\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_WEIGHT + "72.5";
-
-    public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
-            "Successfully added weight to client!\n---------------------------------\n%1$s";
-
-    public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
-            "Successfully removed weight from client!\n--------------------------------------\n%1$s";
 
     private final Index index;
     private final WeightEntry weightEntry;
@@ -92,7 +75,8 @@ public class WeightCommand extends Command {
      */
     private String generateSuccessMessage(Person personToEdit) {
         String message = !(weightEntry.getValue().getValue().getValue() == 0f)
-                ? MESSAGE_ADD_WEIGHT_SUCCESS : MESSAGE_DELETE_WEIGHT_SUCCESS;
+                ? WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS
+                : WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 

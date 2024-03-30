@@ -4,13 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
@@ -22,32 +15,8 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-    public static final String COMMAND_WORD = "find";
 
     public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all clients whose specified attribute contains the specified keyword.\n"
-            + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_WEIGHT + "FROM, TO] "
-            + "[" + PREFIX_WEIGHT + "FROM, TO] "
-            + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_EMAIL + "lewis@hotmail.com";
-
-
-    public static final String MESSAGE_USAGE_RANGE = COMMAND_WORD
-            + ": Finds using a specified range that is comma-delimited."
-            + " FROM parameter must be less than or equal to TO parameter.\n"
-            + " This range function only works for the WEIGHT " + PREFIX_WEIGHT
-            + " and WEIGHT " + PREFIX_WEIGHT + " attributes.\n"
-            + "Parameters: FROM, TO (both of them must be a positive number greater than or equals to 0).\n"
-            + "Example: " + COMMAND_WORD + " " + PREFIX_WEIGHT + " 70, 80";
 
     private final CombinedPredicates predicates;
 

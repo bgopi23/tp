@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -39,7 +40,7 @@ class WeightCommandTest {
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
                 new WeightEntry(editedPerson.getLatestWeight().get()));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -56,7 +57,7 @@ class WeightCommandTest {
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON, new WeightEntry(
                 new AbstractMap.SimpleEntry<>(WeightEntry.getTimeOfExecution(), new Weight(0f))));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_DELETE_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -73,7 +74,7 @@ class WeightCommandTest {
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
                 new WeightEntry(editedPerson.getLatestWeight().get()));
 
-        String expectedMessage = String.format(WeightCommand.MESSAGE_ADD_WEIGHT_SUCCESS,
+        String expectedMessage = String.format(WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
