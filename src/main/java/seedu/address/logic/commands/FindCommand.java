@@ -15,9 +15,7 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-
     public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
-
     private final CombinedPredicates predicates;
 
     public FindCommand(CombinedPredicates predicates) {
