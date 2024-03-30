@@ -37,15 +37,6 @@ public class Weight extends Attribute<Float> {
     }
 
     /**
-     * Adds a heading for the weight field.
-     * Empty weight values (i.e. 0f) will be formatted as "N/A" for better clarity.
-     */
-    public String getFormattedWeight() {
-        assert this.getValue() != null : "Weight value should not be null";
-        return "Weight: " + this.getValue().toString();
-    }
-
-    /**
      * Determine if the weight value stored is within the range specified in weightRange.
      * Returns true if specified value is within weightRange.
      *

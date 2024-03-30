@@ -33,7 +33,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
-    private Label weight;
+    private Label weightDate;
+    @FXML
+    private Label weightValue;
     @FXML
     private Label height;
     @FXML
@@ -73,9 +75,13 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isEmpty()) {
-            weight.setText(WeightCommandMessages.EMPTY_FIELD);
+            weightDate.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_DATE);
+            weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
         } else {
-            weight.setText(latestWeight.get().getValue().getFormattedWeight());
+            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + " "
+                    + latestWeight.get().getKey().toString());
+            weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER + " "
+                    + latestWeight.get().getValue().toString());
         }
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
@@ -85,10 +91,12 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
         note.setVisible(!person.getNote().getValue().isEmpty());
+        weightDate.setVisible(!latestWeight.isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
-        weight.managedProperty().bind(weight.visibleProperty());
+        weightDate.managedProperty().bind(weightDate.visibleProperty());
+        weightValue.managedProperty().bind(weightValue.visibleProperty());
         height.managedProperty().bind(height.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
     }
@@ -102,7 +110,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setText("");
         email.setText("");
         note.setText("");
-        weight.setText("");
+        weightDate.setText("");
+        weightValue.setText("");
         height.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
