@@ -9,7 +9,7 @@ public class GuiSettingsTest {
     public void toStringMethod() {
         GuiSettings guiSettings = new GuiSettings();
         String expected = GuiSettings.class.getCanonicalName() + "{windowWidth=" + guiSettings.getWindowWidth()
-                + ", windowWeight=" + guiSettings.getWindowWeight() + ", windowCoordinates="
+                + ", windowHeight=" + guiSettings.getWindowHeight() + ", windowCoordinates="
                 + guiSettings.getWindowCoordinates() + "}";
         assertEquals(expected, guiSettings.toString());
     }

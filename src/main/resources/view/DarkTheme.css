@@ -35,8 +35,8 @@
 
 .tab-pane .tab-header-area {
     -fx-padding: 0 0 0 0;
-    -fx-min-weight: 0;
-    -fx-max-weight: 0;
+    -fx-min-height: 0;
+    -fx-max-height: 0;
 }
 
 .table-view {
@@ -161,7 +161,7 @@
     -fx-font-family: "Segoe UI Light";
     -fx-text-fill: white;
     -fx-padding: 4px;
-    -fx-pref-weight: 30px;
+    -fx-pref-height: 30px;
 }
 
 .status-bar-with-border {
