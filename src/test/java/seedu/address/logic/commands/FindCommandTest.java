@@ -285,7 +285,7 @@ public class FindCommandTest {
     @Test
     public void execute_searchPartialTag_noPersonsFound() {
         // No persons found
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 0);
+        String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
 
         TagSetContainsAllTagsPredicate predicate = new TagSetContainsAllTagsPredicate(
                 new HashSet<>(Arrays.asList(new Tag("fri"))));
@@ -299,7 +299,7 @@ public class FindCommandTest {
     @Test
     public void execute_searchCaseInsensitiveTag_personsFound() {
         // No persons found
-        String expectedMessage = String.format(MESSAGE_PERSONS_LISTED_OVERVIEW, 3);
+        String expectedMessage = String.format(Messages.MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
 
         TagSetContainsAllTagsPredicate predicate = new TagSetContainsAllTagsPredicate(
                 new HashSet<>(Arrays.asList(new Tag("FrIenDs"))));
