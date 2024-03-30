@@ -10,6 +10,8 @@ import java.util.stream.Stream;
 import seedu.address.logic.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
@@ -41,6 +43,13 @@ public class ArgumentMultimap {
     public Optional<String> getValue(Prefix prefix) {
         List<String> values = getAllValues(prefix);
         return values.isEmpty() ? Optional.empty() : Optional.of(values.get(values.size() - 1));
+    }
+
+    /**
+     * Returns the last value of {@code prefix}.
+     */
+    public String getStringValue(Prefix prefix) {
+        return getValue(prefix).get();
     }
 
     /**
@@ -86,9 +95,17 @@ public class ArgumentMultimap {
     /**
      * Checks if every single one of the prefixes exists in the map
      * @param prefixes
-     * @return true if aall of the prefixes exists in the map
+     * @return true if all the prefixes exists in the map
      */
     public boolean containsAll(Prefix... prefixes) {
         return Stream.of(prefixes).anyMatch(prefix -> contains(prefix));
+    }
+
+    /**
+     * Checks if the preamble of the argumentMultimap object is empty
+     * @return true if the preamble is empty
+     */
+    public boolean isPreambleEmpty() {
+        return this.getPreamble().isEmpty();
     }
 }
