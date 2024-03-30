@@ -2,14 +2,12 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.Model;
 
+import static seedu.address.logic.messages.ExitCommandMessages.MESSAGE_EXIT_ACKNOWLEDGEMENT;
+
 /**
  * Terminates the program.
  */
 public class ExitCommand extends Command {
-
-    public static final String COMMAND_WORD = "exit";
-
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting FitBook. Goodbye!";
 
     @Override
     public CommandResult execute(Model model) {

@@ -12,7 +12,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithout
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
+import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -36,7 +37,7 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -52,7 +53,7 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_DELETE_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -68,7 +69,7 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
@@ -82,7 +83,7 @@ class NoteCommandTest {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         NoteCommand noteCommand = new NoteCommand(invalidIndex, new Note(NOTE_STUB));
         assertCommandFailure(noteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                NoteCommand.MESSAGE_USAGE));
+                NoteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test

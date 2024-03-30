@@ -1,9 +1,13 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_NAME_PARAMETER_MISSING;
-import static seedu.address.logic.Messages.MESSAGE_NO_PARAMETERS;
-import static seedu.address.logic.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_INVALID_PARAMETER_FORMAT_ADD;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NAME_PARAMETER_MISSING_ADD;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NO_PARAMETERS_ADD;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_PHONE_PARAMETER_MISSING_ADD;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
+import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
+import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
@@ -41,22 +45,22 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         // (add)
         if (args.isEmpty()) {
-            throw new ParseException(MESSAGE_NO_PARAMETERS);
+            throw new ParseException(MESSAGE_NO_PARAMETERS_ADD);
         }
 
         // (add John)
         if (!argMultimap.containsAll(PREFIX_NAME_AND_PHONE) || !argMultimap.isPreambleEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_PARAMETER_FORMAT_ADD);
         }
 
         // (add p/99898888)
         if (!argMultimap.contains(PREFIX_NAME)) {
-            throw new ParseException(MESSAGE_NAME_PARAMETER_MISSING);
+            throw new ParseException(MESSAGE_NAME_PARAMETER_MISSING_ADD);
         }
 
         // (add n/John)
         if (!argMultimap.contains(PREFIX_PHONE)) {
-            throw new ParseException(MESSAGE_PHONE_PARAMETER_MISSING);
+            throw new ParseException(MESSAGE_PHONE_PARAMETER_MISSING_ADD);
         }
 
         // (add n/John p/98988898...)

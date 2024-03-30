@@ -1,12 +1,9 @@
-package seedu.address.logic;
+package seedu.address.logic.messages;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.commands.NoteCommand;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.model.person.Person;
 
@@ -28,26 +25,9 @@ public class Messages {
     public static final String MESSAGE_NO_CLIENTS_TO_LIST = "No clients to list!";
     public static final String MESSAGE_ONE_CLIENT_LISTED = "1 client listed!";
     public static final String MESSAGE_ALL_CLIENTS_LISTED = "%1$d clients listed!";
-
-    // AddCommand messages
-    public static final String MESSAGE_NO_PARAMETERS = String.format("No parameters specified! \n%1$s",
-            AddCommand.MESSAGE_USAGE);
-    public static final String MESSAGE_NAME_PARAMETER_MISSING = String.format("Name parameter missing! \n%1$s",
-            AddCommand.MESSAGE_USAGE);
-    public static final String MESSAGE_PHONE_PARAMETER_MISSING = String.format("Phone number parameter missing! \n%1$s",
-            AddCommand.MESSAGE_USAGE);
-
-    // NoteCommand messages
-    public static final String MESSAGE_NO_INDEX_NOTE = String.format("No index specified! \n%1$s",
-            NoteCommand.MESSAGE_USAGE);
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT_NOTE = String.format("Invalid command format! \n%1$s",
-            NoteCommand.MESSAGE_USAGE);
-    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-            NoteCommand.MESSAGE_USAGE);
-
-    //FindCommand messages
-    public static final String MESSAGE_INVALID_COMMAND_FORMAT_FIND = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-            FindCommand.MESSAGE_USAGE);
+    public static final String MESSAGE_NO_PARAMETERS = "No parameters specified! \n%1$s";
+    public static final String MESSAGE_NAME_PARAMETER_MISSING = "Name parameter missing! \n%1$s";
+    public static final String MESSAGE_PHONE_PARAMETER_MISSING = "Phone number parameter missing! \n%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

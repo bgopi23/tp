@@ -1,7 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -15,7 +15,8 @@ import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
+import seedu.address.logic.messages.EditCommandMessages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditPersonDescriptor;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -40,13 +41,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         // (edit) or (edit n/John)
         if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_NO_INDEX, EditCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_NO_INDEX, EditCommandMessages.MESSAGE_USAGE));
         }
 
         // (edit 1 name) or (edit name 1)
         if (argMultimap.getPreambleSegmentNumber() != 1) {
             throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommandMessages.MESSAGE_USAGE));
         }
 
         Index index;
@@ -54,7 +55,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
             throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    EditCommand.MESSAGE_USAGE), pe);
+                    EditCommandMessages.MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE,
@@ -80,7 +81,8 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(String.format(EditCommand.MESSAGE_NOT_EDITED, EditCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(EditCommandMessages.MESSAGE_NOT_EDITED,
+                    EditCommandMessages.MESSAGE_USAGE));
         }
 
         return new EditCommand(index, editPersonDescriptor);

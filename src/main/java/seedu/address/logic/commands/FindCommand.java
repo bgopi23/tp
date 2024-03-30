@@ -9,7 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.predicates.CombinedPredicates;
 
@@ -19,20 +19,6 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
-
-    public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all clients whose specified attribute contains the specified keyword.\n"
-            + "Parameters: "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG] "
-            + "\nExample: " + COMMAND_WORD + " "
-            + PREFIX_EMAIL + "lewis@hotmail.com";
 
     private final CombinedPredicates predicates;
 

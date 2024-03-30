@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.ClearCommandMessages.MESSAGE_CONFIRM;
+import static seedu.address.logic.messages.ClearCommandMessages.MESSAGE_SUCCESS;
 
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -9,10 +11,7 @@ import seedu.address.model.Model;
  * Clears the address book.
  */
 public class ClearCommand extends Command {
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "FitBook has been cleared!";
-    public static final String MESSAGE_CONFIRM = "Are you sure you want to clear ALL clients from FitBook? Enter "
-            + "'clear /confirm' to confirm.";
+
     private final boolean confirmed;
 
     public ClearCommand(boolean confirmed) {
