@@ -71,7 +71,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
-        weight.setText(latestWeight.isPresent() ? latestWeight.get().getValue().getFormattedWeight() : "");
+        weight.setText(latestWeight.get().getValue().getFormattedWeight());
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
@@ -80,7 +80,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
         weight.setVisible(latestWeight.isPresent());
-        height.setVisible(person.getHeight().getValue() != 0f);
+        height.setVisible(!person.getHeight().getValue().isNaN());
         note.setVisible(!person.getNote().getValue().isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());

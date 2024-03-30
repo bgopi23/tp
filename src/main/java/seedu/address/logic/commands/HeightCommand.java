@@ -8,6 +8,7 @@ import java.util.List;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Height;
@@ -20,13 +21,13 @@ public class HeightCommand extends Command {
     public static final String COMMAND_WORD = "height";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the height (in kilograms) of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Edits the height (in centimeters) of the person identified "
+            + "by the index number used in the last person listing.\n"
             + "Existing height will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
-            + "w/ WEIGHT\n"
+            + CliSyntax.PREFIX_HEIGHT + "HEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "w/ 92.5";
+            + CliSyntax.PREFIX_HEIGHT + "172.5";
 
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added height to client!\n---------------------------------\n%1$s";

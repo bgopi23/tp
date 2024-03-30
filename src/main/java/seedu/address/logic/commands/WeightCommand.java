@@ -11,6 +11,7 @@ import java.util.TreeMap;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.CliSyntax;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.weight.Weight;
@@ -25,13 +26,13 @@ public class WeightCommand extends Command {
     public static final String COMMAND_WORD = "weight";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weight (in centimeters) of the person identified "
-            + "by the index number used in the last person listing. "
+            + ": Edits the weight (in kilograms) of the person identified "
+            + "by the index number used in the last person listing.\n"
             + "Existing weight will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
-            + "w/ WEIGHT\n"
+            + CliSyntax.PREFIX_WEIGHT + "WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + "w/ 182";
+            + CliSyntax.PREFIX_WEIGHT + "72.5";
 
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added weight to client!\n---------------------------------\n%1$s";
