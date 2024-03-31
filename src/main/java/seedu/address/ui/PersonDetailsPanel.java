@@ -292,7 +292,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
             Weight weight = entry.getValue();
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
-            weightSeries.getData().add(new XYChart.Data<>(date.format(formatter), weight.getValue()));
+            String dateString = date.format(formatter);
+            Number weightNumber = weight.getValue();
+            XYChart.Data<String, Number> weightData = new XYChart.Data<>(dateString, weightNumber);
+            weightData.setNode(new HoveredThresholdNode(weightNumber.toString(), "", " kg"));
+            weightSeries.getData().add(weightData);
 
             if (weight.getValue() < minWeight) {
                 minWeight = weight.getValue();
@@ -302,8 +306,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
             }
         }
 
-        weightYAxis.setLowerBound(minWeight - 5);
-        weightYAxis.setUpperBound(maxWeight + 5);
+        // XYChart.Data<String, Number> heightData = new XYChart.Data<>("Mar 2024", 170);
+        // heightData.setNode(new HoveredThresholdNode("", "170", " cm"));
+        // heightSeries.getData().add(heightData);
+        weightYAxis.setLowerBound(minWeight - 10);
+        weightYAxis.setUpperBound(maxWeight + 10);
 
         return weightSeries;
     }
