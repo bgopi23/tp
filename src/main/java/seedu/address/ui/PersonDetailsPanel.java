@@ -81,10 +81,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
             weightDate.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_DATE);
             weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
         } else {
-            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + " "
-                    + latestWeight.get().getKey().toString());
-            weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER + " "
-                    + latestWeight.get().getValue().toString());
+            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + latestWeight.get().getKey().toString());
+            weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER + latestWeight.get().getValue().toString());
         }
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
