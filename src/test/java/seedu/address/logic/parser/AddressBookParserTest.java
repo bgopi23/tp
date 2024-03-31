@@ -33,6 +33,7 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.HeightContainsRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -91,12 +92,14 @@ public class AddressBookParserTest {
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
         WeightMapContainsWeightRangePredicate weightPredicate =
-                new WeightMapContainsWeightRangePredicate(new Pair<>(0f, 0f));
+                new WeightMapContainsWeightRangePredicate(new Pair<>(0f, Float.MAX_VALUE));
+        HeightContainsRangePredicate heightPredicate =
+                new HeightContainsRangePredicate(new Pair<>(0f, Float.MAX_VALUE));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 namePredicate, phonePredicate, emailPredicate, addressPredicate,
-                weightPredicate, notePredicate, tagsPredicate));
+                weightPredicate, heightPredicate, notePredicate, tagsPredicate));
         assertEquals(expectedCommand, command);
     }
 

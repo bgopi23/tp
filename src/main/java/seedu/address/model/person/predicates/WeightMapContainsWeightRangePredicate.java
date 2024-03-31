@@ -7,12 +7,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person.PersonAttribute;
 
 /**
- * Tests that a {@code Person}'s {@code WeightMap} contains a weight within a range specified by a Pair.
+ * Tests that a {@code Person}'s latest weight value in {@code WeightMap}
+ * contains a weight within a range specified by a Pair.
  */
 public class WeightMapContainsWeightRangePredicate extends SearchPredicate<Pair<Float, Float>> {
     /**
-     * Construct a predicate to test that a {@code Person}'s {@code WeightMap}
-     * contains a weight within a range specified by a Pair.
+     * Construct a predicate to test that a {@code Person}'s latest weight value in {@code WeightMap}
+     *  * contains a weight within a range specified by a Pair.
      *
      * @param range range to test against
      */

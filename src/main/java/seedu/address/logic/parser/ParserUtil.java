@@ -229,6 +229,6 @@ public class ParserUtil {
             return new Pair<>(fromRange, toRange);
         }
 
-        return new Pair<>(0f, 0f);
+        return new Pair<>(0f, Float.MAX_VALUE);
     }
 }
