@@ -141,6 +141,8 @@ public class MainWindow extends UiPart<Stage> {
                     // In all other cases when a person was added/edited, the list should be of size 1.
                     if (c.getAddedSize() == 1) {
                         Person p = c.getAddedSubList().get(0);
+                        personDetailsPanel.update(p);
+
                         // Select the person in the person list
                         personListPanel.getFxmlObject().getSelectionModel().select(p);
                     }
