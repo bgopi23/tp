@@ -143,7 +143,8 @@ public class MainWindow extends UiPart<Stage> {
                         Person p = c.getAddedSubList().get(0);
                         personDetailsPanel.update(p);
 
-                        // Select the person in the person list
+                        // Select the person in the person list to ensure the details displayed is always the details
+                        // of the person selected in the person list.
                         personListPanel.getFxmlObject().getSelectionModel().select(p);
                     }
                 }
