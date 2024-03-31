@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.Region;
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.weight.Weight;
@@ -22,6 +24,7 @@ import seedu.address.model.tag.Tag;
 public class PersonDetailsPanel extends UiPart<Region> {
     public static final String FXML = "PersonDetailsPanel.fxml";
 
+    private static final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
     @FXML
     private Label name;
     @FXML
@@ -99,6 +102,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         weightValue.managedProperty().bind(weightValue.visibleProperty());
         height.managedProperty().bind(height.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
+
+        logger.info("Displayed details of person: " + person);
     }
 
     /**
