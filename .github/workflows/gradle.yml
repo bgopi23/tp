@@ -49,7 +49,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@master
-      - uses: gaurav-nelson/github-action-markdown-link-check@1.0.15
+      - uses: dillontkh/github-action-markdown-link-check@v1.1.0
         with:
           check-modified-files-only: "yes"
           config-file: "./config/markdown-link-check_config.json"
