@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
@@ -14,7 +15,6 @@ import java.util.AbstractMap;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
@@ -89,7 +89,7 @@ class WeightCommandTest {
 
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         WeightCommand weightCommand = new WeightCommand(invalidIndex, weightEntry);
-        assertCommandFailure(weightCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(weightCommand, model, MESSAGE_INVALID_INDEX_WEIGHT);
     }
 
     @Test
