@@ -55,6 +55,7 @@ public class WeightCommandParser implements Parser<WeightCommand> {
                     WeightEntry.getTimeOfExecution(), new Weight(0f))));
         }
 
+        // Else, user is adding a new weight value.
         return new WeightCommand(index, new WeightEntry(new AbstractMap.SimpleEntry<>(
                 WeightEntry.getTimeOfExecution(),
                 ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)))));
