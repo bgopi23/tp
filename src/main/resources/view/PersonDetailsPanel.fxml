@@ -53,7 +53,7 @@
                 </TabPane>
             </VBox>
 
-            <ImageView fx:id="qrcode" fitHeight="100" fitWidth="100" pickOnBounds="true" preserveRatio="true"
+            <ImageView fx:id="qrcode" fitHeight="150" fitWidth="150" pickOnBounds="true" preserveRatio="true"
                        GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP"/>
         </GridPane>
     </VBox>

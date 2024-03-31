@@ -1,6 +1,7 @@
 package seedu.address.ui;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -62,8 +63,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private ImageView qrcode;
     @FXML
-    private Label note;
-    @FXML
     private TabPane trackableFieldsTabPane;
 
     private LineChart<String, Number> weightChart;
@@ -71,47 +70,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     // private LineChart<String, Number> heightChart;
     // private NumberAxis heightYAxis;
     private VBox notesBox;
-
-    private static class HoveredThresholdNode extends StackPane {
-        private final Label label = createDataThresholdLabel();
-        private final Node point = createDataPoint();
-
-        /**
-         * Creates a new HoveredThresholdNode.
-         */
-        public HoveredThresholdNode(String value, String prefix, String postfix) {
-            setPrefSize(10, 10);
-
-            setOnMouseEntered(event -> {
-                getChildren().setAll(point, label);
-                label.setText(String.format("%s%s%s", prefix, value, postfix));
-                toFront();
-            });
-            setOnMouseExited(event -> {
-                getChildren().setAll(point);
-            });
-
-            setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
-            getChildren().setAll(point);
-        }
-
-        private Node createDataPoint() {
-            final Circle point = new Circle(5);
-            point.setFill(Color.TRANSPARENT);
-            point.setStroke(Color.TRANSPARENT);
-            point.setStrokeWidth(0);
-            return point;
-        }
-
-        private Label createDataThresholdLabel() {
-            final Label label = new Label();
-            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
-            label.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;");
-            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
-            return label;
-        }
-    }
-
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
@@ -214,8 +172,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Clear tags and set new ones
         tags.getChildren().clear();
         person.getTags().stream()
-            .sorted(Comparator.comparing(Tag::toString))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
+                .sorted(Comparator.comparing(Tag::toString))
+                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isEmpty()) {
@@ -234,23 +192,24 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Set trackable fields
 
         // Set weight
-        XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
+        // XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
+        //
+        // weightYAxis.setLowerBound(50);
+        // weightYAxis.setUpperBound(110);
+        //
+        // XYChart.Data<String, Number> weightData = new XYChart.Data<>("Jan 2024", 60);
+        // weightData.setNode(new HoveredThresholdNode("", "60", " kg"));
+        // weightSeries.getData().add(weightData);
+        //
+        // weightData = new XYChart.Data<>("Feb 2024", 100);
+        // weightData.setNode(new HoveredThresholdNode("", "100", " kg"));
+        // weightSeries.getData().add(weightData);
+        //
+        // weightData = new XYChart.Data<>("Mar 2024", 80);
+        // weightData.setNode(new HoveredThresholdNode("", "80", " kg"));
+        // weightSeries.getData().add(weightData);
 
-        weightYAxis.setLowerBound(50);
-        weightYAxis.setUpperBound(110);
-
-        XYChart.Data<String, Number> weightData = new XYChart.Data<>("Jan 2024", 60);
-        weightData.setNode(new HoveredThresholdNode("", "60", " kg"));
-        weightSeries.getData().add(weightData);
-
-        weightData = new XYChart.Data<>("Feb 2024", 100);
-        weightData.setNode(new HoveredThresholdNode("", "100", " kg"));
-        weightSeries.getData().add(weightData);
-
-        weightData = new XYChart.Data<>("Mar 2024", 80);
-        weightData.setNode(new HoveredThresholdNode("", "80", " kg"));
-        weightSeries.getData().add(weightData);
-
+        XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
         weightChart.getData().clear();
         weightChart.getData().add(weightSeries);
 
@@ -320,5 +279,72 @@ public class PersonDetailsPanel extends UiPart<Region> {
         height.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
+    }
+
+    private XYChart.Series<String, Number> generateWeightSeries(Person p) {
+        Float minWeight = Float.MAX_VALUE;
+        Float maxWeight = Float.MIN_VALUE;
+
+        XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
+
+        for (Map.Entry<LocalDateTime, Weight> entry : p.getWeights().entrySet()) {
+            LocalDateTime date = entry.getKey();
+            Weight weight = entry.getValue();
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
+            weightSeries.getData().add(new XYChart.Data<>(date.format(formatter), weight.getValue()));
+
+            if (weight.getValue() < minWeight) {
+                minWeight = weight.getValue();
+            }
+            if (weight.getValue() > maxWeight) {
+                maxWeight = weight.getValue();
+            }
+        }
+
+        weightYAxis.setLowerBound(minWeight - 5);
+        weightYAxis.setUpperBound(maxWeight + 5);
+
+        return weightSeries;
+    }
+
+    private static class HoveredThresholdNode extends StackPane {
+        private final Label label = createDataThresholdLabel();
+        private final Node point = createDataPoint();
+
+        /**
+         * Creates a new HoveredThresholdNode.
+         */
+        public HoveredThresholdNode(String value, String prefix, String postfix) {
+            setPrefSize(10, 10);
+
+            setOnMouseEntered(event -> {
+                getChildren().setAll(point, label);
+                label.setText(String.format("%s%s%s", prefix, value, postfix));
+                toFront();
+            });
+            setOnMouseExited(event -> {
+                getChildren().setAll(point);
+            });
+
+            setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
+            getChildren().setAll(point);
+        }
+
+        private Node createDataPoint() {
+            final Circle point = new Circle(5);
+            point.setFill(Color.TRANSPARENT);
+            point.setStroke(Color.TRANSPARENT);
+            point.setStrokeWidth(0);
+            return point;
+        }
+
+        private Label createDataThresholdLabel() {
+            final Label label = new Label();
+            label.getStyleClass().addAll("default-color0", "chart-line-symbol", "chart-series-line");
+            label.setStyle("-fx-font-size: 10px; -fx-font-weight: bold;");
+            label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
+            return label;
+        }
     }
 }
