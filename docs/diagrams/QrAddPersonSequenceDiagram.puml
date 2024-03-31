@@ -17,7 +17,7 @@ activate Model
 Model -> Person : p.generateQrCode()
 activate Person
 
-Person -> qrg : QrCodeGenerator.generateQrCode(this)
+Person -> qrg : generateQrCode(p)
 activate qrg
 
 qrg -> qrg : createVCardString(p)
