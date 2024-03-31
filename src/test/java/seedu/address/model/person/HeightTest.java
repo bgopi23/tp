@@ -12,15 +12,15 @@ public class HeightTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new Weight(null));
+        assertThrows(NullPointerException.class, () -> new Height(null));
     }
 
     @Test
     public void equals() {
-        Weight height = new Weight(92.5f);
+        Height height = new Height(92.5f);
 
         // same values -> returns true
-        assertTrue(height.equals(new Weight(92.5f)));
+        assertTrue(height.equals(new Height(92.5f)));
 
         // same object -> returns true
         assertTrue(height.equals(height));
@@ -32,13 +32,13 @@ public class HeightTest {
         assertFalse(height.equals("hello"));
 
         // different values -> returns false
-        assertFalse(height.equals(new Weight(69.5f)));
+        assertFalse(height.equals(new Height(69.5f)));
     }
 
 
     @Test
     public void isMatch() {
-        Weight height = new Weight(192.5f);
+        Height height = new Height(192.5f);
 
         // Exact range -> returns true
         assertTrue(height.isMatch(new Pair<Float, Float>(192.5f, 192.5f)));

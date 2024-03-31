@@ -8,11 +8,11 @@ import java.util.TreeMap;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -27,16 +27,16 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final seedu.address.model.person.weight.Weight DEFAULT_WEIGHT =
-            new seedu.address.model.person.weight.Weight(182f);
+    public static final Weight DEFAULT_WEIGHT =
+            new Weight(182f);
     public static final Float DEFAULT_HEIGHT = 92.5f;
 
     private Name name;
     private Phone phone;
     private Email email;
     private Address address;
-    private NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> weights;
-    private Weight height;
+    private NavigableMap<LocalDateTime, Weight> weights;
+    private Height height;
     private Note note;
     private Set<Tag> tags;
 
@@ -50,7 +50,7 @@ public class PersonBuilder {
         this.address = new Address(DEFAULT_ADDRESS);
         this.weights = new TreeMap<>();
         this.weights.put(WeightEntry.getTimeOfExecution(), DEFAULT_WEIGHT);
-        this.height = new Weight(DEFAULT_HEIGHT);
+        this.height = new Height(DEFAULT_HEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();
     }
@@ -122,7 +122,7 @@ public class PersonBuilder {
      * Sets the {@code Height} of the {@code Person} that we are building.
      */
     public PersonBuilder withHeight(Float height) {
-        this.height = new Weight(height);
+        this.height = new Height(height);
         return this;
     }
 

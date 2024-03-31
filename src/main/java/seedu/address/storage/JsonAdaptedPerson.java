@@ -15,11 +15,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 
@@ -130,7 +131,7 @@ class JsonAdaptedPerson {
         }
         final Address modelAddress = new Address(address);
 
-        final NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> modelWeights = new TreeMap<>();
+        final NavigableMap<LocalDateTime, Weight> modelWeights = new TreeMap<>();
         for (JsonAdaptedWeight jsonAdaptedWeight : weights) {
             WeightEntry weightEntry = jsonAdaptedWeight.toModelType();
             modelWeights.put(weightEntry.getValue().getKey(), weightEntry.getValue().getValue());
@@ -139,10 +140,10 @@ class JsonAdaptedPerson {
         if (height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!height.isEmpty() && !Weight.isValidHeight(height)) {
-            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+        if (!height.isEmpty() && !Height.isValidHeight(height)) {
+            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
-        final Weight modelHeight = new Weight(Float.valueOf(height));
+        final Height modelHeight = new Height(Float.valueOf(height));
 
         if (note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));

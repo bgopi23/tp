@@ -24,11 +24,12 @@ import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.Weight;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
@@ -64,10 +65,10 @@ public class EditCommand extends Command {
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
-        NavigableMap<LocalDateTime, seedu.address.model.person.weight.Weight> toEditWeightMap =
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap =
                 new TreeMap<>(personToEdit.getWeights());
         if (editPersonDescriptor.getWeight().isPresent()) {
-            seedu.address.model.person.weight.Weight updatedWeight = editPersonDescriptor.getWeight().get();
+            Weight updatedWeight = editPersonDescriptor.getWeight().get();
             if (updatedWeight.getValue() == 0f) {
                 if (toEditWeightMap.isEmpty()) {
                     throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
@@ -77,7 +78,7 @@ public class EditCommand extends Command {
                 toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
             }
         }
-        Weight updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
@@ -160,8 +161,8 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private seedu.address.model.person.weight.Weight weight;
-        private Weight height;
+        private Weight weight;
+        private Height height;
         private Note note;
         private Set<Tag> tags;
 
@@ -230,19 +231,19 @@ public class EditCommand extends Command {
             this.note = note;
         }
 
-        public Optional<seedu.address.model.person.weight.Weight> getWeight() {
+        public Optional<Weight> getWeight() {
             return Optional.ofNullable(this.weight);
         }
 
-        public void setWeight(seedu.address.model.person.weight.Weight weight) {
+        public void setWeight(Weight weight) {
             this.weight = weight;
         }
 
-        public Optional<Weight> getHeight() {
+        public Optional<Height> getHeight() {
             return Optional.ofNullable(height);
         }
 
-        public void setHeight(Weight height) {
+        public void setHeight(Height height) {
             this.height = height;
         }
 

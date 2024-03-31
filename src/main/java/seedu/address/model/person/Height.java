@@ -8,17 +8,17 @@ import javafx.util.Pair;
  * Represents a Person's height in the address book.
  * Guarantees: immutable; is always valid.
  */
-public class Weight extends Attribute<Float> {
+public class Height extends Attribute<Float> {
 
     public static final String MESSAGE_CONSTRAINTS = "Heights can only take decimals (float)";
-    public static final String VALIDATION_REGEX = "^([0-9]+([.][0-9]*)?|[.][0-9]+)?$";
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)$";
 
     /**
      * Constructs a {@code height}.
      *
      * @param height A height.
      */
-    public Weight(Float height) {
+    public Height(Float height) {
         super(height);
         requireNonNull(height);
     }
@@ -82,11 +82,11 @@ public class Weight extends Attribute<Float> {
         }
 
         // instanceof handles null types as well.
-        if (!(other instanceof Weight)) {
+        if (!(other instanceof Height)) {
             return false;
         }
 
-        Weight otherHeight = (Weight) other;
+        Height otherHeight = (Height) other;
 
         // Use the equals() method of the underlying attribute to compare values
         return this.getValue().equals(otherHeight.getValue());

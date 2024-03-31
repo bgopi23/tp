@@ -12,15 +12,15 @@ public class WeightTest {
 
     @Test
     public void constructor_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> new seedu.address.model.person.weight.Weight(null));
+        assertThrows(NullPointerException.class, () -> new Weight(null));
     }
 
     @Test
     public void equals() {
-        seedu.address.model.person.weight.Weight weight = new seedu.address.model.person.weight.Weight(182f);
+        Weight weight = new Weight(182f);
 
         // same values -> returns true
-        assertTrue(weight.equals(new seedu.address.model.person.weight.Weight(182f)));
+        assertTrue(weight.equals(new Weight(182f)));
 
         // same object -> returns true
         assertTrue(weight.equals(weight));
@@ -32,13 +32,13 @@ public class WeightTest {
         assertFalse(weight.equals("hello"));
 
         // different values -> returns false
-        assertFalse(weight.equals(new seedu.address.model.person.weight.Weight(69.5f)));
+        assertFalse(weight.equals(new Weight(69.5f)));
     }
 
 
     @Test
     public void isMatch() {
-        Weight weight = new Weight(92.5f);
+        Height weight = new Height(92.5f);
 
         // Exact range -> returns true
         assertTrue(weight.isMatch(new Pair<Float, Float>(92.5f, 92.5f)));
