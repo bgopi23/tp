@@ -45,9 +45,7 @@
                          VBox.vgrow="ALWAYS">
                     <Tab text="Weight (kg)">
                     </Tab>
-                    <Tab text="Height (cm)">
-                    </Tab>
-                    <Tab text="Notes">
+                    <Tab text="Exercises">
                     </Tab>
                 </TabPane>
             </VBox>
