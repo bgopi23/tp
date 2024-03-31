@@ -15,7 +15,9 @@ public class TagSetTest {
         Tag friendTag = new Tag("friend");
         Tag loverTag = new Tag("lover");
         Tag invalidTag = new Tag("invalid");
+        Integer notSet = 1;
 
+        Set<Integer> setOfNotTags = new HashSet<>(Arrays.asList(notSet));
         Set<Tag> testSet = new HashSet<Tag>(Arrays.asList(friendTag, loverTag));
 
         TagSet tagSet = new TagSet(testSet);
@@ -37,6 +39,12 @@ public class TagSetTest {
 
         // Multiple tag - Partial match
         assertFalse(tagSet.isMatch(new HashSet<Tag>(Arrays.asList(loverTag, invalidTag))));
+
+        // Not a Set - Mismatch
+        assertFalse(tagSet.isMatch(notSet));
+
+        // Not a Set of Tags - Mismatch
+        assertFalse(tagSet.isMatch(setOfNotTags));
     }
 
     @Test

@@ -229,11 +229,11 @@ Thus, we chose to only generate QR codes when the person is successfully added t
 
 This approach was also taken for the editing/deleting of QR codes.
 
-#### QR Code Image Naming
+#### QR Code Image File Naming
 
-QR codes associated with a client are named according to the format: [FULL NAME]_[PHONE_NUMBER].png
+QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format: 
 
-This format was chosen as clients with the same name and phone number are not allowed in FitBook, so these two fields are enough to uniquely identify every client.
+* [HASHCODE].png, where [HASHCODE] is the result of the `hashCode()` function of a `Person`.
 
 ### Deleting a client from FitBook
 
@@ -245,7 +245,7 @@ The activity diagram below illustrates what happens when a client is deleted fro
 On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status.
 
 This includes:
-* [Height and weight](#height-and-weight-feature-in-fitbook)
+* [Weight tracking feature](#weight-tracking-feature)
 * [Note](#note-feature-in-fitbook)
 
 #### Note feature in FitBook
@@ -263,14 +263,14 @@ The diagram highlights the four main components of FitBook, highlighted in their
 
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
-#### Height and weight feature in FitBook
-The height and weight feature allows users to keep track of past height and weight measurements of a client.
+#### Weight tracking feature
+The weight tracking feature allows users to keep track of past weight measurements of a client.
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `height` and `weight` fields interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
 
-#### Viewing height and weight history of a client
+#### Viewing weight history of a client
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.

@@ -1,75 +1,69 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_AMY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NOT_EMPTY;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.person.Note;
 
 public class NoteCommandParserTest {
-
-    private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, NoteCommand.MESSAGE_USAGE);
 
     private NoteCommandParser parser = new NoteCommandParser();
 
     @Test
     public void parse_missingParts_failure() {
-        // no index specified
-        assertParseFailure(parser, NOTE_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // no index specified (note John)
+        assertParseFailure(parser, VALID_NOTE_NOT_EMPTY,
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        NoteCommandMessages.MESSAGE_USAGE));
 
-        // index but no prefix specified
-        assertParseFailure(parser, VALID_NOTE_AMY, MESSAGE_INVALID_FORMAT);
-
-        // no index and no field specified
-        assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
+        // no index and no field specified (note)
+        assertParseFailure(parser, "", String.format(Messages.MESSAGE_NO_INDEX,
+                NoteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
-    public void parse_invalidPreamble_failure() {
-        // negative index
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+    public void parse_invalidIndex_failure() {
+        // negative index (note -5 n/John)
+        assertParseFailure(parser, "-5" + NAME_DESC_AMY,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
-        // zero index
-        assertParseFailure(parser, "0" + NAME_DESC_AMY, MESSAGE_INVALID_FORMAT);
+        // zero index (note 0 n/John)
+        assertParseFailure(parser, "0" + NAME_DESC_AMY,
+                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
-        // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "1 some random string", MESSAGE_INVALID_FORMAT);
-
-        // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "1 i/ string", MESSAGE_INVALID_FORMAT);
+        // invalid index (note -5)
+        assertParseFailure(parser, "-5",
+                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                        NoteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_PERSON;
-        String userInput = targetIndex.getOneBased() + NOTE_DESC_AMY;
+        String userInput = targetIndex.getOneBased() + " " + VALID_NOTE_NOT_EMPTY;
 
-        NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(VALID_NOTE_AMY));
+        NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(VALID_NOTE_NOT_EMPTY));
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_repeatedNoteField_failure() {
-        Index targetIndex = INDEX_FIRST_PERSON;
-        String invalidUserInput = targetIndex.getOneBased() + NOTE_DESC_AMY + NOTE_DESC_BOB;
+    public void parse_missingNote_success() {
+        Index targetIndex = INDEX_SECOND_PERSON;
+        String userInput = String.format("%s", targetIndex.getOneBased());
 
-        NoteCommandParser noteCommandParser = new NoteCommandParser();
+        NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(""));
 
-        assertParseFailure(noteCommandParser, invalidUserInput,
-                Messages.getErrorMessageForDuplicatePrefixes(PREFIX_NOTE));
+        assertParseSuccess(parser, userInput, expectedCommand);
     }
 }

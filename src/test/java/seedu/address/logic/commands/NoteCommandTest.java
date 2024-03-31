@@ -12,7 +12,8 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookWithout
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
+import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -28,6 +29,7 @@ class NoteCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
+
     @Test
     public void execute_addNoteUnfilteredList_success() {
         Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
@@ -35,7 +37,7 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
@@ -51,8 +53,8 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_DELETE_NOTE_SUCCESS,
-               editedPerson.getFormattedMessage());
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_DELETE_NOTE_SUCCESS,
+                editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
@@ -67,7 +69,7 @@ class NoteCommandTest {
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
 
-        String expectedMessage = String.format(NoteCommand.MESSAGE_ADD_NOTE_SUCCESS,
+        String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
         Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
@@ -80,7 +82,8 @@ class NoteCommandTest {
     public void execute_invalidIndex_failure() {
         Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
         NoteCommand noteCommand = new NoteCommand(invalidIndex, new Note(NOTE_STUB));
-        assertCommandFailure(noteCommand, model, Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+        assertCommandFailure(noteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                NoteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
@@ -89,11 +92,14 @@ class NoteCommandTest {
         NoteCommand secondNote = new NoteCommand(INDEX_SECOND_PERSON, new Note(NOTE_STUB));
         NoteCommand firstNoteClone = new NoteCommand(INDEX_FIRST_PERSON, new Note(NOTE_STUB));
 
-        // same note => return true
+        // same object => return true
         assertEquals(firstNote, firstNote);
 
         // same note details => return true
         assertEquals(firstNote, firstNoteClone);
+
+        // same note, different person => return false
+        assertNotEquals(firstNote, secondNote);
 
         // note not equal to number => return false
         assertNotEquals(firstNote, 10);

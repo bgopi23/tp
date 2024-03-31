@@ -1,8 +1,10 @@
 package seedu.address.ui;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.Optional;
+import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -22,7 +24,10 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import seedu.address.commons.core.LogsCenter;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,6 +35,7 @@ import seedu.address.model.tag.Tag;
  */
 public class PersonDetailsPanel extends UiPart<Region> {
     public static final String FXML = "PersonDetailsPanel.fxml";
+    private static final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
 
     @FXML
     private VBox detailsPane;
@@ -44,6 +50,14 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private Label email;
     @FXML
+    private Label weightDate;
+    @FXML
+    private Label weightValue;
+    @FXML
+    private Label height;
+    @FXML
+    private Label note;
+    @FXML
     private FlowPane tags;
     @FXML
     private ImageView qrcode;
@@ -54,8 +68,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     private LineChart<String, Number> weightChart;
     private NumberAxis weightYAxis;
-//    private LineChart<String, Number> heightChart;
-//    private NumberAxis heightYAxis;
+    // private LineChart<String, Number> heightChart;
+    // private NumberAxis heightYAxis;
     private VBox notesBox;
 
     private static class HoveredThresholdNode extends StackPane {
@@ -98,6 +112,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         }
     }
 
+
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
      * Labels in the {@code .FXML} file contain text with the field name for convenience.
@@ -137,29 +152,29 @@ public class PersonDetailsPanel extends UiPart<Region> {
         weightChart.requestLayout();
 
         // Initialize height chart
-//        CategoryAxis hxAxis = new CategoryAxis();
-//        heightYAxis = new NumberAxis();
-//
-//        hxAxis.setAnimated(false);
-//        hxAxis.setLabel("Date");
-//        hxAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-//
-//        heightYAxis.setAnimated(false);
-//        heightYAxis.setAutoRanging(false);
-//        heightYAxis.setLabel("Height (cm)");
-//        heightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-//
-//        heightChart = new LineChart<>(hxAxis, heightYAxis);
-//        heightChart.setAnimated(false);
-//        heightChart.setHorizontalGridLinesVisible(false);
-//        heightChart.setVerticalGridLinesVisible(false);
-//        heightChart.setTitle("Height Tracking");
-//        heightChart.setLegendVisible(false);
-//        heightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
-//        heightChart.setPrefHeight(200);
-//        heightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
-//        heightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
-//        heightChart.requestLayout();
+        // CategoryAxis hxAxis = new CategoryAxis();
+        // heightYAxis = new NumberAxis();
+        //
+        // hxAxis.setAnimated(false);
+        // hxAxis.setLabel("Date");
+        // hxAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        //
+        // heightYAxis.setAnimated(false);
+        // heightYAxis.setAutoRanging(false);
+        // heightYAxis.setLabel("Height (cm)");
+        // heightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        //
+        // heightChart = new LineChart<>(hxAxis, heightYAxis);
+        // heightChart.setAnimated(false);
+        // heightChart.setHorizontalGridLinesVisible(false);
+        // heightChart.setVerticalGridLinesVisible(false);
+        // heightChart.setTitle("Height Tracking");
+        // heightChart.setLegendVisible(false);
+        // heightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
+        // heightChart.setPrefHeight(200);
+        // heightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
+        // heightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
+        // heightChart.requestLayout();
 
         // Initialize notes box
         notesBox = new VBox();
@@ -175,8 +190,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         Tab weightTab = trackableFieldsTabPane.getTabs().get(0);
         weightTab.setContent(weightChart);
 
-//        Tab heightTab = trackableFieldsTabPane.getTabs().get(1);
-//        heightTab.setContent(heightChart);
+        // Tab heightTab = trackableFieldsTabPane.getTabs().get(1);
+        // heightTab.setContent(heightChart);
 
         Tab notesTab = trackableFieldsTabPane.getTabs().get(1);
         notesTab.setContent(notesScrollPane);
@@ -202,6 +217,17 @@ public class PersonDetailsPanel extends UiPart<Region> {
             .sorted(Comparator.comparing(Tag::toString))
             .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
+        if (latestWeight.isEmpty()) {
+            weightDate.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_DATE);
+            weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
+        } else {
+            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER
+                    + latestWeight.get().getKey().toString());
+            weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
+                    + latestWeight.get().getValue().toString() + " kg");
+        }
+        height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
@@ -229,29 +255,29 @@ public class PersonDetailsPanel extends UiPart<Region> {
         weightChart.getData().add(weightSeries);
 
         // Set height
-//        XYChart.Series<String, Number> heightSeries = new XYChart.Series<>();
-//
-//        heightYAxis.setLowerBound(160);
-//        heightYAxis.setUpperBound(190);
-//
-//        XYChart.Data<String, Number> heightData = new XYChart.Data<>("Mar 2024", 170);
-//        heightData.setNode(new HoveredThresholdNode("", "170", " cm"));
-//        heightSeries.getData().add(heightData);
-//
-//        heightData = new XYChart.Data<>("Apr 2024", 175);
-//        heightData.setNode(new HoveredThresholdNode("", "175", " cm"));
-//        heightSeries.getData().add(heightData);
-//
-//        heightData = new XYChart.Data<>("May 2024", 178);
-//        heightData.setNode(new HoveredThresholdNode("", "178", " cm"));
-//        heightSeries.getData().add(heightData);
-//
-//        heightChart.getData().clear();
-//        heightChart.getData().add(heightSeries);
+        // XYChart.Series<String, Number> heightSeries = new XYChart.Series<>();
+        //
+        // heightYAxis.setLowerBound(160);
+        // heightYAxis.setUpperBound(190);
+        //
+        // XYChart.Data<String, Number> heightData = new XYChart.Data<>("Mar 2024", 170);
+        // heightData.setNode(new HoveredThresholdNode("", "170", " cm"));
+        // heightSeries.getData().add(heightData);
+        //
+        // heightData = new XYChart.Data<>("Apr 2024", 175);
+        // heightData.setNode(new HoveredThresholdNode("", "175", " cm"));
+        // heightSeries.getData().add(heightData);
+        //
+        // heightData = new XYChart.Data<>("May 2024", 178);
+        // heightData.setNode(new HoveredThresholdNode("", "178", " cm"));
+        // heightSeries.getData().add(heightData);
+        //
+        // heightChart.getData().clear();
+        // heightChart.getData().add(heightSeries);
 
         // Set notes
-//        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yy HH:mm:ss");
-//        Label noteLabel = new Label((LocalDateTime.now()).format(dateTimeFormatter) + " - " + "Random text");
+        // DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd MMM yy HH:mm:ss");
+        // Label noteLabel = new Label((LocalDateTime.now()).format(dateTimeFormatter) + " - " + "Random text");
 
         Label noteLabel1 = new Label("Burpees   -  Sets: 3, Reps: 10, Rest between sets: 2 min");
         Label noteLabel2 = new Label("Lunges    -   Sets: 5, Reps: 10, Rest between sets: 1 min");
@@ -268,10 +294,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setVisible(!person.getAddress().getValue().isEmpty());
         email.setVisible(!person.getEmail().getValue().isEmpty());
         note.setVisible(!person.getNote().getValue().isEmpty());
+        weightDate.setVisible(!latestWeight.isEmpty());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
+        weightDate.managedProperty().bind(weightDate.visibleProperty());
+        weightValue.managedProperty().bind(weightValue.visibleProperty());
+        height.managedProperty().bind(height.visibleProperty());
         note.managedProperty().bind(note.visibleProperty());
+
+        logger.info("Displayed details of person: " + person);
     }
 
     /**
@@ -283,6 +315,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
         address.setText("");
         email.setText("");
         note.setText("");
+        weightDate.setText("");
+        weightValue.setText("");
+        height.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
     }

@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.ADDRESS_DESC_EMPTY;
@@ -17,6 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.NOTE_DESC_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.PHONE_DESC_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_FRIEND;
@@ -27,6 +27,10 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
+import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
+import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
@@ -39,8 +43,9 @@ import static seedu.address.testutil.TypicalPersons.BOB;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.messages.AddCommandMessages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
@@ -152,19 +157,21 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
-
-        // missing name prefix
+        // preamble and phone number e.g (add lala p/98989898)
         assertParseFailure(parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
 
-        // missing phone prefix
+        // missing phone prefix e.g (add n/John)
         assertParseFailure(parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                expectedMessage);
+                String.format(MESSAGE_PHONE_PARAMETER_MISSING, AddCommandMessages.MESSAGE_USAGE));
 
-        // all prefixes missing
+        // missing name prefix e.g (add p/99998989)
+        assertParseFailure(parser, PHONE_DESC_BOB,
+                String.format(MESSAGE_NAME_PARAMETER_MISSING, AddCommandMessages.MESSAGE_USAGE));
+
+        // all prefixes missing e.g (add name 99898888)
         assertParseFailure(parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                expectedMessage);
+                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
@@ -188,6 +195,10 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
+
+        // empty preamble (add)
+        assertParseFailure(parser, PREAMBLE_EMPTY,
+                String.format(MESSAGE_NO_PARAMETERS, AddCommandMessages.MESSAGE_USAGE));
     }
 }

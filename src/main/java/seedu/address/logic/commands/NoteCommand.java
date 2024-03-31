@@ -1,14 +1,16 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_DELETE_NOTE_SUCCESS;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -18,28 +20,12 @@ import seedu.address.model.person.Person;
  */
 public class NoteCommand extends Command {
 
-    public static final String COMMAND_WORD = "note";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Updates and overrides the note of the client identified "
-            + "by their corresponding index.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_NOTE + "NOTE]\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + "nt/ Likes to swim.";
-
-    public static final String MESSAGE_ADD_NOTE_SUCCESS =
-            "Successfully added note to client!\n---------------------------------\n%1$s";
-
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS =
-            "Successfully removed note from client!\n--------------------------------------\n%1$s";
-
     private final Index index;
     private final Note note;
 
     /**
      * @param index of the person in the filtered person list to edit the note
-     * @param note of the person to be updated to
+     * @param note  of the person to be updated to
      */
     public NoteCommand(Index index, Note note) {
         requireAllNonNull(index, note);
@@ -50,16 +36,19 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        assert(model != null);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                    NoteCommandMessages.MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), note, personToEdit.getTags());
+                personToEdit.getAddress(), personToEdit.getWeights(),
+                personToEdit.getHeight(), this.note, personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

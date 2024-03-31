@@ -32,35 +32,33 @@ public class TagSet extends Attribute<Set<Tag>> {
 
     /**
      * Determine if the tags stored is a match with a tags specified.
-     * Returns true if tag set contains any of the tags specified.
+     * Returns true if the other TagSet is a subset of this TagSet.
      *
-     * @param otherValue Other value to check against
-     *
+     * @param other Other value to check against
      * @return True if specified value is a match, False otherwise
      */
     @Override
-    public boolean isMatch(Object otherValue) {
-        if (!(otherValue instanceof Set<?>)) {
+    public boolean isMatch(Object other) {
+        // Check that other is a Set
+        if (!(other instanceof Set<?>)) {
             return false;
         }
 
-        Set<?> other = ((Set<?>) otherValue);
+        Set<?> otherSet = ((Set<?>) other);
 
-        if (other.isEmpty()) {
+        // If the set is empty, the user has not specified any tags. Return true to not match by any tags.
+        if (otherSet.isEmpty()) {
             return true;
         }
 
-        if (!(other.iterator().next() instanceof Tag)) {
+        // Check that other is a Set of Tags
+        if (!(otherSet.iterator().next() instanceof Tag)) {
             return false;
         }
 
         // Already checked that set contains Tag objects, so it is safe to cast
         @SuppressWarnings("unchecked")
-        Set<Tag> otherTags = (Set<Tag>) other;
-
-        if (otherTags.isEmpty()) {
-            return true;
-        }
+        Set<Tag> otherTags = (Set<Tag>) otherSet;
 
         return otherTags.stream().allMatch(tag -> this.contains(tag));
     }
@@ -69,7 +67,7 @@ public class TagSet extends Attribute<Set<Tag>> {
      * Determine if the tagset contains the specified tag
      *
      * @param otherValue Tag to check against
-     * @return True if tagset contains the specified tag, False otherwise
+     * @return True if tagset contains the specified tag, false otherwise
      */
     public boolean contains(Object otherValue) {
         if (!(otherValue instanceof Tag)) {

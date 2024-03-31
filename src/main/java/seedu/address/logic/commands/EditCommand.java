@@ -1,60 +1,43 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_EDIT_PERSON_SUCCESS;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_USAGE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
+import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.NavigableMap;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
+import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 
 /**
  * Edits the details of an existing person in the address book.
  */
 public class EditCommand extends Command {
-
-    public static final String COMMAND_WORD = "edit";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits a client's details specified "
-            + "by the corresponding index in the client list.\n"
-            + "Parameters: INDEX "
-            + "[" + PREFIX_NAME + "NAME] "
-            + "[" + PREFIX_PHONE + "PHONE] "
-            + "[" + PREFIX_EMAIL + "EMAIL] "
-            + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_NOTE + "NOTE] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_PHONE + "91234567 "
-            + PREFIX_EMAIL + "john@gmail.com";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS =
-            "Successfully edited client!\n--------------------------\n%1$s";
-    public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-
     private final Index index;
     private final EditPersonDescriptor editPersonDescriptor;
 
@@ -74,16 +57,54 @@ public class EditCommand extends Command {
      * Creates and returns a {@code Person} with the details of {@code personToEdit}
      * edited with {@code editPersonDescriptor}.
      */
-    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor) {
+    private static Person createEditedPerson(Person personToEdit, EditPersonDescriptor editPersonDescriptor)
+            throws CommandException {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        // Get the weight map of the person we are editing.
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap =
+                new TreeMap<>(personToEdit.getWeights());
+
+        // We only modify the weight map if user has specified the weight prefix.
+        if (editPersonDescriptor.getWeight().isPresent()) {
+            Weight updatedWeight = editPersonDescriptor.getWeight().get();
+
+            // If there no more weight values to be removed
+            if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
+                throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
+            }
+
+            toEditWeightMap.pollLastEntry();
+
+            if (updatedWeight.getValue() != 0f) {
+                toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
+            }
+        }
+
+        Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
-        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress, updatedNote, updatedTags);
+        return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
+                toEditWeightMap, updatedHeight, updatedNote, updatedTags);
+    }
+
+    /**
+     * Gets the warning message for the command's execution.
+     *
+     * @return The warning message, or an empty string if none.
+     */
+    private String getMessageWarn(Person editedPerson) {
+        boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
+
+        if (!isPhoneOfExpectedFormat) {
+            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+        }
+
+        return "";
     }
 
     @Override
@@ -92,7 +113,7 @@ public class EditCommand extends Command {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -105,7 +126,13 @@ public class EditCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
-        return new CommandResult(String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage()));
+
+        String messageSuccess = String.format(MESSAGE_EDIT_PERSON_SUCCESS, editedPerson.getFormattedMessage());
+        String messageWarn = this.getMessageWarn(editedPerson);
+
+        String messageResult = String.format("%s%s", messageSuccess, messageWarn);
+
+        return new CommandResult(messageResult);
     }
 
     @Override
@@ -141,8 +168,10 @@ public class EditCommand extends Command {
         private Phone phone;
         private Email email;
         private Address address;
-        private Set<Tag> tags;
+        private Weight weight;
+        private Height height;
         private Note note;
+        private Set<Tag> tags;
 
         public EditPersonDescriptor() {
         }
@@ -156,6 +185,8 @@ public class EditCommand extends Command {
             setPhone(toCopy.phone);
             setEmail(toCopy.email);
             setAddress(toCopy.address);
+            setWeight(toCopy.weight);
+            setHeight(toCopy.height);
             setNote(toCopy.note);
             setTags(toCopy.tags);
         }
@@ -164,7 +195,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, note, tags);
+            return CollectionUtil.isAnyNonNull(name, phone, email, address, weight, height, note, tags);
         }
 
         public Optional<Name> getName() {
@@ -207,6 +238,22 @@ public class EditCommand extends Command {
             this.note = note;
         }
 
+        public Optional<Weight> getWeight() {
+            return Optional.ofNullable(this.weight);
+        }
+
+        public void setWeight(Weight weight) {
+            this.weight = weight;
+        }
+
+        public Optional<Height> getHeight() {
+            return Optional.ofNullable(height);
+        }
+
+        public void setHeight(Height height) {
+            this.height = height;
+        }
+
         /**
          * Returns an unmodifiable tag set, which throws
          * {@code UnsupportedOperationException}
@@ -241,6 +288,8 @@ public class EditCommand extends Command {
                     && Objects.equals(phone, otherEditPersonDescriptor.phone)
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
+                    && Objects.equals(height, otherEditPersonDescriptor.height)
                     && Objects.equals(note, otherEditPersonDescriptor.note)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
@@ -252,6 +301,8 @@ public class EditCommand extends Command {
                     .add("phone", phone)
                     .add("email", email)
                     .add("address", address)
+                    .add("weight", weight)
+                    .add("height", height)
                     .add("note", note)
                     .add("tags", tags)
                     .toString();

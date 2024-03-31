@@ -39,6 +39,9 @@
                         <Label fx:id="address" styleClass="cell_small_label" text="address"/>
                         <Label fx:id="email" styleClass="cell_small_label" text="email"/>
                         <Label fx:id="note" styleClass="cell_small_label" text="note"/>
+                        <Label fx:id="weightValue" styleClass="cell_small_label" text="weightValue"/>
+                        <Label fx:id="weightDate" styleClass="cell_small_label" text="weightDate"/>
+                        <Label fx:id="height" styleClass="cell_small_label" text="height"/>
                     </VBox>
                 </ScrollPane>
                 <TabPane fx:id="trackableFieldsTabPane" tabClosingPolicy="UNAVAILABLE" prefHeight="250" side="BOTTOM"

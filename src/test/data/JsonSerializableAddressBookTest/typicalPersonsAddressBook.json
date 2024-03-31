@@ -6,6 +6,8 @@
       "phone": "94351253",
       "email": "alice@example.com",
       "address": "123, Jurong West Ave 6, #08-111",
+      "weight": "85",
+      "height": "165",
       "note": "Best friend",
       "tags": ["friends"]
     },
@@ -14,6 +16,8 @@
       "phone": "98765432",
       "email": "johnd@example.com",
       "address": "311, Clementi Ave 2, #02-25",
+      "weight": "75",
+      "height": "169",
       "note": "",
       "tags": ["owesMoney", "friends"]
     },
@@ -21,8 +25,10 @@
       "name": "Carl Kurz",
       "phone": "95352563",
       "email": "heinz@example.com",
-      "note": "",
       "address": "wall street",
+      "weight": "68",
+      "height": "160",
+      "note": "",
       "tags": []
     },
     {
@@ -30,6 +36,8 @@
       "phone": "87652533",
       "email": "cornelia@example.com",
       "address": "10th street",
+      "weight": "80",
+      "height": "175.5",
       "note": "Best man",
       "tags": ["friends"]
     },
@@ -38,6 +46,8 @@
       "phone": "94822240",
       "email": "werner@example.com",
       "address": "michegan ave",
+      "weight": "112",
+      "height": "191",
       "note": "",
       "tags": []
     },
@@ -46,6 +56,8 @@
       "phone": "94824279",
       "email": "lydia@example.com",
       "address": "little tokyo",
+      "weight": "100",
+      "height": "188",
       "note": "lover",
       "tags": []
     },
@@ -54,6 +66,8 @@
       "phone": "94824428",
       "email": "anna@example.com",
       "address": "4th street",
+      "weight": "91",
+      "height": "175",
       "note": "",
       "tags": []
     }

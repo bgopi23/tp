@@ -1,23 +1,26 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.logic.commands.AddCommand;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.messages.AddCommandMessages;
+import seedu.address.logic.messages.ClearCommandMessages;
+import seedu.address.logic.messages.DeleteCommandMessages;
+import seedu.address.logic.messages.EditCommandMessages;
+import seedu.address.logic.messages.ExitCommandMessages;
+import seedu.address.logic.messages.FindCommandMessages;
+import seedu.address.logic.messages.HelpCommandMessages;
+import seedu.address.logic.messages.NoteCommandMessages;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -41,7 +44,7 @@ public class AddressBookParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandMessages.MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -52,31 +55,34 @@ public class AddressBookParser {
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
         switch (commandWord) {
-        case NoteCommand.COMMAND_WORD:
+        case NoteCommandMessages.COMMAND_WORD:
             return new NoteCommandParser().parse(arguments);
 
-        case AddCommand.COMMAND_WORD:
+        case AddCommandMessages.COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EditCommandMessages.COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DeleteCommandMessages.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case ClearCommandMessages.COMMAND_WORD:
             return new ClearCommandParser().parse(arguments);
 
-        case FindCommand.COMMAND_WORD:
+        case FindCommandMessages.COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
+
+        case WeightCommandMessages.COMMAND_WORD:
+            return new WeightCommandParser().parse(arguments);
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case ExitCommandMessages.COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HelpCommandMessages.COMMAND_WORD:
             return new HelpCommand();
 
         default:

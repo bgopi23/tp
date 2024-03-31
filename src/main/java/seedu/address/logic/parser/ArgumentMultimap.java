@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Stream;
 
-import seedu.address.logic.Messages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -44,6 +44,33 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Gets  Gets the value associated with the prefix or an empty string
+     * @param prefix the associated prefix
+     * @return a string value or empty string
+     */
+    public String getValueOrEmpty(Prefix prefix) {
+        return this.getValue(prefix).orElse("");
+    }
+
+    /**
+     * Gets the value associated with the prefix or a preamble if the value does not exist
+     * @param prefix the associated prefix
+     * @return the associated value or preamble
+     */
+    public String getValueOrPreamble(Prefix prefix) {
+        return this.getValue(prefix).orElse(getPreamble());
+    }
+
+    /**
+     * Gets string value associated with the given prefix
+     * @param prefix the associated prefix
+     * @return a string
+     */
+    public String getStringValue(Prefix prefix) {
+        return getValue(prefix).get();
+    }
+
+    /**
      * Returns all values of {@code prefix}.
      * If the prefix does not exist or has no values, this will return an empty list.
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
@@ -59,7 +86,14 @@ public class ArgumentMultimap {
      * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
      */
     public String getPreamble() {
-        return getValue(new Prefix("")).orElse("");
+        return this.getValue(new Prefix("")).orElse("");
+    }
+
+    /**
+     * Returns the number of segments in a preamble split by a single whitespace
+     */
+    public Integer getPreambleSegmentNumber() {
+        return getPreamble().split(" ").length;
     }
 
     /**
@@ -81,5 +115,22 @@ public class ArgumentMultimap {
      */
     public boolean contains(Prefix prefix) {
         return argMultimap.containsKey(prefix);
+    }
+
+    /**
+     * Checks if every single one of the prefixes exists in the map
+     * @param prefixes a list of prefixes
+     * @return true if all the prefixes exists in the map
+     */
+    public boolean containsAll(Prefix... prefixes) {
+        return Stream.of(prefixes).anyMatch(this::contains);
+    }
+
+    /**
+     * Checks if the preamble of the argumentMultimap object is empty
+     * @return true if the preamble is empty
+     */
+    public boolean isPreambleEmpty() {
+        return this.getPreamble().isEmpty();
     }
 }
