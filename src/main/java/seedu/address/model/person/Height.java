@@ -10,7 +10,7 @@ import javafx.util.Pair;
  */
 public class Height extends Attribute<Float> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String MESSAGE_CONSTRAINTS = "Height value can only be a positive number.";
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
@@ -72,7 +72,7 @@ public class Height extends Attribute<Float> {
         if (this.getValue() == 0f) {
             return "Height: N/A";
         }
-        return "Height: " + this.getValue().toString();
+        return "Height: " + this.getValue().toString() + " cm";
     }
 
     @Override
