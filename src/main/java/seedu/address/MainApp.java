@@ -170,7 +170,6 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        assert false;
         logger.info("Starting AddressBook " + MainApp.VERSION);
         ui.start(primaryStage);
     }
