@@ -33,7 +33,7 @@ public class Weight extends Attribute<Float> {
 
     @Override
     public String toString() {
-        return this.getValue().toString() + " kg";
+        return this.getValue().toString();
     }
 
     /**
