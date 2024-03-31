@@ -34,7 +34,6 @@ public class ModelManager implements Model {
         this.addressBook = new AddressBook(addressBook);
         this.userPrefs = new UserPrefs(userPrefs);
         filteredPersons = new FilteredList<>(this.addressBook.getPersonList());
-        filteredPersons.setPredicate(PREDICATE_SHOW_ALL_PERSONS);
 
         initQrCodes();
     }
@@ -46,14 +45,14 @@ public class ModelManager implements Model {
     //=========== UserPrefs ==================================================================================
 
     @Override
-    public ReadOnlyUserPrefs getUserPrefs() {
-        return userPrefs;
-    }
-
-    @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
         requireNonNull(userPrefs);
         this.userPrefs.resetData(userPrefs);
+    }
+
+    @Override
+    public ReadOnlyUserPrefs getUserPrefs() {
+        return userPrefs;
     }
 
     @Override
@@ -81,16 +80,16 @@ public class ModelManager implements Model {
     //=========== AddressBook ================================================================================
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
-        return addressBook;
-    }
-
-    @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
         // Delete QR codes of every person in the address book
         this.addressBook.getPersonList().forEach(Person::deleteQrCode);
 
         this.addressBook.resetData(addressBook);
+    }
+
+    @Override
+    public ReadOnlyAddressBook getAddressBook() {
+        return addressBook;
     }
 
     @Override
