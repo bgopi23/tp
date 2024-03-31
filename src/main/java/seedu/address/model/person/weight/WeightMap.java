@@ -41,7 +41,6 @@ public class WeightMap extends Attribute<NavigableMap<LocalDateTime, Weight>> {
      * Returns true if any values in the weight map falls within the specified range.
      *
      * @param otherValue Other value to check against
-     *
      * @return True if there exists a weight value that falls within the range, false otherwise.
      */
     @Override
@@ -62,6 +61,11 @@ public class WeightMap extends Attribute<NavigableMap<LocalDateTime, Weight>> {
 
         assert (weightRange.getValue() - weightRange.getKey() >= 0)
                 : "Range should be more than or equals to zero. Should have been handled in Parser class";
+
+        // If Person has no weights saved
+        if (this.getValue().isEmpty()) {
+            return false;
+        }
 
         Float latestWeight = this.getValue().lastEntry().getValue().getValue();
         return (latestWeight >= weightRange.getKey()) && (latestWeight <= weightRange.getValue());
