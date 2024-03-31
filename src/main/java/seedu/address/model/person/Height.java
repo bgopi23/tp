@@ -10,8 +10,8 @@ import javafx.util.Pair;
  */
 public class Height extends Attribute<Float> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Heights can only take decimals (float)";
-    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)$";
+    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code height}.

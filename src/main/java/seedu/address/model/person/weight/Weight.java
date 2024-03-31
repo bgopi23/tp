@@ -11,8 +11,8 @@ import seedu.address.model.person.Attribute;
  */
 public class Weight extends Attribute<Float> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weights can only take decimals (float)";
-    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)$";
+    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code Weight}.

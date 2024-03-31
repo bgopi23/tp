@@ -30,11 +30,13 @@ public class WeightCommandParser implements Parser<WeightCommand> {
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEIGHT);
 
+        // If no argument or no argument before preamble
         if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(
                     String.format(Messages.MESSAGE_NO_INDEX, WeightCommandMessages.MESSAGE_USAGE));
         }
 
+        // Parse index
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
@@ -45,6 +47,8 @@ public class WeightCommandParser implements Parser<WeightCommand> {
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEIGHT);
 
+        ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT));
+
         // If there is no value specified for the weight, user is deleting the last added weight value.
         if (argMultimap.getValue(PREFIX_WEIGHT).get().isEmpty()) {
             return new WeightCommand(index, new WeightEntry(new AbstractMap.SimpleEntry<>(
@@ -53,6 +57,6 @@ public class WeightCommandParser implements Parser<WeightCommand> {
 
         return new WeightCommand(index, new WeightEntry(new AbstractMap.SimpleEntry<>(
                 WeightEntry.getTimeOfExecution(),
-                new Weight(Float.valueOf(argMultimap.getValue(PREFIX_WEIGHT).get())))));
+                ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)))));
     }
 }
