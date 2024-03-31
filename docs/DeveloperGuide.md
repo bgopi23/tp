@@ -245,7 +245,7 @@ The activity diagram below illustrates what happens when a client is deleted fro
 On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status.
 
 This includes:
-* [Weight and height](#weight-and-height-feature-in-fitbook)
+* [Weight tracking feature](#weight-tracking-feature)
 * [Note](#note-feature-in-fitbook)
 
 #### Note feature in FitBook
@@ -263,14 +263,14 @@ The diagram highlights the four main components of FitBook, highlighted in their
 
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
-#### Weight and height feature in FitBook
-The weight and height feature allows users to keep track of past weight and height measurements of a client.
+#### Weight tracking feature
+The weight tracking feature allows users to keep track of past weight measurements of a client.
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `weight` and `height` fields interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
 
-#### Viewing weight and height history of a client
+#### Viewing weight history of a client
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
@@ -563,10 +563,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **GUI (Graphical User Interface)**: The visual interface of FitBook that users interact with
 * **Healthy**: In a good physical or mental condition
 * **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
-* **JSON (JavaScript Object Notation)**:  A lightheight data-interchange format used for storing and transporting data
+* **JSON (JavaScript Object Notation)**:  A lightweight data-interchange format used for storing and transporting data
 * **Low-end devices**: Computers with lesser than average hardware resources such as processing power and memory
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
-* **Personal Health Information**: Details such as height, body mass index, allergies, medical history etc.
+* **Personal Health Information**: Details such as weight, body mass index, allergies, medical history etc.
 * **Personal Trainer (PT)**: A person who helps others plan and implement a fitness regime
 * **PlantUML**: A tool for creating UML diagrams from plain text
 * **Private contact detail**: A contact detail that is not meant to be shared with others
