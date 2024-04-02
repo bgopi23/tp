@@ -60,7 +60,7 @@ public class FitAddCommand extends Command {
     /**
      * Constructs a new FitAddCommand instance.
      *
-     * @param index    The index of the person in the filtered person list to add the exercise to
+     * @param index          The index of the person in the filtered person list to add the exercise to
      * @param exercisesToAdd The set of exercises to be added to the person
      */
     public FitAddCommand(Index index, Set<Exercise> exercisesToAdd) {
@@ -89,9 +89,12 @@ public class FitAddCommand extends Command {
                 for (Exercise e : updatedExercises) {
                     if (e.equals(exerciseToAdd)) {
                         String name = exerciseToAdd.getName();
-                        Integer sets = exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
-                        Integer reps = exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
-                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != Exercise.DEFAULT_BREAK ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
+                        Integer sets =
+                            exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
+                        Integer reps =
+                            exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
+                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != Exercise.DEFAULT_BREAK
+                            ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
 
                         exerciseToAdd = new Exercise(name, sets, reps, breakBetweenSets);
                         break;

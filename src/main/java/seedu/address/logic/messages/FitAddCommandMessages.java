@@ -1,8 +1,8 @@
 package seedu.address.logic.messages;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 
 /**

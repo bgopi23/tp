@@ -26,9 +26,9 @@ public class FitDeleteCommand extends Command {
     /**
      * Constructs a new FitDeleteCommand instance.
      *
-     * @param index    The index of the person in the filtered person list to delete the exercise from
+     * @param index        The index of the person in the filtered person list to delete the exercise from
      * @param exerciseName The optional exercise name to be deleted from the person
-     * @param deleteAll The boolean indicating whether all exercises should be deleted from the person
+     * @param deleteAll    The boolean indicating whether all exercises should be deleted from the person
      */
     public FitDeleteCommand(Index index, Optional<String> exerciseName, boolean deleteAll) {
         requireNonNull(index);
@@ -70,7 +70,8 @@ public class FitDeleteCommand extends Command {
             }
         } else {
             Exercise exerciseToDelete =
-                new Exercise(exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS, Exercise.DEFAULT_BREAK);
+                new Exercise(exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS,
+                    Exercise.DEFAULT_BREAK);
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
             if (!updatedExercises.contains(exerciseToDelete)) {

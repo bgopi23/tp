@@ -13,7 +13,8 @@ public class Exercise {
     public static final String NAME_CONSTRAINT = "Exercise name should not be empty";
     public static final String SETS_CONSTRAINT = "Number of sets should be a number greater than 0";
     public static final String REPS_CONSTRAINT = "Number of repetitions should be a number greater than 0";
-    public static final String BREAK_CONSTRAINT = "Break time in seconds between sets should be a number greater or equals to 0";
+    public static final String BREAK_CONSTRAINT =
+        "Break time in seconds between sets should be a number greater or equals to 0";
 
     public static final Integer DEFAULT_SETS = 1;
     public static final Integer DEFAULT_REPS = 1;
@@ -28,9 +29,9 @@ public class Exercise {
     /**
      * Constructs an {@code Exercise}.
      *
-     * @param name Name of the exercise.
-     * @param sets Number of sets.
-     * @param reps Number of repetitions per set.
+     * @param name             Name of the exercise.
+     * @param sets             Number of sets.
+     * @param reps             Number of repetitions per set.
      * @param breakBetweenSets Break time in seconds between sets.
      */
     public Exercise(String name, Integer sets, Integer reps, Integer breakBetweenSets) {

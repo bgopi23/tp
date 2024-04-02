@@ -19,7 +19,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class ArgumentMultimap {
 
-    /** Prefixes mapped to their respective arguments**/
+    /**
+     * Prefixes mapped to their respective arguments
+     **/
     private final Map<Prefix, List<String>> argMultimap = new HashMap<>();
 
     /**
@@ -45,6 +47,7 @@ public class ArgumentMultimap {
 
     /**
      * Gets  Gets the value associated with the prefix or an empty string
+     *
      * @param prefix the associated prefix
      * @return a string value or empty string
      */
@@ -54,6 +57,7 @@ public class ArgumentMultimap {
 
     /**
      * Gets the value associated with the prefix or a preamble if the value does not exist
+     *
      * @param prefix the associated prefix
      * @return the associated value or preamble
      */
@@ -63,6 +67,7 @@ public class ArgumentMultimap {
 
     /**
      * Gets string value associated with the given prefix
+     *
      * @param prefix the associated prefix
      * @return a string
      */
@@ -102,8 +107,8 @@ public class ArgumentMultimap {
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-                .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
-                .toArray(Prefix[]::new);
+            .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
+            .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
@@ -117,7 +122,9 @@ public class ArgumentMultimap {
         return argMultimap.containsKey(prefix);
     }
 
-    /** Checks if any number of the prefixes specified is present in the ArgumentMultimap object
+    /**
+     * Checks if any number of the prefixes specified is present in the ArgumentMultimap object
+     *
      * @param prefixes to check
      * @return true if prefix/s present and false otherwise
      */
@@ -127,6 +134,7 @@ public class ArgumentMultimap {
 
     /**
      * Checks if every single one of the prefixes exists in the map
+     *
      * @param prefixes a list of prefixes
      * @return true if all the prefixes exists in the map
      */
@@ -136,6 +144,7 @@ public class ArgumentMultimap {
 
     /**
      * Checks if the preamble of the argumentMultimap object is empty
+     *
      * @return true if the preamble is empty`
      */
     public boolean isPreambleEmpty() {

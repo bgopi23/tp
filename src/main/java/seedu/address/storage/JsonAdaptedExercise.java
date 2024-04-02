@@ -21,7 +21,8 @@ class JsonAdaptedExercise {
      */
     @JsonCreator
     public JsonAdaptedExercise(@JsonProperty("name") String name, @JsonProperty("sets") Integer sets,
-                               @JsonProperty("reps") Integer reps, @JsonProperty("breakBetweenSets") Integer breakBetweenSets) {
+                               @JsonProperty("reps") Integer reps,
+                               @JsonProperty("breakBetweenSets") Integer breakBetweenSets) {
         this.name = name;
         this.sets = sets;
         this.reps = reps;

@@ -5,16 +5,17 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ABS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ARM;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BACK;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_CHEST;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_LEG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SHOULDER;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitAddCommand;
 import seedu.address.logic.messages.FitAddCommandMessages;

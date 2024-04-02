@@ -155,7 +155,7 @@ public class ParserUtil {
                 throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
             }
             return trimmedWeight.isEmpty() ? new Weight(0f)
-                    : new Weight(Float.valueOf(trimmedWeight));
+                : new Weight(Float.valueOf(trimmedWeight));
         }
         return new Weight(0f);
     }
@@ -296,7 +296,8 @@ public class ParserUtil {
      * @return The parsed exercise rest value
      * @throws ParseException If the given {@code exerciseBreakBetweenSetsOpt} is invalid
      */
-    public static Integer parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt) throws ParseException {
+    public static Integer parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt)
+            throws ParseException {
         requireNonNull(exerciseBreakBetweenSetsOpt);
 
         if (exerciseBreakBetweenSetsOpt.isEmpty()) {
@@ -350,28 +351,6 @@ public class ParserUtil {
 
         return new Exercise(name, sets, reps, rest);
     }
-
-//    /**
-//     * Parses a {@code Optional<String> exerciseName} into a {@code String}.
-//     *
-//     * @param exerciseName The optional exercise rest string to be parsed
-//     * @return The parsed exercise name value
-//     * @throws ParseException If the given {@code exerciseRestOpt} is empty of invalid
-//     */
-//    public static String parseExerciseName(Optional<String> exerciseName) throws ParseException {
-//        requireNonNull(exerciseName);
-//
-//        if (exerciseName.isEmpty()) {
-//            throw new ParseException(Exercise.NAME_CONSTRAINT);
-//        }
-//
-//        String exerciseNameTrimmed = exerciseName.orElse("").trim();
-//        if (!Exercise.isValidName(exerciseNameTrimmed)) {
-//            throw new ParseException(Exercise.NAME_CONSTRAINT);
-//        }
-//
-//        return exerciseNameTrimmed;
-//    }
 
     /**
      * Parses a {@code String searchString} into a string.
