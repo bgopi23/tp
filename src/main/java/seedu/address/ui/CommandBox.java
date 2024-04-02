@@ -6,6 +6,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.Region;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -42,8 +43,11 @@ public class CommandBox extends UiPart<Region> {
         }
 
         try {
-            commandExecutor.execute(commandText);
-            commandTextField.setText("");
+            CommandResult result = commandExecutor.execute(commandText);
+            // Do not clear if the user is editing a note
+            if (!result.getFeedbackToUser().contains(NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER)) {
+                commandTextField.setText("");
+            }
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
         }
@@ -91,4 +95,17 @@ public class CommandBox extends UiPart<Region> {
         CommandResult execute(String commandText) throws CommandException, ParseException;
     }
 
+    /**
+     * Sets the text of the commandTextField to the specified text.
+     */
+    public void setText(String text) {
+        commandTextField.setText(text);
+    }
+
+    /**
+     * Moves the cursor to the end of the command text field.
+     */
+    public void moveCursorToEnd() {
+        commandTextField.positionCaret(Integer.MAX_VALUE);
+    }
 }

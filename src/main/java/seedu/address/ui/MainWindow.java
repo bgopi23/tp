@@ -262,4 +262,18 @@ public class MainWindow extends UiPart<Stage> {
             throw e;
         }
     }
+
+    /**
+     * Sets the text of the command box.
+     */
+    public void setCommandBoxText(String text) {
+        commandBox.setText(text);
+    }
+
+    /**
+     * Moves the cursor of the command box to the end.
+     */
+    public void moveCommandBoxCursorToEnd() {
+        commandBox.moveCursorToEnd();
+    }
 }

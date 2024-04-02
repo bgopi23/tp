@@ -9,6 +9,7 @@ import java.util.Arrays;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.NoteCommand;
+import seedu.address.logic.commands.NoteEditCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Note;
 
@@ -41,13 +42,26 @@ public class NoteCommandParser implements Parser<NoteCommand> {
             throw new ParseException(MESSAGE_INVALID_INDEX_NOTE, ive);
         }
 
+        // (note 1 /edit)
+        if (isEdit(argsArray)) {
+            return new NoteEditCommand(index);
+        }
+
         Note note;
+        // (note 1)
         if (argsArray.length <= 1) {
             note = new Note("");
-        } else {
+        } else { // (note 1 valid note)
             note = new Note(String.join(" ", Arrays.copyOfRange(argsArray, 1, argsArray.length)).trim());
         }
 
         return new NoteCommand(index, note);
+    }
+
+    /**
+     * Checks if the given array of arguments indicates an edit operation.
+     */
+    private boolean isEdit(String[] argsArray) {
+        return argsArray.length == 2 && argsArray[1].equals("/edit");
     }
 }

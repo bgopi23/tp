@@ -36,19 +36,18 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
-        assert(model != null);
+        assert (model != null);
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                    NoteCommandMessages.MESSAGE_USAGE));
+            throw new CommandException(
+                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
-        Person editedPerson = new Person(
-                personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
-                personToEdit.getAddress(), personToEdit.getWeights(),
-                personToEdit.getHeight(), this.note, personToEdit.getTags());
+        Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
+                personToEdit.getAddress(), personToEdit.getWeights(), personToEdit.getHeight(), this.note,
+                personToEdit.getTags());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
@@ -78,7 +77,13 @@ public class NoteCommand extends Command {
         }
 
         NoteCommand e = (NoteCommand) other;
-        return index.equals(e.index)
-                && note.equals(e.note);
+        return index.equals(e.index) && note.equals(e.note);
+    }
+
+    /**
+     * Returns the index of the object.
+     */
+    public Index getIndex() {
+        return index;
     }
 }
