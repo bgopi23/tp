@@ -1,6 +1,8 @@
 package seedu.address.ui;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Optional;
@@ -81,8 +83,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
             weightDate.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_DATE);
             weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
         } else {
-            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER
-                    + latestWeight.get().getKey().toString());
+            LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
+            DateTimeFormatter numericToText = DateTimeFormatter.ofPattern("MMMM d yyyy");
+            String formattedDate = numericDate.format(numericToText);
+            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
             weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
                     + latestWeight.get().getValue().toString() + " kg");
         }
