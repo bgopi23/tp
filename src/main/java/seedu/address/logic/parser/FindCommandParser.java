@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIXES_NAME_PHONE_EMAIL_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
@@ -16,6 +17,7 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
+import seedu.address.model.person.predicates.HeightContainsRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
@@ -50,15 +52,17 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_EMAIL)));
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_ADDRESS)));
-        WeightMapContainsWeightRangePredicate weightsPredicate = new WeightMapContainsWeightRangePredicate(
+        WeightMapContainsWeightRangePredicate weightPredicate = new WeightMapContainsWeightRangePredicate(
                 ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)));
+        HeightContainsRangePredicate heightPredicate = new HeightContainsRangePredicate(
+                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil
                 .parseSearchString(argMultimap.getValueOrEmpty(PREFIX_NOTE)));
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(
                 ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
-                addressPredicate, weightsPredicate, notePredicate, tagsPredicate);
+                addressPredicate, weightPredicate, heightPredicate, notePredicate, tagsPredicate);
 
         return new FindCommand(predicates);
     }

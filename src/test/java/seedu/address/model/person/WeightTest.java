@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.util.Pair;
 import seedu.address.model.person.weight.Weight;
 
 public class WeightTest {
@@ -38,21 +39,27 @@ public class WeightTest {
 
     @Test
     public void isMatch() {
-        Weight weight = new Weight(182f);
+        Height weight = new Height(92.5f);
 
-        // Exact match -> returns true
-        assertTrue(weight.isMatch(new Weight(182f)));
+        // Exact range -> returns true
+        assertTrue(weight.isMatch(new Pair<Float, Float>(92.5f, 92.5f)));
 
-        // Just above match -> returns false
-        assertFalse(weight.isMatch(new Weight(183f)));
+        // Falls within range -> returns true
+        assertTrue(weight.isMatch(new Pair<Float, Float>(90f, 100f)));
 
-        // Just below match -> returns false
-        assertFalse(weight.isMatch(new Weight(181f)));
+        // Falls outside of range -> returns false
+        assertFalse(weight.isMatch(new Pair<Float, Float>(80f, 90f)));
 
-        // Negative input -> returns false
-        assertFalse(weight.isMatch(new Weight(-182f)));
+        // Incorrect generic types -> returns false
+        assertFalse(weight.isMatch(new Pair<Object, Object>("foo", "bar")));
+        assertFalse(weight.isMatch(new Pair<Float, Object>(80f, "bar")));
+        assertFalse(weight.isMatch(new Pair<Object, Object>("foo", 80f)));
 
-        // Incorrect type -> returns false
-        assertFalse(weight.isMatch("hello"));
+        // Null pair -> returns false
+        assertFalse(weight.isMatch(new Pair<Float, Float>(null, null)));
+
+        // Either value is null -> returns false
+        assertFalse(weight.isMatch(new Pair<Float, Float>(90f, null)));
+        assertFalse(weight.isMatch(new Pair<Float, Float>(null, 100f)));
     }
 }

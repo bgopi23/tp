@@ -4,6 +4,7 @@ import java.util.logging.Logger;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.collections.ListChangeListener;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.MenuItem;
@@ -19,6 +20,7 @@ import seedu.address.logic.Logic;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.person.Person;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -119,13 +121,33 @@ public class MainWindow extends UiPart<Stage> {
     void fillInnerParts() {
         personListPanel = new PersonListPanel(logic.getFilteredPersonList());
 
-        // Update the details panel when a Person in the list is selected
-        personListPanel.initListener((observable, oldValue, newValue) -> {
+        // Update the details panel when a Person in the list is selected.
+        personListPanel.addListener((observable, oldValue, newValue) -> {
             // newValue can be null if the selection in the personListView is cleared
             if (newValue == null) {
                 personDetailsPanel.clear();
             } else {
                 personDetailsPanel.update(newValue);
+            }
+        });
+
+        // Update the details panel when the currently displayed Person is updated.
+        logic.getFilteredPersonList().addListener((ListChangeListener<? super Person>) c -> {
+            while (c.next()) {
+                // adding and editing of clients
+                if (c.wasAdded()) {
+                    // When the address book is initialized, the AddedSubList will contain all clients.
+                    // Do not update the details panel in that case.
+                    // In all other cases when a person was added/edited, the list should be of size 1.
+                    if (c.getAddedSize() == 1) {
+                        Person p = c.getAddedSubList().get(0);
+                        personDetailsPanel.update(p);
+
+                        // Select the person in the person list to ensure the details displayed is always the details
+                        // of the person selected in the person list.
+                        personListPanel.getFxmlObject().getSelectionModel().select(p);
+                    }
+                }
             }
         });
 
@@ -148,7 +170,7 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowWeight());
+        primaryStage.setHeight(guiSettings.getWindowHeight());
         primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
             primaryStage.setX(guiSettings.getWindowCoordinates().getX());

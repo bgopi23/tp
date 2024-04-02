@@ -21,7 +21,7 @@ h2, h3, h4, h5, h6 {
 
 // Provide class for links that match alerts
 .alert-link {
-  font-height: $alert-link-font-height;
+  font-weight: $alert-link-font-weight;
 }
 
 // Generate contextual modifier classes for colorizing the alert.

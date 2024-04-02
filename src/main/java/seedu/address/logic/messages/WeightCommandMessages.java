@@ -20,4 +20,18 @@ public class WeightCommandMessages extends Messages {
             "Successfully added weight to client!\n---------------------------------\n%1$s";
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
             "Successfully removed weight from client!\n--------------------------------------\n%1$s";
+    public static final String MESSAGE_INVALID_PARAMETER_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+            MESSAGE_USAGE);
+
+    public static final String MESSAGE_NO_PARAMETER_WEIGHT = String.format(MESSAGE_NO_PARAMETERS, MESSAGE_USAGE);
+
+    public static final String MESSAGE_INVALID_INDEX_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        MESSAGE_USAGE);
+
+    public static final String WEIGHT_VALUE_HEADER = "Weight: ";
+    public static final String WEIGHT_DATE_HEADER = "Date Recorded: ";
+
+    // Represents an empty weight field in the UI that needs extra clarity (instead of not showing the field at all)
+    public static final String EMPTY_FIELD_WEIGHT_VALUE = WEIGHT_VALUE_HEADER + Messages.EMPTY_FIELD;
+    public static final String EMPTY_FIELD_WEIGHT_DATE = WEIGHT_DATE_HEADER + Messages.EMPTY_FIELD;
 }

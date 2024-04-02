@@ -30,9 +30,9 @@ public class QrCodeGenerator {
      */
     private static final int QR_CODE_WIDTH = 200;
     /**
-     * The weight of the QR code.
+     * The height of the QR code.
      */
-    private static final int QR_CODE_WEIGHT = 200;
+    private static final int QR_CODE_HEIGHT = 200;
 
     /**
      * Generates a QR code based on the provided person information and saves it to the specified file path
@@ -53,7 +53,7 @@ public class QrCodeGenerator {
         hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
 
         QRCodeWriter qrCodeWriter = new QRCodeWriter();
-        BitMatrix bitMatrix = qrCodeWriter.encode(vCard, BarcodeFormat.QR_CODE, QR_CODE_WIDTH, QR_CODE_WEIGHT, hints);
+        BitMatrix bitMatrix = qrCodeWriter.encode(vCard, BarcodeFormat.QR_CODE, QR_CODE_WIDTH, QR_CODE_HEIGHT, hints);
 
         Path path = getQrCodePath(person);
         Files.createDirectories(path.getParent()); // Create necessary folders along the path if they do not exist

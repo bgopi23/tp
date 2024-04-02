@@ -30,7 +30,8 @@ public class PersonBuilder {
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
     public static final String DEFAULT_NOTE = "";
-    public static final Weight DEFAULT_WEIGHT = new Weight(182f);
+    public static final Weight DEFAULT_WEIGHT =
+            new Weight(182f);
     public static final Float DEFAULT_HEIGHT = 92.5f;
 
     private Name name;

@@ -87,7 +87,7 @@ public class SampleDataUtil {
     /**
      * Returns a NavigableMap containing the list of LocalDateTime and Weight values given as strings.
      */
-    public static NavigableMap<LocalDateTime, Weight> getWeightMap(String... strings) {
+    public static NavigableMap<LocalDateTime, Weight>getWeightMap(String... strings) {
         return Stream.of(strings)
             .map(str -> str.split("="))
             .collect(Collectors.toMap(

@@ -113,7 +113,7 @@ public class Person {
     }
 
     public Optional<Map.Entry<LocalDateTime, Weight>> getLatestWeight() {
-        return Optional.of(this.weights.getValue().lastEntry());
+        return Optional.ofNullable(this.weights.getValue().lastEntry());
     }
 
     /**

@@ -70,16 +70,22 @@ public class EditCommand extends Command {
 
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
 
-        NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
+        // Get the weight map of the person we are editing.
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap =
+                new TreeMap<>(personToEdit.getWeights());
 
+        // We only modify the weight map if user has specified the weight prefix.
         if (editPersonDescriptor.getWeight().isPresent()) {
             Weight updatedWeight = editPersonDescriptor.getWeight().get();
-            if (updatedWeight.getValue() == 0f) {
-                if (toEditWeightMap.isEmpty()) {
-                    throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
-                }
-                toEditWeightMap.pollLastEntry();
-            } else {
+
+            // If there are no more weight values to be removed
+            if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
+                throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
+            }
+
+            toEditWeightMap.pollLastEntry();
+
+            if (updatedWeight.getValue() != 0f) {
                 toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
             }
         }

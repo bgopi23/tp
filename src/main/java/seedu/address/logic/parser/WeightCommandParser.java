@@ -1,15 +1,15 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_PARAMETER_WEIGHT;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_NO_PARAMETER_WEIGHT;
 
 import java.util.AbstractMap;
+import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.WeightCommand;
-import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
@@ -26,26 +26,29 @@ public class WeightCommandParser implements Parser<WeightCommand> {
      */
     public WeightCommand parse(String args) throws ParseException {
         requireNonNull(args);
-        ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, PREFIX_WEIGHT);
+
+        if (args.trim().isEmpty()) {
+            throw new ParseException(MESSAGE_NO_PARAMETER_WEIGHT);
+        }
+
+        String[] argsArray = args.trim().split(" ");
 
         Index index;
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
+            index = ParserUtil.parseIndex(argsArray[0]);
         } catch (IllegalValueException ive) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    WeightCommandMessages.MESSAGE_USAGE), ive);
+            throw new ParseException(MESSAGE_INVALID_PARAMETER_WEIGHT, ive);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_WEIGHT);
-
         // If there is no value specified for the weight, user is deleting the last added weight value.
-        if (argMultimap.getValue(PREFIX_WEIGHT).get().isEmpty()) {
+        if (argsArray.length <= 1) {
             return new WeightCommand(index, new WeightEntry(new AbstractMap.SimpleEntry<>(
                     WeightEntry.getTimeOfExecution(), new Weight(0f))));
         }
 
+        // Else, user is adding a new weight value.
         return new WeightCommand(index, new WeightEntry(new AbstractMap.SimpleEntry<>(
                 WeightEntry.getTimeOfExecution(),
-                new Weight(Float.valueOf(argMultimap.getValue(PREFIX_WEIGHT).get())))));
+                ParserUtil.parseWeight(Optional.of(argsArray[1])))));
     }
 }

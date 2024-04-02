@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.time.LocalDateTime;
@@ -10,7 +11,6 @@ import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
@@ -25,6 +25,7 @@ public class WeightCommand extends Command {
 
     private final Index index;
     private final WeightEntry weightEntry;
+    private LocalDateTime timeOfExecution = null;
 
     /**
      * @param index of the person in the filtered person list to edit the weight
@@ -37,12 +38,24 @@ public class WeightCommand extends Command {
         this.weightEntry = weight;
     }
 
+    /**
+     * @param index of the person in the filtered person list to edit the weight
+     * @param weight of the person to be updated to
+     * @param timeOfExecution of the weight
+     */
+    public WeightCommand(Index index, WeightEntry weight, LocalDateTime timeOfExecution) {
+        requireAllNonNull(index, weight, timeOfExecution);
+        this.index = index;
+        this.weightEntry = weight;
+        this.timeOfExecution = timeOfExecution;
+    }
+
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+            throw new CommandException(MESSAGE_INVALID_INDEX_WEIGHT);
         }
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
@@ -54,7 +67,12 @@ public class WeightCommand extends Command {
             }
             toEditWeightMap.pollLastEntry();
         } else {
-            toEditWeightMap.put(WeightEntry.getTimeOfExecution(), this.weightEntry.getValue().getValue());
+            // If user created this instance without specifying time of execution.
+            if (this.timeOfExecution == null) {
+                toEditWeightMap.put(WeightEntry.getTimeOfExecution(), this.weightEntry.getValue().getValue());
+            } else {
+                toEditWeightMap.put(this.timeOfExecution, this.weightEntry.getValue().getValue());
+            }
         }
 
         Person editedPerson = new Person(

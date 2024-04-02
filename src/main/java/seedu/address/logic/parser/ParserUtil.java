@@ -154,7 +154,8 @@ public class ParserUtil {
             if (!Weight.isValidWeight(trimmedWeight)) {
                 throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
             }
-            return trimmedWeight.isEmpty() ? new Weight(0f) : new Weight(Float.valueOf(trimmedWeight));
+            return trimmedWeight.isEmpty() ? new Weight(0f)
+                    : new Weight(Float.valueOf(trimmedWeight));
         }
         return new Weight(0f);
     }
@@ -175,7 +176,7 @@ public class ParserUtil {
             if (!Height.isValidHeight(trimmedHeight)) {
                 throw new ParseException(Height.MESSAGE_CONSTRAINTS);
             }
-            return new Height(Float.valueOf(trimmedHeight));
+            return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
         }
         return new Height(0f);
     }
@@ -412,6 +413,6 @@ public class ParserUtil {
             return new Pair<>(fromRange, toRange);
         }
 
-        return new Pair<>(0f, 0f);
+        return new Pair<>(0f, Float.MAX_VALUE);
     }
 }
