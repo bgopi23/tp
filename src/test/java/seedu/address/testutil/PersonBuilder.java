@@ -6,6 +6,8 @@ import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 
+import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -40,6 +42,7 @@ public class PersonBuilder {
     private Height height;
     private Note note;
     private Set<Tag> tags;
+    private ExerciseSet exerciseSet;
 
     /**
      * Creates a {@code PersonBuilder} with the default details.
@@ -54,6 +57,7 @@ public class PersonBuilder {
         this.height = new Height(DEFAULT_HEIGHT);
         this.note = new Note(DEFAULT_NOTE);
         this.tags = new HashSet<>();
+        this.exerciseSet = new ExerciseSet(new HashSet<>());
     }
 
     /**
@@ -68,6 +72,7 @@ public class PersonBuilder {
         this.height = personToCopy.getHeight();
         this.note = personToCopy.getNote();
         this.tags = new HashSet<>(personToCopy.getTags());
+        this.exerciseSet = personToCopy.getExerciseSet();
     }
 
     /**
@@ -84,6 +89,15 @@ public class PersonBuilder {
      */
     public PersonBuilder withTags(String... tags) {
         this.tags = SampleDataUtil.getTagSet(tags);
+        return this;
+    }
+
+    /**
+     * Parses the {@code exercises} into a {@code ExerciseSet} and set it to the
+     * {@code Person} that we are building.
+     */
+    public PersonBuilder withExercises(Exercise... exercises) {
+        this.exerciseSet = new ExerciseSet(SampleDataUtil.getExerciseHashSet(exercises));
         return this;
     }
 
@@ -140,7 +154,7 @@ public class PersonBuilder {
      */
     public Person build() {
         return new Person(this.name, this.phone, this.email, this.address,
-                this.weights, this.height, this.note, this.tags);
+                this.weights, this.height, this.note, this.tags, this.exerciseSet);
     }
 
 }
