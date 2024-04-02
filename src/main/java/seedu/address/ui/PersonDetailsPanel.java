@@ -3,12 +3,16 @@ package seedu.address.ui;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
@@ -16,18 +20,22 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Separator;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.messages.WeightCommandMessages;
+import seedu.address.model.exercise.Exercise;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
@@ -126,6 +134,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Create a scroll pane and set the notes box as its content
         ScrollPane exerciseScrollPane = new ScrollPane(exercisesBox);
         exerciseScrollPane.setFitToWidth(true);
+        exerciseScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
@@ -153,8 +162,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Clear tags and set new ones
         tags.getChildren().clear();
         person.getTags().stream()
-                .sorted(Comparator.comparing(Tag::toString))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
+            .sorted(Comparator.comparing(Tag::toString))
+            .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isEmpty()) {
@@ -162,9 +171,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
             weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
         } else {
             weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER
-                    + latestWeight.get().getKey().toString());
+                + latestWeight.get().getKey().toString());
             weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
-                    + latestWeight.get().getValue().toString() + " kg");
+                + latestWeight.get().getValue().toString() + " kg");
         }
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
@@ -174,16 +183,62 @@ public class PersonDetailsPanel extends UiPart<Region> {
         weightChart.getData().clear();
         weightChart.getData().add(weightSeries);
 
-//        Label noteLabel1 = new Label("Burpees   -  Sets: 3, Reps: 10, Rest between sets: 2 min");
-//        Label noteLabel2 = new Label("Lunges    -   Sets: 5, Reps: 10, Rest between sets: 1 min");
-//        Label noteLabel3 = new Label("Squats    -   Sets: 5, Reps: 10, Rest between sets: 3 min");
-//
-//        noteLabel1.setStyle("-fx-text-fill: white; -fx-font-size: 14");
-//        noteLabel2.setStyle("-fx-text-fill: white; -fx-font-size: 14");
-//        noteLabel3.setStyle("-fx-text-fill: white; -fx-font-size: 14");
-//
-//        exercisesBox.getChildren().clear();
-//        exercisesBox.getChildren().addAll(noteLabel1, noteLabel2, noteLabel3);
+        // Display exercises
+        Label exercisesTitle = new Label("Exercises");
+        exercisesTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
+        exercisesTitle.setMaxWidth(Double.MAX_VALUE);
+        exercisesTitle.setAlignment(Pos.CENTER);
+
+        exercisesBox.getChildren().clear();
+        exercisesBox.getChildren().add(exercisesTitle);
+
+        Set<Exercise> exercises = person.getExerciseSet().getValue();
+        List<Exercise> sortedExercises = exercises.stream()
+            .sorted(Comparator.comparing(Exercise::getName))
+            .collect(Collectors.toList());
+
+        for (Exercise exercise : sortedExercises) {
+            final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
+            final String exerciseAttrValueStyle =
+                "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
+
+            Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
+
+            exerciseName.setWrapText(true);
+            exerciseName.setUnderline(true);
+            exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
+            exerciseName.setPadding(new Insets(10, 0, 0, 0));
+
+            Label setsLabel = new Label("Sets:");
+            setsLabel.setStyle(exerciseAttrDescStyle);
+            Label setsValue = new Label(String.valueOf(exercise.getSets()));
+            setsValue.setStyle(exerciseAttrValueStyle);
+
+            Label repsLabel = new Label("Reps:");
+            repsLabel.setStyle(exerciseAttrDescStyle);
+            Label repsValue = new Label(String.valueOf(exercise.getReps()));
+            repsValue.setStyle(exerciseAttrValueStyle);
+
+            Label breakLabel = new Label("Break between sets:");
+            breakLabel.setStyle(exerciseAttrDescStyle);
+            Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
+            breakValue.setStyle(exerciseAttrValueStyle);
+
+            HBox setsBox = new HBox(10, setsLabel, setsValue);
+            HBox repsBox = new HBox(10, repsLabel, repsValue);
+            HBox breakBox = new HBox(10, breakLabel, breakValue);
+
+            setsBox.setPadding(new Insets(10, 0, 10, 0));
+            repsBox.setPadding(new Insets(10, 0, 10, 0));
+            breakBox.setPadding(new Insets(10, 0, 10, 0));
+
+            setsBox.setPrefWidth(130);
+            repsBox.setPrefWidth(130);
+            breakBox.setPrefWidth(250);
+
+            HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
+            exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
+        }
 
         // Bind manageability (presence) of node based on presence of value for optional fields
         address.setVisible(!person.getAddress().getValue().isEmpty());

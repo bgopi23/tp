@@ -80,4 +80,28 @@ public class StringUtil {
 
         return true;
     }
+
+    /**
+     * Capitalizes the first letter in each word in the given string.
+     *
+     * @return The new string with the first letter of each word capitalized
+     */
+    public static String capitalizeWords(String str) {
+        if (str == null || str.isEmpty()) {
+            return str;
+        }
+
+        String[] words = str.split("\\s+");
+        StringBuilder result = new StringBuilder();
+
+        for (String word : words) {
+            if (!word.isEmpty()) {
+                result.append(Character.toUpperCase(word.charAt(0)))
+                    .append(word.substring(1))
+                    .append(" ");
+            }
+        }
+
+        return result.toString().trim();
+    }
 }
