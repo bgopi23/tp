@@ -26,7 +26,7 @@
           "name": "squats",
           "sets": 3,
           "reps": 5,
-          "rest": 1
+          "breakBetweenSets": 1
         }
       ]
     },
