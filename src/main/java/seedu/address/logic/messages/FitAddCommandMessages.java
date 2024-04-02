@@ -1,9 +1,16 @@
 package seedu.address.logic.messages;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ABS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ALL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ARM;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BACK;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_CHEST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_LEG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SHOULDER;
 
 /**
  * Messages used by FitAddCommand and associated classes.
@@ -14,10 +21,17 @@ public class FitAddCommandMessages extends Messages {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to the client identified "
         + "by their corresponding index.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_EXERCISE_NAME + "EXERCISE_NAME "
+        + "[" + PREFIX_EXERCISE_NAME + "EXERCISE_NAME] "
         + "[" + PREFIX_EXERCISE_SETS + "SETS] "
         + "[" + PREFIX_EXERCISE_REPS + "REPETITIONS] "
         + "[" + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "REST_TIME]\n"
+        + "[" + PREFIX_EXERCISE_ARM + "] "
+        + "[" + PREFIX_EXERCISE_LEG + "] "
+        + "[" + PREFIX_EXERCISE_CHEST + "] "
+        + "[" + PREFIX_EXERCISE_BACK + "] "
+        + "[" + PREFIX_EXERCISE_SHOULDER + "] "
+        + "[" + PREFIX_EXERCISE_ABS + "] "
+        + "[" + PREFIX_EXERCISE_ALL + "]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_EXERCISE_NAME + "squats "
         + PREFIX_EXERCISE_SETS + "3 "
