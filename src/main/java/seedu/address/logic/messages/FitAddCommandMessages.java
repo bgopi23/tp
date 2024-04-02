@@ -24,13 +24,14 @@ public class FitAddCommandMessages extends Messages {
         + PREFIX_EXERCISE_REPS + "10 "
         + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "1";
 
-    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING = "Exercise name parameter missing! \n%1$s";
-
-    public static final String MESSAGE_ADD_EXERCISE_SUCCESS = "Successfully added exercise '%s' for client";
-    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING_FITADD =
-        String.format(MESSAGE_EXERCISE_NAME_PARAMETER_MISSING,
-            MESSAGE_USAGE);
     public static final String MESSAGE_NO_INDEX_FITADD = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
     public static final String MESSAGE_INVALID_INDEX_FITADD = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
         MESSAGE_USAGE);
+    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING =
+        String.format("Either exercise name parameter or default exercise prefix(es) must be supplied\n%1$s",
+            MESSAGE_USAGE);
+    public static final String MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES =
+        String.format("Exercise name parameter cannot be supplied together with default exercise prefix(es)\n%1$s",
+            MESSAGE_USAGE);
+    public static final String MESSAGE_ADD_EXERCISE_SUCCESS = "Successfully added exercise(s) for client";
 }

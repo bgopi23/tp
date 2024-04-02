@@ -9,7 +9,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitDeleteCommand;
 import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.exercise.Exercise;
 
 /**
  * Parses input arguments and creates a new FitDeleteCommand object.
@@ -43,7 +42,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
             throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
         }
 
-        // Checks for relevant prefixes
+        // Get existence of relevant prefixes
         boolean containsPrefixExerciseName = argMultimap.contains(PREFIX_EXERCISE_NAME);
         boolean containsPrefixExerciseDeleteAll = argMultimap.contains(PREFIX_FITDELETE_DELETE_ALL);
 
@@ -54,15 +53,15 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
         // Checks if all prefixes missing
         if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_MISSING_FITDELETE);
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
         }
 
         // Ensure no duplicate prefixes
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME);
 
-        Optional<String> exerciseNameOpt = Optional.of(
-            containsPrefixExerciseDeleteAll ? ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME))
-                : "");
+        Optional<String> exerciseNameOpt = Optional.ofNullable(
+            containsPrefixExerciseDeleteAll ? null
+                : ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME)));
 
         return new FitDeleteCommand(index, exerciseNameOpt, containsPrefixExerciseDeleteAll);
     }

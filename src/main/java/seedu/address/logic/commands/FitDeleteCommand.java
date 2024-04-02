@@ -56,18 +56,24 @@ public class FitDeleteCommand extends Command {
 
         return new CommandResult(
             String.format(deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
-                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseName)));
+                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseName.orElse(""))));
     }
 
     private Person getEditedPerson(Person personToEdit) throws CommandException {
         ExerciseSet updatedExerciseSet = new ExerciseSet(new HashSet<>());
 
-        if (!deleteAll) {
+        if (deleteAll) {
+            Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
+
+            if (updatedExercises.isEmpty()) {
+                throw new CommandException(FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
+            }
+        } else {
             Exercise exerciseToDelete =
                 new Exercise(exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS, Exercise.DEFAULT_BREAK);
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
-            if (!updatedExerciseSet.contains(exerciseToDelete)) {
+            if (!updatedExercises.contains(exerciseToDelete)) {
                 throw new CommandException(String.format(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST,
                     exerciseToDelete.getName()));
             }

@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,21 +19,56 @@ import seedu.address.model.person.Person;
  * Adds a new exercise or overwrites an existing exercise of a person in the address book.
  */
 public class FitAddCommand extends Command {
+    public static final Set<Exercise> DEFAULT_ARM_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("bicep curls", 3, 10, 60),
+        new Exercise("tricep dips", 3, 12, 60),
+        new Exercise("push-ups", 3, 15, 90)
+    ));
+
+    public static final Set<Exercise> DEFAULT_LEG_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("squats", 4, 15, 90),
+        new Exercise("lunges", 3, 12, 60),
+        new Exercise("calf raises", 3, 20, 60)
+    ));
+
+    public static final Set<Exercise> DEFAULT_CHEST_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("bench press", 4, 8, 120),
+        new Exercise("push-ups", 3, 15, 90),
+        new Exercise("chest fly", 3, 10, 90)
+    ));
+
+    public static final Set<Exercise> DEFAULT_BACK_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("pull-ups", 3, 8, 120),
+        new Exercise("bent-over rows", 3, 10, 90),
+        new Exercise("lat pull-downs", 3, 12, 60)
+    ));
+
+    public static final Set<Exercise> DEFAULT_SHOULDER_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("shoulder press", 3, 10, 90),
+        new Exercise("lateral raises", 3, 12, 60),
+        new Exercise("front raises", 3, 10, 60)
+    ));
+
+    public static final Set<Exercise> DEFAULT_ABS_EXERCISES = new HashSet<>(Arrays.asList(
+        new Exercise("crunches", 3, 20, 60),
+        new Exercise("plank", 3, 60, 90),
+        new Exercise("russian twists", 3, 15, 60)
+    ));
     private final Index index;
-    private final Exercise exercise;
+    private final Set<Exercise> exercisesToAdd;
 
     /**
      * Constructs a new FitAddCommand instance.
      *
      * @param index    The index of the person in the filtered person list to add the exercise to
-     * @param exercise The exercise to be added to the person
+     * @param exercisesToAdd The set of exercises to be added to the person
      */
-    public FitAddCommand(Index index, Exercise exercise) {
+    public FitAddCommand(Index index, Set<Exercise> exercisesToAdd) {
         requireNonNull(index);
-        requireNonNull(exercise);
+        requireNonNull(exercisesToAdd);
 
         this.index = index;
-        this.exercise = exercise;
+        this.exercisesToAdd = exercisesToAdd;
     }
 
     @Override
@@ -46,23 +82,26 @@ public class FitAddCommand extends Command {
 
         Person personToEdit = lastShownList.get(index.getZeroBased());
 
-        Exercise exerciseToAdd = exercise;
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
-        for (Exercise e : updatedExercises) {
-            if (e.getName().equals(exercise.getName())) {
-                String name = exercise.getName();
-                Integer sets = exercise.getSets() != Exercise.DEFAULT_SETS ? exercise.getSets() : e.getSets();
-                Integer reps = exercise.getReps() != Exercise.DEFAULT_REPS ? exercise.getReps() : e.getReps();
-                Integer rest = exercise.getBreakBetweenSets() != Exercise.DEFAULT_BREAK ? exercise.getBreakBetweenSets() : e.getBreakBetweenSets();
+        for (Exercise exerciseToAdd : exercisesToAdd) {
+            if (updatedExercises.contains(exerciseToAdd)) {
+                for (Exercise e : updatedExercises) {
+                    if (e.equals(exerciseToAdd)) {
+                        String name = exerciseToAdd.getName();
+                        Integer sets = exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
+                        Integer reps = exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
+                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != Exercise.DEFAULT_BREAK ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
 
-                exerciseToAdd = new Exercise(name, sets, reps, rest);
-                break;
+                        exerciseToAdd = new Exercise(name, sets, reps, breakBetweenSets);
+                        break;
+                    }
+                }
             }
-        }
 
-        updatedExercises.remove(exerciseToAdd);
-        updatedExercises.add(exerciseToAdd);
+            updatedExercises.remove(exerciseToAdd);
+            updatedExercises.add(exerciseToAdd);
+        }
 
         ExerciseSet updatedExerciseSet = new ExerciseSet(updatedExercises);
 
@@ -73,8 +112,7 @@ public class FitAddCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
-        return new CommandResult(
-            String.format(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS, exerciseToAdd.getName()));
+        return new CommandResult(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS);
     }
 
     @Override
@@ -89,6 +127,6 @@ public class FitAddCommand extends Command {
 
         FitAddCommand otherFitAddCommand = (FitAddCommand) other;
         return index.equals(otherFitAddCommand.index)
-            && exercise.equals(otherFitAddCommand.exercise);
+            && exercisesToAdd.equals(otherFitAddCommand.exercisesToAdd);
     }
 }

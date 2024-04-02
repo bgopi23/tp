@@ -17,16 +17,20 @@ public class FitDeleteCommandMessages extends Messages {
         + PREFIX_EXERCISE_NAME + "squats "
         + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
 
-    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING = "Exercise name and 'all' parameter missing! \n%1$s";
-    public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
-    public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS = "Successfully removed exercise '%s' for client";
-    public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST =
-        "Exercise name '%s' does not exist for the client";
-    public static final String MESSAGE_CONCURRENT_PREFIX = "Exercise name prefix cannot be supplied together with delete all prefix";
-    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING_FITDELETE =
-        String.format(MESSAGE_EXERCISE_NAME_PARAMETER_MISSING,
-            MESSAGE_USAGE);
     public static final String MESSAGE_NO_INDEX_FITDELETE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
     public static final String MESSAGE_INVALID_INDEX_FITDELETE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
         MESSAGE_USAGE);
+    public static final String MESSAGE_CONCURRENT_PREFIX =
+        String.format("Exercise name parameter cannot be supplied together with '/all' prefix\n%1$s",
+            MESSAGE_USAGE);
+    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING =
+        String.format("Either exercise name parameter or '/all' prefix must be supplied\n%1$s",
+            MESSAGE_USAGE);
+
+    public static final String MESSAGE_DELETE_ALL_EXERCISES_FAILURE =
+        "Client does not have any existing exercises";
+    public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST =
+        "Exercise name '%s' does not exist for the client";
+    public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
+    public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS = "Successfully removed all exercises '%s' for client";
 }
