@@ -31,6 +31,17 @@ public class PersonListPanel extends UiPart<Region> {
     }
 
     /**
+     * Adds a listener for the person list view.
+     */
+    public void addListener(ChangeListener<Person> listener) {
+        personListView.getSelectionModel().selectedItemProperty().addListener(listener);
+    }
+
+    public ListView<Person> getFxmlObject() {
+        return this.personListView;
+    }
+
+    /**
      * Custom {@code ListCell} that displays the graphics of a {@code Person} using a {@code PersonCard}.
      */
     class PersonListViewCell extends ListCell<Person> {
@@ -45,12 +56,5 @@ public class PersonListPanel extends UiPart<Region> {
                 setGraphic(new PersonCard(person, getIndex() + 1).getRoot());
             }
         }
-    }
-
-    /**
-     * Initializes the listener for the person list view.
-     */
-    public void initListener(ChangeListener<Person> listener) {
-        personListView.getSelectionModel().selectedItemProperty().addListener(listener);
     }
 }

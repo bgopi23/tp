@@ -26,9 +26,10 @@ public class HelpWindow extends UiPart<Stage> {
         {"add", "Adds a client to FitBook."},
         {"list", "Shows a list of all clients saved in FitBook."},
         {"edit", "Edits an existing client in FitBook."},
+        {"weight", "Adds a new weight value to a client."},
         {"note", "Adds a new note to a client."},
         {"find", "Finds all clients whose specified attribute contains the specified keyword"
-                + " (Uses name attribute if none specified)"},
+                + " (Uses name attribute if none specified)."},
         {"delete", "Deletes the specified client from FitBook."},
         {"clear", "Clears all entries from FitBook. USE WITH CAUTION."},
         {"exit", "Exits FitBook."}

@@ -141,7 +141,7 @@ Format: `help`
 
 Adds a client to the FitBook.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
@@ -163,7 +163,7 @@ Format: `list`
 
 Edits information tagged to an existing client
 
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
 * Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list. 
 * The index **must be a positive integer** 1, 2, 3, …​

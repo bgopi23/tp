@@ -7,14 +7,19 @@ import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
+import javafx.util.Pair;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -72,7 +77,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String address} into an {@code Address}.
+     * Parses a {@code Optional<String> address} into an {@code Address}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code address} is invalid.
@@ -92,17 +97,7 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code Optional<String> note} into a {@code Note}.
-     * Leading and trailing whitespaces will be trimmed.
-     * If the {@code Optional} is empty, return a {@code Note} with an empty string.
-     */
-    public static Note parseNote(Optional<String> note) {
-        requireNonNull(note);
-        return note.isEmpty() ? new Note("") : new Note(note.get().trim());
-    }
-
-    /**
-     * Parses a {@code String email} into an {@code Email}.
+     * Parses a {@code Optional<String> email} into an {@code Email}.
      * Leading and trailing whitespaces will be trimmed.
      *
      * @throws ParseException if the given {@code email} is invalid.
@@ -119,6 +114,51 @@ public class ParserUtil {
         }
 
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code Optional<String> note} into a {@code Note}.
+     * Leading and trailing whitespaces will be trimmed.
+     * If the {@code Optional} is empty, return a {@code Note} with an empty string.
+     */
+    public static Note parseNote(Optional<String> note) {
+        requireNonNull(note);
+        return note.isEmpty() ? new Note("") : new Note(note.get().trim());
+    }
+
+    /**
+     * Parses a {@code Optional<String> weight} into a {@code Weight}.
+     * If the {@code Optional} is empty, return a {@code Weight} with an uninitialized value of 0f.
+     */
+    public static Weight parseWeight(Optional<String> weight) throws ParseException {
+        requireNonNull(weight);
+
+        if (!weight.isEmpty()) {
+            String trimmedWeight = weight.get().trim();
+            if (!Weight.isValidWeight(trimmedWeight)) {
+                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+            }
+            return trimmedWeight.isEmpty() ? new Weight(0f)
+                    : new Weight(Float.valueOf(trimmedWeight));
+        }
+        return new Weight(0f);
+    }
+
+    /**
+     * Parses a {@code Optional<String> height} into a {@code Height}.
+     * If the {@code Optional} is empty, return a {@code Height} with an uninitialized value of 0f.
+     */
+    public static Height parseHeight(Optional<String> height) throws ParseException {
+        requireNonNull(height);
+
+        if (!height.isEmpty()) {
+            String trimmedHeight = height.get().trim();
+            if (!Height.isValidHeight(trimmedHeight)) {
+                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+            }
+            return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
+        }
+        return new Height(0f);
     }
 
     /**
@@ -149,17 +189,46 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code searchString} into a string.
+     * Parses a {@code String searchString} into a string.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @param searchString String to search
+     * @param searchString String to search.
      *
-     * @return The string ready to be used for searching
+     * @return The string ready to be used for searching.
      */
     public static String parseSearchString(String searchString) {
         requireNonNull(searchString);
-        String trimmedAddress = searchString.trim();
+        return searchString.trim();
+    }
 
-        return trimmedAddress;
+    /**
+     * Parses a {@code Optional<String> searchRange} into a Pair of Floats.
+     *
+     * @param searchRange Range to search.
+     *
+     * @return The Pair instance ready to be used for searching.
+     */
+    public static Pair<Float, Float> parseSearchRange(Optional<String> searchRange) throws ParseException {
+        requireNonNull(searchRange);
+
+        if (searchRange.isPresent() && !searchRange.get().isEmpty()) {
+            String trimmedRange = searchRange.get().trim();
+
+            if (!FindCommand.isValidRange(trimmedRange)) {
+                throw new ParseException(FindCommandMessages.MESSAGE_USAGE_RANGE);
+            }
+
+            String[] range = searchRange.get().split(",\\s*");
+            Float fromRange = Float.valueOf(range[0]);
+            Float toRange = Float.valueOf(range[1]);
+
+            if (fromRange > toRange) {
+                throw new ParseException(FindCommandMessages.MESSAGE_USAGE_RANGE);
+            }
+
+            return new Pair<>(fromRange, toRange);
+        }
+
+        return new Pair<>(0f, Float.MAX_VALUE);
     }
 }

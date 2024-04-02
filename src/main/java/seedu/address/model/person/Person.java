@@ -5,8 +5,12 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Map;
+import java.util.NavigableMap;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.logging.Logger;
 
@@ -16,6 +20,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.QrCodeGenerator;
 import seedu.address.model.person.exceptions.AttributeNotFoundException;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.tag.TagSet;
 
@@ -32,26 +38,32 @@ public class Person {
     private final Email email;
     // Data fields
     private final Address address;
-    private final TagSet tags;
+    private final WeightMap weights;
+    private final Height height;
     private final Note note;
+    private final TagSet tags;
 
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Address address, Note note, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, address, tags);
+    public Person(Name name, Phone phone, Email email, Address address,
+                  NavigableMap<LocalDateTime, Weight> weights,
+                  Height height, Note note, Set<Tag> tags) {
+        requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;
         this.phone = phone;
         this.email = email;
         this.address = address;
+        this.weights = new WeightMap(weights);
+        this.height = height;
+        this.note = note;
         Set<Tag> tagSet = new HashSet<>();
         tagSet.addAll(tags);
         this.tags = new TagSet(tagSet);
-        this.note = note;
     }
 
     /**
-     * Get the valued of the specified attribute.
+     * Get the value of the specified attribute.
      *
      * @param attribute Attribute to retrieve
      * @return Value of the specified attribute
@@ -66,10 +78,15 @@ public class Person {
             return this.email;
         case ADDRESS:
             return this.address;
-        case TAGS:
-            return this.tags;
         case NOTE:
             return this.note;
+        case WEIGHT:
+            return this.weights;
+        case HEIGHT:
+            return this.height;
+        case TAGS:
+            return this.tags;
+
         default:
             throw new AttributeNotFoundException();
         }
@@ -91,6 +108,28 @@ public class Person {
         return address;
     }
 
+    public Optional<Map.Entry<LocalDateTime, Weight>> getLatestWeight() {
+        return Optional.ofNullable(this.weights.getValue().lastEntry());
+    }
+
+    /**
+     * Returns an immutable navigable map, which throws
+     * {@code UnsupportedOperationException}
+     * if modification is attempted.
+     */
+    public NavigableMap<LocalDateTime, Weight> getWeights() {
+        return this.weights.getValue();
+    }
+
+    public Height getHeight() {
+        return this.height;
+    }
+
+    public Note getNote() {
+        return this.note;
+    }
+
+
     /**
      * Returns an immutable tag set, which throws
      * {@code UnsupportedOperationException}
@@ -98,10 +137,6 @@ public class Person {
      */
     public Set<Tag> getTags() {
         return this.tags.getValue();
-    }
-
-    public Note getNote() {
-        return this.note;
     }
 
     /**
@@ -223,7 +258,15 @@ public class Person {
             sb.append(" | Note: ").append(note);
         }
 
-        if (!getTags().isEmpty()) {
+        if (!weights.getValue().isEmpty()) {
+            sb.append(" | Latest Weight: ").append(this.getLatestWeight().get().getValue().toString());
+        }
+
+        if (!(height.getValue() == 0f)) {
+            sb.append(" | Height: ").append(height);
+        }
+
+        if (!this.getTags().isEmpty()) {
             sb.append(" | Tags: ").append(tags);
         }
 
@@ -238,7 +281,9 @@ public class Person {
         PHONE,
         EMAIL,
         ADDRESS,
-        TAGS,
-        NOTE
+        WEIGHT,
+        HEIGHT,
+        NOTE,
+        TAGS
     }
 }

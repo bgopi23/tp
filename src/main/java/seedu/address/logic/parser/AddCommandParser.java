@@ -8,22 +8,30 @@ import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME_AND_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
+import java.time.LocalDateTime;
+import java.util.NavigableMap;
 import java.util.Set;
+import java.util.TreeMap;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
+import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.weight.Weight;
+import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -66,10 +74,16 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE));
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
+        NavigableMap<LocalDateTime, Weight> weightMap = new TreeMap<>();
+        if (ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).getValue() != 0f) {
+            weightMap.put(WeightEntry.getTimeOfExecution(),
+                    ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
+        }
+        Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, note, tagList);
+        Person person = new Person(name, phone, email, address, weightMap, height, note, tagList);
 
         return new AddCommand(person);
     }

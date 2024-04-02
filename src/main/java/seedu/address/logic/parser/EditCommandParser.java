@@ -4,10 +4,12 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -36,7 +38,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
-                        PREFIX_ADDRESS, PREFIX_NOTE, PREFIX_TAG);
+                        PREFIX_ADDRESS, PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_NOTE, PREFIX_TAG);
 
         // (edit) or (edit n/John)
         if (args.isEmpty() || argMultimap.getPreamble().isEmpty()) {
@@ -58,8 +60,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                     EditCommandMessages.MESSAGE_USAGE), pe);
         }
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL, PREFIX_NOTE,
-                PREFIX_ADDRESS);
+        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_NAME, PREFIX_PHONE, PREFIX_EMAIL,
+                PREFIX_WEIGHT, PREFIX_HEIGHT, PREFIX_NOTE, PREFIX_ADDRESS);
 
         EditPersonDescriptor editPersonDescriptor = new EditPersonDescriptor();
 
@@ -75,6 +77,12 @@ public class EditCommandParser implements Parser<EditCommand> {
         if (argMultimap.contains(PREFIX_ADDRESS)) {
             editPersonDescriptor.setAddress(ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS)));
         }
+        if (argMultimap.getValue(PREFIX_WEIGHT).isPresent()) {
+            editPersonDescriptor.setWeight(ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
+        }
+        if (argMultimap.getValue(PREFIX_HEIGHT).isPresent()) {
+            editPersonDescriptor.setHeight(ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT)));
+        }
         if (argMultimap.contains(PREFIX_NOTE)) {
             editPersonDescriptor.setNote(ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE)));
         }
@@ -86,7 +94,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         return new EditCommand(index, editPersonDescriptor);
-
     }
 
     /**
@@ -103,5 +110,4 @@ public class EditCommandParser implements Parser<EditCommand> {
         Collection<String> tagSet = tags.size() == 1 && tags.contains("") ? Collections.emptySet() : tags;
         return Optional.of(ParserUtil.parseTags(tagSet));
     }
-
 }

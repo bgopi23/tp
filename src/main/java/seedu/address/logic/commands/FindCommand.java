@@ -15,11 +15,18 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-
+    public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
     private final CombinedPredicates predicates;
 
     public FindCommand(CombinedPredicates predicates) {
         this.predicates = predicates;
+    }
+
+    /**
+     * Returns if a given string is a valid email.
+     */
+    public static boolean isValidRange(String test) {
+        return test.matches(FindCommand.VALIDATION_REGEX_RANGE);
     }
 
     @Override
