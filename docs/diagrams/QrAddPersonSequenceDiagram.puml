@@ -14,7 +14,7 @@ end box
 [-> Model : addPerson(p)
 activate Model
 
-Model -> Person : p.generateQrCode()
+Model -> Person : generateQrCode()
 activate Person
 
 Person -> qrg : generateQrCode(p)
