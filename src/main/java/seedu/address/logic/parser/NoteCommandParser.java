@@ -62,6 +62,6 @@ public class NoteCommandParser implements Parser<NoteCommand> {
      * Checks if the given array of arguments indicates an edit operation.
      */
     private boolean isEdit(String[] argsArray) {
-        return argsArray.length == 2 && argsArray[1].equals("/edit");
+        return argsArray.length == 2 && argsArray[1].equalsIgnoreCase("/edit");
     }
 }
