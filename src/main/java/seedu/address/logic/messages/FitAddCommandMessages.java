@@ -2,7 +2,7 @@ package seedu.address.logic.messages;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 
 /**
@@ -17,12 +17,12 @@ public class FitAddCommandMessages extends Messages {
         + PREFIX_EXERCISE_NAME + "EXERCISE_NAME "
         + "[" + PREFIX_EXERCISE_SETS + "SETS] "
         + "[" + PREFIX_EXERCISE_REPS + "REPETITIONS] "
-        + "[" + PREFIX_EXERCISE_REST + "REST_TIME]\n"
+        + "[" + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "REST_TIME]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_EXERCISE_NAME + "squats "
         + PREFIX_EXERCISE_SETS + "3 "
         + PREFIX_EXERCISE_REPS + "10 "
-        + PREFIX_EXERCISE_REST + "1";
+        + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "1";
 
     public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING = "Exercise name parameter missing! \n%1$s";
 

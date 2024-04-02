@@ -14,18 +14,18 @@ class JsonAdaptedExercise {
     private final String name;
     private final Integer sets;
     private final Integer reps;
-    private final Integer rest;
+    private final Integer breakBetweenSets;
 
     /**
      * Constructs a {@code JsonAdaptedExercise} with the given {@code exerciseName}.
      */
     @JsonCreator
     public JsonAdaptedExercise(@JsonProperty("name") String name, @JsonProperty("sets") Integer sets,
-                               @JsonProperty("reps") Integer reps, @JsonProperty("rest") Integer rest) {
+                               @JsonProperty("reps") Integer reps, @JsonProperty("breakBetweenSets") Integer breakBetweenSets) {
         this.name = name;
         this.sets = sets;
         this.reps = reps;
-        this.rest = rest;
+        this.breakBetweenSets = breakBetweenSets;
     }
 
     /**
@@ -35,7 +35,7 @@ class JsonAdaptedExercise {
         name = source.getName();
         sets = source.getSets();
         reps = source.getReps();
-        rest = source.getRest();
+        breakBetweenSets = source.getBreakBetweenSets();
     }
 
     /**
@@ -55,10 +55,10 @@ class JsonAdaptedExercise {
         if (!Exercise.isValidReps(reps)) {
             throw new IllegalValueException(Exercise.REPS_CONSTRAINT);
         }
-        if (!Exercise.isValidRest(rest)) {
-            throw new IllegalValueException(Exercise.REST_CONSTRAINT);
+        if (!Exercise.isValidBreakBetweenSets(breakBetweenSets)) {
+            throw new IllegalValueException(Exercise.BREAK_CONSTRAINT);
         }
-        return new Exercise(name, sets, reps, rest);
+        return new Exercise(name, sets, reps, breakBetweenSets);
     }
 
 }

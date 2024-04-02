@@ -219,10 +219,15 @@ public class ParserUtil {
      * @param exerciseNameOpt The optional exercise name string to be parsed
      * @return The parsed exercise name string
      */
-    public static String parseExerciseName(Optional<String> exerciseNameOpt) {
+    public static String parseExerciseName(Optional<String> exerciseNameOpt) throws ParseException {
         requireNonNull(exerciseNameOpt);
 
-        return exerciseNameOpt.orElse("").trim();
+        String trimmedExerciseName = exerciseNameOpt.orElse("").trim();
+        if (!Exercise.isValidName(trimmedExerciseName)) {
+            throw new ParseException(Exercise.NAME_CONSTRAINT);
+        }
+
+        return trimmedExerciseName.toLowerCase();
     }
 
     /**
@@ -245,7 +250,12 @@ public class ParserUtil {
             throw new ParseException(Exercise.SETS_CONSTRAINT);
         }
 
-        return Integer.valueOf(exerciseSetsTrimmed);
+        Integer exerciseSets = Integer.valueOf(exerciseSetsTrimmed);
+        if (!Exercise.isValidReps(exerciseSets)) {
+            throw new ParseException(Exercise.SETS_CONSTRAINT);
+        }
+
+        return exerciseSets;
     }
 
     /**
@@ -268,30 +278,41 @@ public class ParserUtil {
             throw new ParseException(Exercise.REPS_CONSTRAINT);
         }
 
-        return Integer.valueOf(exerciseRepsTrimmed);
+        Integer exerciseReps = Integer.valueOf(exerciseRepsTrimmed);
+        if (!Exercise.isValidReps(exerciseReps)) {
+            throw new ParseException(Exercise.REPS_CONSTRAINT);
+        }
+
+
+        return exerciseReps;
     }
 
     /**
-     * Parses a {@code Optional<String> exerciseRestOpt} into a {@code Integer}.
+     * Parses a {@code Optional<String> exerciseBreakBetweenSetsOpt} into a {@code Integer}.
      * If the {@code Optional} is empty, return a {@code Integer} with the default value.
      *
-     * @param exerciseRestOpt The optional exercise rest string to be parsed
+     * @param exerciseBreakBetweenSetsOpt The optional exercise rest string to be parsed
      * @return The parsed exercise rest value
-     * @throws ParseException If the given {@code exerciseRestOpt} is invalid
+     * @throws ParseException If the given {@code exerciseBreakBetweenSetsOpt} is invalid
      */
-    public static Integer parseExerciseRest(Optional<String> exerciseRestOpt) throws ParseException {
-        requireNonNull(exerciseRestOpt);
+    public static Integer parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt) throws ParseException {
+        requireNonNull(exerciseBreakBetweenSetsOpt);
 
-        if (exerciseRestOpt.isEmpty()) {
-            return Exercise.DEFAULT_REST;
+        if (exerciseBreakBetweenSetsOpt.isEmpty()) {
+            return Exercise.DEFAULT_BREAK;
         }
 
-        String exerciseRestTrimmed = exerciseRestOpt.orElse("").trim();
+        String exerciseRestTrimmed = exerciseBreakBetweenSetsOpt.orElse("").trim();
         if (!StringUtil.isInteger(exerciseRestTrimmed)) {
-            throw new ParseException(Exercise.REST_CONSTRAINT);
+            throw new ParseException(Exercise.BREAK_CONSTRAINT);
         }
 
-        return Integer.valueOf(exerciseRestTrimmed);
+        Integer exerciseBreakBetweenSets = Integer.valueOf(exerciseRestTrimmed);
+        if (!Exercise.isValidBreakBetweenSets(exerciseBreakBetweenSets)) {
+            throw new ParseException(Exercise.BREAK_CONSTRAINT);
+        }
+
+        return exerciseBreakBetweenSets;
     }
 
     /**
@@ -322,12 +343,34 @@ public class ParserUtil {
             throw new ParseException(Exercise.REPS_CONSTRAINT);
         }
 
-        if (!Exercise.isValidRest(rest)) {
-            throw new ParseException(Exercise.REST_CONSTRAINT);
+        if (!Exercise.isValidBreakBetweenSets(rest)) {
+            throw new ParseException(Exercise.BREAK_CONSTRAINT);
         }
 
         return new Exercise(name, sets, reps, rest);
     }
+
+//    /**
+//     * Parses a {@code Optional<String> exerciseName} into a {@code String}.
+//     *
+//     * @param exerciseName The optional exercise rest string to be parsed
+//     * @return The parsed exercise name value
+//     * @throws ParseException If the given {@code exerciseRestOpt} is empty of invalid
+//     */
+//    public static String parseExerciseName(Optional<String> exerciseName) throws ParseException {
+//        requireNonNull(exerciseName);
+//
+//        if (exerciseName.isEmpty()) {
+//            throw new ParseException(Exercise.NAME_CONSTRAINT);
+//        }
+//
+//        String exerciseNameTrimmed = exerciseName.orElse("").trim();
+//        if (!Exercise.isValidName(exerciseNameTrimmed)) {
+//            throw new ParseException(Exercise.NAME_CONSTRAINT);
+//        }
+//
+//        return exerciseNameTrimmed;
+//    }
 
     /**
      * Parses a {@code String searchString} into a string.

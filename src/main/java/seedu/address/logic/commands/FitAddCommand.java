@@ -54,7 +54,7 @@ public class FitAddCommand extends Command {
                 String name = exercise.getName();
                 Integer sets = exercise.getSets() != Exercise.DEFAULT_SETS ? exercise.getSets() : e.getSets();
                 Integer reps = exercise.getReps() != Exercise.DEFAULT_REPS ? exercise.getReps() : e.getReps();
-                Integer rest = exercise.getRest() != Exercise.DEFAULT_REST ? exercise.getRest() : e.getRest();
+                Integer rest = exercise.getBreakBetweenSets() != Exercise.DEFAULT_BREAK ? exercise.getBreakBetweenSets() : e.getBreakBetweenSets();
 
                 exerciseToAdd = new Exercise(name, sets, reps, rest);
                 break;

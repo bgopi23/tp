@@ -1,6 +1,7 @@
 package seedu.address.logic.messages;
 
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 
 /**
  * Messages used by FitDeleteCommand and associated classes.
@@ -13,13 +14,15 @@ public class FitDeleteCommandMessages extends Messages {
         + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_EXERCISE_NAME + "EXERCISE_NAME\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_EXERCISE_NAME + "squats ";
+        + PREFIX_EXERCISE_NAME + "squats "
+        + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
 
-    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING = "Exercise name parameter missing! \n%1$s";
+    public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING = "Exercise name and 'all' parameter missing! \n%1$s";
     public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
+    public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS = "Successfully removed exercise '%s' for client";
     public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST =
         "Exercise name '%s' does not exist for the client";
-
+    public static final String MESSAGE_CONCURRENT_PREFIX = "Exercise name prefix cannot be supplied together with delete all prefix";
     public static final String MESSAGE_EXERCISE_NAME_PARAMETER_MISSING_FITDELETE =
         String.format(MESSAGE_EXERCISE_NAME_PARAMETER_MISSING,
             MESSAGE_USAGE);

@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 
+import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitDeleteCommand;
 import seedu.address.logic.messages.FitDeleteCommandMessages;
@@ -26,7 +28,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         requireNonNull(args);
 
         ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME);
+            ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_FITDELETE_DELETE_ALL);
 
         // Ensure that client index is present
         if (argMultimap.isPreambleEmpty()) {
@@ -41,19 +43,27 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
             throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
         }
 
-        // Ensure that required prefixes are present
-        if (!argMultimap.containsAll(PREFIX_EXERCISE_NAME)) {
+        // Checks for relevant prefixes
+        boolean containsPrefixExerciseName = argMultimap.contains(PREFIX_EXERCISE_NAME);
+        boolean containsPrefixExerciseDeleteAll = argMultimap.contains(PREFIX_FITDELETE_DELETE_ALL);
+
+        // Checks for concurrent prefixes
+        if (containsPrefixExerciseName && containsPrefixExerciseDeleteAll) {
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX);
+        }
+
+        // Checks if all prefixes missing
+        if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
             throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_MISSING_FITDELETE);
         }
 
         // Ensure no duplicate prefixes
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME);
 
-        String exerciseName = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME));
+        Optional<String> exerciseNameOpt = Optional.of(
+            containsPrefixExerciseDeleteAll ? ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME))
+                : "");
 
-        Exercise exercise =
-            ParserUtil.parseExercise(exerciseName, Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS, Exercise.DEFAULT_REST);
-
-        return new FitDeleteCommand(index, exercise);
+        return new FitDeleteCommand(index, exerciseNameOpt, containsPrefixExerciseDeleteAll);
     }
 }

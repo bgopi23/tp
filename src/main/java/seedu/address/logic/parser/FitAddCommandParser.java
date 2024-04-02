@@ -3,7 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REST;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 
 import seedu.address.commons.core.index.Index;
@@ -30,7 +30,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
 
         ArgumentMultimap argMultimap =
             ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS,
-                PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_REST);
+                PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS);
 
         // Ensure that client index is present
         if (argMultimap.isPreambleEmpty()) {
@@ -52,14 +52,15 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
 
         // Ensure no duplicate prefixes
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS, PREFIX_EXERCISE_REPS,
-            PREFIX_EXERCISE_REST);
+            PREFIX_EXERCISE_BREAK_BETWEEN_SETS);
 
         String exerciseName = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME));
         Integer exerciseSets = ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_EXERCISE_SETS));
         Integer exerciseReps = ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_EXERCISE_REPS));
-        Integer exerciseRest = ParserUtil.parseExerciseRest(argMultimap.getValue(PREFIX_EXERCISE_REST));
+        Integer exerciseBreakBetweenSets = ParserUtil.parseExerciseBreakBetweenSets(argMultimap.getValue(
+            PREFIX_EXERCISE_BREAK_BETWEEN_SETS));
 
-        Exercise exercise = ParserUtil.parseExercise(exerciseName, exerciseSets, exerciseReps, exerciseRest);
+        Exercise exercise = ParserUtil.parseExercise(exerciseName, exerciseSets, exerciseReps, exerciseBreakBetweenSets);
 
         return new FitAddCommand(index, exercise);
     }

@@ -10,20 +10,20 @@ import java.util.Objects;
  */
 public class Exercise {
 
-    public static final String NAME_CONSTRAINT = "Exercise names should not be empty";
+    public static final String NAME_CONSTRAINT = "Exercise name should not be empty";
     public static final String SETS_CONSTRAINT = "Number of sets should be a number greater than 0";
     public static final String REPS_CONSTRAINT = "Number of repetitions should be a number greater than 0";
-    public static final String REST_CONSTRAINT = "Rest time in minutes should be a number greater or equals to 0";
+    public static final String BREAK_CONSTRAINT = "Break time in minutes between sets should be a number greater or equals to 0";
 
     public static final Integer DEFAULT_SETS = 1;
     public static final Integer DEFAULT_REPS = 1;
-    public static final Integer DEFAULT_REST = 0;
+    public static final Integer DEFAULT_BREAK = 0;
 
 
     private final String name;
     private final Integer sets;
     private final Integer reps;
-    private final Integer rest;
+    private final Integer breakBetweenSets;
 
     /**
      * Constructs an {@code Exercise}.
@@ -31,23 +31,23 @@ public class Exercise {
      * @param name Name of the exercise.
      * @param sets Number of sets.
      * @param reps Number of repetitions per set.
-     * @param rest Rest time in minutes between sets.
+     * @param breakBetweenSets Break time in minutes between sets.
      */
-    public Exercise(String name, Integer sets, Integer reps, Integer rest) {
+    public Exercise(String name, Integer sets, Integer reps, Integer breakBetweenSets) {
         requireNonNull(name);
         requireNonNull(sets);
         requireNonNull(reps);
-        requireNonNull(rest);
+        requireNonNull(breakBetweenSets);
 
         checkArgument(isValidName(name), NAME_CONSTRAINT);
         checkArgument(isValidSets(sets), SETS_CONSTRAINT);
         checkArgument(isValidReps(reps), REPS_CONSTRAINT);
-        checkArgument(isValidRest(rest), REST_CONSTRAINT);
+        checkArgument(isValidBreakBetweenSets(breakBetweenSets), BREAK_CONSTRAINT);
 
         this.name = name;
         this.sets = sets;
         this.reps = reps;
-        this.rest = rest;
+        this.breakBetweenSets = breakBetweenSets;
     }
 
     /**
@@ -81,13 +81,13 @@ public class Exercise {
     }
 
     /**
-     * Returns true if the given Integer represents a valid rest time.
+     * Returns true if the given Integer represents a valid break time between sets.
      *
-     * @param rest The rest time to be validated.
-     * @return true if the rest time is valid, false otherwise.
+     * @param breakBetweenSets The break time to be validated.
+     * @return true if the break time is valid, false otherwise.
      */
-    public static boolean isValidRest(Integer rest) {
-        return rest >= 0;
+    public static boolean isValidBreakBetweenSets(Integer breakBetweenSets) {
+        return breakBetweenSets >= 0;
     }
 
     /**
@@ -118,12 +118,12 @@ public class Exercise {
     }
 
     /**
-     * Returns the rest time in minutes for the exercise.
+     * Returns the break time in minutes for the exercise.
      *
-     * @return The rest time in minutes for the exercise.
+     * @return The break time in minutes for the exercise.
      */
-    public int getRest() {
-        return rest;
+    public int getBreakBetweenSets() {
+        return breakBetweenSets;
     }
 
     @Override
@@ -148,6 +148,6 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return String.format("%s: %d sets of %d reps, %d min rest", name, sets, reps, rest);
+        return String.format("%s: %d sets of %d reps, %d min break between sets", name, sets, reps, breakBetweenSets);
     }
 }

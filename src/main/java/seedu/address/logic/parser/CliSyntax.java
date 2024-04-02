@@ -17,7 +17,9 @@ public class CliSyntax {
     public static final Prefix PREFIX_EXERCISE_NAME = new Prefix("n/");
     public static final Prefix PREFIX_EXERCISE_SETS = new Prefix("s/");
     public static final Prefix PREFIX_EXERCISE_REPS = new Prefix("r/");
-    public static final Prefix PREFIX_EXERCISE_REST = new Prefix("rest/");
+    public static final Prefix PREFIX_EXERCISE_BREAK_BETWEEN_SETS = new Prefix("b/");
+    public static final Prefix PREFIX_FITDELETE_DELETE_ALL = new Prefix("/all");
+
     public static final Prefix[] ALL_PREFIXES = {
         PREFIX_NAME,
         PREFIX_PHONE,
