@@ -74,10 +74,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private TabPane trackableFieldsTabPane;
 
+
+    private Tab weightTab;
+    private Tab exerciseTab;
     private LineChart<String, Number> weightChart;
     private NumberAxis weightYAxis;
-    // private LineChart<String, Number> heightChart;
-    // private NumberAxis heightYAxis;
     private VBox exercisesBox;
 
     /**
@@ -101,6 +102,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * Initializes a new PersonDetailsPanel.
      */
     public void initialize() {
+        // Initialize tab pane
+        trackableFieldsTabPane.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
+
         // Initialize weight chart
         CategoryAxis xAxis = new CategoryAxis();
         weightYAxis = new NumberAxis();
@@ -138,10 +142,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
-        Tab weightTab = getWeightTab();
+        weightTab = getWeightTab();
         weightTab.setContent(weightChart);
 
-        Tab exerciseTab = getExerciseTab();
+        exerciseTab = getExerciseTab();
         exerciseTab.setContent(exerciseScrollPane);
     }
 
@@ -166,22 +170,28 @@ public class PersonDetailsPanel extends UiPart<Region> {
             .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
-        if (latestWeight.isEmpty()) {
-            weightDate.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_DATE);
-            weightValue.setText(WeightCommandMessages.EMPTY_FIELD_WEIGHT_VALUE);
-        } else {
+        if (latestWeight.isPresent()) {
             weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER
                 + latestWeight.get().getKey().toString());
             weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
                 + latestWeight.get().getValue().toString() + " kg");
         }
+
         height.setText(person.getHeight().getFormattedHeight());
         note.setText(person.getNote().toString());
         qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
-        XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
-        weightChart.getData().clear();
-        weightChart.getData().add(weightSeries);
+        // Clear tabs
+        trackableFieldsTabPane.getTabs().clear();
+
+        // Display weights graph
+        if (latestWeight.isPresent()) {
+            trackableFieldsTabPane.getTabs().add(0, weightTab);
+            XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
+
+            weightChart.getData().clear();
+            weightChart.getData().add(weightSeries);
+        }
 
         // Display exercises
         Label exercisesTitle = new Label("Exercises");
@@ -193,51 +203,56 @@ public class PersonDetailsPanel extends UiPart<Region> {
         exercisesBox.getChildren().add(exercisesTitle);
 
         Set<Exercise> exercises = person.getExerciseSet().getValue();
-        List<Exercise> sortedExercises = exercises.stream()
-            .sorted(Comparator.comparing(Exercise::getName))
-            .collect(Collectors.toList());
 
-        for (Exercise exercise : sortedExercises) {
-            final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
-            final String exerciseAttrValueStyle =
-                "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
+        if (!exercises.isEmpty()) {
+            trackableFieldsTabPane.getTabs().add(exerciseTab);
 
-            Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
+            List<Exercise> sortedExercises = exercises.stream()
+                .sorted(Comparator.comparing(Exercise::getName))
+                .collect(Collectors.toList());
 
-            exerciseName.setWrapText(true);
-            exerciseName.setUnderline(true);
-            exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
-            exerciseName.setPadding(new Insets(10, 0, 0, 0));
+            for (Exercise exercise : sortedExercises) {
+                final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
+                final String exerciseAttrValueStyle =
+                    "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
 
-            Label setsLabel = new Label("Sets:");
-            setsLabel.setStyle(exerciseAttrDescStyle);
-            Label setsValue = new Label(String.valueOf(exercise.getSets()));
-            setsValue.setStyle(exerciseAttrValueStyle);
+                Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
 
-            Label repsLabel = new Label("Reps:");
-            repsLabel.setStyle(exerciseAttrDescStyle);
-            Label repsValue = new Label(String.valueOf(exercise.getReps()));
-            repsValue.setStyle(exerciseAttrValueStyle);
+                exerciseName.setWrapText(true);
+                exerciseName.setUnderline(true);
+                exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
+                exerciseName.setPadding(new Insets(10, 0, 0, 0));
 
-            Label breakLabel = new Label("Break between sets:");
-            breakLabel.setStyle(exerciseAttrDescStyle);
-            Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
-            breakValue.setStyle(exerciseAttrValueStyle);
+                Label setsLabel = new Label("Sets:");
+                setsLabel.setStyle(exerciseAttrDescStyle);
+                Label setsValue = new Label(String.valueOf(exercise.getSets()));
+                setsValue.setStyle(exerciseAttrValueStyle);
 
-            HBox setsBox = new HBox(10, setsLabel, setsValue);
-            HBox repsBox = new HBox(10, repsLabel, repsValue);
-            HBox breakBox = new HBox(10, breakLabel, breakValue);
+                Label repsLabel = new Label("Reps:");
+                repsLabel.setStyle(exerciseAttrDescStyle);
+                Label repsValue = new Label(String.valueOf(exercise.getReps()));
+                repsValue.setStyle(exerciseAttrValueStyle);
 
-            setsBox.setPadding(new Insets(10, 0, 10, 0));
-            repsBox.setPadding(new Insets(10, 0, 10, 0));
-            breakBox.setPadding(new Insets(10, 0, 10, 0));
+                Label breakLabel = new Label("Break between sets:");
+                breakLabel.setStyle(exerciseAttrDescStyle);
+                Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
+                breakValue.setStyle(exerciseAttrValueStyle);
 
-            setsBox.setPrefWidth(130);
-            repsBox.setPrefWidth(130);
-            breakBox.setPrefWidth(250);
+                HBox setsBox = new HBox(10, setsLabel, setsValue);
+                HBox repsBox = new HBox(10, repsLabel, repsValue);
+                HBox breakBox = new HBox(10, breakLabel, breakValue);
 
-            HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
-            exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
+                setsBox.setPadding(new Insets(10, 0, 10, 0));
+                repsBox.setPadding(new Insets(10, 0, 10, 0));
+                breakBox.setPadding(new Insets(10, 0, 10, 0));
+
+                setsBox.setPrefWidth(130);
+                repsBox.setPrefWidth(130);
+                breakBox.setPrefWidth(250);
+
+                HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
+                exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
+            }
         }
 
         // Bind manageability (presence) of node based on presence of value for optional fields
@@ -245,6 +260,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         email.setVisible(!person.getEmail().getValue().isEmpty());
         note.setVisible(!person.getNote().getValue().isEmpty());
         weightDate.setVisible(latestWeight.isPresent());
+        weightValue.setVisible(latestWeight.isPresent());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
