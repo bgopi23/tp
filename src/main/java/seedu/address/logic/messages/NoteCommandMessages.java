@@ -23,4 +23,5 @@ public class NoteCommandMessages extends Messages {
             MESSAGE_USAGE);
     public static final String MESSAGE_NO_INDEX_NOTE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
     public static final String MESSAGE_EDIT_FEEDBACK_TO_USER = "Editing note for client: ";
+    public static final String NOTE_EDIT_TAG = "/edit";
 }
