@@ -9,10 +9,11 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 public class FitDeleteCommandMessages extends Messages {
     public static final String COMMAND_WORD = "fitdelete";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes an exercise from the client identified "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes exercise(s) from the client identified "
         + "by their corresponding index.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_EXERCISE_NAME + "EXERCISE_NAME\n"
+        + "[" + PREFIX_EXERCISE_NAME + "EXERCISE_NAME]"
+        + " [" + PREFIX_FITDELETE_DELETE_ALL + "]\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_EXERCISE_NAME + "squats "
         + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
