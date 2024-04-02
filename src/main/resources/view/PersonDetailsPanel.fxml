@@ -30,7 +30,7 @@
                 <GridPane.margin>
                     <Insets right="10.0"/>
                 </GridPane.margin>
-                <ScrollPane prefHeight="120" fitToWidth="true" VBox.vgrow="ALWAYS"
+                <ScrollPane prefHeight="120" VBox.vgrow="ALWAYS"
                             style="-fx-background:transparent; -fx-background-color: transparent;">
                     <VBox>
                         <Label fx:id="name" styleClass="cell_big_label" text="name" wrapText="true"/>
@@ -44,17 +44,17 @@
                         <Label fx:id="height" styleClass="cell_small_label" text="height"/>
                     </VBox>
                 </ScrollPane>
-                <TabPane fx:id="trackableFieldsTabPane" tabClosingPolicy="UNAVAILABLE" prefHeight="250" side="BOTTOM"
-                         VBox.vgrow="ALWAYS">
-                    <Tab text="Weight (kg)">
-                    </Tab>
-                    <Tab text="Exercises">
-                    </Tab>
-                </TabPane>
             </VBox>
-
             <ImageView fx:id="qrcode" fitHeight="150" fitWidth="150" pickOnBounds="true" preserveRatio="true"
                        GridPane.columnIndex="1" GridPane.halignment="RIGHT" GridPane.valignment="TOP"/>
         </GridPane>
+
+        <TabPane fx:id="trackableFieldsTabPane" tabClosingPolicy="UNAVAILABLE" prefHeight="250" side="BOTTOM"
+                 VBox.vgrow="ALWAYS">
+            <Tab text="Weight (kg)">
+            </Tab>
+            <Tab text="Exercises">
+            </Tab>
+        </TabPane>
     </VBox>
 </ScrollPane>
