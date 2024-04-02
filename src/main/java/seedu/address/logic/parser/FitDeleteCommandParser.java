@@ -9,6 +9,7 @@ import java.util.Optional;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitDeleteCommand;
 import seedu.address.logic.messages.FitDeleteCommandMessages;
+import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,6 +34,11 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         // Ensure that client index is present
         if (argMultimap.isPreambleEmpty()) {
             throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
+        }
+
+        if (argMultimap.getPreambleSegmentNumber() != 1) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
         }
 
         // Parse index of client to delete exercise from
