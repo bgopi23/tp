@@ -377,11 +377,12 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_addPerson_PersonFound() throws CommandException {
+    public void execute_addPersonSearch_personFound() throws CommandException {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
 
-        (new AddCommand(HOON)).execute(model);
-        (new AddCommand(HOON)).execute(expectedModel);
+        AddCommand addHoonCommand = new AddCommand(HOON);
+        addHoonCommand.execute(model);
+        addHoonCommand.execute(expectedModel);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("Hoon Meier");
 
