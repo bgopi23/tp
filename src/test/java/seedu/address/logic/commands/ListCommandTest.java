@@ -29,39 +29,39 @@ public class ListCommandTest {
 
     @BeforeEach
     public void setUp() {
-        emptyModel = new ModelManager(getTypicalAddressBookWithNothing(), new UserPrefs());
-        singlePersonModel = new ModelManager(getTypicalAddressBookWithSinglePerson(), new UserPrefs());
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedSinglePersonModel = new ModelManager(singlePersonModel.getAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs());
-        expectedEmptyModel = new ModelManager(emptyModel.getAddressBook(), new UserPrefs());
+        this.emptyModel = new ModelManager(getTypicalAddressBookWithNothing(), new UserPrefs());
+        this.singlePersonModel = new ModelManager(getTypicalAddressBookWithSinglePerson(), new UserPrefs());
+        this.model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        this.expectedSinglePersonModel = new ModelManager(this.singlePersonModel.getAddressBook(), new UserPrefs());
+        this.expectedModel = new ModelManager(this.model.getAddressBook(), new UserPrefs());
+        this.expectedEmptyModel = new ModelManager(this.emptyModel.getAddressBook(), new UserPrefs());
     }
 
     @Test
     public void execute_listIsNotFiltered_showsSameList() {
-        int listSize = expectedModel.getFilteredPersonList().size();
+        int listSize = this.expectedModel.getFilteredPersonList().size();
         String expectedMessage = String.format(ListCommandMessages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
-        assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(), this.model, expectedMessage, this.expectedModel);
     }
 
     @Test
     public void execute_emptyList_showsNothing() {
         String expectedMessage = String.format(ListCommandMessages.MESSAGE_NO_CLIENTS_TO_LIST);
-        assertCommandSuccess(new ListCommand(), emptyModel, expectedMessage, expectedEmptyModel);
+        assertCommandSuccess(new ListCommand(), this.emptyModel, expectedMessage, this.expectedEmptyModel);
     }
 
     @Test
     public void execute_singlePersonList_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(this.model, INDEX_FIRST_PERSON);
         String expectedMessage = String.format(ListCommandMessages.MESSAGE_ONE_CLIENT_LISTED);
-        assertCommandSuccess(new ListCommand(), singlePersonModel, expectedMessage, expectedSinglePersonModel);
+        assertCommandSuccess(new ListCommand(), this.singlePersonModel, expectedMessage, this.expectedSinglePersonModel);
     }
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
-        int listSize = expectedModel.getFilteredPersonList().size();
+        showPersonAtIndex(this.model, INDEX_FIRST_PERSON);
+        int listSize = this.expectedModel.getFilteredPersonList().size();
         String expectedMessage = String.format(ListCommandMessages.MESSAGE_ALL_CLIENTS_LISTED, listSize);
-        assertCommandSuccess(new ListCommand(), model, expectedMessage, expectedModel);
+        assertCommandSuccess(new ListCommand(), this.model, expectedMessage, this.expectedModel);
     }
 }

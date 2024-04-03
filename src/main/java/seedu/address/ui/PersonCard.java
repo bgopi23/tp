@@ -57,11 +57,11 @@ public class PersonCard extends UiPart<Region> {
         super(FXML);
         this.person = person;
         // Set fields with information from the person
-        id.setText(displayedIndex + ". ");
-        name.setText(person.getName().toString());
-        phone.setText(person.getPhone().toString());
+        this.id.setText(displayedIndex + ". ");
+        this.name.setText(person.getName().toString());
+        this.phone.setText(person.getPhone().toString());
         person.getTags().stream()
                 .sorted(Comparator.comparing(Tag::toString))
-                .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
+                .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
     }
 }

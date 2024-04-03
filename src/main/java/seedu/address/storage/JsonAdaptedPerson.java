@@ -74,28 +74,28 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().getValue();
+        this.name = source.getName().getValue();
 
-        phone = source.getPhone().getValue();
+        this.phone = source.getPhone().getValue();
 
-        email = source.getEmail().getValue();
+        this.email = source.getEmail().getValue();
 
-        address = source.getAddress().getValue();
+        this.address = source.getAddress().getValue();
 
-        weights.addAll(source.getWeights().entrySet().stream()
+        this.weights.addAll(source.getWeights().entrySet().stream()
             .map(WeightEntry::new)
             .map(JsonAdaptedWeight::new)
             .collect(Collectors.toList()));
 
-        height = source.getHeight().getValue().toString();
+        this.height = source.getHeight().getValue().toString();
 
-        note = source.getNote().getValue();
+        this.note = source.getNote().getValue();
 
-        tags.addAll(source.getTags().stream()
+        this.tags.addAll(source.getTags().stream()
             .map(JsonAdaptedTag::new)
             .collect(Collectors.toList()));
 
-        exercises.addAll(source.getExerciseSet().getValue().stream()
+        this.exercises.addAll(source.getExerciseSet().getValue().stream()
             .map(JsonAdaptedExercise::new)
             .collect(Collectors.toList()));
     }
@@ -119,61 +119,61 @@ class JsonAdaptedPerson {
         }
 
         final List<Exercise> personExercises = new ArrayList<>();
-        for (JsonAdaptedExercise exercise : exercises) {
+        for (JsonAdaptedExercise exercise : this.exercises) {
             personExercises.add(exercise.toModelType());
         }
         final Set<Exercise> peronExerciseHashSet = new HashSet<>(personExercises);
 
-        if (name == null) {
+        if (this.name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
+        if (!Name.isValidName(this.name)) {
             throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final Name modelName = new Name(this.name);
 
-        if (phone == null) {
+        if (this.phone == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
+        if (!Phone.isValidPhone(this.phone)) {
             throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Phone modelPhone = new Phone(this.phone);
 
-        if (email == null) {
+        if (this.email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
-        if (!email.isEmpty() && !Email.isValidEmail(email)) {
+        if (!this.email.isEmpty() && !Email.isValidEmail(this.email)) {
             throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
         }
-        final Email modelEmail = new Email(email);
+        final Email modelEmail = new Email(this.email);
 
-        if (address == null) {
+        if (this.address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!address.isEmpty() && !Address.isValidAddress(address)) {
+        if (!this.address.isEmpty() && !Address.isValidAddress(this.address)) {
             throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
         }
-        final Address modelAddress = new Address(address);
+        final Address modelAddress = new Address(this.address);
 
         final NavigableMap<LocalDateTime, Weight> modelWeights = new TreeMap<>();
-        for (JsonAdaptedWeight jsonAdaptedWeight : weights) {
+        for (JsonAdaptedWeight jsonAdaptedWeight : this.weights) {
             WeightEntry weightEntry = jsonAdaptedWeight.toModelType();
             modelWeights.put(weightEntry.getValue().getKey(), weightEntry.getValue().getValue());
         }
 
-        if (height == null) {
+        if (this.height == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        if (!height.isEmpty() && !Height.isValidHeight(height)) {
+        if (!this.height.isEmpty() && !Height.isValidHeight(this.height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
-        final Height modelHeight = new Height(Float.valueOf(height));
+        final Height modelHeight = new Height(Float.valueOf(this.height));
 
-        if (note == null) {
+        if (this.note == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
-        final Note modelNote = new Note(note);
+        final Note modelNote = new Note(this.note);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
 

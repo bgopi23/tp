@@ -53,20 +53,20 @@ public class SerializableTestClass {
     }
 
     public void setTestValues() {
-        name = getNameTestValue();
-        listOfLocalDateTimes = getListTestValues();
-        mapOfIntegerToString = getHashMapTestValues();
+        this.name = getNameTestValue();
+        this.listOfLocalDateTimes = getListTestValues();
+        this.mapOfIntegerToString = getHashMapTestValues();
     }
 
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public List<LocalDateTime> getListOfLocalDateTimes() {
-        return listOfLocalDateTimes;
+        return this.listOfLocalDateTimes;
     }
 
     public HashMap<Integer, String> getMapOfIntegerToString() {
-        return mapOfIntegerToString;
+        return this.mapOfIntegerToString;
     }
 }

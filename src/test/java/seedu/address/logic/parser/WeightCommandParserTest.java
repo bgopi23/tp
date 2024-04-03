@@ -15,22 +15,22 @@ public class WeightCommandParserTest {
 
     @Test
     public void parse_missingParts_failure() {
-        assertParseFailure(parser, VALID_WEIGHT_BOB.toString(),
+        assertParseFailure(this.parser, VALID_WEIGHT_BOB.toString(),
                 MESSAGE_INVALID_PARAMETER_WEIGHT);
 
         // no index and no field specified (note)
-        assertParseFailure(parser, "", MESSAGE_NO_PARAMETER_WEIGHT);
+        assertParseFailure(this.parser, "", MESSAGE_NO_PARAMETER_WEIGHT);
     }
 
     @Test
     public void parse_invalidIndex_failure() {
-        assertParseFailure(parser, "-5" + VALID_WEIGHT_AMY,
+        assertParseFailure(this.parser, "-5" + VALID_WEIGHT_AMY,
                 MESSAGE_INVALID_INDEX_WEIGHT);
 
-        assertParseFailure(parser, "0" + VALID_WEIGHT_BOB,
+        assertParseFailure(this.parser, "0" + VALID_WEIGHT_BOB,
                 MESSAGE_INVALID_INDEX_WEIGHT);
 
-        assertParseFailure(parser, "-5",
+        assertParseFailure(this.parser, "-5",
                 MESSAGE_INVALID_INDEX_WEIGHT);
     }
 }

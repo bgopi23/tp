@@ -33,10 +33,10 @@ class JsonAdaptedExercise {
      * Converts a given {@code Exercise} into this class for Jackson use.
      */
     public JsonAdaptedExercise(Exercise source) {
-        name = source.getName();
-        sets = source.getSets();
-        reps = source.getReps();
-        breakBetweenSets = source.getBreakBetweenSets();
+        this.name = source.getName();
+        this.sets = source.getSets();
+        this.reps = source.getReps();
+        this.breakBetweenSets = source.getBreakBetweenSets();
     }
 
     /**
@@ -47,19 +47,19 @@ class JsonAdaptedExercise {
      *                               the adapted exercise.
      */
     public Exercise toModelType() throws IllegalValueException {
-        if (!Exercise.isValidName(name)) {
+        if (!Exercise.isValidName(this.name)) {
             throw new IllegalValueException(Exercise.NAME_CONSTRAINT);
         }
-        if (!Exercise.isValidSets(sets)) {
+        if (!Exercise.isValidSets(this.sets)) {
             throw new IllegalValueException(Exercise.SETS_CONSTRAINT);
         }
-        if (!Exercise.isValidReps(reps)) {
+        if (!Exercise.isValidReps(this.reps)) {
             throw new IllegalValueException(Exercise.REPS_CONSTRAINT);
         }
-        if (!Exercise.isValidBreakBetweenSets(breakBetweenSets)) {
+        if (!Exercise.isValidBreakBetweenSets(this.breakBetweenSets)) {
             throw new IllegalValueException(Exercise.BREAK_CONSTRAINT);
         }
-        return new Exercise(name, sets, reps, breakBetweenSets);
+        return new Exercise(this.name, this.sets, this.reps, this.breakBetweenSets);
     }
 
 }

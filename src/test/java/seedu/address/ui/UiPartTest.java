@@ -32,7 +32,7 @@ public class UiPartTest {
 
     @Test
     public void constructor_missingFileUrl_throwsAssertionError() throws Exception {
-        URL missingFileUrl = new URL(testFolder.toUri().toURL(), MISSING_FILE_PATH);
+        URL missingFileUrl = new URL(this.testFolder.toUri().toURL(), MISSING_FILE_PATH);
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl));
         assertThrows(AssertionError.class, () -> new TestUiPart<Object>(missingFileUrl, new Object()));
     }
@@ -101,12 +101,12 @@ public class UiPartTest {
 
         TestUiPart(URL fxmlFileUrl) {
             super(fxmlFileUrl);
-            assertEquals(VALID_FILE_ROOT, validFileRoot);
+            assertEquals(VALID_FILE_ROOT, this.validFileRoot);
         }
 
         TestUiPart(String fxmlFileName) {
             super(fxmlFileName);
-            assertEquals(VALID_FILE_ROOT, validFileRoot);
+            assertEquals(VALID_FILE_ROOT, this.validFileRoot);
         }
 
     }

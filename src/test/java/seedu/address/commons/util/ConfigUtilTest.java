@@ -87,7 +87,7 @@ public class ConfigUtilTest {
     public void saveConfig_allInOrder_success() throws DataLoadingException, IOException {
         Config original = getTypicalConfig();
 
-        Path configFilePath = tempDir.resolve("TempConfig.json");
+        Path configFilePath = this.tempDir.resolve("TempConfig.json");
 
         //Try writing when the file doesn't exist
         ConfigUtil.saveConfig(original, configFilePath);

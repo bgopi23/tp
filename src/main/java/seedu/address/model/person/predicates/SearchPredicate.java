@@ -29,7 +29,7 @@ public abstract class SearchPredicate<T extends Object> implements Predicate<Per
 
     @Override
     public boolean test(Person person) {
-        return person.getAttribute(this.attribute).isMatch(searchValue);
+        return person.getAttribute(this.attribute).isMatch(this.searchValue);
     }
 
     @Override
@@ -44,11 +44,11 @@ public abstract class SearchPredicate<T extends Object> implements Predicate<Per
         }
 
         SearchPredicate<?> otherSearchPredicate = (SearchPredicate<?>) other;
-        return searchValue.equals(otherSearchPredicate.searchValue);
+        return this.searchValue.equals(otherSearchPredicate.searchValue);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("searchValue", searchValue).toString();
+        return new ToStringBuilder(this).add("searchValue", this.searchValue).toString();
     }
 }

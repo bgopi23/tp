@@ -33,7 +33,7 @@ class WeightCommandTest {
     private Model modelWithoutEmail = new ModelManager(getTypicalAddressBookWithoutEmail(), new UserPrefs());
     @Test
     public void execute_addWeightUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withWeights(WEIGHT_STUB).build();
 
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
@@ -42,15 +42,15 @@ class WeightCommandTest {
         String expectedMessage = String.format(WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(weightCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteWeightUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withWeights().build();
 
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON, new WeightEntry(
@@ -59,15 +59,15 @@ class WeightCommandTest {
         String expectedMessage = String.format(WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS,
                editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(weightCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_addWeightUnfilteredListWithoutEmail_success() {
-        Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withWeights(WEIGHT_STUB).build();
 
         WeightCommand weightCommand = new WeightCommand(INDEX_FIRST_PERSON,
@@ -76,10 +76,10 @@ class WeightCommandTest {
         String expectedMessage = String.format(WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(weightCommand, modelWithoutEmail, expectedMessage, expectedModel);
+        assertCommandSuccess(weightCommand, this.modelWithoutEmail, expectedMessage, expectedModel);
     }
 
     @Test
@@ -87,9 +87,9 @@ class WeightCommandTest {
         WeightEntry weightEntry = new WeightEntry(
                 new AbstractMap.SimpleEntry<>(WeightEntry.getTimeOfExecution(), new Weight(180f)));
 
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
         WeightCommand weightCommand = new WeightCommand(invalidIndex, weightEntry);
-        assertCommandFailure(weightCommand, model, MESSAGE_INVALID_INDEX_WEIGHT);
+        assertCommandFailure(weightCommand, this.model, MESSAGE_INVALID_INDEX_WEIGHT);
     }
 
     @Test

@@ -90,7 +90,7 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void initialize() {
         if (!isDesktopBrowseActionSupported()) {
-            copyButton.setText("Copy URL");
+            this.copyButton.setText("Copy URL");
         }
 
         for (String[] command : COMMAND_DESCRIPTIONS) {
@@ -105,7 +105,7 @@ public class HelpWindow extends UiPart<Stage> {
             HBox commandBox = new HBox(10);
             commandBox.getChildren().addAll(commandLabel, descriptionLabel);
 
-            helpMessageContainer.getChildren().add(commandBox);
+            this.helpMessageContainer.getChildren().add(commandBox);
         }
     }
 

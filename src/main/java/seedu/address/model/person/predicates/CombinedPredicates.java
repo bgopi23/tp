@@ -19,7 +19,7 @@ public class CombinedPredicates implements Predicate<Person> {
 
     @Override
     public boolean test(Person person) {
-        return Arrays.stream(predicates).allMatch(predicate -> predicate.test(person));
+        return Arrays.stream(this.predicates).allMatch(predicate -> predicate.test(person));
     }
 
     @Override
@@ -34,12 +34,12 @@ public class CombinedPredicates implements Predicate<Person> {
         }
 
         CombinedPredicates otherCombinedPredicate = (CombinedPredicates) other;
-        return Arrays.equals(predicates, otherCombinedPredicate.predicates);
+        return Arrays.equals(this.predicates, otherCombinedPredicate.predicates);
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("predicates", predicates).toString();
+        return new ToStringBuilder(this).add("predicates", this.predicates).toString();
     }
 
 }

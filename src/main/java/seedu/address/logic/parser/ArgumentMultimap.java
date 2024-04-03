@@ -34,7 +34,7 @@ public class ArgumentMultimap {
     public void put(Prefix prefix, String argValue) {
         List<String> argValues = getAllValues(prefix);
         argValues.add(argValue);
-        argMultimap.put(prefix, argValues);
+        this.argMultimap.put(prefix, argValues);
     }
 
     /**
@@ -81,10 +81,10 @@ public class ArgumentMultimap {
      * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
      */
     public List<String> getAllValues(Prefix prefix) {
-        if (!argMultimap.containsKey(prefix)) {
+        if (!this.argMultimap.containsKey(prefix)) {
             return new ArrayList<>();
         }
-        return new ArrayList<>(argMultimap.get(prefix));
+        return new ArrayList<>(this.argMultimap.get(prefix));
     }
 
     /**
@@ -107,7 +107,7 @@ public class ArgumentMultimap {
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-            .filter(prefix -> argMultimap.containsKey(prefix) && argMultimap.get(prefix).size() > 1)
+            .filter(prefix -> this.argMultimap.containsKey(prefix) && this.argMultimap.get(prefix).size() > 1)
             .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
@@ -119,7 +119,7 @@ public class ArgumentMultimap {
      * Returns true if the prefix exists as a key in the map.
      */
     public boolean contains(Prefix prefix) {
-        return argMultimap.containsKey(prefix);
+        return this.argMultimap.containsKey(prefix);
     }
 
     /**

@@ -22,7 +22,7 @@ public class ClearCommand extends Command {
     public CommandResult execute(Model model) {
         requireNonNull(model);
 
-        if (!confirmed) {
+        if (!this.confirmed) {
             return new CommandResult(MESSAGE_CONFIRM);
         } else {
             model.setAddressBook(new AddressBook());
