@@ -209,7 +209,8 @@ public class FindCommandTest {
         command = new FindCommand(new CombinedPredicates(predicate));
         this.expectedModel.updateFilteredPersonList(predicate);
         assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), this.model.getFilteredPersonList());
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE),
+                this.model.getFilteredPersonList());
     }
 
     @Test

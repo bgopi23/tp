@@ -54,7 +54,8 @@ public class ListCommandTest {
     public void execute_singlePersonList_showsEverything() {
         showPersonAtIndex(this.model, INDEX_FIRST_PERSON);
         String expectedMessage = String.format(ListCommandMessages.MESSAGE_ONE_CLIENT_LISTED);
-        assertCommandSuccess(new ListCommand(), this.singlePersonModel, expectedMessage, this.expectedSinglePersonModel);
+        assertCommandSuccess(new ListCommand(), this.singlePersonModel,
+                expectedMessage, this.expectedSinglePersonModel);
     }
 
     @Test

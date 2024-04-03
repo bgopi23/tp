@@ -76,7 +76,8 @@ class WeightCommandTest {
         String expectedMessage = String.format(WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()),
+                new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(weightCommand, this.modelWithoutEmail, expectedMessage, expectedModel);

@@ -56,7 +56,8 @@ public class FitDeleteCommand extends Command {
 
         return new CommandResult(
             String.format(this.deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
-                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, this.exerciseName.orElse(""))));
+                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS,
+                    this.exerciseName.orElse(""))));
     }
 
     private Person getEditedPerson(Person personToEdit) throws CommandException {

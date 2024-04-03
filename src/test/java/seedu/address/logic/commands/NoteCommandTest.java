@@ -72,7 +72,8 @@ class NoteCommandTest {
         String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()),
+                new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
         assertCommandSuccess(noteCommand, this.modelWithoutEmail, expectedMessage, expectedModel);

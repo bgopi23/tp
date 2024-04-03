@@ -124,7 +124,8 @@ public class FitDeleteCommandTest {
 
         FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty(), true);
 
-        assertCommandFailure(fitDeleteCommand, this.model, FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
+        assertCommandFailure(fitDeleteCommand, this.model,
+                FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
     }
 
     @Test

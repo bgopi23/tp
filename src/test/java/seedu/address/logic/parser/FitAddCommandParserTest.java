@@ -69,7 +69,8 @@ public class FitAddCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(this.parser, "1" + INVALID_EXERCISE_NAME_DESC, Exercise.NAME_CONSTRAINT); // invalid exercise name
+        // invalid exercise name
+        assertParseFailure(this.parser, "1" + INVALID_EXERCISE_NAME_DESC, Exercise.NAME_CONSTRAINT);
         assertParseFailure(this.parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_SETS_DESC,
             Exercise.SETS_CONSTRAINT); // invalid exercise sets
         assertParseFailure(this.parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_REPS_DESC,
