@@ -51,6 +51,10 @@ public class CommandTestUtil {
     public static final String VALID_NOTE_BOB = "";
     public static final String VALID_NOTE_AMY = "";
     public static final String VALID_NOTE_NOT_EMPTY = "valid note";
+    public static final String EDIT_TAG_RANDOM_CASE = "/eDiT";
+    public static final String EDIT_TAG_WITH_MORE_WORDS = "/edit more words";
+    public static final String EDIT_TAG_LEADING_WHITESPACE = "          /edit";
+    public static final String EDIT_TAG_TRAILING_WHITESPACE = "/edit         ";
     public static final String VALID_TAG_HUSBAND = "husband";
     public static final String VALID_TAG_FRIEND = "friend";
 

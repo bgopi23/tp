@@ -27,6 +27,7 @@ import seedu.address.model.person.Person;
  * a menu bar and space where other JavaFX elements can be placed.
  */
 public class MainWindow extends UiPart<Stage> {
+    private static MainWindow instance = null;
 
     private static final String FXML = "MainWindow.fxml";
 
@@ -61,7 +62,7 @@ public class MainWindow extends UiPart<Stage> {
     /**
      * Creates a {@code MainWindow} with the given {@code Stage} and {@code Logic}.
      */
-    public MainWindow(Stage primaryStage, Logic logic) {
+    private MainWindow(Stage primaryStage, Logic logic) {
         super(FXML, primaryStage);
 
         // Set dependencies
@@ -74,6 +75,24 @@ public class MainWindow extends UiPart<Stage> {
         setAccelerators();
 
         helpWindow = new HelpWindow();
+    }
+
+    /**
+     * Initializes the MainWindow instance with the provided primary stage and logic.
+     */
+    public static void init(Stage primaryStage, Logic logic) {
+        if (instance == null) {
+            instance = new MainWindow(primaryStage, logic);
+        }
+    }
+
+
+    /**
+     * Returns the singleton instance of the MainWindow class.
+     */
+    public static MainWindow getInstance() {
+        assert instance != null : "MainWindow must be initialized before getting instance.";
+        return instance;
     }
 
     public Stage getPrimaryStage() {
@@ -242,5 +261,19 @@ public class MainWindow extends UiPart<Stage> {
             resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
+    }
+
+    /**
+     * Sets the text of the command box.
+     */
+    public void setCommandBoxText(String text) {
+        commandBox.setText(text);
+    }
+
+    /**
+     * Moves the cursor of the command box to the end.
+     */
+    public void moveCommandBoxCursorToEnd() {
+        commandBox.moveCursorToEnd();
     }
 }

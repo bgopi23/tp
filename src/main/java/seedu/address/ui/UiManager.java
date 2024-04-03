@@ -40,7 +40,8 @@ public class UiManager implements Ui {
         primaryStage.getIcons().add(getImage(ICON_APPLICATION));
 
         try {
-            mainWindow = new MainWindow(primaryStage, logic);
+            MainWindow.init(primaryStage, logic);
+            mainWindow = MainWindow.getInstance();
             mainWindow.show(); //This should be called before creating other UI parts
             mainWindow.fillInnerParts();
 

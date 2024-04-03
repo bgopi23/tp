@@ -180,16 +180,24 @@ Examples:
 
 ### Adding a note to clients : `note`
 
-Format: `note INDEX nt/NOTE`
+Format: `note INDEX [NOTE] `
 
 * Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Existing note will be updated to the input note.
+* Existing note will be updated to the note specified.
+* If no note is given, the note for the client at the specified index will be deleted.
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
 
 Examples:
-*  `note 1 nt/History of asthma` - Edits the note of the 1st client to `History of asthma`.
-*  `note 2 nt/Previously sprained both ankles` - Edits the note of the 2nd client to `Previously sprained both ankles`.
+
+* `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
+* `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
+
+If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of the command box will be replaced with a note command whose NOTE field is pre-loaded with the note of the client at the specified index.
+
+> For example: Client at index 1 has the note "Wants to gain muscle".
+>
+> Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
 ### Searching clients: `find`
@@ -330,3 +338,4 @@ _Details coming soon ..._
 | **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
 | **List**   | `list`                                                                                                                                                                                              |
 | **Help**   | `help`                                                                                                                                                                                              |
+| **Note**   | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
