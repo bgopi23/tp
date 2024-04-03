@@ -263,6 +263,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         note.setVisible(!person.getNote().getValue().isEmpty());
         weightDate.setVisible(latestWeight.isPresent());
         weightValue.setVisible(latestWeight.isPresent());
+        height.setVisible(person.getHeight().isValid());
 
         address.managedProperty().bind(address.visibleProperty());
         email.managedProperty().bind(email.visibleProperty());
