@@ -190,8 +190,8 @@ Format: `note INDEX [NOTE] `
 
 Examples:
 
-* `note 1 History of asthma` - Edits the note of the 1st client to `History of asthma`.
-* `note 2 Previously sprained both ankles` - Edits the note of the 2nd client to `Previously sprained both ankles`.
+* `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
+* `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
 
 If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of the command box will be replaced with a note command whose NOTE field is pre-loaded with the note of the client at the specified index.
 
