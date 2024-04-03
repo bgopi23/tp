@@ -40,12 +40,14 @@ public class Exercise {
         requireNonNull(reps);
         requireNonNull(breakBetweenSets);
 
-        checkArgument(isValidName(name), NAME_CONSTRAINT);
+        String nameLowerCase = name.toLowerCase();
+
+        checkArgument(isValidName(nameLowerCase), NAME_CONSTRAINT);
         checkArgument(isValidSets(sets), SETS_CONSTRAINT);
         checkArgument(isValidReps(reps), REPS_CONSTRAINT);
         checkArgument(isValidBreakBetweenSets(breakBetweenSets), BREAK_CONSTRAINT);
 
-        this.name = name;
+        this.name = nameLowerCase;
         this.sets = sets;
         this.reps = reps;
         this.breakBetweenSets = breakBetweenSets;
