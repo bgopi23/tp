@@ -228,7 +228,7 @@ public class ParserUtil {
             throw new ParseException(Exercise.NAME_CONSTRAINT);
         }
 
-        return trimmedExerciseName.toLowerCase();
+        return trimmedExerciseName;
     }
 
     /**

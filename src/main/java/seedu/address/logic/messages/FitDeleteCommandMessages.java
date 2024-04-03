@@ -34,5 +34,5 @@ public class FitDeleteCommandMessages extends Messages {
         "Exercise name '%s' does not exist for the client";
     public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
     public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS =
-        "Successfully removed all exercises '%s' for client";
+        "Successfully removed all exercise(s) for client";
 }
