@@ -50,8 +50,8 @@ public class FindCommandParserTest {
             EMAIL);
     private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE = new AddressContainsSubstringPredicate(
             ADDRESS);
-    private static final WeightMapContainsWeightRangePredicate WEIGHT_PREDICATE = new WeightMapContainsWeightRangePredicate(
-            new Pair<>(0f, 1000f));
+    private static final WeightMapContainsWeightRangePredicate WEIGHT_PREDICATE =
+            new WeightMapContainsWeightRangePredicate(new Pair<>(0f, 1000f));
     private static final HeightContainsRangePredicate HEIGHT_PREDICATE = new HeightContainsRangePredicate(
             new Pair<>(0f, 500f));
     private static final NoteContainsSubstringPredicate NOTE_PREDICATE = new NoteContainsSubstringPredicate(NOTE);
@@ -64,8 +64,8 @@ public class FindCommandParserTest {
             "");
     private static final EmailContainsSubstringPredicate EMAIL_PREDICATE_EMPTY = new EmailContainsSubstringPredicate(
             "");
-    private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE_EMPTY = new AddressContainsSubstringPredicate(
-            "");
+    private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE_EMPTY =
+            new AddressContainsSubstringPredicate("");
     private static final AlwaysTruePredicate WEIGHT_PREDICATE_EMPTY = new AlwaysTruePredicate();
     private static final HeightContainsRangePredicate HEIGHT_PREDICATE_EMPTY = new HeightContainsRangePredicate(
             new Pair<>(0f, Float.MAX_VALUE));
