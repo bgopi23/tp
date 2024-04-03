@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_BREAK_BETWEEN_SETS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_REPS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
@@ -72,6 +76,21 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+
+    public static final String VALID_EXERCISE_NAME = "Push Ups";
+    public static final String VALID_EXERCISE_SETS = "3";
+    public static final String VALID_EXERCISE_REPS = "12";
+    public static final String VALID_EXERCISE_BREAK = "60";
+
+    public static final String VALID_EXERCISE_NAME_DESC = " " + PREFIX_EXERCISE_NAME + VALID_EXERCISE_NAME;
+    public static final String VALID_EXERCISE_SETS_DESC = " " + PREFIX_EXERCISE_SETS + VALID_EXERCISE_SETS;
+    public static final String VALID_EXERCISE_REPS_DESC = " " + PREFIX_EXERCISE_REPS + VALID_EXERCISE_REPS;
+    public static final String VALID_EXERCISE_BREAK_DESC = " " + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + VALID_EXERCISE_BREAK;
+
+    public static final String INVALID_EXERCISE_NAME_DESC = " " + PREFIX_EXERCISE_NAME + "";
+    public static final String INVALID_EXERCISE_SETS_DESC = " " + PREFIX_EXERCISE_SETS + "0";
+    public static final String INVALID_EXERCISE_REPS_DESC = " " + PREFIX_EXERCISE_REPS + "-10";
+    public static final String INVALID_EXERCISE_BREAK_DESC = " " + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "-5";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
