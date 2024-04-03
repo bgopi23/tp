@@ -45,7 +45,8 @@ public class FitAddCommandParserTest {
             FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD);
 
         // no field specified
-        assertParseFailure(parser, "1", FitAddCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING);
+        assertParseFailure(parser, "1",
+            FitAddCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING);
 
         // no index and no field specified
         assertParseFailure(parser, "", FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD);
@@ -69,9 +70,12 @@ public class FitAddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "1" + INVALID_EXERCISE_NAME_DESC, Exercise.NAME_CONSTRAINT); // invalid exercise name
-        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_SETS_DESC, Exercise.SETS_CONSTRAINT); // invalid exercise sets
-        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_REPS_DESC, Exercise.REPS_CONSTRAINT); // invalid exercise reps
-        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_BREAK_DESC, Exercise.BREAK_CONSTRAINT); // invalid exercise break
+        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_SETS_DESC,
+            Exercise.SETS_CONSTRAINT); // invalid exercise sets
+        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_REPS_DESC,
+            Exercise.REPS_CONSTRAINT); // invalid exercise reps
+        assertParseFailure(parser, "1" + VALID_EXERCISE_NAME_DESC + INVALID_EXERCISE_BREAK_DESC,
+            Exercise.BREAK_CONSTRAINT); // invalid exercise break
     }
 
     @Test
@@ -110,7 +114,7 @@ public class FitAddCommandParserTest {
             new FitAddCommand(INDEX_FIRST_PERSON, FitAddCommand.DEFAULT_SHOULDER_EXERCISES));
 
         // abs exercises
-        assertParseSuccess(parser, "1" + " " +PREFIX_EXERCISE_ABS,
+        assertParseSuccess(parser, "1" + " " + PREFIX_EXERCISE_ABS,
             new FitAddCommand(INDEX_FIRST_PERSON, FitAddCommand.DEFAULT_ABS_EXERCISES));
 
         // all exercises
