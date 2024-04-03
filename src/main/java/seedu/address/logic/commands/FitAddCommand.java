@@ -113,7 +113,6 @@ public class FitAddCommand extends Command {
             personToEdit.getNote(), personToEdit.getTags(), updatedExerciseSet);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS);
     }
