@@ -78,7 +78,7 @@ public class WeightCommand extends Command {
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
                 personToEdit.getAddress(), toEditWeightMap, personToEdit.getHeight(),
-                personToEdit.getNote(), personToEdit.getTags());
+                personToEdit.getNote(), personToEdit.getTags(), personToEdit.getExerciseSet());
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);

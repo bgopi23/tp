@@ -10,19 +10,20 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME_AND_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.NavigableMap;
 import java.util.Set;
 import java.util.TreeMap;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -42,6 +43,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddCommand parse(String args) throws ParseException {
@@ -53,7 +55,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
 
         // (add John)
-        if (!argMultimap.containsAll(PREFIX_NAME_AND_PHONE) || !argMultimap.isPreambleEmpty()) {
+        if (!argMultimap.isPreambleEmpty()) {
             throw new ParseException(MESSAGE_INVALID_PARAMETER_FORMAT_ADD);
         }
 
@@ -71,19 +73,28 @@ public class AddCommandParser implements Parser<AddCommand> {
         argMultimap.verifyNoDuplicatePrefixesFor(ALL_PREFIXES_EXCEPT_TAG);
 
         Name name = ParserUtil.parseName(argMultimap.getStringValue(PREFIX_NAME));
+
         Phone phone = ParserUtil.parsePhone(argMultimap.getStringValue(PREFIX_PHONE));
+
         Email email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL));
+
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
+
         NavigableMap<LocalDateTime, Weight> weightMap = new TreeMap<>();
         if (ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).getValue() != 0f) {
             weightMap.put(WeightEntry.getTimeOfExecution(),
-                    ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
+                ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
         }
+
         Height height = ParserUtil.parseHeight(argMultimap.getValue(PREFIX_HEIGHT));
+
         Note note = ParserUtil.parseNote(argMultimap.getValue(PREFIX_NOTE));
+
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Person person = new Person(name, phone, email, address, weightMap, height, note, tagList);
+        ExerciseSet exercises = new ExerciseSet(new HashSet<>());
+
+        Person person = new Person(name, phone, email, address, weightMap, height, note, tagList, exercises);
 
         return new AddCommand(person);
     }

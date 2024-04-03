@@ -22,6 +22,7 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
+import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Height;
@@ -62,9 +63,13 @@ public class EditCommand extends Command {
         assert personToEdit != null;
 
         Name updatedName = editPersonDescriptor.getName().orElse(personToEdit.getName());
+
         Phone updatedPhone = editPersonDescriptor.getPhone().orElse(personToEdit.getPhone());
+
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
+
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+
         // Get the weight map of the person we are editing.
         NavigableMap<LocalDateTime, Weight> toEditWeightMap =
                 new TreeMap<>(personToEdit.getWeights());
@@ -73,7 +78,7 @@ public class EditCommand extends Command {
         if (editPersonDescriptor.getWeight().isPresent()) {
             Weight updatedWeight = editPersonDescriptor.getWeight().get();
 
-            // If there no more weight values to be removed
+            // If there are no more weight values to be removed
             if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
                 throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
             }
@@ -86,10 +91,16 @@ public class EditCommand extends Command {
         }
 
         Height updatedHeight = editPersonDescriptor.getHeight().orElse(personToEdit.getHeight());
+
         Note updatedNote = editPersonDescriptor.getNote().orElse(personToEdit.getNote());
+
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
+
+        // Modification of exercises cannot be performed as part of the edit command
+        ExerciseSet exerciseSet = personToEdit.getExerciseSet();
+
         return new Person(updatedName, updatedPhone, updatedEmail, updatedAddress,
-                toEditWeightMap, updatedHeight, updatedNote, updatedTags);
+                toEditWeightMap, updatedHeight, updatedNote, updatedTags, exerciseSet);
     }
 
     /**
