@@ -165,7 +165,7 @@ Edits information tagged to an existing client
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
-* Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list. 
+* Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
@@ -265,14 +265,14 @@ Format: `exit`
 
 ### Saving the data
 
-FitBook data is saved in the hard disk automatically after any command that changes the data. 
+FitBook data is saved in the hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 <hr>
 
 ### Editing the data file
 
-FitBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`. 
+FitBook data is saved automatically as a JSON file `[JAR file location]/data/addressbook.json`.
 Advanced users are welcome to update data directly by editing that data file.
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning:**
@@ -289,7 +289,7 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g.,
 To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact.
 
 <img src="images/QRScanning.png" height="480">
-<img src="images/QRContact.png" height="480"> 
+<img src="images/QRContact.png" height="480">
 <hr>
 
 ### Archiving data files `[coming in v2.0]`

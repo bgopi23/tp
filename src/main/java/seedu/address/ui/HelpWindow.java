@@ -22,17 +22,19 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-t17-3.github.io/tp/UserGuide.html";
     public static final String[][] COMMAND_DESCRIPTIONS = {
-        {"help", "Shows this window."},
         {"add", "Adds a client to FitBook."},
-        {"list", "Shows a list of all clients saved in FitBook."},
+        {"clear", "Clears all entries from FitBook. USE WITH CAUTION."},
+        {"delete", "Deletes the specified client from FitBook."},
         {"edit", "Edits an existing client in FitBook."},
-        {"weight", "Adds a new weight value to a client."},
-        {"note", "Adds a new note to a client."},
+        {"exit", "Exits FitBook."},
         {"find", "Finds all clients whose specified attribute contains the specified keyword"
                 + " (Uses name attribute if none specified)."},
-        {"delete", "Deletes the specified client from FitBook."},
-        {"clear", "Clears all entries from FitBook. USE WITH CAUTION."},
-        {"exit", "Exits FitBook."}
+        {"fitadd", "Adds exercise(s) to an existing client in FitBook."},
+        {"fitdelete", "Deletes exercise(s) from an existing client in FitBook."},
+        {"help", "Shows this window."},
+        {"list", "Shows a list of all clients saved in FitBook."},
+        {"note", "Adds a new note to a client."},
+        {"weight", "Adds a new weight value to a client."},
     };
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
