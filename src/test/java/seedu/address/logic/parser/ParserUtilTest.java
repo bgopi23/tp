@@ -227,13 +227,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseExerciseName_validValueWithoutWhitespace_returnsExerciseName() throws Exception {
-        assertEquals(VALID_EXERCISE_NAME.toLowerCase(), ParserUtil.parseExerciseName(Optional.of(VALID_EXERCISE_NAME)));
+        assertEquals(VALID_EXERCISE_NAME, ParserUtil.parseExerciseName(Optional.of(VALID_EXERCISE_NAME)));
     }
 
     @Test
     public void parseExerciseName_validValueWithWhitespace_returnsTrimmedExerciseName() throws Exception {
         String exerciseNameWithWhitespace = WHITESPACE + VALID_EXERCISE_NAME + WHITESPACE;
-        assertEquals(VALID_EXERCISE_NAME.toLowerCase(),
+        assertEquals(VALID_EXERCISE_NAME,
             ParserUtil.parseExerciseName(Optional.of(exerciseNameWithWhitespace)));
     }
 

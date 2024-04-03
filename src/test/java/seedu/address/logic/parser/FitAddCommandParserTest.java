@@ -80,7 +80,7 @@ public class FitAddCommandParserTest {
 
     @Test
     public void parse_exerciseSpecified_success() {
-        Exercise exercise = new Exercise(VALID_EXERCISE_NAME.toLowerCase(), Integer.parseInt(VALID_EXERCISE_SETS),
+        Exercise exercise = new Exercise(VALID_EXERCISE_NAME, Integer.parseInt(VALID_EXERCISE_SETS),
             Integer.parseInt(VALID_EXERCISE_REPS), Integer.parseInt(VALID_EXERCISE_BREAK));
         Set<Exercise> exerciseSet = new HashSet<>();
         exerciseSet.add(exercise);
