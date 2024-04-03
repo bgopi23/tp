@@ -18,6 +18,8 @@ import seedu.address.logic.messages.DeleteCommandMessages;
 import seedu.address.logic.messages.EditCommandMessages;
 import seedu.address.logic.messages.ExitCommandMessages;
 import seedu.address.logic.messages.FindCommandMessages;
+import seedu.address.logic.messages.FitAddCommandMessages;
+import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
 import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.logic.messages.WeightCommandMessages;
@@ -50,11 +52,11 @@ public class AddressBookParser {
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
 
-        // Note to developers: Change the log level in config.json to enable lower level (i.e., FINE, FINER and lower)
-        // log messages such as the one below.
+        // Note to developers: Change the log level in config.json to enable lower level
+        // (i.e., FINE, FINER and lower) log messages such as the one below.
         // Lower level log messages are used sparingly to minimize noise in the code.
         logger.fine("Command word: " + commandWord + "; Arguments: " + arguments);
-        switch (commandWord) {
+        switch (commandWord.toLowerCase()) {
         case NoteCommandMessages.COMMAND_WORD:
             return new NoteCommandParser().parse(arguments);
 
@@ -84,6 +86,12 @@ public class AddressBookParser {
 
         case HelpCommandMessages.COMMAND_WORD:
             return new HelpCommand();
+
+        case FitAddCommandMessages.COMMAND_WORD:
+            return new FitAddCommandParser().parse(arguments);
+
+        case FitDeleteCommandMessages.COMMAND_WORD:
+            return new FitDeleteCommandParser().parse(arguments);
 
         default:
             logger.finer("This user input caused a ParseException: " + userInput);

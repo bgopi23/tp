@@ -31,6 +31,7 @@ import seedu.address.logic.messages.HelpCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
+import seedu.address.model.person.predicates.AlwaysTruePredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
 import seedu.address.model.person.predicates.HeightContainsRangePredicate;
@@ -38,7 +39,6 @@ import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
-import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -91,10 +91,9 @@ public class AddressBookParserTest {
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
-        WeightMapContainsWeightRangePredicate weightPredicate =
-                new WeightMapContainsWeightRangePredicate(new Pair<>(0f, Float.MAX_VALUE));
-        HeightContainsRangePredicate heightPredicate =
-                new HeightContainsRangePredicate(new Pair<>(0f, Float.MAX_VALUE));
+        AlwaysTruePredicate weightPredicate = new AlwaysTruePredicate();
+        HeightContainsRangePredicate heightPredicate = new HeightContainsRangePredicate(
+                new Pair<>(0f, Float.MAX_VALUE));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
@@ -118,7 +117,7 @@ public class AddressBookParserTest {
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
         assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                        HelpCommandMessages.MESSAGE_USAGE), () -> parser.parseCommand(""));
+                HelpCommandMessages.MESSAGE_USAGE), () -> parser.parseCommand(""));
     }
 
     @Test

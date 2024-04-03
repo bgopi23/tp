@@ -14,14 +14,17 @@ import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
+import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -41,6 +44,12 @@ import seedu.address.model.tag.Tag;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+
+    @BeforeEach
+    public void resetModels() {
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    }
 
     @Test
     public void equals() {
@@ -365,6 +374,25 @@ public class FindCommandTest {
         expectedModel.updateFilteredPersonList(combinedPredicates);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
         assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_addPersonSearch_personFound() throws CommandException {
+        String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
+
+        AddCommand addHoonCommand = new AddCommand(HOON);
+        addHoonCommand.execute(model);
+        addHoonCommand.execute(expectedModel);
+
+        NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("Hoon Meier");
+
+        CombinedPredicates combinedPredicates = new CombinedPredicates(namePredicate);
+
+        FindCommand command = new FindCommand(new CombinedPredicates(namePredicate));
+        expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(HOON),
+                model.getFilteredPersonList());
     }
 
     @Test

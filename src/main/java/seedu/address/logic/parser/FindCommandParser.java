@@ -15,12 +15,14 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
+import seedu.address.model.person.predicates.AlwaysTruePredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
 import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
 import seedu.address.model.person.predicates.HeightContainsRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
+import seedu.address.model.person.predicates.SearchPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
 import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 
@@ -52,8 +54,10 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_EMAIL)));
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_ADDRESS)));
-        WeightMapContainsWeightRangePredicate weightPredicate = new WeightMapContainsWeightRangePredicate(
-                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)));
+        SearchPredicate<?> weightPredicate = argMultimap.getValue(PREFIX_WEIGHT).isPresent()
+                ? new WeightMapContainsWeightRangePredicate(
+                        ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)))
+                : new AlwaysTruePredicate();
         HeightContainsRangePredicate heightPredicate = new HeightContainsRangePredicate(
                 ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)));
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil
