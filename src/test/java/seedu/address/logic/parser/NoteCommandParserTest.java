@@ -28,27 +28,27 @@ public class NoteCommandParserTest {
     @Test
     public void parse_missingParts_failure() {
         // no index specified (note John)
-        assertParseFailure(parser, VALID_NOTE_NOT_EMPTY,
+        assertParseFailure(this.parser, VALID_NOTE_NOT_EMPTY,
                 String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         NoteCommandMessages.MESSAGE_USAGE));
 
         // no index and no field specified (note)
-        assertParseFailure(parser, "", String.format(Messages.MESSAGE_NO_INDEX,
+        assertParseFailure(this.parser, "", String.format(Messages.MESSAGE_NO_INDEX,
                 NoteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_invalidIndex_failure() {
         // negative index (note -5 n/John)
-        assertParseFailure(parser, "-5" + NAME_DESC_AMY,
+        assertParseFailure(this.parser, "-5" + NAME_DESC_AMY,
                 String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
         // zero index (note 0 n/John)
-        assertParseFailure(parser, "0" + NAME_DESC_AMY,
+        assertParseFailure(this.parser, "0" + NAME_DESC_AMY,
                 String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
         // invalid index (note -5)
-        assertParseFailure(parser, "-5",
+        assertParseFailure(this.parser, "-5",
                 String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                         NoteCommandMessages.MESSAGE_USAGE));
     }
@@ -60,7 +60,7 @@ public class NoteCommandParserTest {
 
         NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(VALID_NOTE_NOT_EMPTY));
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
@@ -70,7 +70,7 @@ public class NoteCommandParserTest {
 
         NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(""));
 
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
@@ -78,7 +78,7 @@ public class NoteCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + EDIT_TAG_RANDOM_CASE;
         NoteCommand expectedCommand = new NoteEditCommand(targetIndex);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     // (note 1 /edit moreText)
@@ -87,7 +87,7 @@ public class NoteCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + EDIT_TAG_WITH_MORE_WORDS;
         NoteCommand expectedCommand = new NoteCommand(targetIndex, new Note(EDIT_TAG_WITH_MORE_WORDS));
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
@@ -95,7 +95,7 @@ public class NoteCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + EDIT_TAG_LEADING_WHITESPACE;
         NoteCommand expectedCommand = new NoteEditCommand(targetIndex);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 
     @Test
@@ -103,6 +103,6 @@ public class NoteCommandParserTest {
         Index targetIndex = INDEX_FIRST_PERSON;
         String userInput = targetIndex.getOneBased() + " " + EDIT_TAG_TRAILING_WHITESPACE;
         NoteCommand expectedCommand = new NoteEditCommand(targetIndex);
-        assertParseSuccess(parser, userInput, expectedCommand);
+        assertParseSuccess(this.parser, userInput, expectedCommand);
     }
 }

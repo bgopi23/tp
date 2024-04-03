@@ -92,11 +92,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private Tab getWeightTab() {
-        return trackableFieldsTabPane.getTabs().get(0);
+        return this.trackableFieldsTabPane.getTabs().get(0);
     }
 
     private Tab getExerciseTab() {
-        return trackableFieldsTabPane.getTabs().get(1);
+        return this.trackableFieldsTabPane.getTabs().get(1);
     }
 
     /**
@@ -104,50 +104,50 @@ public class PersonDetailsPanel extends UiPart<Region> {
      */
     public void initialize() {
         // Initialize tab pane
-        trackableFieldsTabPane.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
+        this.trackableFieldsTabPane.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
 
         // Initialize weight chart
         CategoryAxis xAxis = new CategoryAxis();
-        weightYAxis = new NumberAxis();
+        this.weightYAxis = new NumberAxis();
 
         xAxis.setAnimated(false); // fixes the collapsed categories bug
         xAxis.setLabel("Date");
         xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
-        weightYAxis.setAnimated(false);
-        weightYAxis.setAutoRanging(false);
-        weightYAxis.setLabel("Weight (kg)");
-        weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        this.weightYAxis.setAnimated(false);
+        this.weightYAxis.setAutoRanging(false);
+        this.weightYAxis.setLabel("Weight (kg)");
+        this.weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
-        weightChart = new LineChart<>(xAxis, weightYAxis);
-        weightChart.setAnimated(false);
-        weightChart.setHorizontalGridLinesVisible(false);
-        weightChart.setVerticalGridLinesVisible(false);
-        weightChart.setTitle("Weight Tracking");
-        weightChart.setLegendVisible(false);
-        weightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
-        weightChart.setPrefHeight(200);
-        weightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
-        weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
-        weightChart.requestLayout();
+        this.weightChart = new LineChart<>(xAxis, this.weightYAxis);
+        this.weightChart.setAnimated(false);
+        this.weightChart.setHorizontalGridLinesVisible(false);
+        this.weightChart.setVerticalGridLinesVisible(false);
+        this.weightChart.setTitle("Weight Tracking");
+        this.weightChart.setLegendVisible(false);
+        this.weightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
+        this.weightChart.setPrefHeight(200);
+        this.weightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
+        this.weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
+        this.weightChart.requestLayout();
 
         // Initialize notes box
-        exercisesBox = new VBox();
-        exercisesBox.setPadding(new Insets(10, 10, 10, 10));
-        exercisesBox.setPrefHeight(200);
+        this.exercisesBox = new VBox();
+        this.exercisesBox.setPadding(new Insets(10, 10, 10, 10));
+        this.exercisesBox.setPrefHeight(200);
 
         // Create a scroll pane and set the notes box as its content
-        ScrollPane exerciseScrollPane = new ScrollPane(exercisesBox);
+        ScrollPane exerciseScrollPane = new ScrollPane(this.exercisesBox);
         exerciseScrollPane.setFitToWidth(true);
         exerciseScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
-        weightTab = getWeightTab();
-        weightTab.setContent(weightChart);
+        this.weightTab = getWeightTab();
+        this.weightTab.setContent(this.weightChart);
 
-        exerciseTab = getExerciseTab();
-        exerciseTab.setContent(exerciseScrollPane);
+        this.exerciseTab = getExerciseTab();
+        this.exerciseTab.setContent(exerciseScrollPane);
     }
 
     /**
@@ -156,43 +156,43 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * @param person the Person object containing the information to update the fields with.
      */
     public void update(Person person) {
-        detailsPane.setVisible(true);
+        this.detailsPane.setVisible(true);
 
         // Set fields with information from the person
-        name.setText(person.getName().toString());
-        phone.setText(person.getPhone().toString());
-        address.setText(person.getAddress().toString());
-        email.setText(person.getEmail().toString());
+        this.name.setText(person.getName().toString());
+        this.phone.setText(person.getPhone().toString());
+        this.address.setText(person.getAddress().toString());
+        this.email.setText(person.getEmail().toString());
 
         // Clear tags and set new ones
-        tags.getChildren().clear();
+        this.tags.getChildren().clear();
         person.getTags().stream()
             .sorted(Comparator.comparing(Tag::toString))
-            .forEach(tag -> tags.getChildren().add(new Label(tag.toString())));
+            .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isPresent()) {
             LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
             String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
-            weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
-            weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
+            this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
+            this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
                 + latestWeight.get().getValue().toString() + " kg");
         }
 
-        height.setText(person.getHeight().getFormattedHeight());
-        note.setText(person.getNote().toString());
-        qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
+        this.height.setText(person.getHeight().getFormattedHeight());
+        this.note.setText(person.getNote().toString());
+        this.qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
         // Clear tabs
-        trackableFieldsTabPane.getTabs().clear();
+        this.trackableFieldsTabPane.getTabs().clear();
 
         // Display weights graph
         if (latestWeight.isPresent()) {
-            trackableFieldsTabPane.getTabs().add(0, weightTab);
+            this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
             XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
 
-            weightChart.getData().clear();
-            weightChart.getData().add(weightSeries);
+            this.weightChart.getData().clear();
+            this.weightChart.getData().add(weightSeries);
         }
 
         // Display exercises
@@ -201,13 +201,13 @@ public class PersonDetailsPanel extends UiPart<Region> {
         exercisesTitle.setMaxWidth(Double.MAX_VALUE);
         exercisesTitle.setAlignment(Pos.CENTER);
 
-        exercisesBox.getChildren().clear();
-        exercisesBox.getChildren().add(exercisesTitle);
+        this.exercisesBox.getChildren().clear();
+        this.exercisesBox.getChildren().add(exercisesTitle);
 
         Set<Exercise> exercises = person.getExerciseSet().getValue();
 
         if (!exercises.isEmpty()) {
-            trackableFieldsTabPane.getTabs().add(exerciseTab);
+            this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
             List<Exercise> sortedExercises = exercises.stream()
                 .sorted(Comparator.comparing(Exercise::getName))
@@ -253,24 +253,23 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 breakBox.setPrefWidth(250);
 
                 HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
-                exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
+                this.exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
             }
         }
 
         // Bind manageability (presence) of node based on presence of value for optional fields
-        address.setVisible(!person.getAddress().getValue().isEmpty());
-        email.setVisible(!person.getEmail().getValue().isEmpty());
-        note.setVisible(!person.getNote().getValue().isEmpty());
-        weightDate.setVisible(latestWeight.isPresent());
-        weightValue.setVisible(latestWeight.isPresent());
-        height.setVisible(person.getHeight().isValid());
+        this.address.setVisible(!person.getAddress().getValue().isEmpty());
+        this.email.setVisible(!person.getEmail().getValue().isEmpty());
+        this.note.setVisible(!person.getNote().getValue().isEmpty());
+        this.weightDate.setVisible(latestWeight.isPresent());
+        this.weightValue.setVisible(latestWeight.isPresent());
 
-        address.managedProperty().bind(address.visibleProperty());
-        email.managedProperty().bind(email.visibleProperty());
-        weightDate.managedProperty().bind(weightDate.visibleProperty());
-        weightValue.managedProperty().bind(weightValue.visibleProperty());
-        height.managedProperty().bind(height.visibleProperty());
-        note.managedProperty().bind(note.visibleProperty());
+        this.address.managedProperty().bind(this.address.visibleProperty());
+        this.email.managedProperty().bind(this.email.visibleProperty());
+        this.weightDate.managedProperty().bind(this.weightDate.visibleProperty());
+        this.weightValue.managedProperty().bind(this.weightValue.visibleProperty());
+        this.height.managedProperty().bind(this.height.visibleProperty());
+        this.note.managedProperty().bind(this.note.visibleProperty());
 
         logger.info("Displayed details of person: " + person);
     }
@@ -279,17 +278,17 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * Clears all fields
      */
     public void clear() {
-        name.setText("");
-        phone.setText("");
-        address.setText("");
-        email.setText("");
-        note.setText("");
-        weightDate.setText("");
-        weightValue.setText("");
-        height.setText("");
-        tags.getChildren().clear();
-        qrcode.setImage(null);
-        trackableFieldsTabPane.getTabs().clear();
+        this.name.setText("");
+        this.phone.setText("");
+        this.address.setText("");
+        this.email.setText("");
+        this.note.setText("");
+        this.weightDate.setText("");
+        this.weightValue.setText("");
+        this.height.setText("");
+        this.tags.getChildren().clear();
+        this.qrcode.setImage(null);
+        this.trackableFieldsTabPane.getTabs().clear();
     }
 
     private XYChart.Series<String, Number> generateWeightSeries(Person p) {
@@ -316,8 +315,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
             }
         }
 
-        weightYAxis.setLowerBound(minWeight - 10);
-        weightYAxis.setUpperBound(maxWeight + 10);
+        this.weightYAxis.setLowerBound(minWeight - 10);
+        this.weightYAxis.setUpperBound(maxWeight + 10);
 
         return weightSeries;
     }
@@ -333,16 +332,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
             setPrefSize(10, 10);
 
             setOnMouseEntered(event -> {
-                getChildren().setAll(point, label);
-                label.setText(String.format("%s%s%s", prefix, value, postfix));
+                getChildren().setAll(this.point, this.label);
+                this.label.setText(String.format("%s%s%s", prefix, value, postfix));
                 toFront();
             });
             setOnMouseExited(event -> {
-                getChildren().setAll(point);
+                getChildren().setAll(this.point);
             });
 
             setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
-            getChildren().setAll(point);
+            getChildren().setAll(this.point);
         }
 
         private Node createDataPoint() {

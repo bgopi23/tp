@@ -23,19 +23,19 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteCommand() {
-        assertParseSuccess(parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
+        assertParseSuccess(this.parser, "1", new DeleteCommand(INDEX_FIRST_PERSON));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertParseFailure(this.parser, "a", String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 DeleteCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
     public void parse_emptyArgs_throwsParseException() {
         // (delete)
-        assertParseFailure(parser, "", String.format(Messages.MESSAGE_NO_INDEX,
+        assertParseFailure(this.parser, "", String.format(Messages.MESSAGE_NO_INDEX,
                 DeleteCommandMessages.MESSAGE_USAGE));
     }
 }

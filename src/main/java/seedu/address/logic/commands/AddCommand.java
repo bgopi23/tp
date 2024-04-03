@@ -21,7 +21,7 @@ public class AddCommand extends Command {
      */
     public AddCommand(Person person) {
         requireNonNull(person);
-        toAdd = person;
+        this.toAdd = person;
     }
 
     /**
@@ -30,7 +30,7 @@ public class AddCommand extends Command {
      * @return The warning message, or an empty string if none.
      */
     private String getMessageWarn() {
-        boolean isPhoneOfExpectedFormat = toAdd.getPhone().isExpectedFormat();
+        boolean isPhoneOfExpectedFormat = this.toAdd.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
             return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
@@ -43,13 +43,13 @@ public class AddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
 
-        if (model.hasPerson(toAdd)) {
+        if (model.hasPerson(this.toAdd)) {
             throw new CommandException(AddCommandMessages.MESSAGE_DUPLICATE_PERSON);
         }
 
-        model.addPerson(toAdd);
+        model.addPerson(this.toAdd);
 
-        String messageSuccess = String.format(AddCommandMessages.MESSAGE_SUCCESS, toAdd.getFormattedMessage());
+        String messageSuccess = String.format(AddCommandMessages.MESSAGE_SUCCESS, this.toAdd.getFormattedMessage());
         String messageWarn = this.getMessageWarn();
 
         String messageResult = String.format("%s%s", messageSuccess, messageWarn);
@@ -69,13 +69,13 @@ public class AddCommand extends Command {
         }
 
         AddCommand otherAddCommand = (AddCommand) other;
-        return toAdd.equals(otherAddCommand.toAdd);
+        return this.toAdd.equals(otherAddCommand.toAdd);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("toAdd", toAdd)
+                .add("toAdd", this.toAdd)
                 .toString();
     }
 }

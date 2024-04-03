@@ -99,7 +99,7 @@ public class Exercise {
      * @return The name of the exercise.
      */
     public String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -108,7 +108,7 @@ public class Exercise {
      * @return The number of sets for the exercise.
      */
     public int getSets() {
-        return sets;
+        return this.sets;
     }
 
     /**
@@ -117,7 +117,7 @@ public class Exercise {
      * @return The number of reps for the exercise.
      */
     public int getReps() {
-        return reps;
+        return this.reps;
     }
 
     /**
@@ -126,7 +126,7 @@ public class Exercise {
      * @return The break time in seconds for the exercise.
      */
     public int getBreakBetweenSets() {
-        return breakBetweenSets;
+        return this.breakBetweenSets;
     }
 
     @Override
@@ -141,16 +141,17 @@ public class Exercise {
         }
 
         Exercise otherExercise = (Exercise) other;
-        return name.equals(otherExercise.getName());
+        return this.name.equals(otherExercise.getName());
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name);
+        return Objects.hash(this.name);
     }
 
     @Override
     public String toString() {
-        return String.format("%s: %d sets of %d reps, %d min break between sets", name, sets, reps, breakBetweenSets);
+        return String.format("%s: %d sets of %d reps, %d min break between sets",
+                this.name, this.sets, this.reps, this.breakBetweenSets);
     }
 }

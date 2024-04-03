@@ -23,7 +23,7 @@ public class EditPersonDescriptorBuilder {
     private EditPersonDescriptor descriptor;
 
     public EditPersonDescriptorBuilder() {
-        descriptor = new EditPersonDescriptor();
+        this.descriptor = new EditPersonDescriptor();
     }
 
     public EditPersonDescriptorBuilder(EditPersonDescriptor descriptor) {
@@ -35,15 +35,15 @@ public class EditPersonDescriptorBuilder {
      * {@code person}'s details
      */
     public EditPersonDescriptorBuilder(Person person) {
-        descriptor = new EditPersonDescriptor();
-        descriptor.setName(person.getName());
-        descriptor.setPhone(person.getPhone());
-        descriptor.setEmail(person.getEmail());
-        descriptor.setAddress(person.getAddress());
-        descriptor.setWeight(person.getLatestWeight().get().getValue());
-        descriptor.setHeight(person.getHeight());
-        descriptor.setNote(person.getNote());
-        descriptor.setTags(person.getTags());
+        this.descriptor = new EditPersonDescriptor();
+        this.descriptor.setName(person.getName());
+        this.descriptor.setPhone(person.getPhone());
+        this.descriptor.setEmail(person.getEmail());
+        this.descriptor.setAddress(person.getAddress());
+        this.descriptor.setWeight(person.getLatestWeight().get().getValue());
+        this.descriptor.setHeight(person.getHeight());
+        this.descriptor.setNote(person.getNote());
+        this.descriptor.setTags(person.getTags());
     }
 
     /**
@@ -51,7 +51,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withName(String name) {
-        descriptor.setName(new Name(name));
+        this.descriptor.setName(new Name(name));
         return this;
     }
 
@@ -60,7 +60,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withPhone(String phone) {
-        descriptor.setPhone(new Phone(phone));
+        this.descriptor.setPhone(new Phone(phone));
         return this;
     }
 
@@ -69,7 +69,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
+        this.descriptor.setEmail(new Email(email));
         return this;
     }
 
@@ -78,7 +78,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withAddress(String address) {
-        descriptor.setAddress(new Address(address));
+        this.descriptor.setAddress(new Address(address));
         return this;
     }
 
@@ -87,7 +87,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withWeight(Float weight) {
-        descriptor.setWeight(new Weight(weight));
+        this.descriptor.setWeight(new Weight(weight));
         return this;
     }
 
@@ -96,7 +96,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withHeight(Float height) {
-        descriptor.setHeight(new Height(height));
+        this.descriptor.setHeight(new Height(height));
         return this;
     }
 
@@ -105,7 +105,7 @@ public class EditPersonDescriptorBuilder {
      * building.
      */
     public EditPersonDescriptorBuilder withNote(String note) {
-        descriptor.setNote(new Note(note));
+        this.descriptor.setNote(new Note(note));
         return this;
     }
 
@@ -116,11 +116,11 @@ public class EditPersonDescriptorBuilder {
      */
     public EditPersonDescriptorBuilder withTags(String... tags) {
         Set<Tag> tagSet = Stream.of(tags).map(Tag::new).collect(Collectors.toSet());
-        descriptor.setTags(tagSet);
+        this.descriptor.setTags(tagSet);
         return this;
     }
 
     public EditPersonDescriptor build() {
-        return descriptor;
+        return this.descriptor;
     }
 }

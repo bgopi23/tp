@@ -26,15 +26,15 @@ public class PersonListPanel extends UiPart<Region> {
      */
     public PersonListPanel(ObservableList<Person> personList) {
         super(FXML);
-        personListView.setItems(personList);
-        personListView.setCellFactory(listView -> new PersonListViewCell());
+        this.personListView.setItems(personList);
+        this.personListView.setCellFactory(listView -> new PersonListViewCell());
     }
 
     /**
      * Adds a listener for the person list view.
      */
     public void addListener(ChangeListener<Person> listener) {
-        personListView.getSelectionModel().selectedItemProperty().addListener(listener);
+        this.personListView.getSelectionModel().selectedItemProperty().addListener(listener);
     }
 
     public ListView<Person> getFxmlObject() {

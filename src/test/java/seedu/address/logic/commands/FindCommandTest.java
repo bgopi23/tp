@@ -47,8 +47,8 @@ public class FindCommandTest {
 
     @BeforeEach
     public void resetModels() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-        expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        this.model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+        this.expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     }
 
     @Test
@@ -91,38 +91,38 @@ public class FindCommandTest {
 
         // Empty name
         FindCommand command = new FindCommand(new CombinedPredicates(namePredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty phone
         command = new FindCommand(new CombinedPredicates(phonePredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty email
         command = new FindCommand(new CombinedPredicates(emailPredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty address
         command = new FindCommand(new CombinedPredicates(addressPredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty tags
         command = new FindCommand(new CombinedPredicates(tagsPredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty note
         command = new FindCommand(new CombinedPredicates(notePredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
 
         // Empty multiple
         command = new FindCommand(new CombinedPredicates(namePredicate, phonePredicate));
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), model.getFilteredPersonList());
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -130,9 +130,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("alonica");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -141,17 +141,17 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
         NameContainsSubstringPredicate predicate = new NameContainsSubstringPredicate("alice");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
         predicate = new NameContainsSubstringPredicate("meier");
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -159,9 +159,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         PhoneContainsSubstringPredicate predicate = new PhoneContainsSubstringPredicate("11111111");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -170,17 +170,17 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
         PhoneContainsSubstringPredicate predicate = new PhoneContainsSubstringPredicate("9435");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
         predicate = new PhoneContainsSubstringPredicate("9482");
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ELLE, FIONA, GEORGE), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -188,9 +188,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         EmailContainsSubstringPredicate predicate = new EmailContainsSubstringPredicate("alonica");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -199,17 +199,18 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
         EmailContainsSubstringPredicate predicate = new EmailContainsSubstringPredicate("johnd");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(BENSON), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
         predicate = new EmailContainsSubstringPredicate("example.com");
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE),
+                this.model.getFilteredPersonList());
     }
 
     @Test
@@ -217,9 +218,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         AddressContainsSubstringPredicate predicate = new AddressContainsSubstringPredicate("Republic City");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -228,17 +229,17 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
         AddressContainsSubstringPredicate predicate = new AddressContainsSubstringPredicate("tokyo");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(FIONA), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
         predicate = new AddressContainsSubstringPredicate("street");
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(CARL, DANIEL, GEORGE), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -249,9 +250,9 @@ public class FindCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("Enemies"))));
 
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -263,9 +264,9 @@ public class FindCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("owesmoney"))));
 
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(BENSON), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
@@ -273,9 +274,9 @@ public class FindCommandTest {
         predicate = new TagSetContainsAllTagsPredicate(new HashSet<>(Arrays.asList(new Tag("friends"))));
 
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -287,9 +288,9 @@ public class FindCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("owesmoney"), new Tag("friends"))));
 
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(BENSON), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -301,9 +302,9 @@ public class FindCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("fri"))));
 
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -315,9 +316,9 @@ public class FindCommandTest {
                 new HashSet<>(Arrays.asList(new Tag("FrIenDs"))));
 
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE, BENSON, DANIEL), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -325,9 +326,9 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_NO_CLIENTS_FOUND);
         NoteContainsSubstringPredicate predicate = new NoteContainsSubstringPredicate("enemy");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -336,17 +337,17 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
         NoteContainsSubstringPredicate predicate = new NoteContainsSubstringPredicate("love");
         FindCommand command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(FIONA), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(FIONA), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
         predicate = new NoteContainsSubstringPredicate("best");
         command = new FindCommand(new CombinedPredicates(predicate));
-        expectedModel.updateFilteredPersonList(predicate);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE, DANIEL), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(predicate);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE, DANIEL), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -360,9 +361,9 @@ public class FindCommandTest {
         CombinedPredicates combinedPredicates = new CombinedPredicates(notePredicate, namePredicate);
 
         FindCommand command = new FindCommand(new CombinedPredicates(notePredicate, namePredicate));
-        expectedModel.updateFilteredPersonList(combinedPredicates);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
 
         // Some match, some mismatch
         notePredicate = new NoteContainsSubstringPredicate("best");
@@ -371,9 +372,9 @@ public class FindCommandTest {
         combinedPredicates = new CombinedPredicates(notePredicate, namePredicate);
 
         command = new FindCommand(new CombinedPredicates(notePredicate, namePredicate));
-        expectedModel.updateFilteredPersonList(combinedPredicates);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.emptyList(), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Collections.emptyList(), this.model.getFilteredPersonList());
     }
 
     @Test
@@ -381,18 +382,18 @@ public class FindCommandTest {
         String expectedMessage = String.format(MESSAGE_ONE_CLIENT_FOUND);
 
         AddCommand addHoonCommand = new AddCommand(HOON);
-        addHoonCommand.execute(model);
-        addHoonCommand.execute(expectedModel);
+        addHoonCommand.execute(this.model);
+        addHoonCommand.execute(this.expectedModel);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("Hoon Meier");
 
         CombinedPredicates combinedPredicates = new CombinedPredicates(namePredicate);
 
         FindCommand command = new FindCommand(new CombinedPredicates(namePredicate));
-        expectedModel.updateFilteredPersonList(combinedPredicates);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        this.expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(Arrays.asList(HOON),
-                model.getFilteredPersonList());
+                this.model.getFilteredPersonList());
     }
 
     @Test
@@ -406,9 +407,9 @@ public class FindCommandTest {
         CombinedPredicates combinedPredicates = new CombinedPredicates(notePredicate, namePredicate);
 
         FindCommand command = new FindCommand(new CombinedPredicates(notePredicate, namePredicate));
-        expectedModel.updateFilteredPersonList(combinedPredicates);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(ALICE), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(ALICE), this.model.getFilteredPersonList());
 
         // Multiple persons found
         expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
@@ -420,9 +421,9 @@ public class FindCommandTest {
         combinedPredicates = new CombinedPredicates(tagsPredicate, phonePredicate);
 
         command = new FindCommand(new CombinedPredicates(tagsPredicate, phonePredicate));
-        expectedModel.updateFilteredPersonList(combinedPredicates);
-        assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Arrays.asList(BENSON, DANIEL), model.getFilteredPersonList());
+        this.expectedModel.updateFilteredPersonList(combinedPredicates);
+        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
+        assertEquals(Arrays.asList(BENSON, DANIEL), this.model.getFilteredPersonList());
     }
 
     @Test

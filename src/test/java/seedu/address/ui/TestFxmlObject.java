@@ -20,7 +20,7 @@ public class TestFxmlObject {
     }
 
     public String getText() {
-        return text;
+        return this.text;
     }
 
     public void setText(String text) {
@@ -39,7 +39,7 @@ public class TestFxmlObject {
         }
 
         TestFxmlObject otherTestFxmlObject = (TestFxmlObject) other;
-        return Objects.equals(text, otherTestFxmlObject.text);
+        return Objects.equals(this.text, otherTestFxmlObject.text);
     }
 
 }

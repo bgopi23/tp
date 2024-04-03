@@ -39,12 +39,12 @@ public class NoteCommand extends Command {
         assert (model != null);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(
                     String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.index.getZeroBased());
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -63,7 +63,7 @@ public class NoteCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !note.getValue().isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
+        String message = !this.note.getValue().isEmpty() ? MESSAGE_ADD_NOTE_SUCCESS : MESSAGE_DELETE_NOTE_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 
@@ -79,13 +79,13 @@ public class NoteCommand extends Command {
         }
 
         NoteCommand e = (NoteCommand) other;
-        return index.equals(e.index) && note.equals(e.note);
+        return this.index.equals(e.index) && this.note.equals(e.note);
     }
 
     /**
      * Returns the index of the object.
      */
     public Index getIndex() {
-        return index;
+        return this.index;
     }
 }

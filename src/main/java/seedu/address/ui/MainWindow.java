@@ -74,7 +74,7 @@ public class MainWindow extends UiPart<Stage> {
 
         setAccelerators();
 
-        helpWindow = new HelpWindow();
+        this.helpWindow = new HelpWindow();
     }
 
     /**
@@ -96,11 +96,11 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     public Stage getPrimaryStage() {
-        return primaryStage;
+        return this.primaryStage;
     }
 
     private void setAccelerators() {
-        setAccelerator(helpMenuItem, KeyCombination.valueOf("F1"));
+        setAccelerator(this.helpMenuItem, KeyCombination.valueOf("F1"));
     }
 
     /**
@@ -138,20 +138,20 @@ public class MainWindow extends UiPart<Stage> {
      * Fills up all the placeholders of this window.
      */
     void fillInnerParts() {
-        personListPanel = new PersonListPanel(logic.getFilteredPersonList());
+        this.personListPanel = new PersonListPanel(this.logic.getFilteredPersonList());
 
         // Update the details panel when a Person in the list is selected.
-        personListPanel.addListener((observable, oldValue, newValue) -> {
+        this.personListPanel.addListener((observable, oldValue, newValue) -> {
             // newValue can be null if the selection in the personListView is cleared
             if (newValue == null) {
-                personDetailsPanel.clear();
+                this.personDetailsPanel.clear();
             } else {
-                personDetailsPanel.update(newValue);
+                this.personDetailsPanel.update(newValue);
             }
         });
 
         // Update the details panel when the currently displayed Person is updated.
-        logic.getFilteredPersonList().addListener((ListChangeListener<? super Person>) c -> {
+        this.logic.getFilteredPersonList().addListener((ListChangeListener<? super Person>) c -> {
             while (c.next()) {
                 // adding and editing of clients
                 if (c.wasAdded()) {
@@ -160,40 +160,40 @@ public class MainWindow extends UiPart<Stage> {
                     // In all other cases when a person was added/edited, the list should be of size 1.
                     if (c.getAddedSize() == 1) {
                         Person p = c.getAddedSubList().get(0);
-                        personDetailsPanel.update(p);
+                        this.personDetailsPanel.update(p);
 
                         // Select the person in the person list to ensure the details displayed is always the details
                         // of the person selected in the person list.
-                        personListPanel.getFxmlObject().getSelectionModel().select(p);
+                        this.personListPanel.getFxmlObject().getSelectionModel().select(p);
                     }
                 }
             }
         });
 
-        personListPanelPlaceholder.getChildren().add(personListPanel.getRoot());
+        this.personListPanelPlaceholder.getChildren().add(this.personListPanel.getRoot());
 
-        resultDisplay = new ResultDisplay();
-        resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        this.resultDisplay = new ResultDisplay();
+        this.resultDisplayPlaceholder.getChildren().add(this.resultDisplay.getRoot());
 
-        personDetailsPanel = new PersonDetailsPanel();
-        personDetailsPanelPlaceholder.getChildren().add(personDetailsPanel.getRoot());
+        this.personDetailsPanel = new PersonDetailsPanel();
+        this.personDetailsPanelPlaceholder.getChildren().add(this.personDetailsPanel.getRoot());
 
-        StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getAddressBookFilePath());
-        statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
+        StatusBarFooter statusBarFooter = new StatusBarFooter(this.logic.getAddressBookFilePath());
+        this.statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
 
-        commandBox = new CommandBox(this::executeCommand);
-        commandBoxPlaceholder.getChildren().add(commandBox.getRoot());
+        this.commandBox = new CommandBox(this::executeCommand);
+        this.commandBoxPlaceholder.getChildren().add(this.commandBox.getRoot());
     }
 
     /**
      * Sets the default size based on {@code guiSettings}.
      */
     private void setWindowDefaultSize(GuiSettings guiSettings) {
-        primaryStage.setHeight(guiSettings.getWindowHeight());
-        primaryStage.setWidth(guiSettings.getWindowWidth());
+        this.primaryStage.setHeight(guiSettings.getWindowHeight());
+        this.primaryStage.setWidth(guiSettings.getWindowWidth());
         if (guiSettings.getWindowCoordinates() != null) {
-            primaryStage.setX(guiSettings.getWindowCoordinates().getX());
-            primaryStage.setY(guiSettings.getWindowCoordinates().getY());
+            this.primaryStage.setX(guiSettings.getWindowCoordinates().getX());
+            this.primaryStage.setY(guiSettings.getWindowCoordinates().getY());
         }
     }
 
@@ -202,15 +202,15 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleHelp() {
-        if (!helpWindow.isShowing()) {
-            helpWindow.show();
+        if (!this.helpWindow.isShowing()) {
+            this.helpWindow.show();
         } else {
-            helpWindow.focus();
+            this.helpWindow.focus();
         }
     }
 
     void show() {
-        primaryStage.show();
+        this.primaryStage.show();
     }
 
     /**
@@ -218,22 +218,22 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     private void handleExit() {
-        GuiSettings guiSettings = new GuiSettings(primaryStage.getWidth(), primaryStage.getHeight(),
-                (int) primaryStage.getX(), (int) primaryStage.getY());
+        GuiSettings guiSettings = new GuiSettings(this.primaryStage.getWidth(), this.primaryStage.getHeight(),
+                (int) this.primaryStage.getX(), (int) this.primaryStage.getY());
 
-        commandBox.freezeCommandBox();
+        this.commandBox.freezeCommandBox();
 
         Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), exitEvent -> {
-            logic.setGuiSettings(guiSettings);
-            helpWindow.hide();
-            primaryStage.hide();
+            this.logic.setGuiSettings(guiSettings);
+            this.helpWindow.hide();
+            this.primaryStage.hide();
         }));
 
         timeline.play();
     }
 
     public PersonListPanel getPersonListPanel() {
-        return personListPanel;
+        return this.personListPanel;
     }
 
     /**
@@ -243,9 +243,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
-            CommandResult commandResult = logic.execute(commandText);
-            logger.info("Result: " + commandResult.getFeedbackToUser());
-            resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
+            CommandResult commandResult = this.logic.execute(commandText);
+            this.logger.info("Result: " + commandResult.getFeedbackToUser());
+            this.resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 
             if (commandResult.isShowHelp()) {
                 handleHelp();
@@ -257,8 +257,8 @@ public class MainWindow extends UiPart<Stage> {
 
             return commandResult;
         } catch (CommandException | ParseException e) {
-            logger.info("An error occurred while executing command: " + commandText);
-            resultDisplay.setFeedbackToUser(e.getMessage());
+            this.logger.info("An error occurred while executing command: " + commandText);
+            this.resultDisplay.setFeedbackToUser(e.getMessage());
             throw e;
         }
     }
@@ -267,13 +267,13 @@ public class MainWindow extends UiPart<Stage> {
      * Sets the text of the command box.
      */
     public void setCommandBoxText(String text) {
-        commandBox.setText(text);
+        this.commandBox.setText(text);
     }
 
     /**
      * Moves the cursor of the command box to the end.
      */
     public void moveCommandBoxCursorToEnd() {
-        commandBox.moveCursorToEnd();
+        this.commandBox.moveCursorToEnd();
     }
 }

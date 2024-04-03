@@ -26,14 +26,14 @@ public class UniquePersonList implements Iterable<Person> {
 
     private final ObservableList<Person> internalList = FXCollections.observableArrayList();
     private final ObservableList<Person> internalUnmodifiableList =
-            FXCollections.unmodifiableObservableList(internalList);
+            FXCollections.unmodifiableObservableList(this.internalList);
 
     /**
      * Returns true if the list contains an equivalent person as the given argument.
      */
     public boolean contains(Person toCheck) {
         requireNonNull(toCheck);
-        return internalList.stream().anyMatch(toCheck::isSamePerson);
+        return this.internalList.stream().anyMatch(toCheck::isSamePerson);
     }
 
     /**
@@ -45,7 +45,7 @@ public class UniquePersonList implements Iterable<Person> {
         if (contains(toAdd)) {
             throw new DuplicatePersonException();
         }
-        internalList.add(toAdd);
+        this.internalList.add(toAdd);
     }
 
     /**
@@ -56,7 +56,7 @@ public class UniquePersonList implements Iterable<Person> {
     public void setPerson(Person target, Person editedPerson) {
         requireAllNonNull(target, editedPerson);
 
-        int index = internalList.indexOf(target);
+        int index = this.internalList.indexOf(target);
         if (index == -1) {
             throw new PersonNotFoundException();
         }
@@ -65,7 +65,7 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        internalList.set(index, editedPerson);
+        this.internalList.set(index, editedPerson);
     }
 
     /**
@@ -74,14 +74,14 @@ public class UniquePersonList implements Iterable<Person> {
      */
     public void remove(Person toRemove) {
         requireNonNull(toRemove);
-        if (!internalList.remove(toRemove)) {
+        if (!this.internalList.remove(toRemove)) {
             throw new PersonNotFoundException();
         }
     }
 
     public void setPersons(UniquePersonList replacement) {
         requireNonNull(replacement);
-        internalList.setAll(replacement.internalList);
+        this.internalList.setAll(replacement.internalList);
     }
 
     /**
@@ -94,19 +94,19 @@ public class UniquePersonList implements Iterable<Person> {
             throw new DuplicatePersonException();
         }
 
-        internalList.setAll(persons);
+        this.internalList.setAll(persons);
     }
 
     /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Person> asUnmodifiableObservableList() {
-        return internalUnmodifiableList;
+        return this.internalUnmodifiableList;
     }
 
     @Override
     public Iterator<Person> iterator() {
-        return internalList.iterator();
+        return this.internalList.iterator();
     }
 
     @Override
@@ -121,17 +121,17 @@ public class UniquePersonList implements Iterable<Person> {
         }
 
         UniquePersonList otherUniquePersonList = (UniquePersonList) other;
-        return internalList.equals(otherUniquePersonList.internalList);
+        return this.internalList.equals(otherUniquePersonList.internalList);
     }
 
     @Override
     public int hashCode() {
-        return internalList.hashCode();
+        return this.internalList.hashCode();
     }
 
     @Override
     public String toString() {
-        return internalList.toString();
+        return this.internalList.toString();
     }
 
     /**

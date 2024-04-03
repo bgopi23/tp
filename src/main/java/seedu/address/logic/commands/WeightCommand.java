@@ -54,11 +54,11 @@ public class WeightCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX_WEIGHT);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.index.getZeroBased());
 
         NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
         if (this.weightEntry.getValue().getValue().getValue() == 0f) {
@@ -92,7 +92,7 @@ public class WeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(weightEntry.getValue().getValue().getValue() == 0f)
+        String message = !(this.weightEntry.getValue().getValue().getValue() == 0f)
                 ? WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS
                 : WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());

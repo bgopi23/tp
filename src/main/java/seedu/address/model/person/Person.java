@@ -97,19 +97,19 @@ public class Person {
     }
 
     public Name getName() {
-        return name;
+        return this.name;
     }
 
     public Phone getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public Email getEmail() {
-        return email;
+        return this.email;
     }
 
     public Address getAddress() {
-        return address;
+        return this.address;
     }
 
     public Optional<Map.Entry<LocalDateTime, Weight>> getLatestWeight() {
@@ -198,30 +198,30 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
-                && email.equals(otherPerson.email)
-                && address.equals(otherPerson.address)
-                && tags.equals(otherPerson.tags)
-                && note.equals(otherPerson.note)
-                && exerciseSet.equals(otherPerson.exerciseSet);
+        return this.name.equals(otherPerson.name)
+                && this.phone.equals(otherPerson.phone)
+                && this.email.equals(otherPerson.email)
+                && this.address.equals(otherPerson.address)
+                && this.tags.equals(otherPerson.tags)
+                && this.note.equals(otherPerson.note)
+                && this.exerciseSet.equals(otherPerson.exerciseSet);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address, tags, exerciseSet);
+        return Objects.hash(this.name, this.phone, this.email, this.address, this.tags, this.exerciseSet);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
-                .add("email", email)
-                .add("address", address)
-                .add("note", note)
-                .add("tags", tags)
+                .add("name", this.name)
+                .add("phone", this.phone)
+                .add("email", this.email)
+                .add("address", this.address)
+                .add("note", this.note)
+                .add("tags", this.tags)
                 .toString();
     }
 
@@ -252,31 +252,31 @@ public class Person {
     public String getFormattedMessage() {
         StringBuilder sb = new StringBuilder();
 
-        sb.append("Name: ").append(name);
-        sb.append(" | Phone: ").append(phone);
+        sb.append("Name: ").append(this.name);
+        sb.append(" | Phone: ").append(this.phone);
 
-        if (!email.getValue().isEmpty()) {
-            sb.append(" | Email: ").append(email);
+        if (!this.email.getValue().isEmpty()) {
+            sb.append(" | Email: ").append(this.email);
         }
 
-        if (!address.getValue().isEmpty()) {
-            sb.append("\nAddress: ").append(address);
+        if (!this.address.getValue().isEmpty()) {
+            sb.append("\nAddress: ").append(this.address);
         }
 
-        if (!note.getValue().isEmpty()) {
-            sb.append(" | Note: ").append(note);
+        if (!this.note.getValue().isEmpty()) {
+            sb.append(" | Note: ").append(this.note);
         }
 
-        if (!weights.getValue().isEmpty()) {
+        if (!this.weights.getValue().isEmpty()) {
             sb.append(" | Latest Weight: ").append(this.getLatestWeight().get().getValue().toString());
         }
 
-        if (!(height.getValue() == 0f)) {
-            sb.append(" | Height: ").append(height);
+        if (!(this.height.getValue() == 0f)) {
+            sb.append(" | Height: ").append(this.height);
         }
 
         if (!this.getTags().isEmpty()) {
-            sb.append(" | Tags: ").append(tags);
+            sb.append(" | Tags: ").append(this.tags);
         }
 
         return sb.toString();

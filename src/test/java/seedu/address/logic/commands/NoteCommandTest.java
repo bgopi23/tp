@@ -32,7 +32,7 @@ class NoteCommandTest {
 
     @Test
     public void execute_addNoteUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
@@ -40,15 +40,15 @@ class NoteCommandTest {
         String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_deleteNoteUnfilteredList_success() {
-        Person firstPerson = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote(EMPTY_NOTE).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
@@ -56,15 +56,15 @@ class NoteCommandTest {
         String expectedMessage = String.format(NoteCommandMessages.MESSAGE_DELETE_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()), new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(noteCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_addNoteUnfilteredListWithoutEmail_success() {
-        Person firstPerson = modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person firstPerson = this.modelWithoutEmail.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Person editedPerson = new PersonBuilder(firstPerson).withNote(NOTE_STUB).build();
 
         NoteCommand noteCommand = new NoteCommand(INDEX_FIRST_PERSON, new Note(editedPerson.getNote().getValue()));
@@ -72,17 +72,18 @@ class NoteCommandTest {
         String expectedMessage = String.format(NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS,
                 editedPerson.getFormattedMessage());
 
-        Model expectedModel = new ModelManager(new AddressBook(modelWithoutEmail.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.modelWithoutEmail.getAddressBook()),
+                new UserPrefs());
         expectedModel.setPerson(firstPerson, editedPerson);
 
-        assertCommandSuccess(noteCommand, modelWithoutEmail, expectedMessage, expectedModel);
+        assertCommandSuccess(noteCommand, this.modelWithoutEmail, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidIndex_failure() {
-        Index invalidIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index invalidIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
         NoteCommand noteCommand = new NoteCommand(invalidIndex, new Note(NOTE_STUB));
-        assertCommandFailure(noteCommand, model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertCommandFailure(noteCommand, this.model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
                 NoteCommandMessages.MESSAGE_USAGE));
     }
 

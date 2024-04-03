@@ -33,14 +33,14 @@ public class FitAddCommandTest {
 
     @Test
     public void execute_validIndexAndExercise_success() {
-        Person personToEdit = model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
+        Person personToEdit = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
         Exercise exerciseToAdd = new Exercise("Test Exercise", 3, 10, 60);
         Set<Exercise> exercisesToAdd = new HashSet<>(List.of(exerciseToAdd));
         FitAddCommand fitAddCommand = new FitAddCommand(INDEX_FIRST_PERSON, exercisesToAdd);
 
         String expectedMessage = FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS;
 
-        Model expectedModel = new ModelManager(new AddressBook(model.getAddressBook()), new UserPrefs());
+        Model expectedModel = new ModelManager(new AddressBook(this.model.getAddressBook()), new UserPrefs());
 
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
             personToEdit.getAddress(), personToEdit.getWeights(), personToEdit.getHeight(),
@@ -49,29 +49,29 @@ public class FitAddCommandTest {
 
         expectedModel.setPerson(personToEdit, editedPerson);
 
-        assertCommandSuccess(fitAddCommand, model, expectedMessage, expectedModel);
+        assertCommandSuccess(fitAddCommand, this.model, expectedMessage, expectedModel);
     }
 
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredPersonList().size() + 1);
+        Index outOfBoundIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
         Set<Exercise> exercisesToAdd = new HashSet<>();
         FitAddCommand fitAddCommand = new FitAddCommand(outOfBoundIndex, exercisesToAdd);
 
-        assertCommandFailure(fitAddCommand, model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
+        assertCommandFailure(fitAddCommand, this.model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
     }
 
     @Test
     public void execute_invalidPersonIndexFilteredList_failure() {
-        showPersonAtIndex(model, INDEX_FIRST_PERSON);
+        showPersonAtIndex(this.model, INDEX_FIRST_PERSON);
         Index outOfBoundIndex = INDEX_SECOND_PERSON;
         // ensures that outOfBoundIndex is still in bounds of address book list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getPersonList().size());
+        assertTrue(outOfBoundIndex.getZeroBased() < this.model.getAddressBook().getPersonList().size());
 
         Set<Exercise> exercisesToAdd = new HashSet<>();
         FitAddCommand fitAddCommand = new FitAddCommand(outOfBoundIndex, exercisesToAdd);
 
-        assertCommandFailure(fitAddCommand, model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
+        assertCommandFailure(fitAddCommand, this.model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
     }
 
     @Test

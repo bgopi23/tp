@@ -29,7 +29,7 @@ public class CommandBox extends UiPart<Region> {
         super(FXML);
         this.commandExecutor = commandExecutor;
         // calls #setStyleToDefault() whenever there is a change to the text of the command box.
-        commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
+        this.commandTextField.textProperty().addListener((unused1, unused2, unused3) -> setStyleToDefault());
     }
 
     /**
@@ -37,16 +37,16 @@ public class CommandBox extends UiPart<Region> {
      */
     @FXML
     private void handleCommandEntered() {
-        String commandText = commandTextField.getText();
+        String commandText = this.commandTextField.getText();
         if (commandText.equals("")) {
             return;
         }
 
         try {
-            CommandResult result = commandExecutor.execute(commandText);
+            CommandResult result = this.commandExecutor.execute(commandText);
             // Do not clear if the user is editing a note
             if (!result.getFeedbackToUser().contains(NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER)) {
-                commandTextField.setText("");
+                this.commandTextField.setText("");
             }
         } catch (CommandException | ParseException e) {
             setStyleToIndicateCommandFailure();
@@ -57,14 +57,14 @@ public class CommandBox extends UiPart<Region> {
      * Sets the command box style to use the default style.
      */
     private void setStyleToDefault() {
-        commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
+        this.commandTextField.getStyleClass().remove(ERROR_STYLE_CLASS);
     }
 
     /**
      * Sets the command box style to indicate a failed command.
      */
     private void setStyleToIndicateCommandFailure() {
-        ObservableList<String> styleClass = commandTextField.getStyleClass();
+        ObservableList<String> styleClass = this.commandTextField.getStyleClass();
 
         if (styleClass.contains(ERROR_STYLE_CLASS)) {
             return;
@@ -77,9 +77,9 @@ public class CommandBox extends UiPart<Region> {
      * Disables the command input field to prevent user input.
      */
     public void freezeCommandBox() {
-        commandTextField.setDisable(true);
-        commandTextField.clear();
-        commandTextField.setPromptText("Exiting...");
+        this.commandTextField.setDisable(true);
+        this.commandTextField.clear();
+        this.commandTextField.setPromptText("Exiting...");
     }
 
     /**
@@ -99,13 +99,13 @@ public class CommandBox extends UiPart<Region> {
      * Sets the text of the commandTextField to the specified text.
      */
     public void setText(String text) {
-        commandTextField.setText(text);
+        this.commandTextField.setText(text);
     }
 
     /**
      * Moves the cursor to the end of the command text field.
      */
     public void moveCursorToEnd() {
-        commandTextField.positionCaret(Integer.MAX_VALUE);
+        this.commandTextField.positionCaret(Integer.MAX_VALUE);
     }
 }

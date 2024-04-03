@@ -76,15 +76,15 @@ public class FitAddCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.index.getZeroBased());
 
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
-        for (Exercise exerciseToAdd : exercisesToAdd) {
+        for (Exercise exerciseToAdd : this.exercisesToAdd) {
             if (updatedExercises.contains(exerciseToAdd)) {
                 for (Exercise e : updatedExercises) {
                     if (e.equals(exerciseToAdd)) {
@@ -129,7 +129,7 @@ public class FitAddCommand extends Command {
         }
 
         FitAddCommand otherFitAddCommand = (FitAddCommand) other;
-        return index.equals(otherFitAddCommand.index)
-            && exercisesToAdd.equals(otherFitAddCommand.exercisesToAdd);
+        return this.index.equals(otherFitAddCommand.index)
+            && this.exercisesToAdd.equals(otherFitAddCommand.exercisesToAdd);
     }
 }

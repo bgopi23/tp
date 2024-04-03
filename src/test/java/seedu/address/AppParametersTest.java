@@ -21,22 +21,22 @@ public class AppParametersTest {
 
     @Test
     public void parse_validConfigPath_success() {
-        parametersStub.namedParameters.put("config", "config.json");
-        expected.setConfigPath(Paths.get("config.json"));
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        this.parametersStub.namedParameters.put("config", "config.json");
+        this.expected.setConfigPath(Paths.get("config.json"));
+        assertEquals(this.expected, AppParameters.parse(this.parametersStub));
     }
 
     @Test
     public void parse_nullConfigPath_success() {
-        parametersStub.namedParameters.put("config", null);
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        this.parametersStub.namedParameters.put("config", null);
+        assertEquals(this.expected, AppParameters.parse(this.parametersStub));
     }
 
     @Test
     public void parse_invalidConfigPath_success() {
-        parametersStub.namedParameters.put("config", "a\0");
-        expected.setConfigPath(null);
-        assertEquals(expected, AppParameters.parse(parametersStub));
+        this.parametersStub.namedParameters.put("config", "a\0");
+        this.expected.setConfigPath(null);
+        assertEquals(this.expected, AppParameters.parse(this.parametersStub));
     }
 
     @Test
@@ -83,7 +83,7 @@ public class AppParametersTest {
 
         @Override
         public Map<String, String> getNamed() {
-            return Collections.unmodifiableMap(namedParameters);
+            return Collections.unmodifiableMap(this.namedParameters);
         }
     }
 }

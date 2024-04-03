@@ -78,7 +78,7 @@ public class FindCommandParserTest {
 
     @Test
     public void parse_emptyArg_throwsParseException() {
-        assertParseFailure(parser, "     ",
+        assertParseFailure(this.parser, "     ",
                 String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindCommandMessages.MESSAGE_USAGE));
     }
 
@@ -89,10 +89,10 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_NAME, NAME), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_NAME, NAME), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_NAME, NAME), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_NAME, NAME), expectedCommand);
     }
 
     @Test
@@ -102,10 +102,10 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_PHONE, PHONE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_PHONE, PHONE), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_PHONE, PHONE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_PHONE, PHONE), expectedCommand);
     }
 
     @Test
@@ -115,10 +115,10 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_EMAIL, EMAIL), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_EMAIL, EMAIL), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_EMAIL, EMAIL), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_EMAIL, EMAIL), expectedCommand);
     }
 
     @Test
@@ -128,10 +128,10 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_ADDRESS, ADDRESS), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_ADDRESS, ADDRESS), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_ADDRESS, ADDRESS), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_ADDRESS, ADDRESS), expectedCommand);
     }
 
     @Test
@@ -141,10 +141,10 @@ public class FindCommandParserTest {
                 ADDRESS_PREDICATE_EMPTY,
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE, TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_NOTE, NOTE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_NOTE, NOTE), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_NOTE, NOTE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_NOTE, NOTE), expectedCommand);
     }
 
     @Test
@@ -154,10 +154,10 @@ public class FindCommandParserTest {
                 ADDRESS_PREDICATE_EMPTY,
                 WEIGHT_PREDICATE, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_WEIGHT, WEIGHT_RANGE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_WEIGHT, WEIGHT_RANGE), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_WEIGHT, WEIGHT_RANGE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_WEIGHT, WEIGHT_RANGE), expectedCommand);
     }
 
     @Test
@@ -167,10 +167,10 @@ public class FindCommandParserTest {
                 ADDRESS_PREDICATE_EMPTY,
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_HEIGHT, HEIGHT_RANGE), expectedCommand);
     }
 
     @Test
@@ -180,10 +180,10 @@ public class FindCommandParserTest {
                 ADDRESS_PREDICATE_EMPTY, WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY,
                 NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
 
-        assertParseSuccess(parser, String.format(" %s%s", PREFIX_TAG, TAG), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s", PREFIX_TAG, TAG), expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n", PREFIX_TAG, TAG), expectedCommand);
+        assertParseSuccess(this.parser, String.format(" %s%s \n", PREFIX_TAG, TAG), expectedCommand);
     }
 
     @Test
@@ -193,11 +193,11 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format(" %s%s %s%s", PREFIX_NAME, NAME, PREFIX_PHONE, PHONE),
+        assertParseSuccess(this.parser, String.format(" %s%s %s%s", PREFIX_NAME, NAME, PREFIX_PHONE, PHONE),
                 expectedCommand);
 
         // multiple whitespaces
-        assertParseSuccess(parser, String.format(" %s%s \n %s%s", PREFIX_NAME, NAME, PREFIX_PHONE, PHONE),
+        assertParseSuccess(this.parser, String.format(" %s%s \n %s%s", PREFIX_NAME, NAME, PREFIX_PHONE, PHONE),
                 expectedCommand);
     }
 
@@ -214,7 +214,7 @@ public class FindCommandParserTest {
                 NOTE_PREDICATE_EMPTY, TAGS_PREDICATE_EMPTY);
         FindCommand expectedCommand = new FindCommand(expectedPredicates);
 
-        assertParseSuccess(parser, NAME, expectedCommand);
+        assertParseSuccess(this.parser, NAME, expectedCommand);
     }
 
     @Test
@@ -223,7 +223,7 @@ public class FindCommandParserTest {
                 NAME_PREDICATE, PHONE_PREDICATE_EMPTY, EMAIL_PREDICATE_EMPTY, ADDRESS_PREDICATE_EMPTY,
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY, TAGS_PREDICATE));
 
-        assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_TAG, TAG),
+        assertParseSuccess(this.parser, String.format("%s %s%s", NAME, PREFIX_TAG, TAG),
                 expectedCommand);
     }
 
@@ -234,7 +234,7 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_EMAIL, EMAIL),
+        assertParseSuccess(this.parser, String.format("%s %s%s", NAME, PREFIX_EMAIL, EMAIL),
                 expectedCommand);
     }
 
@@ -245,7 +245,7 @@ public class FindCommandParserTest {
                 WEIGHT_PREDICATE_EMPTY, HEIGHT_PREDICATE_EMPTY, NOTE_PREDICATE_EMPTY,
                 TAGS_PREDICATE_EMPTY));
 
-        assertParseSuccess(parser, String.format("%s %s%s", NAME, PREFIX_ADDRESS, ADDRESS),
+        assertParseSuccess(this.parser, String.format("%s %s%s", NAME, PREFIX_ADDRESS, ADDRESS),
                 expectedCommand);
     }
 }

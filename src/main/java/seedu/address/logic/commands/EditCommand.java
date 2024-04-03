@@ -123,13 +123,13 @@ public class EditCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.index.getZeroBased());
 
-        Person editedPerson = createEditedPerson(personToEdit, editPersonDescriptor);
+        Person editedPerson = createEditedPerson(personToEdit, this.editPersonDescriptor);
 
         if (!personToEdit.isSamePerson(editedPerson) && model.hasPerson(editedPerson)) {
             throw new CommandException(MESSAGE_DUPLICATE_PERSON);
@@ -158,15 +158,15 @@ public class EditCommand extends Command {
         }
 
         EditCommand otherEditCommand = (EditCommand) other;
-        return index.equals(otherEditCommand.index)
-                && editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
+        return this.index.equals(otherEditCommand.index)
+                && this.editPersonDescriptor.equals(otherEditCommand.editPersonDescriptor);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("index", index)
-                .add("editPersonDescriptor", editPersonDescriptor)
+                .add("index", this.index)
+                .add("editPersonDescriptor", this.editPersonDescriptor)
                 .toString();
     }
 
@@ -206,11 +206,12 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(name, phone, email, address, weight, height, note, tags);
+            return CollectionUtil.isAnyNonNull(this.name, this.phone, this.email,
+                    this.address, this.weight, this.height, this.note, this.tags);
         }
 
         public Optional<Name> getName() {
-            return Optional.ofNullable(name);
+            return Optional.ofNullable(this.name);
         }
 
         public void setName(Name name) {
@@ -218,7 +219,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Phone> getPhone() {
-            return Optional.ofNullable(phone);
+            return Optional.ofNullable(this.phone);
         }
 
         public void setPhone(Phone phone) {
@@ -226,7 +227,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Email> getEmail() {
-            return Optional.ofNullable(email);
+            return Optional.ofNullable(this.email);
         }
 
         public void setEmail(Email email) {
@@ -234,7 +235,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Address> getAddress() {
-            return Optional.ofNullable(address);
+            return Optional.ofNullable(this.address);
         }
 
         public void setAddress(Address address) {
@@ -242,7 +243,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Note> getNote() {
-            return Optional.ofNullable(note);
+            return Optional.ofNullable(this.note);
         }
 
         public void setNote(Note note) {
@@ -258,7 +259,7 @@ public class EditCommand extends Command {
         }
 
         public Optional<Height> getHeight() {
-            return Optional.ofNullable(height);
+            return Optional.ofNullable(this.height);
         }
 
         public void setHeight(Height height) {
@@ -272,7 +273,7 @@ public class EditCommand extends Command {
          * Returns {@code Optional#empty()} if {@code tags} is null.
          */
         public Optional<Set<Tag>> getTags() {
-            return (tags != null) ? Optional.of(Collections.unmodifiableSet(tags)) : Optional.empty();
+            return (this.tags != null) ? Optional.of(Collections.unmodifiableSet(this.tags)) : Optional.empty();
         }
 
         /**
@@ -295,27 +296,27 @@ public class EditCommand extends Command {
             }
 
             EditPersonDescriptor otherEditPersonDescriptor = (EditPersonDescriptor) other;
-            return Objects.equals(name, otherEditPersonDescriptor.name)
-                    && Objects.equals(phone, otherEditPersonDescriptor.phone)
-                    && Objects.equals(email, otherEditPersonDescriptor.email)
-                    && Objects.equals(address, otherEditPersonDescriptor.address)
-                    && Objects.equals(weight, otherEditPersonDescriptor.weight)
-                    && Objects.equals(height, otherEditPersonDescriptor.height)
-                    && Objects.equals(note, otherEditPersonDescriptor.note)
-                    && Objects.equals(tags, otherEditPersonDescriptor.tags);
+            return Objects.equals(this.name, otherEditPersonDescriptor.name)
+                    && Objects.equals(this.phone, otherEditPersonDescriptor.phone)
+                    && Objects.equals(this.email, otherEditPersonDescriptor.email)
+                    && Objects.equals(this.address, otherEditPersonDescriptor.address)
+                    && Objects.equals(this.weight, otherEditPersonDescriptor.weight)
+                    && Objects.equals(this.height, otherEditPersonDescriptor.height)
+                    && Objects.equals(this.note, otherEditPersonDescriptor.note)
+                    && Objects.equals(this.tags, otherEditPersonDescriptor.tags);
         }
 
         @Override
         public String toString() {
             return new ToStringBuilder(this)
-                    .add("name", name)
-                    .add("phone", phone)
-                    .add("email", email)
-                    .add("address", address)
-                    .add("weight", weight)
-                    .add("height", height)
-                    .add("note", note)
-                    .add("tags", tags)
+                    .add("name", this.name)
+                    .add("phone", this.phone)
+                    .add("email", this.email)
+                    .add("address", this.address)
+                    .add("weight", this.weight)
+                    .add("height", this.height)
+                    .add("note", this.note)
+                    .add("tags", this.tags)
                     .toString();
         }
     }

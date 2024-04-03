@@ -26,11 +26,11 @@ public class Index {
     }
 
     public int getZeroBased() {
-        return zeroBasedIndex;
+        return this.zeroBasedIndex;
     }
 
     public int getOneBased() {
-        return zeroBasedIndex + 1;
+        return this.zeroBasedIndex + 1;
     }
 
     /**
@@ -59,11 +59,11 @@ public class Index {
         }
 
         Index otherIndex = (Index) other;
-        return zeroBasedIndex == otherIndex.zeroBasedIndex;
+        return this.zeroBasedIndex == otherIndex.zeroBasedIndex;
     }
 
     @Override
     public String toString() {
-        return new ToStringBuilder(this).add("zeroBasedIndex", zeroBasedIndex).toString();
+        return new ToStringBuilder(this).add("zeroBasedIndex", this.zeroBasedIndex).toString();
     }
 }

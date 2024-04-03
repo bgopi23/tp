@@ -32,7 +32,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
-        model.updateFilteredPersonList(predicates);
+        model.updateFilteredPersonList(this.predicates);
         int listSize = model.getFilteredPersonList().size();
 
         if (listSize == 0) {
@@ -59,13 +59,13 @@ public class FindCommand extends Command {
         }
 
         FindCommand otherFindCommand = (FindCommand) other;
-        return predicates.equals(otherFindCommand.predicates);
+        return this.predicates.equals(otherFindCommand.predicates);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("predicates", predicates)
+                .add("predicates", this.predicates)
                 .toString();
     }
 }

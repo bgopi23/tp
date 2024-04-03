@@ -13,7 +13,7 @@ public class AddressBookBuilder {
     private AddressBook addressBook;
 
     public AddressBookBuilder() {
-        addressBook = new AddressBook();
+        this.addressBook = new AddressBook();
     }
 
     public AddressBookBuilder(AddressBook addressBook) {
@@ -24,11 +24,11 @@ public class AddressBookBuilder {
      * Adds a new {@code Person} to the {@code AddressBook} that we are building.
      */
     public AddressBookBuilder withPerson(Person person) {
-        addressBook.addPerson(person);
+        this.addressBook.addPerson(person);
         return this;
     }
 
     public AddressBook build() {
-        return addressBook;
+        return this.addressBook;
     }
 }

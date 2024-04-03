@@ -44,25 +44,26 @@ public class FitDeleteCommand extends Command {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
+        if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE);
         }
 
-        Person personToEdit = lastShownList.get(index.getZeroBased());
+        Person personToEdit = lastShownList.get(this.index.getZeroBased());
         Person editedPerson = getEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
         model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(
-            String.format(deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
-                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseName.orElse(""))));
+            String.format(this.deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
+                : String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS,
+                    this.exerciseName.orElse(""))));
     }
 
     private Person getEditedPerson(Person personToEdit) throws CommandException {
         ExerciseSet updatedExerciseSet = new ExerciseSet(new HashSet<>());
 
-        if (deleteAll) {
+        if (this.deleteAll) {
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
             if (updatedExercises.isEmpty()) {
@@ -70,7 +71,7 @@ public class FitDeleteCommand extends Command {
             }
         } else {
             Exercise exerciseToDelete =
-                new Exercise(exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS,
+                new Exercise(this.exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS,
                     Exercise.DEFAULT_BREAK);
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
@@ -99,8 +100,8 @@ public class FitDeleteCommand extends Command {
         }
 
         FitDeleteCommand otherFitDeleteCommand = (FitDeleteCommand) other;
-        return index.equals(otherFitDeleteCommand.index)
-            && exerciseName.equals(otherFitDeleteCommand.exerciseName)
-            && deleteAll == otherFitDeleteCommand.deleteAll;
+        return this.index.equals(otherFitDeleteCommand.index)
+            && this.exerciseName.equals(otherFitDeleteCommand.exerciseName)
+            && this.deleteAll == otherFitDeleteCommand.deleteAll;
     }
 }
