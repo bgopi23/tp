@@ -286,6 +286,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         height.setText("");
         tags.getChildren().clear();
         qrcode.setImage(null);
+        trackableFieldsTabPane.getTabs().clear();
     }
 
     private XYChart.Series<String, Number> generateWeightSeries(Person p) {
