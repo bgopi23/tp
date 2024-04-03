@@ -2,7 +2,6 @@ package seedu.address.ui;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -34,6 +33,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.util.DateTimeUtil;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.exercise.Exercise;
@@ -173,8 +173,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isPresent()) {
             LocalDate numericDate = latestWeight.get().getKey().toLocalDate();
-            DateTimeFormatter numericToText = DateTimeFormatter.ofPattern("MMMM d yyyy");
-            String formattedDate = numericDate.format(numericToText);
+            String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
             weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
             weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
                 + latestWeight.get().getValue().toString() + " kg");
@@ -302,8 +301,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
             LocalDateTime date = entry.getKey();
             Weight weight = entry.getValue();
 
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yy");
-            String dateString = date.format(formatter);
+            String dateString = date.format(DateTimeUtil.DATE_FORMATTER);
             Number weightNumber = weight.getValue();
             XYChart.Data<String, Number> weightData = new XYChart.Data<>(dateString, weightNumber);
             weightData.setNode(new HoveredThresholdNode(weightNumber.toString(), "", " kg"));
