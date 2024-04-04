@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_EMPTY_FIND;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_HEIGHT;
@@ -20,7 +19,6 @@ import org.junit.jupiter.api.Test;
 
 import javafx.util.Pair;
 import seedu.address.logic.commands.FindCommand;
-import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.AlwaysTruePredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
