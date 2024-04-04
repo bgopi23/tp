@@ -151,7 +151,6 @@ Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01 nt/john from school`
 * `add n/Betsy Crowe t/friend e/betsycrowe@hotmail.com a/Newgate Prison p/1234567 nt/likes donuts t/criminal`
 
-Format: `add`
 <hr>
 
 ### Listing all clients : `list`
