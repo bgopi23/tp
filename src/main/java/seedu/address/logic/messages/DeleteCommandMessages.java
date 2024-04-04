@@ -13,5 +13,5 @@ public class DeleteCommandMessages extends Messages {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS =
-            "Successfully deleted client!\n---------------------------\n%1$s";
+            "Successfully deleted client!" + MESSAGE_RESULT_DIVIDER;
 }
