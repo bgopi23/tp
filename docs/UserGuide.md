@@ -203,6 +203,48 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 > Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
+### Adding or overriding exercise(s) of clients : `fitadd`
+
+Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
+
+* Adds the specified exercise(s) to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values (sets: 1, reps: 1, break: 0) if not supplied.
+
+Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
+
+Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+You must either specify a specific exercise name or use a number of default supported prefixes, but not both together.
+</div>
+
+Examples:
+
+* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetition of 1 and 0 seconds break time between sets.
+* `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
+* `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
+* `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
+<hr>
+
+### Deleting exercise(s) of clients : `fitdelete`
+
+Format: `fitdelete INDEX n/EXERCISE_NAME [/all]`
+
+* Deletes the specified exercises(s) from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Supplying the `/all` prefix deletes all exercise(s) from the specified client.
+ 
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+You must either specify a specific exercise name or the `/all` prefix, but not both together.
+</div>
+
+Examples:
+
+* `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the 1st client.
+* `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
+<hr>
+
 ### Adding a weight value to a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
@@ -344,14 +386,17 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 ## Command summary
 
-| Commands   | Format, Examples                                                                                                                                                                                    |
-|------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
-| **Clear**  | `clear`                                                                                                                                                                                             |
-| **Delete** | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Edit**   | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **Find**   | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
-| **List**   | `list`                                                                                                                                                                                              |
-| **Help**   | `help`                                                                                                                                                                                              |
-| **Note**   | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| **Weight** | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
+| Action        | Format, Examples                                                                                                                                                                                    |
+|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
+| **Clear**     | `clear`                                                                                                                                                                                             |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
+| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
+| **FitAdd**    | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
+| **FitDelete** | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
+| **List**      | `list`                                                                                                                                                                                              |
+| **Help**      | `help`                                                                                                                                                                                              |
+| **Note**      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
+| **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
+
