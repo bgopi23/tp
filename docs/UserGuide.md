@@ -83,7 +83,7 @@ Java is a versatile programming language used for developing various application
 
 1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.<br>
 
-    ![Ui](images/Ui.png)
+    ![Ui](images/UGUI.png)
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
