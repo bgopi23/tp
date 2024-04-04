@@ -12,7 +12,7 @@ With FitBook, you can:
 
 * **Seamlessly save clients as contacts on your phone using QR codes**
 * **Store personalized notes for each client**
-* **Keep track of your clients' fitness journey** (_Work in progress_)
+* **Keep track of your clients' weight**
 
 _All in one app!_
 
@@ -83,7 +83,7 @@ Java is a versatile programming language used for developing various application
 
 1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.<br>
 
-    ![Ui](images/Ui.png)
+    ![Ui](images/UGUI.png)
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
@@ -137,7 +137,7 @@ Format: `help`
 
 <hr>
 
-### Adding a client: `add`
+### Adding a client : `add`
 
 Adds a client to the FitBook.
 
@@ -150,6 +150,7 @@ A client can have 0 or more tags.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01 nt/john from school`
 * `add n/Betsy Crowe t/friend e/betsycrowe@hotmail.com a/Newgate Prison p/1234567 nt/likes donuts t/criminal`
+
 <hr>
 
 ### Listing all clients : `list`
@@ -207,7 +208,7 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 Format: `weight INDEX [WEIGHT] `
 
 * Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client) command.
+* Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If no weight value is given, the latest weight for the client at the specified index will be deleted.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
@@ -217,7 +218,7 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
-### Searching clients: `find`
+### Searching clients : `find`
 
 Finds all clients that match the specified attributes.
 
@@ -240,9 +241,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 
 Examples:
 * `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
-  ![result for 'find n/Wendy'](images/FindNameMultiple.png)
 * `find n/Wendy t/Lover` returns `Wendy` (`Name` contains `Wendy` and is tagged with `Lover`)
-  ![result for 'find n/Wendy t/Lover'](images/FindNameTag.png)
 
 <hr>
 
@@ -285,7 +284,7 @@ Format: `exit`
 
 ### Saving the data
 
-FitBook data is saved in the hard disk automatically after any command that changes the data.
+FitBook data is saved to your hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 <hr>
@@ -345,7 +344,7 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                    |
+| Commands   | Format, Examples                                                                                                                                                                                    |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                                                                             |
