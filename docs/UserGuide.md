@@ -205,7 +205,7 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 Format: `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `
 
 * Adds the specified exercise(s) to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values if not supplied.
+* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values (sets: 1, reps: 1, break: 0) if not supplied.
 * The `n/EXERCISE_NAME`, `s/SETS`, `r/REPS` and `[b/BREAK_BETWEEN_SETS_IN_SECONDS]` may be omitted in place of a default supported prefix such as `/arms` and `/legs`.
 * Using default supported prefixes such as `/arms` or `/legs` will add a pre-defined set of related exercises to the specified client.
 * You must either specify a specific exercise name or use a number of default supported prefixes, but not both together. 
