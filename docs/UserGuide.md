@@ -137,7 +137,7 @@ Format: `help`
 
 <hr>
 
-### Adding a client: `add`
+### Adding a client : `add`
 
 Adds a client to the FitBook.
 
@@ -219,7 +219,7 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
-### Searching clients: `find`
+### Searching clients : `find`
 
 Finds all clients that match the specified attributes.
 
