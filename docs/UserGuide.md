@@ -210,7 +210,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
 
 * The search is case-insensitive. e.g `hans` will match `Hans`
 * Any fields can be searched.
-* Multiple fields can be search in one command
+* Multiple fields can be searched in one command
     * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name contains `wendy` and phone number contains `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
@@ -265,7 +265,7 @@ Format: `exit`
 
 ### Saving the data
 
-FitBook data is saved in the hard disk automatically after any command that changes the data.
+FitBook data is saved to your hard disk automatically after any command that changes the data.
 There is no need to save manually.
 
 <hr>
@@ -329,7 +329,7 @@ _Details coming soon ..._
 
 ## Command summary
 
-| Action     | Format, Examples                                                                                                                                                                                    |
+| Commands   | Format, Examples                                                                                                                                                                                    |
 |------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Add**    | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
 | **Clear**  | `clear`                                                                                                                                                                                             |
