@@ -150,6 +150,8 @@ A client can have 0 or more tags.
 Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01 nt/john from school`
 * `add n/Betsy Crowe t/friend e/betsycrowe@hotmail.com a/Newgate Prison p/1234567 nt/likes donuts t/criminal`
+
+Format: `add`
 <hr>
 
 ### Listing all clients : `list`
@@ -220,9 +222,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
 
 Examples:
 * `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
-  ![result for 'find n/Wendy'](images/FindNameMultiple.png)
 * `find n/Wendy t/Lover` returns `Wendy` (`Name` contains `Wendy` and is tagged with `Lover`)
-  ![result for 'find n/Wendy t/Lover'](images/FindNameTag.png)
 
 <hr>
 
