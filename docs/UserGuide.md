@@ -12,7 +12,7 @@ With FitBook, you can:
 
 * **Seamlessly save clients as contacts on your phone using QR codes**
 * **Store personalized notes for each client**
-* **Keep track of your clients' fitness journey** (_Work in progress_)
+* **Keep track of your clients' weight**
 
 _All in one app!_
 
