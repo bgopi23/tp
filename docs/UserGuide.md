@@ -163,7 +163,7 @@ Format: `list`
 
 ### Editing a client : `edit`
 
-Edits information tagged to an existing client
+Edits information tagged to an existing client.
 
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
@@ -171,6 +171,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
+    * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
@@ -180,7 +182,7 @@ Examples:
 *  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 <hr>
 
-### Adding a note to clients : `note`
+### Adding a note to a client : `note`
 
 Format: `note INDEX [NOTE] `
 
@@ -202,11 +204,26 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 > Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
+### Adding a weight value to a client : `weight`
+
+Format: `weight INDEX [WEIGHT] `
+
+* Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client) command.
+* If no weight value is given, the latest weight for the client at the specified index will be deleted.
+
+> While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
+
+Examples:
+
+* `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
+* `weight 2` - Deletes the latest weight value of the client at index 2.
+
 ### Searching clients: `find`
 
 Finds all clients that match the specified attributes.
 
-Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
+Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/NOTE] [t/TAG]…​`
 
 * The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
 * `RANGE` allows the user to search for a value that falls within the specified `RANGE`. The syntax is as follows:
@@ -281,7 +298,7 @@ Advanced users are welcome to update data directly by editing that data file.
 <div markdown="block" class="alert alert-warning">:warning: **Warning:**
 If your changes to the data file make its format invalid, FitBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
 
-Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range, or an invalid field is specified). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 <hr>
 
@@ -294,10 +311,6 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 <img src="images/QRScanning.png" height="480">
 <img src="images/QRContact.png" height="480">
 <hr>
-
-### Archiving data files `[coming in v2.0]`
-
-_Details coming soon ..._
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -342,3 +355,4 @@ _Details coming soon ..._
 | **List**   | `list`                                                                                                                                                                                              |
 | **Help**   | `help`                                                                                                                                                                                              |
 | **Note**   | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
+| **Weight** | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
