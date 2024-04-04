@@ -116,7 +116,10 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns true if the prefix exists as a key in the map.
+     * Checks if the specific prefix specified is present in the ArgumentMultimap object
+     *
+     * @param prefix to check
+     * @return true if prefix is present and false otherwise
      */
     public boolean contains(Prefix prefix) {
         return this.argMultimap.containsKey(prefix);
@@ -133,21 +136,19 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Checks if every single one of the prefixes exists in the map
-     *
-     * @param prefixes a list of prefixes
-     * @return true if all the prefixes exists in the map
-     */
-    public boolean containsAll(Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(this::contains);
-    }
-
-    /**
      * Checks if the preamble of the argumentMultimap object is empty
      *
      * @return true if the preamble is empty`
      */
     public boolean isPreambleEmpty() {
         return this.getPreamble().isEmpty();
+    }
+
+    /**
+     * Checks if the preamble of ArgumentMultimap object is made of 1 part
+     * @return true if the preamble is by itself
+     */
+    public boolean isPreambleAlone() {
+        return (getPreambleSegmentNumber() == 1);
     }
 }

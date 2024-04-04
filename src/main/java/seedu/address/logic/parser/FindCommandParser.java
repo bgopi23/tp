@@ -54,7 +54,7 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_EMAIL)));
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_ADDRESS)));
-        SearchPredicate<?> weightPredicate = argMultimap.getValue(PREFIX_WEIGHT).isPresent()
+        SearchPredicate<?> weightPredicate = argMultimap.contains(PREFIX_WEIGHT)
                 ? new WeightMapContainsWeightRangePredicate(
                         ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)))
                 : new AlwaysTruePredicate();

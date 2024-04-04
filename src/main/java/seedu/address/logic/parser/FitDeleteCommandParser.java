@@ -1,6 +1,12 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_USAGE;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 
@@ -8,8 +14,6 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitDeleteCommand;
-import seedu.address.logic.messages.FitDeleteCommandMessages;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -33,12 +37,12 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
         // Ensure that client index is present
         if (argMultimap.isPreambleEmpty()) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
+            throw new ParseException(MESSAGE_NO_INDEX_FITDELETE);
         }
 
-        if (argMultimap.getPreambleSegmentNumber() != 1) {
+        if (!argMultimap.isPreambleAlone()) {
             throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         // Parse index of client to delete exercise from
@@ -46,7 +50,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
+            throw new ParseException(MESSAGE_INVALID_INDEX_FITDELETE, pe);
         }
 
         // Get existence of relevant prefixes
@@ -55,12 +59,12 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
         // Checks for concurrent prefixes
         if (containsPrefixExerciseName && containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX);
+            throw new ParseException(MESSAGE_CONCURRENT_PREFIX);
         }
 
         // Checks if all prefixes missing
         if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
+            throw new ParseException(MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
         }
 
         // Ensure no duplicate prefixes
