@@ -52,7 +52,6 @@ public class FitDeleteCommand extends Command {
         Person editedPerson = getEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
-        model.updateFilteredPersonList(Model.PREDICATE_SHOW_ALL_PERSONS);
 
         return new CommandResult(
             String.format(this.deleteAll ? FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS

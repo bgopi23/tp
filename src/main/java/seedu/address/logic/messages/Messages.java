@@ -26,6 +26,7 @@ public class Messages {
     // Represents empty fields in the UI that needs extra clarity (instead of not showing the field at all)
     public static final String EMPTY_FIELD = "N/A";
     public static final String MESSAGE_WARN = "\n\nWARNING: %s";
+    public static final String MESSAGE_RESULT_DIVIDER = "\n-------------------------------------------\n%1$s";
 
     /**
      * Returns an error message indicating the duplicate prefixes.

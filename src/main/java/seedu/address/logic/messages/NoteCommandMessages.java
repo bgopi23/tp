@@ -14,11 +14,10 @@ public class NoteCommandMessages extends Messages {
             + "Example: " + COMMAND_WORD + " 1 "
             + "Likes to swim.";
 
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Successfully added note to client!\n"
-            + "---------------------------------\n%1$s";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Successfully added note to client!" + MESSAGE_RESULT_DIVIDER;
 
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!\n"
-            + "--------------------------------------\n%1$s";
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!"
+            + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
             MESSAGE_USAGE);
     public static final String MESSAGE_NO_INDEX_NOTE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);

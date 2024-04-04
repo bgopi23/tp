@@ -32,7 +32,8 @@ public class AddCommandMessages extends Messages {
             + PREFIX_ADDRESS + "Clementi Ave 2 "
             + PREFIX_NOTE + "BFF "
             + PREFIX_TAG + "friend ";
-    public static final String MESSAGE_SUCCESS = "Client successfully added!\n--------------------------\n%1$s";
+    public static final String MESSAGE_CLIENT_ADDED = "Client successfully added!";
+    public static final String MESSAGE_SUCCESS = MESSAGE_CLIENT_ADDED + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_NO_PARAMETERS_ADD = String.format(MESSAGE_NO_PARAMETERS, MESSAGE_USAGE);
     public static final String MESSAGE_NAME_PARAMETER_MISSING_ADD = String.format(MESSAGE_NAME_PARAMETER_MISSING,
             MESSAGE_USAGE);

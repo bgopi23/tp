@@ -17,16 +17,16 @@ public class WeightCommandMessages extends Messages {
             + "Example: " + COMMAND_WORD + " 1 "
             + CliSyntax.PREFIX_WEIGHT + "72.5";
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
-            "Successfully added weight to client!\n---------------------------------\n%1$s";
+            "Successfully added weight to client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
-            "Successfully removed weight from client!\n--------------------------------------\n%1$s";
+            "Successfully removed weight from client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_INVALID_PARAMETER_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
             MESSAGE_USAGE);
 
     public static final String MESSAGE_NO_PARAMETER_WEIGHT = String.format(MESSAGE_NO_PARAMETERS, MESSAGE_USAGE);
 
     public static final String MESSAGE_INVALID_INDEX_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-        MESSAGE_USAGE);
+            MESSAGE_USAGE);
 
     public static final String WEIGHT_VALUE_HEADER = "Weight: ";
     public static final String WEIGHT_DATE_HEADER = "Date Recorded: ";
