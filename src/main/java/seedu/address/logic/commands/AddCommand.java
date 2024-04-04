@@ -9,7 +9,6 @@ import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.ui.MainWindow;
 
 /**
  * Adds a person to the address book.
@@ -54,9 +53,6 @@ public class AddCommand extends Command {
         String messageWarn = this.getMessageWarn();
 
         String messageResult = String.format("%s%s", messageSuccess, messageWarn);
-
-        MainWindow mainWindow = MainWindow.getInstance();
-        mainWindow.getPersonListPanel().getFxmlObject().scrollTo(this.toAdd);
 
         return new CommandResult(messageResult);
     }
