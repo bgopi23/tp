@@ -208,10 +208,13 @@ Finds all clients that match the specified attributes.
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`
 
-* The search is case-insensitive. e.g `hans` will match `Hans`
-* Any fields can be searched.
-* Multiple fields can be searched in one command
-    * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name contains `wendy` and phone number contains `91234567`)
+* The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
+* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. The syntax is as follows:
+    * `FROM, TO`. For example, to search for weights that fall between 70kg and 90kg, you can enter `w/70, 90`.
+* Any fields specified in the format above can be searched.
+* When an empty input is specified an optional field, only users that have value(s) available for that field will be showed. (e.g. `find w/` returns all clients that have at least one weight value associated to them).
+* Multiple fields can be searched in one command.
+    * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name **contains** `wendy` and phone number **contains** `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
