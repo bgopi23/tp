@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_USAGE;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -12,6 +13,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.messages.FindCommandMessages;
+import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.person.Address;
@@ -152,7 +154,7 @@ public class ParserUtil {
         if (!weight.isEmpty()) {
             String trimmedWeight = weight.get().trim();
             if (!Weight.isValidWeight(trimmedWeight)) {
-                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+                throw new ParseException(String.format(Weight.MESSAGE_CONSTRAINTS, MESSAGE_USAGE));
             }
             return trimmedWeight.isEmpty() ? new Weight(0f)
                 : new Weight(Float.valueOf(trimmedWeight));

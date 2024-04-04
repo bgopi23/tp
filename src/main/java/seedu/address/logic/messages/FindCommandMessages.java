@@ -16,7 +16,8 @@ public class FindCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "find";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all clients whose specified attribute contains the specified keyword.\n"
+            + ": Lists all clients whose specified attribute contains the specified keyword. "
+            + "(Prefix for name is optional)\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
@@ -29,6 +30,8 @@ public class FindCommandMessages extends Messages {
             + "\nExample: " + COMMAND_WORD + " "
             + PREFIX_EMAIL + "lewis@hotmail.com";
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_FIND = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MESSAGE_USAGE);
+    public static final String MESSAGE_EMPTY_FIND = String.format("Please specify what you would like to find! \n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_PERSONS_FOUND_OVERVIEW = "%1$d clients found!";
     public static final String MESSAGE_NO_CLIENTS_FOUND = "No clients found!";

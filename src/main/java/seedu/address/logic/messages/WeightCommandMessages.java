@@ -14,8 +14,7 @@ public class WeightCommandMessages extends Messages {
             + "Existing weight will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
             + CliSyntax.PREFIX_WEIGHT + "WEIGHT\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_WEIGHT + "72.5";
+            + "Example: " + COMMAND_WORD + " 1 " + "72.5";
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added weight to client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =

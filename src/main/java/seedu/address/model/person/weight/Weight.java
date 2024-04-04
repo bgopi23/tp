@@ -11,7 +11,7 @@ import seedu.address.model.person.Attribute;
  */
 public class Weight extends Attribute<Float> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.\n%1$s";
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
