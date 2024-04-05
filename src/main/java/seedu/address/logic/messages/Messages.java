@@ -16,7 +16,7 @@ public class Messages {
     public static final String MESSAGE_INVALID_COMMAND_FORMAT = "Invalid command format! \n%1$s";
     public static final String MESSAGE_INVALID_PARAMETER_FORMAT = "Invalid parameter format! \n%1$s";
     public static final String MESSAGE_NO_INDEX = "No index specified! \n%1$s";
-    public static final String MESSAGE_INVALID_PERSON_DISPLAYED_INDEX = "Invalid index provided. \n%1$s";
+    public static final String MESSAGE_INVALID_INDEX = "Invalid index provided. \n%1$s";
     public static final String MESSAGE_DUPLICATE_FIELDS =
                 "Multiple values specified for the following single-valued field(s): ";
     public static final String MESSAGE_NO_PARAMETERS = "No parameters specified! \n%1$s";

@@ -19,7 +19,7 @@ public class FitDeleteCommandMessages extends Messages {
         + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
 
     public static final String MESSAGE_NO_INDEX_FITDELETE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
-    public static final String MESSAGE_INVALID_INDEX_FITDELETE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+    public static final String MESSAGE_INVALID_INDEX_FITDELETE = String.format(MESSAGE_INVALID_INDEX,
         MESSAGE_USAGE);
     public static final String MESSAGE_CONCURRENT_PREFIX =
         String.format("Exercise name parameter cannot be supplied together with '/all' prefix\n%1$s",

@@ -41,11 +41,13 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
+     * Parses a given string of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
      *
+     * @param args the string to be parsed
+     * @returns an AddCommand object with the client that will be added to FitBook
      * @throws ParseException if the client's input does not conform the expected format
-     */
+     **/
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
 
@@ -81,7 +83,7 @@ public class AddCommandParser implements Parser<AddCommand> {
         Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS));
 
         NavigableMap<LocalDateTime, Weight> weightMap = new TreeMap<>();
-        if (ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).getValue() != 0f) {
+        if (!ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)).isZero()) {
             weightMap.put(WeightEntry.getTimeOfExecution(),
                 ParserUtil.parseWeight(argMultimap.getValue(PREFIX_WEIGHT)));
         }

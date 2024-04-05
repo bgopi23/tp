@@ -20,12 +20,12 @@ public class WeightCommandMessages extends Messages {
             "Successfully added weight to client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
             "Successfully removed weight from client!" + MESSAGE_RESULT_DIVIDER;
-    public static final String MESSAGE_INVALID_PARAMETER_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+    public static final String MESSAGE_INVALID_PARAMETER_WEIGHT = String.format(MESSAGE_INVALID_INDEX,
             MESSAGE_USAGE);
 
     public static final String MESSAGE_NO_PARAMETER_WEIGHT = String.format(MESSAGE_NO_PARAMETERS, MESSAGE_USAGE);
 
-    public static final String MESSAGE_INVALID_INDEX_WEIGHT = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+    public static final String MESSAGE_INVALID_INDEX_WEIGHT = String.format(MESSAGE_INVALID_INDEX,
             MESSAGE_USAGE);
 
     public static final String WEIGHT_VALUE_HEADER = "Weight: ";

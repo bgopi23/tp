@@ -4,7 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_USAGE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.messages.Messages.MESSAGE_NO_INDEX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
@@ -59,7 +59,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE), pe);
+            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE), pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(ALL_PREFIXES_EXCEPT_TAG);

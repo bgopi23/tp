@@ -18,7 +18,7 @@ public class NoteCommandMessages extends Messages {
 
     public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!"
             + MESSAGE_RESULT_DIVIDER;
-    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_INDEX,
             MESSAGE_USAGE);
     public static final String MESSAGE_NO_INDEX_NOTE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
     public static final String MESSAGE_EDIT_FEEDBACK_TO_USER = "Editing note for client: ";

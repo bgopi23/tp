@@ -38,7 +38,7 @@ public class NoteEditCommand extends NoteCommand {
         int oneBasedIndex = super.getIndex().getOneBased();
 
         if (zeroBasedIndex >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX,
                     NoteCommandMessages.MESSAGE_USAGE));
         }
 

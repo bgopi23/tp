@@ -41,7 +41,7 @@ public class NoteCommand extends Command {
 
         if (this.index.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
+                    String.format(Messages.MESSAGE_INVALID_INDEX, NoteCommandMessages.MESSAGE_USAGE));
         }
 
         Person personToEdit = lastShownList.get(this.index.getZeroBased());

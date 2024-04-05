@@ -9,10 +9,9 @@ import static seedu.address.logic.commands.FitAddCommand.DEFAULT_LEG_EXERCISES;
 import static seedu.address.logic.commands.FitAddCommand.DEFAULT_SHOULDER_EXERCISES;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING;
+import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD;
-import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_USAGE;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.DEFAULT_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ABS;
@@ -59,9 +58,8 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
             throw new ParseException(MESSAGE_NO_INDEX_FITADD);
         }
 
-        if (argMultimap.getPreambleSegmentNumber() != 1) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+        if (!argMultimap.isPreambleAlone()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITADD);
         }
 
         // Parse index of client to add exercise to

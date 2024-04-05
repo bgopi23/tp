@@ -14,4 +14,6 @@ public class DeleteCommandMessages extends Messages {
 
     public static final String MESSAGE_DELETE_PERSON_SUCCESS =
             "Successfully deleted client!" + MESSAGE_RESULT_DIVIDER;
+    public static final String MESSAGE_NO_INDEX_DELETE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_INDEX_DELETE = String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE);
 }

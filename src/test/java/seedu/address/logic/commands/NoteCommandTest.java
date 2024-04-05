@@ -83,7 +83,7 @@ class NoteCommandTest {
     public void execute_invalidIndex_failure() {
         Index invalidIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
         NoteCommand noteCommand = new NoteCommand(invalidIndex, new Note(NOTE_STUB));
-        assertCommandFailure(noteCommand, this.model, String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertCommandFailure(noteCommand, this.model, String.format(Messages.MESSAGE_INVALID_INDEX,
                 NoteCommandMessages.MESSAGE_USAGE));
     }
 

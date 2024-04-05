@@ -31,6 +31,14 @@ public class Weight extends Attribute<Float> {
         return test.matches(VALIDATION_REGEX);
     }
 
+    /**
+     * Checks if the weight object has a value of 0
+     *
+     * @return true if the weight object has a value of 0 and false otherwise
+     */
+    public boolean isZero() {
+        return getValue() == 0f;
+    }
     @Override
     public String toString() {
         return this.getValue().toString();
