@@ -1,14 +1,14 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_DUPLICATE_PERSON;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_SUCCESS;
+import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_WARN;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.AddCommandMessages;
-import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 
 /**
  * Adds a person to the address book.
@@ -33,7 +33,7 @@ public class AddCommand extends Command {
         boolean isPhoneOfExpectedFormat = this.toAdd.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+            return MESSAGE_PHONE_WARN;
         }
 
         return "";
@@ -44,14 +44,13 @@ public class AddCommand extends Command {
         requireNonNull(model);
 
         if (model.hasPerson(this.toAdd)) {
-            throw new CommandException(AddCommandMessages.MESSAGE_DUPLICATE_PERSON);
+            throw new CommandException(MESSAGE_DUPLICATE_PERSON);
         }
 
         model.addPerson(this.toAdd);
 
-        String messageSuccess = String.format(AddCommandMessages.MESSAGE_SUCCESS, this.toAdd.getFormattedMessage());
+        String messageSuccess = String.format(MESSAGE_SUCCESS, this.toAdd.getFormattedMessage());
         String messageWarn = this.getMessageWarn();
-
         String messageResult = String.format("%s%s", messageSuccess, messageWarn);
 
         return new CommandResult(messageResult);

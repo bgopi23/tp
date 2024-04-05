@@ -1,10 +1,12 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_INVALID_INDEX_NOTE;
+
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Note;
@@ -38,8 +40,7 @@ public class NoteEditCommand extends NoteCommand {
         int oneBasedIndex = super.getIndex().getOneBased();
 
         if (zeroBasedIndex >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_INDEX,
-                    NoteCommandMessages.MESSAGE_USAGE));
+            throw new CommandException(MESSAGE_INVALID_INDEX_NOTE);
         }
 
         Person personToEdit = lastShownList.get(zeroBasedIndex);
@@ -47,6 +48,6 @@ public class NoteEditCommand extends NoteCommand {
 
         mainWindow.setCommandBoxText(NoteCommandMessages.COMMAND_WORD + " " + oneBasedIndex + " " + noteToEdit);
         mainWindow.moveCommandBoxCursorToEnd();
-        return new CommandResult(NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER + oneBasedIndex);
+        return new CommandResult(MESSAGE_EDIT_FEEDBACK_TO_USER + oneBasedIndex);
     }
 }

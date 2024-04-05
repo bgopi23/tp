@@ -3,14 +3,13 @@ package seedu.address.logic.commands;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_ADD_NOTE_SUCCESS;
 import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_DELETE_NOTE_SUCCESS;
+import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_INVALID_INDEX_NOTE;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.Messages;
-import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
@@ -38,13 +37,13 @@ public class NoteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         assert (model != null);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.index.getZeroBased();
 
-        if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(
-                    String.format(Messages.MESSAGE_INVALID_INDEX, NoteCommandMessages.MESSAGE_USAGE));
+        if (listIndex >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_NOTE);
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        Person personToEdit = lastShownList.get(listIndex);
 
         Person editedPerson = new Person(
                 personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),

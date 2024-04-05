@@ -38,4 +38,5 @@ public class FindCommandMessages extends Messages {
             + " FROM parameter must be less than or equal to TO parameter.\n"
             + "Parameters: FROM, TO (both of them must be a positive number greater than or equals to 0).\n"
             + "Example: " + COMMAND_WORD + " w/70, 80";
+    public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
 }

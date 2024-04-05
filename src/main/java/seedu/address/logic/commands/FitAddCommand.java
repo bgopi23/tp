@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS;
+import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,7 +11,6 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.FitAddCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
@@ -75,12 +76,13 @@ public class FitAddCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.index.getZeroBased();
 
-        if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
+        if (listIndex >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_FITADD);
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        Person personToEdit = lastShownList.get(listIndex);
 
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
@@ -114,7 +116,7 @@ public class FitAddCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS);
+        return new CommandResult(MESSAGE_ADD_EXERCISE_SUCCESS);
     }
 
     @Override
