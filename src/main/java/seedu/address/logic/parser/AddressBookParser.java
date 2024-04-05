@@ -1,5 +1,7 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.AddressBookParserMessages.MESSAGE_PARSE_EXCEPTION;
+import static seedu.address.logic.messages.HelpCommandMessages.MESSAGE_USAGE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_COMMAND;
 
@@ -26,7 +28,7 @@ import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses user input.
+ * Parses client input.
  */
 public class AddressBookParser {
 
@@ -37,16 +39,16 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Parses user input into command for execution.
+     * Parses client's input into command for execution.
      *
-     * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @param userInput full client input string
+     * @return the command based on the client's input
+     * @throws ParseException if the client's input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandMessages.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -94,7 +96,7 @@ public class AddressBookParser {
             return new FitDeleteCommandParser().parse(arguments);
 
         default:
-            logger.finer("This user input caused a ParseException: " + userInput);
+            logger.finer(MESSAGE_PARSE_EXCEPTION + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

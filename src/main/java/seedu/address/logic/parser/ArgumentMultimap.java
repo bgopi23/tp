@@ -146,6 +146,7 @@ public class ArgumentMultimap {
 
     /**
      * Checks if the preamble of ArgumentMultimap object is made of 1 part
+     *
      * @return true if the preamble is by itself
      */
     public boolean isPreambleAlone() {
