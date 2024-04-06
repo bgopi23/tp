@@ -6,8 +6,6 @@ import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXER
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE;
-import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_USAGE;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 
