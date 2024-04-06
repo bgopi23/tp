@@ -11,6 +11,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NOTE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
+import static seedu.address.model.tag.Tag.EMPTY_TAG_SET;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -25,6 +26,7 @@ import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.SearchPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
 import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
+import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -74,7 +76,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                 : alwaysTruePredicate;
 
         SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
-                ? new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
+                ? argMultimap.getAllValues(PREFIX_TAG).toString().equals("[]")
+                ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
+                : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
                 : alwaysTruePredicate;
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
