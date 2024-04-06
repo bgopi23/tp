@@ -9,7 +9,8 @@ public class WeightCommandMessages extends Messages {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Edits the weight (in kilograms) of the person identified "
             + "by the index number used in the last person listing.\n"
-            + "Existing weight will be overwritten by the input.\n"
+            + "Weight will be added if there is no existing weight on that day; otherwise, "
+            + "the existing entry will be overwritten.\n"
             + "Parameters: INDEX [WEIGHT] (must be a positive float)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "70.0";
