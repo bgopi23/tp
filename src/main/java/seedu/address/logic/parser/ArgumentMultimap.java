@@ -95,7 +95,9 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns the number of segments in a preamble split by a single whitespace
+     * Gets the number of whitespace-separated segments in a preamble
+     *
+     * @return an integer representing the number of the preamble segments
      */
     public Integer getPreambleSegmentNumber() {
         return getPreamble().split(" ").length;

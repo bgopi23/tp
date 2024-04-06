@@ -59,6 +59,15 @@ public class Height extends Attribute<Float> {
         return (this.getValue() >= firstVal && this.getValue() <= secondVal);
     }
 
+    /**
+     * Checks if the height object has a value of 0
+     *
+     * @return true if the weight object has a value of 0 and false otherwise
+     */
+    public boolean isZero() {
+        return getValue() == 0f;
+    }
+
     @Override
     public String toString() {
         return this.getValue().toString();
@@ -69,7 +78,7 @@ public class Height extends Attribute<Float> {
      * Empty height values (i.e. 0f) will be formatted as "N/A" for better clarity.
      */
     public String getFormattedHeight() {
-        if (this.getValue() == 0f) {
+        if (this.isZero()) {
             return "Height: N/A";
         }
         return "Height: " + this.getValue().toString() + " cm";
@@ -101,6 +110,6 @@ public class Height extends Attribute<Float> {
      * Check if the value is valid (i.e. greater than 0).
      */
     public boolean isValid() {
-        return this.getValue() != 0f;
+        return this.getValue() > 0f;
     }
 }

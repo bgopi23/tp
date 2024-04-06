@@ -79,13 +79,13 @@ public class EditCommand extends Command {
             Weight updatedWeight = editPersonDescriptor.getWeight().get();
 
             // If there are no more weight values to be removed
-            if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
+            if (updatedWeight.isZero() && toEditWeightMap.isEmpty()) {
                 throw new CommandException(MESSAGE_EMPTY_WEIGHT_MAP);
             }
 
             toEditWeightMap.pollLastEntry();
 
-            if (updatedWeight.getValue() != 0f) {
+            if (!updatedWeight.isZero()) {
                 toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
             }
         }

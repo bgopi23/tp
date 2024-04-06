@@ -35,4 +35,6 @@ public class FitDeleteCommandMessages extends Messages {
     public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
     public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS =
         "Successfully removed all exercise(s) for client";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MESSAGE_USAGE);
 }

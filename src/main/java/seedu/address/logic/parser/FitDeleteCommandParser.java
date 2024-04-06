@@ -3,6 +3,7 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_USAGE;
@@ -41,8 +42,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         }
 
         if (!argMultimap.isPreambleAlone()) {
-            throw new ParseException(
-                String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE);
         }
 
         // Parse index of client to delete exercise from
