@@ -13,6 +13,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
 import static seedu.address.model.tag.Tag.EMPTY_TAG_SET;
 
+import javafx.util.Pair;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
@@ -26,7 +27,6 @@ import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.SearchPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
 import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
-import seedu.address.model.tag.Tag;
 
 /**
  * Parses input arguments and creates a new FindCommand object
@@ -68,7 +68,9 @@ public class FindCommandParser implements Parser<FindCommand> {
                 : alwaysTruePredicate;
 
         SearchPredicate<?> heightPredicate = argMultimap.contains(PREFIX_HEIGHT)
-                ? new HeightContainsRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)))
+                ? argMultimap.getStringValue(PREFIX_HEIGHT).isEmpty()
+                    ? new HeightContainsRangePredicate(new Pair<>(0f, 0f))
+                    : new HeightContainsRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> notePredicate = argMultimap.contains(PREFIX_NOTE)
@@ -77,8 +79,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
                 ? argMultimap.getAllValues(PREFIX_TAG).toString().equals("[]")
-                ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
-                : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
+                    ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
+                    : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
                 : alwaysTruePredicate;
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
