@@ -43,27 +43,39 @@ public class FindCommandParser implements Parser<FindCommand> {
         }
 
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES);
+        AlwaysTruePredicate alwaysTruePredicate = new AlwaysTruePredicate();
 
         argMultimap.verifyNoDuplicatePrefixesFor(PREFIXES_NAME_PHONE_EMAIL_ADDRESS);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrPreamble(PREFIX_NAME)));
+
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate(
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_PHONE)));
-        EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate(
-                ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_EMAIL)));
-        AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate(
-                ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_ADDRESS)));
-        SearchPredicate<?> weightPredicate = argMultimap.getValue(PREFIX_WEIGHT).isPresent()
-                ? new WeightMapContainsWeightRangePredicate(
-                        ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)))
-                : new AlwaysTruePredicate();
-        HeightContainsRangePredicate heightPredicate = new HeightContainsRangePredicate(
-                ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)));
-        NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate(ParserUtil
-                .parseSearchString(argMultimap.getValueOrEmpty(PREFIX_NOTE)));
-        TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(
-                ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)));
+
+        SearchPredicate<?> emailPredicate = argMultimap.contains(PREFIX_EMAIL)
+                ? new EmailContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_EMAIL)))
+                : alwaysTruePredicate;
+
+        SearchPredicate<?> addressPredicate = argMultimap.contains(PREFIX_ADDRESS)
+                ? new AddressContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_ADDRESS)))
+                : alwaysTruePredicate;
+
+        SearchPredicate<?> weightPredicate = argMultimap.contains(PREFIX_WEIGHT)
+                ? new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)))
+                : alwaysTruePredicate;
+
+        SearchPredicate<?> heightPredicate = argMultimap.contains(PREFIX_HEIGHT)
+                ? new HeightContainsRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)))
+                : alwaysTruePredicate;
+
+        SearchPredicate<?> notePredicate = argMultimap.contains(PREFIX_NOTE)
+                ? new NoteContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_NOTE)))
+                : alwaysTruePredicate;
+
+        SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
+                ? new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
+                : alwaysTruePredicate;
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
                 addressPredicate, weightPredicate, heightPredicate, notePredicate, tagsPredicate);
