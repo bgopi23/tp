@@ -1,7 +1,5 @@
 package seedu.address.logic.messages;
 
-import seedu.address.logic.parser.CliSyntax;
-
 /**
  * Messages used by ListCommand and associated classes.
  */
