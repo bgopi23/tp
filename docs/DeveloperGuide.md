@@ -327,7 +327,7 @@ We anticipated possible erroneous user inputs and crafted specialised outputs as
 certain direction towards the correct command format instead of just telling them the format was wrong.
 
 **_Alternatives considered._** <br>
-Alternatives such as hyper-specific error outputs was considered, but ultimately, we felt that the benefit it would add
+Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
 was trivial.
 
 ### \[Proposed\] Undo/redo feature
