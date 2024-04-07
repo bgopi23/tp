@@ -40,7 +40,8 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 Given below is a quick overview of main components and how they interact with each other.
 
-**Main components of the architecture**<a name="main-components-of-the-architecture"></a>
+<a id="main-components-of-the-architecture"></a>
+**Main components of the architecture**
 
 **`Main`** (consisting of
 classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
@@ -259,7 +260,9 @@ The sequence diagram below shows how the components interact with each other whe
 
 ![AddNoteSequenceDiagram](images/AddNoteSequenceDiagram.png)
 
-The diagram highlights the four main components of FitBook, highlighted in their respective colors. For more information regarding the four main components, see [Main components of the architecture](#main-components-of-the-architecture).
+The diagram highlights the four main components of FitBook, highlighted in their respective colors. 
+For more information regarding the four main components, 
+see [Main components of the architecture](#main-components-of-the-architecture).
 
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
