@@ -71,10 +71,8 @@ public class FindCommandParser implements Parser<FindCommand> {
                 : alwaysTruePredicate;
 
         SearchPredicate<?> heightPredicate = argMultimap.contains(PREFIX_HEIGHT)
-                ? argMultimap.getStringValue(PREFIX_HEIGHT).isEmpty()
-                    ? new HeightContainsRangePredicate(new Pair<>(0f, 0f))
-                    : new HeightContainsRangePredicate(ParserUtil.parseSearchRange(
-                            argMultimap.getValue(PREFIX_HEIGHT)))
+                ? new HeightContainsRangePredicate(ParserUtil.parseSearchRange(
+                argMultimap.getValue(PREFIX_HEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> notePredicate = argMultimap.contains(PREFIX_NOTE)

@@ -25,15 +25,4 @@ public class HeightContainsRangePredicate extends SearchPredicate<Pair<Float, Fl
     public String toString() {
         return new ToStringBuilder(this).add("height", this.getSearchValue()).toString();
     }
-
-    @Override
-    public boolean test(Person person) {
-        Pair<Float, Float> searchRange = getSearchValue();
-
-        if (searchRange.getKey() == 0f && searchRange.getValue() == 0f) {
-            return !person.getAttribute(PersonAttribute.HEIGHT).isMatch(getSearchValue());
-        } else {
-            return person.getAttribute(PersonAttribute.HEIGHT).isMatch(getSearchValue());
-        }
-    }
 }
