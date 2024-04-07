@@ -101,7 +101,7 @@ Java is a versatile programming language used for developing various application
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Features
 
@@ -260,6 +260,8 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
+<hr>
+
 ### Searching clients : `find`
 
 Finds all clients that match the specified attributes.
@@ -362,8 +364,6 @@ Other mobile devices may not support this feature.
 
 <hr>
 
---------------------------------------------------------------------------------------------------------------------
-
 ## FAQ
 
 ###### How do I transfer my data to another Computer?
@@ -385,7 +385,7 @@ Other mobile devices may not support this feature.
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Known issues
 
@@ -393,7 +393,7 @@ Other mobile devices may not support this feature.
 
 1. **When scanning a contact QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Command summary
 
