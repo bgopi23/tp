@@ -181,7 +181,8 @@ public class TypicalPersons {
      * @returns a list of people where only some of them do not have an email
      */
     public static List<Person> getSomeTypicalPersonsWithoutEmail() {
-        return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL, BENSON_WITHOUT_EMAIL, CARL_WITHOUT_EMAIL, DANIEL, ELLE));
+        return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL, BENSON_WITHOUT_EMAIL, CARL_WITHOUT_EMAIL, DANIEL,
+                ELLE));
     }
 
     /**

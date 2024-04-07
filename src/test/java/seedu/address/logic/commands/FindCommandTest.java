@@ -52,8 +52,10 @@ import seedu.address.model.tag.Tag;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model modelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(), new UserPrefs());
-    private Model expectedModelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(), new UserPrefs());
+    private Model modelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(),
+            new UserPrefs());
+    private Model expectedModelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(),
+            new UserPrefs());
 
     @BeforeEach
     public void resetModels() {
@@ -119,7 +121,8 @@ public class FindCommandTest {
         EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(emailPredicate));
         this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(emailPredicate);
-        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage, this.expectedModelWithoutSomeAttributes);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
         assertEquals(Arrays.asList(DANIEL, ELLE), this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
@@ -130,8 +133,10 @@ public class FindCommandTest {
         AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(addressPredicate));
         this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(addressPredicate);
-        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage, this.expectedModelWithoutSomeAttributes);
-        assertEquals(Arrays.asList(CARL_WITHOUT_EMAIL, DANIEL, ELLE), this.modelWithoutSomeAttributes.getFilteredPersonList());
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(CARL_WITHOUT_EMAIL, DANIEL, ELLE),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
     @Test
@@ -141,8 +146,10 @@ public class FindCommandTest {
         TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
         FindCommand command = new FindCommand(new CombinedPredicates(tagsPredicate));
         this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(tagsPredicate);
-        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage, this.expectedModelWithoutSomeAttributes);
-        assertEquals(Arrays.asList(BENSON_WITHOUT_EMAIL, DANIEL), this.modelWithoutSomeAttributes.getFilteredPersonList());
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(BENSON_WITHOUT_EMAIL, DANIEL),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
     @Test
@@ -152,8 +159,10 @@ public class FindCommandTest {
         NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
         FindCommand command = new FindCommand(new CombinedPredicates(notePredicate));
         this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(notePredicate);
-        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage, this.expectedModelWithoutSomeAttributes);
-        assertEquals(Arrays.asList(ALICE_WITHOUT_EMAIL, DANIEL), this.modelWithoutSomeAttributes.getFilteredPersonList());
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(ALICE_WITHOUT_EMAIL, DANIEL),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
     @Test
@@ -164,7 +173,8 @@ public class FindCommandTest {
                 new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(Optional.empty()));
         FindCommand command = new FindCommand(new CombinedPredicates(weightPredicate));
         this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(weightPredicate);
-        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage, this.expectedModelWithoutSomeAttributes);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
         assertEquals(Arrays.asList(DANIEL, ELLE), this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
