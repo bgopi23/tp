@@ -34,7 +34,7 @@ public class Tag extends Attribute<String> {
      *
      * @param bool any boolean
      */
-    private Tag (boolean bool) {
+    private Tag(boolean bool) {
         super("");
     }
 
