@@ -56,6 +56,7 @@ public class Height extends Attribute<Float> {
         assert (secondVal - firstVal >= 0) : "Range should be more than or equals to zero."
                 + "Should have been handled in Parser class";
 
+        // if a client has no height value
         if (this.getValue() == 0) {
             return false;
         }
