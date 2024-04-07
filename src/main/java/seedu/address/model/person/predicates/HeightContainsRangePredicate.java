@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import javafx.util.Pair;
 import seedu.address.commons.util.ToStringBuilder;
-import seedu.address.model.person.Person;
 import seedu.address.model.person.Person.PersonAttribute;
 
 /**
