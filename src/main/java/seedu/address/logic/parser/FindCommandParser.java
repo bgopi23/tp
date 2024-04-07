@@ -56,25 +56,30 @@ public class FindCommandParser implements Parser<FindCommand> {
                 ParserUtil.parseSearchString(argMultimap.getValueOrEmpty(PREFIX_PHONE)));
 
         SearchPredicate<?> emailPredicate = argMultimap.contains(PREFIX_EMAIL)
-                ? new EmailContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_EMAIL)))
+                ? new EmailContainsSubstringPredicate(ParserUtil.parseSearchString(
+                        argMultimap.getStringValue(PREFIX_EMAIL)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> addressPredicate = argMultimap.contains(PREFIX_ADDRESS)
-                ? new AddressContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_ADDRESS)))
+                ? new AddressContainsSubstringPredicate(ParserUtil.parseSearchString(
+                        argMultimap.getStringValue(PREFIX_ADDRESS)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> weightPredicate = argMultimap.contains(PREFIX_WEIGHT)
-                ? new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_WEIGHT)))
+                ? new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(
+                        argMultimap.getValue(PREFIX_WEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> heightPredicate = argMultimap.contains(PREFIX_HEIGHT)
                 ? argMultimap.getStringValue(PREFIX_HEIGHT).isEmpty()
                     ? new HeightContainsRangePredicate(new Pair<>(0f, 0f))
-                    : new HeightContainsRangePredicate(ParserUtil.parseSearchRange(argMultimap.getValue(PREFIX_HEIGHT)))
+                    : new HeightContainsRangePredicate(ParserUtil.parseSearchRange(
+                            argMultimap.getValue(PREFIX_HEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> notePredicate = argMultimap.contains(PREFIX_NOTE)
-                ? new NoteContainsSubstringPredicate(ParserUtil.parseSearchString(argMultimap.getStringValue(PREFIX_NOTE)))
+                ? new NoteContainsSubstringPredicate(ParserUtil.parseSearchString(
+                        argMultimap.getStringValue(PREFIX_NOTE)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
