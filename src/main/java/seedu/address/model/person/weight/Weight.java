@@ -29,7 +29,7 @@ public class Weight extends Attribute<Float> {
      * Returns true if a given string is a valid weight.
      */
     public static boolean isValidWeight(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && Float.valueOf(test) <= WEIGHT_MAX_VALUE;
     }
 
     @Override
