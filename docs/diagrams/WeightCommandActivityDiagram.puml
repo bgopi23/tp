@@ -1,0 +1,40 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:WeightCommandParser parses arguments;
+:ParseIndex gets index from parsed arguments;
+if () then ([Valid])
+else ([Invalid index])
+    :Display invalid index error;
+    stop
+endif
+
+if () then ([Valid weight])
+    :Create WeightCommand instance with supplied index and weight;
+    :Execute WeightCommand instance;
+
+if () then ([Weight == 0])
+
+else ([Weight value > 0])
+    :Add a new weight to client;
+    :Display success message;
+    stop
+endif
+
+if () then ([No weight value to delete])
+    :Display no weight to delete error;
+    stop
+else ([Client has weight to delete])
+    :Delete client's latest weight value;
+    :Display success message;
+    stop
+endif
+
+else ([Invalid weight])
+    :Display invalid weight error;
+    stop
+endif
+
+@enduml

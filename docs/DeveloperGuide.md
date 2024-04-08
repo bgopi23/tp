@@ -242,11 +242,10 @@ The activity diagram below illustrates what happens when a client is deleted fro
 ![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
 
 ### Additional user details in FitBook
-On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status.
+On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status. Some key features include:
 
-This includes:
-* [Weight tracking feature](#weight-tracking-feature)
 * [Note](#note-feature-in-fitbook)
+* [Weight tracking feature](#weight-tracking-feature)
 
 #### Note feature in FitBook
 The `note` feature allows users to add any relevant health information to each client.
@@ -270,7 +269,8 @@ We can refer to the sequence diagram [above](#interacting-with-the-note-command)
 
 For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
 
-#### Viewing weight history of a client
+The activity diagram below illustrates what happens when a user enters a `weight` command.
+![WeightCommandActivityDiagram](images/WeightCommandActivityDiagram.png)
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
