@@ -10,8 +10,9 @@ import seedu.address.model.person.Attribute;
  * Guarantees: immutable; is always valid.
  */
 public class Weight extends Attribute<Float> {
+    public static final Float WEIGHT_MAX_VALUE = 5000f;
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number less than 5000.";
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
