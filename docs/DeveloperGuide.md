@@ -548,7 +548,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should be optimized to run smoothly on low-end devices with limited processing power and memory. Users on older hardware should be able to use the application as long as it meets [this requirement](#nfr-1).
 1. Should provide full offline functionality. Users should be able to access all functionality of FitBook even when the device is not connected to the internet.
 
-### Glossary
+## Glossary
 
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
@@ -632,3 +632,10 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## **Appendix: Planned Enhancements**
+FitBook's team size is 5.
+
+1. **Allow for more flexible weight management:** The current implementation of tracking client's weights only allow users to add or modify the latest weight value at the current date and time. They can also delete the latest weight value from the client. We plan to make this feature more flexible by allowing users to add/modify a client's weight at specified date and time of their choice.
+1. **Provide more specific error messages:** When removing non-optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages to the other non-optional fields of a client , where the error message will be similar to the one seen in the `weight` field.
