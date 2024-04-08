@@ -84,10 +84,14 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         }
     }
 
-    private void verifyNoConflictingPrefixes(boolean hasExerciseNamePrefix, boolean hasDefaultExercisePrefixes)
+    private void verifyNoConflictingPrefixes(boolean hasExerciseNamePrefix, boolean hasExerciseValuesPrefix, boolean hasDefaultExercisePrefixes)
             throws ParseException {
         if (hasExerciseNamePrefix && hasDefaultExercisePrefixes) {
-            throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES);
+            throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_NAME_CONFLICTING_PREFIXES);
+        }
+
+        if (hasDefaultExercisePrefixes && hasExerciseValuesPrefix) {
+            throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_VALUES_CONFLICTING_PREFIXES);
         }
     }
 
@@ -171,12 +175,14 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
 
         // Get existence of relevant prefixes
         boolean hasExerciseNamePrefix = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
+        boolean hasExerciseValuesPrefix = argumentMultimap.containsAny(PREFIX_EXERCISE_SETS,
+            PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS);
         boolean hasDefaultExercisePrefixes = argumentMultimap.containsAny(PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
             PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
             PREFIX_EXERCISE_ALL);
 
         verifyNoMissingPrefixes(hasExerciseNamePrefix, hasDefaultExercisePrefixes);
-        verifyNoConflictingPrefixes(hasExerciseNamePrefix, hasDefaultExercisePrefixes);
+        verifyNoConflictingPrefixes(hasExerciseNamePrefix, hasExerciseValuesPrefix, hasDefaultExercisePrefixes);
 
         return new FitAddCommand(index, getExercisesToAdd(argumentMultimap, hasExerciseNamePrefix));
     }

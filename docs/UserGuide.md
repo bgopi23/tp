@@ -207,7 +207,10 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds or overwrites the specified exercise of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Exercise names are **case-insensitive**.
+* Overwrites the specified exercise if it already exists for the client.
+* An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name for the client.
 
 Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
@@ -252,6 +255,7 @@ Examples:
 Format: `fitdelete INDEX n/EXERCISE_NAME`
 
 * Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Exercise names are **case-insensitive**.
 
 Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
 
