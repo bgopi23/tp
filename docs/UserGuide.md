@@ -143,6 +143,8 @@ Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
+* When HEIGHT and/or WEIGHT is specified to be 0, the respective height/weight values will not be shown on the client's details.
+
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
 </div>
@@ -172,6 +174,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * Existing values will be updated to the input values.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
+* When WEIGHT is specified to be 0, the latest weight (if any) will be removed from the client.
+* Similarly, when HEIGHT is specified to be 0, the height value will be removed from the client.
 * When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
@@ -251,7 +255,7 @@ Format: `weight INDEX [WEIGHT] `
 
 * Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
-* If no weight value is given, the latest weight for the client at the specified index will be deleted.
+* If no weight value is given, or the weight value entered is 0, the latest weight for the client at the specified index will be deleted.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
 
