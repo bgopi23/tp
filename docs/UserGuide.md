@@ -203,12 +203,11 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 > Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
-### Adding or overriding exercise(s) of clients : `fitadd`
+### Adding or overwriting exercise(s) of clients : `fitadd`
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds the specified exercise(s) to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values (sets: 1, reps: 1, break: 0) if not supplied.
+* Adds or overwrites the specified exercise of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 
 Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
@@ -216,12 +215,23 @@ Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or use a number of default supported prefixes, but not both together.
+You must either specify a specific an exercise name or use one or more of the default supported prefixes, but not both together.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+If you are adding an exercise that already exists for the client, the old exercise will be overwritten with the newly supplied field value(s), or a default set of values (sets: 1, reps: 1, break: 0) for the value(s) that are not supplied.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+Using the default supported prefixes will overwrite exercises with a default set of values, if any of those default exercises already exists for the client.
 </div>
 
 Examples:
 
-* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetition of 1 and 0 seconds break time between sets.
+* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, default repetition of 1 and default 0 seconds break time between sets.
+* `fitadd 1 n/burpees r/5` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetitions of 5 and default 0 seconds break time between sets.
 * `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
 * `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
 * `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
@@ -229,10 +239,15 @@ Examples:
 
 ### Deleting exercise(s) of clients : `fitdelete`
 
-Format: `fitdelete INDEX n/EXERCISE_NAME [/all]`
+Format: `fitdelete INDEX n/EXERCISE_NAME`
 
-* Deletes the specified exercises(s) from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Supplying the `/all` prefix deletes all exercise(s) from the specified client.
+* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+
+Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
+
+Format: `fitdelete INDEX /all`
+
+* Specifying the `/all` prefix more than once will simply be treated as if it was only supplied once.
  
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
@@ -243,6 +258,7 @@ Examples:
 
 * `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the 1st client.
 * `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
+* `fitdelete 2 /all /all` - Deletes all exercise(s) from the 2nd client.
 <hr>
 
 ### Adding a weight value to a client : `weight`

@@ -28,6 +28,126 @@ import seedu.address.model.exercise.Exercise;
  */
 public class FitAddCommandParser implements Parser<FitAddCommand> {
 
+    private ArgumentMultimap getArgMultiMap(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS,
+            PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS, PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
+            PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
+            PREFIX_EXERCISE_ALL);
+    }
+
+    private void verifyClientIndexExists(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.isPreambleEmpty()) {
+            throw new ParseException(FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD);
+        }
+    }
+
+    private void verifyClientIndexSingleSegment(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.getPreambleSegmentNumber() != 1) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitAddCommandMessages.MESSAGE_USAGE));
+        }
+    }
+
+    private Index parseIndex(ArgumentMultimap argumentMultimap) throws ParseException {
+        // Parse index of client to add exercise to
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD, pe);
+        }
+
+        return index;
+    }
+
+    private void verifyNoDuplicatePrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS,
+            PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS, PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
+            PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
+            PREFIX_EXERCISE_ALL);
+    }
+
+    private void verifyNoArgumentValueForPrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.hasArgumentValueForPrefixes(PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
+            PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
+            PREFIX_EXERCISE_ALL)) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitAddCommandMessages.MESSAGE_USAGE));
+        }
+    }
+
+    private void verifyNoMissingPrefixes(boolean hasExerciseNamePrefix, boolean hasDefaultExercisePrefixes)
+            throws ParseException {
+        if (!hasExerciseNamePrefix && !hasDefaultExercisePrefixes) {
+            throw new ParseException(
+                FitAddCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING);
+        }
+    }
+
+    private void verifyNoConflictingPrefixes(boolean hasExerciseNamePrefix, boolean hasDefaultExercisePrefixes)
+            throws ParseException {
+        if (hasExerciseNamePrefix && hasDefaultExercisePrefixes) {
+            throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES);
+        }
+    }
+
+    private Exercise parseExercise(ArgumentMultimap argumentMultimap) throws ParseException {
+        // If individual exercise details are provided, add that exercise
+        String exerciseName = ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME));
+        Integer exerciseSets = ParserUtil.parseExerciseSets(argumentMultimap.getValue(PREFIX_EXERCISE_SETS));
+        Integer exerciseReps = ParserUtil.parseExerciseReps(argumentMultimap.getValue(PREFIX_EXERCISE_REPS));
+        Integer exerciseBreakBetweenSets =
+            ParserUtil.parseExerciseBreakBetweenSets(argumentMultimap.getValue(PREFIX_EXERCISE_BREAK_BETWEEN_SETS));
+
+        return ParserUtil.parseExercise(exerciseName, exerciseSets, exerciseReps, exerciseBreakBetweenSets);
+    }
+
+    private Set<Exercise> getDefaultExercises(ArgumentMultimap argumentMultimap) {
+        Set<Exercise> defaultExercises = new HashSet<>();
+
+        if (argumentMultimap.contains(PREFIX_EXERCISE_ALL)) {
+            defaultExercises.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
+            defaultExercises.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
+            defaultExercises.addAll(FitAddCommand.DEFAULT_CHEST_EXERCISES);
+            defaultExercises.addAll(FitAddCommand.DEFAULT_BACK_EXERCISES);
+            defaultExercises.addAll(FitAddCommand.DEFAULT_SHOULDER_EXERCISES);
+            defaultExercises.addAll(FitAddCommand.DEFAULT_ABS_EXERCISES);
+        } else {
+            if (argumentMultimap.contains(PREFIX_EXERCISE_ARM)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
+            }
+            if (argumentMultimap.contains(PREFIX_EXERCISE_LEG)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
+            }
+            if (argumentMultimap.contains(PREFIX_EXERCISE_CHEST)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_CHEST_EXERCISES);
+            }
+            if (argumentMultimap.contains(PREFIX_EXERCISE_BACK)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_BACK_EXERCISES);
+            }
+            if (argumentMultimap.contains(PREFIX_EXERCISE_SHOULDER)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_SHOULDER_EXERCISES);
+            }
+            if (argumentMultimap.contains(PREFIX_EXERCISE_ABS)) {
+                defaultExercises.addAll(FitAddCommand.DEFAULT_ABS_EXERCISES);
+            }
+        }
+
+        return defaultExercises;
+    }
+
+    private Set<Exercise> getExercisesToAdd(ArgumentMultimap argumentMultimap, boolean hasExerciseNamePrefix)
+            throws ParseException {
+        Set<Exercise> exercisesToAdd = new HashSet<>();
+        if (hasExerciseNamePrefix) {
+            exercisesToAdd.add(parseExercise(argumentMultimap));
+        } else {
+            exercisesToAdd.addAll(getDefaultExercises(argumentMultimap));
+        }
+
+        return exercisesToAdd;
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FitAddCommand
      * and returns a FitAddCommand object for execution.
@@ -39,94 +159,25 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
     public FitAddCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS,
-                PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS, PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
-                PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
-                PREFIX_EXERCISE_ALL);
+        ArgumentMultimap argumentMultimap = getArgMultiMap(args);
 
-        // Ensure that client index is present
-        if (argMultimap.isPreambleEmpty()) {
-            throw new ParseException(FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD);
-        }
+        verifyClientIndexExists(argumentMultimap);
+        verifyClientIndexSingleSegment(argumentMultimap);
 
-        if (argMultimap.getPreambleSegmentNumber() != 1) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitAddCommandMessages.MESSAGE_USAGE));
-        }
+        Index index = parseIndex(argumentMultimap);
 
-        // Parse index of client to add exercise to
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD, pe);
-        }
+        verifyNoDuplicatePrefixes(argumentMultimap);
+        verifyNoArgumentValueForPrefixes(argumentMultimap);
 
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_SETS,
-            PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS, PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
+        // Get existence of relevant prefixes
+        boolean hasExerciseNamePrefix = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
+        boolean hasDefaultExercisePrefixes = argumentMultimap.containsAny(PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
             PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
             PREFIX_EXERCISE_ALL);
 
-        // Check for existing prefixes
-        boolean hasExerciseNamePrefix = argMultimap.contains(PREFIX_EXERCISE_NAME);
-        boolean hasDefaultExercisePrefixes = argMultimap.containsAny(PREFIX_EXERCISE_ARM, PREFIX_EXERCISE_LEG,
-            PREFIX_EXERCISE_CHEST, PREFIX_EXERCISE_BACK, PREFIX_EXERCISE_SHOULDER, PREFIX_EXERCISE_ABS,
-            PREFIX_EXERCISE_ALL);
+        verifyNoMissingPrefixes(hasExerciseNamePrefix, hasDefaultExercisePrefixes);
+        verifyNoConflictingPrefixes(hasExerciseNamePrefix, hasDefaultExercisePrefixes);
 
-        if (!hasExerciseNamePrefix && !hasDefaultExercisePrefixes) {
-            throw new ParseException(
-                FitAddCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING);
-        }
-
-        if (hasExerciseNamePrefix && hasDefaultExercisePrefixes) {
-            throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES);
-        }
-
-        Set<Exercise> exercisesToAdd = new HashSet<>();
-
-        if (hasExerciseNamePrefix) {
-            // If individual exercise details are provided, add that exercise
-            String exerciseName = ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME));
-            Integer exerciseSets = ParserUtil.parseExerciseSets(argMultimap.getValue(PREFIX_EXERCISE_SETS));
-            Integer exerciseReps = ParserUtil.parseExerciseReps(argMultimap.getValue(PREFIX_EXERCISE_REPS));
-            Integer exerciseBreakBetweenSets =
-                ParserUtil.parseExerciseBreakBetweenSets(argMultimap.getValue(PREFIX_EXERCISE_BREAK_BETWEEN_SETS));
-
-            Exercise exercise =
-                ParserUtil.parseExercise(exerciseName, exerciseSets, exerciseReps, exerciseBreakBetweenSets);
-            exercisesToAdd.add(exercise);
-        } else {
-            if (argMultimap.contains(PREFIX_EXERCISE_ALL)) {
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_CHEST_EXERCISES);
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_BACK_EXERCISES);
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_SHOULDER_EXERCISES);
-                exercisesToAdd.addAll(FitAddCommand.DEFAULT_ABS_EXERCISES);
-            } else {
-                if (argMultimap.contains(PREFIX_EXERCISE_ARM)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
-                }
-                if (argMultimap.contains(PREFIX_EXERCISE_LEG)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
-                }
-                if (argMultimap.contains(PREFIX_EXERCISE_CHEST)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_CHEST_EXERCISES);
-                }
-                if (argMultimap.contains(PREFIX_EXERCISE_BACK)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_BACK_EXERCISES);
-                }
-                if (argMultimap.contains(PREFIX_EXERCISE_SHOULDER)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_SHOULDER_EXERCISES);
-                }
-                if (argMultimap.contains(PREFIX_EXERCISE_ABS)) {
-                    exercisesToAdd.addAll(FitAddCommand.DEFAULT_ABS_EXERCISES);
-                }
-            }
-        }
-
-        return new FitAddCommand(index, exercisesToAdd);
+        return new FitAddCommand(index, getExercisesToAdd(argumentMultimap, hasExerciseNamePrefix));
     }
-
 }

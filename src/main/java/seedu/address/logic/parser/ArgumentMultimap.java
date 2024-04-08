@@ -116,6 +116,22 @@ public class ArgumentMultimap {
     }
 
     /**
+     * Checks if the argument multimap contains a non-empty value for any of the specified prefixes.
+     *
+     * @param prefixes the prefixes to check for argument values
+     * @return {@code true} if at least one of the specified prefixes has a non-empty argument value,
+     *      {@code false} otherwise
+     */
+    public boolean hasArgumentValueForPrefixes(Prefix... prefixes) {
+        Prefix[] prefixesWithValues = Stream.of(prefixes).distinct()
+            .filter(prefix -> this.argMultimap.containsKey(prefix) && !this.argMultimap.get(prefix).isEmpty()
+                && !this.argMultimap.get(prefix).get(0).isEmpty())
+            .toArray(Prefix[]::new);
+
+        return prefixesWithValues.length > 0;
+    }
+
+    /**
      * Returns true if the prefix exists as a key in the map.
      */
     public boolean contains(Prefix prefix) {

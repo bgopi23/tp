@@ -17,6 +17,59 @@ import seedu.address.logic.parser.exceptions.ParseException;
  */
 public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
+    private ArgumentMultimap getArgMultiMap(String args) {
+        return ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_FITDELETE_DELETE_ALL);
+    }
+
+    private void verifyClientIndexExists(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.isPreambleEmpty()) {
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
+        }
+    }
+
+    private void verifyClientIndexSingleSegment(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.getPreambleSegmentNumber() != 1) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
+        }
+    }
+
+    private Index parseIndex(ArgumentMultimap argumentMultimap) throws ParseException {
+        Index index;
+        try {
+            index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
+        } catch (ParseException pe) {
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
+        }
+
+        return index;
+    }
+
+    private void verifyNoDuplicatePrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME);
+    }
+
+    private void verifyNoConflictingPrefixes(boolean containsPrefixExerciseName,
+                                             boolean containsPrefixExerciseDeleteAll) throws ParseException {
+        if (containsPrefixExerciseName && containsPrefixExerciseDeleteAll) {
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX);
+        }
+    }
+
+    private void verifyNoMissingPrefixes(boolean containsPrefixExerciseName, boolean containsPrefixExerciseDeleteAll)
+            throws ParseException {
+        if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
+            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
+        }
+    }
+
+    private void verifyNoArgumentValueForPrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
+        if (argumentMultimap.hasArgumentValueForPrefixes(PREFIX_FITDELETE_DELETE_ALL)) {
+            throw new ParseException(
+                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
+        }
+    }
+
     /**
      * Parses the given {@code String} of arguments in the context of the FitDeleteCommand
      * and returns a FitDeleteCommand object for execution.
@@ -28,47 +81,26 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
     public FitDeleteCommand parse(String args) throws ParseException {
         requireNonNull(args);
 
-        ArgumentMultimap argMultimap =
-            ArgumentTokenizer.tokenize(args, PREFIX_EXERCISE_NAME, PREFIX_FITDELETE_DELETE_ALL);
+        ArgumentMultimap argumentMultimap = getArgMultiMap(args);
 
-        // Ensure that client index is present
-        if (argMultimap.isPreambleEmpty()) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
-        }
+        verifyClientIndexExists(argumentMultimap);
+        verifyClientIndexSingleSegment(argumentMultimap);
 
-        if (argMultimap.getPreambleSegmentNumber() != 1) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
-        }
+        Index index = parseIndex(argumentMultimap);
 
-        // Parse index of client to delete exercise from
-        Index index;
-        try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
-        }
+        verifyNoDuplicatePrefixes(argumentMultimap);
+        verifyNoArgumentValueForPrefixes(argumentMultimap);
 
         // Get existence of relevant prefixes
-        boolean containsPrefixExerciseName = argMultimap.contains(PREFIX_EXERCISE_NAME);
-        boolean containsPrefixExerciseDeleteAll = argMultimap.contains(PREFIX_FITDELETE_DELETE_ALL);
+        boolean containsPrefixExerciseName = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
+        boolean containsPrefixExerciseDeleteAll = argumentMultimap.contains(PREFIX_FITDELETE_DELETE_ALL);
 
-        // Checks for concurrent prefixes
-        if (containsPrefixExerciseName && containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX);
-        }
-
-        // Checks if all prefixes missing
-        if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
-        }
-
-        // Ensure no duplicate prefixes
-        argMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME);
+        verifyNoConflictingPrefixes(containsPrefixExerciseName, containsPrefixExerciseDeleteAll);
+        verifyNoMissingPrefixes(containsPrefixExerciseName, containsPrefixExerciseDeleteAll);
 
         Optional<String> exerciseNameOpt = Optional.ofNullable(
             containsPrefixExerciseDeleteAll ? null
-                : ParserUtil.parseExerciseName(argMultimap.getValue(PREFIX_EXERCISE_NAME)));
+                : ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME)));
 
         return new FitDeleteCommand(index, exerciseNameOpt, containsPrefixExerciseDeleteAll);
     }
