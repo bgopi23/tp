@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
 
@@ -46,7 +47,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
     }
 
     private void verifyNoDuplicatePrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
-        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME);
+        argumentMultimap.verifyNoDuplicatePrefixesFor(PREFIX_EXERCISE_NAME, PREFIX_EXERCISE_ALL);
     }
 
     private void verifyNoConflictingPrefixes(boolean containsPrefixExerciseName,
