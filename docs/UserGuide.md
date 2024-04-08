@@ -213,19 +213,29 @@ Alternatively, you can use any one of the supported prefixes to quickly add a pr
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
 
+| Prefix     | Exercises                                                                                                                                             |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/arms`      | `bicep curls` - sets: 3, reps: 10, break: 60<br/>`tricep dips` - sets: 3, reps: 12, break: 60<br/>`push-ups` - sets: 3, reps: 15, break: 90           |
+| `/legs`      | `squats` - sets: 4, reps: 15, break: 90<br/>`lunges` - sets: 3, reps: 12, break: 60<br/>`calf raises` - sets: 3, reps: 20, break: 60                  |
+| `/chest`     | `bench press` - sets: 4, reps: 8, break: 120<br/>`push-ups` - sets: 3, reps: 15, break: 90<br/>`chest fly` - sets: 3, reps: 10, break: 90             |
+| `/back`      | `pull-ups` - sets: 3, reps: 8, break: 120<br/>`bent-over rows` - sets: 3, reps: 10, break: 90<br/>`lat pull-downs` - sets: 3, reps: 12, break: 60     |
+| `/shoulders` | `shoulder press` - sets: 3, reps: 10, break: 90<br/>`lateral raises` - sets: 3, reps: 12, break: 60<br/>`front raises` - sets: 3, reps: 10, break: 60 |
+| `/abs`       | `crunches` - sets: 3, reps: 20, break: 60<br/>`plank` - sets: 3, reps: 60, break: 90<br/>`russian twists` - sets: 3, reps: 15, break: 60              |
+| `/all`       | A combination of all exercises from the other prefixes                                                                                                |
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific an exercise name or use one or more of the default supported prefixes, but not both together.
+You must either specify an exercise name or use one or more of the default supported prefixes, but not both together.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-If you are adding an exercise that already exists for the client, the old exercise will be overwritten with the newly supplied field value(s), or a default set of values (sets: 1, reps: 1, break: 0) for the value(s) that are not supplied.
+If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied field value(s), or a default set of values (sets: 1, reps: 1, break: 0) for the value(s) that are not supplied.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-Using the default supported prefixes will overwrite exercises with a default set of values, if any of those default exercises already exists for the client.
+Using the default supported prefixes will overwrite exercises with the pre-defined set of values, if any of those pre-defined default exercises already exists for the client.
 </div>
 
 Examples:
