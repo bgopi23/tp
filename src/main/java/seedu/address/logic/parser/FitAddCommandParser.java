@@ -84,7 +84,8 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         }
     }
 
-    private void verifyNoConflictingPrefixes(boolean hasExerciseNamePrefix, boolean hasExerciseValuesPrefix, boolean hasDefaultExercisePrefixes)
+    private void verifyNoConflictingPrefixes(boolean hasExerciseNamePrefix, boolean hasExerciseValuesPrefix,
+                                             boolean hasDefaultExercisePrefixes)
             throws ParseException {
         if (hasExerciseNamePrefix && hasDefaultExercisePrefixes) {
             throw new ParseException(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_NAME_CONFLICTING_PREFIXES);

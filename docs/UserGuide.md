@@ -208,11 +208,11 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
 * Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Exercise names are **case-insensitive**.
-* Overwrites the specified exercise if it already exists for the client.
-* An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name for the client.
+* `EXERCISE_NAME` is **case-insensitive**.
+* Overwrites the specified exercise and its values if the exercise already exists for the client.
+* An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
-Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
+Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
 
@@ -228,17 +228,17 @@ Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify an exercise name or use one or more of the default supported prefixes, but not both together.
+You must either specify an exercise name, or use one or more of the default supported prefixes, but not both together.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied field value(s), or a default set of values (sets: 1, reps: 1, break: 0) for the value(s) that are not supplied.
+If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied exercise value(s), or a default set of exercise values (ie. sets: 1, reps: 1, break: 0) for the exercise value(s) that are not supplied.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-Using the default supported prefixes will overwrite exercises with the pre-defined set of values, if any of those pre-defined default exercises already exists for the client.
+Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined default exercises already exists for the client.
 </div>
 
 Examples:
@@ -255,7 +255,7 @@ Examples:
 Format: `fitdelete INDEX n/EXERCISE_NAME`
 
 * Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Exercise names are **case-insensitive**.
+* `EXERCISE_NAME` is **case-insensitive**.
 
 Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
 
@@ -263,14 +263,13 @@ Format: `fitdelete INDEX /all`
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or the `/all` prefix, but not both together.
+You must either specify a specific an exercise name or the `/all` prefix, but not both together.
 </div>
 
 Examples:
 
 * `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the 1st client.
 * `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
-* `fitdelete 2 /all /all` - Deletes all exercise(s) from the 2nd client.
 <hr>
 
 ### Adding a weight value to a client : `weight`
