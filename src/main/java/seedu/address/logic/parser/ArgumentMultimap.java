@@ -125,7 +125,7 @@ public class ArgumentMultimap {
     public boolean hasArgumentValueForPrefixes(Prefix... prefixes) {
         Prefix[] prefixesWithValues = Stream.of(prefixes).distinct()
             .filter(prefix -> this.argMultimap.containsKey(prefix) && !this.argMultimap.get(prefix).isEmpty()
-                && !this.argMultimap.get(prefix).get(0).isEmpty())
+                && !this.argMultimap.get(prefix).stream().allMatch(String::isEmpty))
             .toArray(Prefix[]::new);
 
         return prefixesWithValues.length > 0;

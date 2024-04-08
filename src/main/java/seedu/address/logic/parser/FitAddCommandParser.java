@@ -166,8 +166,8 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
 
         Index index = parseIndex(argumentMultimap);
 
-        verifyNoDuplicatePrefixes(argumentMultimap);
         verifyNoArgumentValueForPrefixes(argumentMultimap);
+        verifyNoDuplicatePrefixes(argumentMultimap);
 
         // Get existence of relevant prefixes
         boolean hasExerciseNamePrefix = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
