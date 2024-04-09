@@ -35,7 +35,7 @@ On the other hand, these boxes indicate when you should pay extra attention to a
 
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
 
-Lastly, these boxes contain warnings about potential negative outcomes. 
+Lastly, these boxes contain warnings about potential negative outcomes.
 
 (e.g. irreversible loss of data)
 </div>
@@ -87,14 +87,14 @@ Java is a versatile programming language used for developing various application
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
- 
+
    * `add n/John p/98765432` Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
 
    * `delete 3` : Deletes the third client shown in the list.
-   
+
    * `exit` : Exits the app.
 
    * `list` : Lists all clients.
@@ -233,7 +233,7 @@ Format: `fitdelete INDEX n/EXERCISE_NAME [/all]`
 
 * Deletes the specified exercises(s) from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Supplying the `/all` prefix deletes all exercise(s) from the specified client.
- 
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
 You must either specify a specific exercise name or the `/all` prefix, but not both together.
@@ -400,3 +400,13 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 | **Note**      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
 | **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
 
+## **Appendix: Planned Enhancements**
+
+**1. Adaptive entires in client list**
+
+Client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+  * Name
+  * Tags
+  * Phone Number
+
+Fields that exceed the length of the entry would be clipped. Complete information can always be viewed in the client details panel.
