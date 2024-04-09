@@ -168,6 +168,9 @@ class JsonAdaptedPerson {
         if (!this.height.isEmpty() && !Height.isValidHeight(this.height)) {
             throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
         }
+        if (this.height.isEmpty()) {
+            throw new IllegalValueException(Height.MESSAGE_JSON_EMPTY_HEIGHT);
+        }
         final Height modelHeight = new Height(Float.valueOf(this.height));
 
         if (this.note == null) {

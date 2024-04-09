@@ -11,6 +11,8 @@ import javafx.util.Pair;
 public class Height extends Attribute<Float> {
 
     public static final String MESSAGE_CONSTRAINTS = "Height value can only be a positive number.";
+    public static final String MESSAGE_JSON_EMPTY_HEIGHT = "Height value specified in JSON cannot be an empty string.";
+
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**

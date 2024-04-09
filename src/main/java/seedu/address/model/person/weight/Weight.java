@@ -15,7 +15,7 @@ public class Weight extends Attribute<Float> {
     public static final String MESSAGE_CONSTRAINTS_DATE = "Date value is invalid. Should follow the format "
         + "YYYY-MM-DDTHH:mm:ss, e.g. 2024-03-27T10:15:30";
     public static final String MESSAGE_JSON_KEY_NOT_FOUND = "Key value not found in JSON file.";
-    public static final String MESSAGE_JSON_EMPTY_WEIGHT = "Weight value specified in JSON cannot be empty.";
+    public static final String MESSAGE_JSON_EMPTY_WEIGHT = "Weight value specified in JSON cannot be an empty string.";
 
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
