@@ -2,9 +2,9 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
+import static seedu.address.model.person.messages.PhoneMessages.EXPECTED_FORMAT_REGEX;
 import static seedu.address.model.person.messages.PhoneMessages.MESSAGE_CONSTRAINTS;
 import static seedu.address.model.person.messages.PhoneMessages.REQUIRED_REGEX;
-import static seedu.address.model.person.messages.PhoneMessages.EXPECTED_FORMAT_REGEX;
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}

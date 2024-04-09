@@ -10,7 +10,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.messages.TagMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
-import seedu.address.model.tag.Tag;
 
 /**
  * Jackson-friendly version of {@link Weight} with {@code LocalDateTime} as key.
