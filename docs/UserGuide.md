@@ -382,6 +382,16 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
+1. **When trying to scan the QR code of a client with a lot of information stored**, the QR code may become too dense and difficult to scan. The remedy is to reduce the amount of information stored in the client.
+
+> We have verified that the QR code can still be scanned for clients with no more than 100 characters in the following fields:
+>
+> * Name
+> * Phone Number
+> * Address
+> * Email
+> * Notes
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
