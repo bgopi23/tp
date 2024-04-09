@@ -141,7 +141,8 @@ Format: `help`
 
 Adds a client to the FitBook.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​` <br>
+Parameter Constraints: Parameters should follow the constraints listed [here](#parameter-constraints)
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
