@@ -632,3 +632,16 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+## **Appendix: Planned Enhancements**
+
+Team size: 5
+
+1. **Always show details of client being modified**
+
+To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
+
+> Some examples where this could be implemented:
+> 
+> * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
+> * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
