@@ -645,3 +645,7 @@ To improve clarity for users, the details pane should always show the informatio
 > 
 > * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
 > * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
+
+2. **Better keyboard navigation support**
+
+For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
