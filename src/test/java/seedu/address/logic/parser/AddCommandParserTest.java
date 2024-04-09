@@ -46,15 +46,11 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.Messages;
-import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.messages.EmailMessages;
 import seedu.address.model.person.messages.NameMessages;
 import seedu.address.model.person.messages.PhoneMessages;
 import seedu.address.model.person.messages.TagMessages;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.PersonBuilder;
 
 public class AddCommandParserTest {
