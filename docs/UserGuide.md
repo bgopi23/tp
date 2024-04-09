@@ -274,11 +274,19 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * Multiple fields can be searched in one command.
     * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name **contains** `wendy` and phone number **contains** `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
+
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
 * E.g `find t/fri` will not match the tag `friend`
 * But `find t/fRieNd` will match the tag `friend`
 </div>
+<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+* If no prefix is specified for the first argument, it will be used to search for a clients name
+* If prefix no prefix is specified to search for a client's name, it must be the first field to search
+* E.g `find roy t/friends` is allowed
+* But `find t/friends roy` will result in an error
+</div>
+
 
 
 Examples:
