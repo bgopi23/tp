@@ -263,7 +263,7 @@ Format: `fitdelete INDEX /all`
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific an exercise name or the `/all` prefix, but not both together.
+You must either specify an exercise name or the `/all` prefix, but not both together.
 </div>
 
 Examples:
