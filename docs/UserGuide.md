@@ -172,7 +172,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * Existing values will be updated to the input values.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* When editing tags, all existing tags of the client will be removed before new tags specified after t/ are added.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
