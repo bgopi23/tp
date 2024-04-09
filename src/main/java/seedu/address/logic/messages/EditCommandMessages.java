@@ -30,12 +30,10 @@ public class EditCommandMessages extends Messages {
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_PHONE + "91234567 "
             + PREFIX_EMAIL + "john@gmail.com";
-
-    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_NOT_EDITED = String.format("At least one field to edit must be provided.\n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_DUPLICATE_PERSON = "This person already exists in the address book.";
-    public static final String MESSAGE_INVALID_INDEX_EDIT =
-            String.format(Messages.MESSAGE_INVALID_INDEX, MESSAGE_USAGE);
+    public static final String MESSAGE_EDIT_PERSON_SUCCESS = "Successfully edited client!" + MESSAGE_RESULT_DIVIDER;
+    public static final String MESSAGE_INVALID_INDEX_EDIT = String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE);
 
 }

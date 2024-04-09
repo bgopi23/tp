@@ -13,14 +13,12 @@ public class NoteCommandMessages extends Messages {
             + "Parameters: INDEX (must be a positive integer)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "Likes to swim.";
-
-    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Successfully added note to client!" + MESSAGE_RESULT_DIVIDER;
-
-    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!"
-            + MESSAGE_RESULT_DIVIDER;
-    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_INDEX,
-            MESSAGE_USAGE);
-    public static final String MESSAGE_NO_INDEX_NOTE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
     public static final String MESSAGE_EDIT_FEEDBACK_TO_USER = "Editing note for client: ";
     public static final String NOTE_EDIT_TAG = "/edit";
+    public static final String MESSAGE_ADD_NOTE_SUCCESS = "Successfully added note to client!"
+            + MESSAGE_RESULT_DIVIDER;
+    public static final String MESSAGE_DELETE_NOTE_SUCCESS = "Successfully removed note from client!"
+            + MESSAGE_RESULT_DIVIDER;
+    public static final String MESSAGE_INVALID_INDEX_NOTE = String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE);
+    public static final String MESSAGE_NO_INDEX_NOTE = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
 }
