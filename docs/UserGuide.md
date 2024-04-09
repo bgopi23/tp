@@ -151,7 +151,7 @@ A client can have 0 or more tags.
 FitBook does not allow addition of [duplicate clients](#duplicate-clients).
 
 An attempt to add a duplicate client will result in the following error.
-![duplicate-add-client-error](/docs/images/DuplicateAddClientError.png)
+![duplicate-add-client-error](images/DuplicateAddClientError.png)
 </div>
 
 Examples:
@@ -202,7 +202,7 @@ Format: `note INDEX [NOTE] `
 FitBook does not allow [duplicate clients](#duplicate-clients).
 
 Any edits that would result in duplicate clients will result in the following error.
-![duplicate-edit-client-error](/docs/images/DuplicateEditClientError.png)
+![duplicate-edit-client-error](images/DuplicateEditClientError.png)
 </div>
 
 Examples:
