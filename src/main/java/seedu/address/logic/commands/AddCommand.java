@@ -11,13 +11,15 @@ import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a person to the address book.
+ * Adds a person to FitBook.
  */
 public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Creates an AddCommand to add the specified {@code Person}
+     * Constructs an AddCommand object to add the specified Person object
+     *
+     * @param person object to add
      */
     public AddCommand(Person person) {
         requireNonNull(person);

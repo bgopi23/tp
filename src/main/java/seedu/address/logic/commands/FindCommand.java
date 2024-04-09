@@ -18,6 +18,12 @@ import seedu.address.model.person.predicates.CombinedPredicates;
 public class FindCommand extends Command {
     private final CombinedPredicates predicates;
 
+    /**
+     * Constructs a FindCommand object with the predicates we want
+     * to use in the search
+     *
+     * @param predicates the search information
+     */
     public FindCommand(CombinedPredicates predicates) {
         this.predicates = predicates;
     }

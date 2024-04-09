@@ -29,12 +29,13 @@ public class WeightCommand extends Command {
     private LocalDateTime timeOfExecution = null;
 
     /**
+     * Constructs a WeightCommand object with a person list index and weight
+     *
      * @param index of the person in the filtered person list to edit the weight
      * @param weight of the person to be updated to
      */
     public WeightCommand(Index index, WeightEntry weight) {
         requireAllNonNull(index, weight);
-
         this.index = index;
         this.weightEntry = weight;
     }

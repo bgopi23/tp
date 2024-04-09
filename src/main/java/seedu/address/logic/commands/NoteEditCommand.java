@@ -19,6 +19,9 @@ import seedu.address.ui.MainWindow;
 public class NoteEditCommand extends NoteCommand {
 
     /**
+     * Constructs a NoteEdictCommand object with the index of the person
+     * to edit
+     *
      * @param index of the person in the filtered person list to edit the note
      */
     public NoteEditCommand(Index index) {

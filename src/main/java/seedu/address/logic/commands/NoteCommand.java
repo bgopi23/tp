@@ -23,6 +23,8 @@ public class NoteCommand extends Command {
     private final Note note;
 
     /**
+     * Constructs a NoteCommand object with the person index and note description
+     *
      * @param index of the person in the filtered person list to edit the note
      * @param note  of the person to be updated to
      */

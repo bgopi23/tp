@@ -19,6 +19,12 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand object with the index of
+     * the person we want to delete as specified by the person list
+     *
+     * @param targetIndex the index of the person to delete
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }

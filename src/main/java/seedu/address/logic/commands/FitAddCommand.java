@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
+import static seedu.address.model.exercise.Exercise.DEFAULT_BREAK;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -95,7 +96,7 @@ public class FitAddCommand extends Command {
                             exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
                         Integer reps =
                             exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
-                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != Exercise.DEFAULT_BREAK
+                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != DEFAULT_BREAK
                             ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
 
                         exerciseToAdd = new Exercise(name, sets, reps, breakBetweenSets);
