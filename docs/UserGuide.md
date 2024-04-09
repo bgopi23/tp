@@ -147,6 +147,13 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [
 A client can have 0 or more tags.
 </div>
 
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow addition of [duplicate clients](#duplicate-clients).
+
+An attempt to add a duplicate client will result in the following error.
+![duplicate-add-client-error](/docs/images/DuplicateAddClientError.png)
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01 nt/john from school`
 * `add n/Betsy Crowe t/friend e/betsycrowe@hotmail.com a/Newgate Prison p/1234567 nt/likes donuts t/criminal`
@@ -190,6 +197,13 @@ Format: `note INDEX [NOTE] `
 * If no note is given, the note for the client at the specified index will be deleted.
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
+
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow [duplicate clients](#duplicate-clients).
+
+Any edits that would result in duplicate clients will result in the following error.
+![duplicate-edit-client-error](/docs/images/DuplicateEditClientError.png)
+</div>
 
 Examples:
 
@@ -279,7 +293,6 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * E.g `find t/fri` will not match the tag `friend`
 * But `find t/fRieNd` will match the tag `friend`
 </div>
-
 
 Examples:
 * `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
