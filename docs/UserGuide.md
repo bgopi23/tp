@@ -402,9 +402,9 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 ## **Appendix: Planned Enhancements**
 
-**1. Adaptive entires in client list**
+**1. Adaptive client list entries**
 
-Client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
   * Name
   * Tags
   * Phone Number
