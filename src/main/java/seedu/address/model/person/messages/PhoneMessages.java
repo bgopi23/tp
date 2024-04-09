@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Phone and associated classes.
+ */
 public class PhoneMessages {
 
     public static final String MESSAGE_CONSTRAINTS =

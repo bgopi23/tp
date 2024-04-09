@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Email and associated classes.
+ */
 public class EmailMessages {
 
     private static final String SPECIAL_CHARACTERS = "+_.-";

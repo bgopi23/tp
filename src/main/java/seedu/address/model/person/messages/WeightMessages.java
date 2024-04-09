@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Weight and associated classes.
+ */
 public class WeightMessages {
 
     public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";

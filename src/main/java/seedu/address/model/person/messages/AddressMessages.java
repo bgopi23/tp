@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Address and associated classes.
+ */
 public class AddressMessages {
 
     public static final String MESSAGE_CONSTRAINTS = "Addresses can take any values, and it should not be blank";

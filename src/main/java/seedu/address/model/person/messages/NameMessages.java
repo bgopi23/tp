@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Name and associated classes.
+ */
 public class NameMessages {
 
     public static final String MESSAGE_CONSTRAINTS = "Names should only contain alphanumeric"

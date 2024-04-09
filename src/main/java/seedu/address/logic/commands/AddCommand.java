@@ -8,7 +8,6 @@ import seedu.address.logic.messages.AddCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
 import seedu.address.model.person.messages.PhoneMessages;
 
 /**

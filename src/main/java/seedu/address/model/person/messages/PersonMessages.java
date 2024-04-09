@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Person and associated classes.
+ */
 public class PersonMessages {
     public static final String MESSAGE_GENERATED_QR = "Generated QR code for ";
     public static final String MESSAGE_DELETED_QR ="Deleted QR code for ";

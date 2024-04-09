@@ -1,5 +1,8 @@
 package seedu.address.model.person.messages;
 
+/**
+ * Messages used by Height and associated classes.
+ */
 public class HeightMessages {
 
     public static final String MESSAGE_CONSTRAINTS = "Height value can only be a positive number.";

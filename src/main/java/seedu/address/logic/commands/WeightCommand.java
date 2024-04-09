@@ -17,7 +17,6 @@ import seedu.address.model.person.Person;
 import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
-import seedu.address.model.person.weight.WeightMap;
 
 /**
  * Changes the weight of an existing person in the address book.

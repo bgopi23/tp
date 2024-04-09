@@ -34,7 +34,6 @@ import seedu.address.model.person.messages.PhoneMessages;
 import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
-import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 
 /**
