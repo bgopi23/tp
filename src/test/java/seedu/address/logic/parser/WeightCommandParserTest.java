@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
+import static seedu.address.logic.commands.CommandTestUtil.*;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_PARAMETER_WEIGHT;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_NO_PARAMETER_WEIGHT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
+import static seedu.address.model.person.weight.Weight.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 
@@ -32,5 +32,12 @@ public class WeightCommandParserTest {
 
         assertParseFailure(this.parser, "-5",
                 MESSAGE_INVALID_INDEX_WEIGHT);
+    }
+
+    @Test
+    public void parse_invalidWeight_failure() {
+        assertParseFailure(this.parser, "1" + INVALID_WEIGHT_OVER_LIMIT, MESSAGE_CONSTRAINTS);
+
+        assertParseFailure(this.parser, "1" + INVALID_WEIGHT_NEGATIVE, MESSAGE_CONSTRAINTS);
     }
 }
