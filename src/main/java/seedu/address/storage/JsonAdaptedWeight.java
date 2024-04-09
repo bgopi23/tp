@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.person.messages.TagMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
@@ -46,7 +47,7 @@ class JsonAdaptedWeight {
      */
     public WeightEntry toModelType() throws IllegalValueException {
         if (!Weight.isValidWeight(this.weightValue)) {
-            throw new IllegalValueException(Tag.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(TagMessages.MESSAGE_CONSTRAINTS);
         }
         return new WeightEntry(new AbstractMap.SimpleEntry<>(
                 LocalDateTime.parse(this.weightDate), new Weight(Float.valueOf(this.weightValue))));

@@ -2,20 +2,14 @@ package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
+import static seedu.address.model.person.messages.PhoneMessages.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.person.messages.PhoneMessages.REQUIRED_REGEX;
+import static seedu.address.model.person.messages.PhoneMessages.EXPECTED_FORMAT_REGEX;
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
  */
 public class Phone extends Attribute<String> {
-
-    public static final String MESSAGE_CONSTRAINTS =
-        "Phone numbers should only contain digits and have a minimum length of 1.";
-    public static final String MESSAGE_EXPECTED =
-        "The phone number supplied does not appear to be from Singapore,\nfor other types of numbers, "
-            + "please ensure that you have keyed it in correctly.";
-    public static final String EXPECTED_FORMAT_REGEX = "^[689]\\d{7}$";
-    public static final String REQUIRED_REGEX = "^\\d+$";
 
     /**
      * Constructs a {@code Phone}.

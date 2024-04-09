@@ -22,6 +22,11 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.AddressMessages;
+import seedu.address.model.person.messages.EmailMessages;
+import seedu.address.model.person.messages.HeightMessages;
+import seedu.address.model.person.messages.NameMessages;
+import seedu.address.model.person.messages.PhoneMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
@@ -128,7 +133,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
         if (!Name.isValidName(this.name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(NameMessages.MESSAGE_CONSTRAINTS);
         }
         final Name modelName = new Name(this.name);
 
@@ -136,7 +141,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
         }
         if (!Phone.isValidPhone(this.phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(PhoneMessages.MESSAGE_CONSTRAINTS);
         }
         final Phone modelPhone = new Phone(this.phone);
 
@@ -144,7 +149,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
         }
         if (!this.email.isEmpty() && !Email.isValidEmail(this.email)) {
-            throw new IllegalValueException(Email.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(EmailMessages.MESSAGE_CONSTRAINTS);
         }
         final Email modelEmail = new Email(this.email);
 
@@ -152,7 +157,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!this.address.isEmpty() && !Address.isValidAddress(this.address)) {
-            throw new IllegalValueException(Address.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(AddressMessages.MESSAGE_CONSTRAINTS);
         }
         final Address modelAddress = new Address(this.address);
 
@@ -166,7 +171,7 @@ class JsonAdaptedPerson {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
         if (!this.height.isEmpty() && !Height.isValidHeight(this.height)) {
-            throw new IllegalValueException(Height.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(HeightMessages.MESSAGE_CONSTRAINTS);
         }
         final Height modelHeight = new Height(Float.valueOf(this.height));
 

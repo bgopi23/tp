@@ -9,6 +9,7 @@ import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.PhoneMessages;
 
 /**
  * Adds a person to the address book.
@@ -33,7 +34,7 @@ public class AddCommand extends Command {
         boolean isPhoneOfExpectedFormat = this.toAdd.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+            return String.format(Messages.MESSAGE_WARN, PhoneMessages.MESSAGE_EXPECTED);
         }
 
         return "";

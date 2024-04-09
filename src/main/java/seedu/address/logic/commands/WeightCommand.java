@@ -14,6 +14,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
+import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.person.weight.WeightMap;
@@ -63,7 +64,7 @@ public class WeightCommand extends Command {
         NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
         if (this.weightEntry.getValue().getValue().getValue() == 0f) {
             if (toEditWeightMap.isEmpty()) {
-                throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
+                throw new CommandException(WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP);
             }
             toEditWeightMap.pollLastEntry();
         } else {

@@ -50,6 +50,10 @@ import seedu.address.logic.messages.Messages;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.EmailMessages;
+import seedu.address.model.person.messages.NameMessages;
+import seedu.address.model.person.messages.PhoneMessages;
+import seedu.address.model.person.messages.TagMessages;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
@@ -95,26 +99,31 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(this.parser, "1" + INVALID_NAME_DESC, Name.MESSAGE_CONSTRAINTS); // invalid name
-        assertParseFailure(this.parser, "1" + INVALID_PHONE_DESC, Phone.MESSAGE_CONSTRAINTS); // invalid phone
-        assertParseFailure(this.parser, "1" + INVALID_EMAIL_DESC, Email.MESSAGE_CONSTRAINTS); // invalid email
-        assertParseFailure(this.parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+        assertParseFailure(this.parser, "1" + INVALID_NAME_DESC,
+                NameMessages.MESSAGE_CONSTRAINTS); // invalid name
+        assertParseFailure(this.parser, "1" + INVALID_PHONE_DESC,
+                PhoneMessages.MESSAGE_CONSTRAINTS); // invalid phone
+        assertParseFailure(this.parser, "1" + INVALID_EMAIL_DESC,
+                EmailMessages.MESSAGE_CONSTRAINTS); // invalid email
+        assertParseFailure(this.parser, "1" + INVALID_TAG_DESC,
+                TagMessages.MESSAGE_CONSTRAINTS); // invalid tag
 
         // invalid phone followed by valid email
-        assertParseFailure(this.parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY, Phone.MESSAGE_CONSTRAINTS);
+        assertParseFailure(this.parser, "1" + INVALID_PHONE_DESC + EMAIL_DESC_AMY,
+                PhoneMessages.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Person} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(this.parser, "1" + TAG_DESC_FRIEND
-                + TAG_DESC_HUSBAND + TAG_EMPTY, Tag.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_HUSBAND + TAG_EMPTY, TagMessages.MESSAGE_CONSTRAINTS);
         assertParseFailure(this.parser, "1" + TAG_DESC_FRIEND
-                + TAG_EMPTY + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+                + TAG_EMPTY + TAG_DESC_HUSBAND, TagMessages.MESSAGE_CONSTRAINTS);
         assertParseFailure(this.parser, "1" + TAG_EMPTY
-                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, Tag.MESSAGE_CONSTRAINTS);
+                + TAG_DESC_FRIEND + TAG_DESC_HUSBAND, TagMessages.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
         assertParseFailure(this.parser, "1" + INVALID_NAME_DESC + INVALID_EMAIL_DESC
-                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY, Name.MESSAGE_CONSTRAINTS);
+                        + VALID_ADDRESS_AMY + VALID_PHONE_AMY, NameMessages.MESSAGE_CONSTRAINTS);
     }
 
     @Test

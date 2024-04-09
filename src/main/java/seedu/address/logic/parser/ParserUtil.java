@@ -20,6 +20,13 @@ import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.AddressMessages;
+import seedu.address.model.person.messages.EmailMessages;
+import seedu.address.model.person.messages.HeightMessages;
+import seedu.address.model.person.messages.NameMessages;
+import seedu.address.model.person.messages.PhoneMessages;
+import seedu.address.model.person.messages.TagMessages;
+import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -59,7 +66,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(NameMessages.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -76,7 +83,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.replaceAll("\\s", "");
         if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            throw new ParseException(PhoneMessages.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
     }
@@ -96,7 +103,7 @@ public class ParserUtil {
         if (address.isPresent() && !address.get().isEmpty()) {
             trimmedAddress = address.get().trim();
             if (!Address.isValidAddress(trimmedAddress)) {
-                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+                throw new ParseException(AddressMessages.MESSAGE_CONSTRAINTS);
             }
         }
 
@@ -118,7 +125,7 @@ public class ParserUtil {
         if (email.isPresent() && !email.get().isEmpty()) {
             trimmedEmail = email.get().trim();
             if (!Email.isValidEmail(trimmedEmail)) {
-                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+                throw new ParseException(EmailMessages.MESSAGE_CONSTRAINTS);
             }
         }
 
@@ -152,7 +159,7 @@ public class ParserUtil {
         if (!weight.isEmpty()) {
             String trimmedWeight = weight.get().trim();
             if (!Weight.isValidWeight(trimmedWeight)) {
-                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+                throw new ParseException(WeightMessages.MESSAGE_CONSTRAINTS);
             }
             return trimmedWeight.isEmpty() ? new Weight(0f)
                 : new Weight(Float.valueOf(trimmedWeight));
@@ -174,7 +181,7 @@ public class ParserUtil {
         if (!height.isEmpty()) {
             String trimmedHeight = height.get().trim();
             if (!Height.isValidHeight(trimmedHeight)) {
-                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+                throw new ParseException(HeightMessages.MESSAGE_CONSTRAINTS);
             }
             return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
         }
@@ -193,7 +200,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(TagMessages.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
     }
