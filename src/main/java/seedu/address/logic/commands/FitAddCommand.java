@@ -62,7 +62,7 @@ public class FitAddCommand extends Command {
     /**
      * Constructs a new FitAddCommand instance.
      *
-     * @param index          The index of the person in the filtered person list to add the exercise to
+     * @param index The index of the person in the filtered person list to add the exercise to
      * @param exercisesToAdd The set of exercises to be added to the person
      */
     public FitAddCommand(Index index, Set<Exercise> exercisesToAdd) {
