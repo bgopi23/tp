@@ -386,17 +386,17 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 ## Command summary
 
-| Action        | Format, Examples                                                                                                                                                                                    |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
-| **Clear**     | `clear`                                                                                                                                                                                             |
-| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
-| **FitAdd**    | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
-| **FitDelete** | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
-| **List**      | `list`                                                                                                                                                                                              |
-| **Help**      | `help`                                                                                                                                                                                              |
-| **Note**      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
+| Action        | Format, Examples                                                                                                                                                                                                       |
+|---------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Add**       | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/james@hotmail.com a/123, Clementi Rd, 1234665 w/70 h/180 nt/likes pizzas t/friend` |
+| **Clear**     | `clear`                                                                                                                                                                                                                |
+| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                                    |
+| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                            |
+| **Find**      | `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/NOTE] [t/TAG]…​`<br> e.g., `find n/James Jake`                                                                                                  |
+| **FitAdd**    | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`                          |
+| **FitDelete** | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                                           |
+| **List**      | `list`                                                                                                                                                                                                                 |
+| **Help**      | `help`                                                                                                                                                                                                                 |
+| **Note**      | 1. `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`<br><br>2. `note INDEX [/edit]` <br> e.g. <br> `note 2 /edit`                                                                           |
+| **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                                   |
 
