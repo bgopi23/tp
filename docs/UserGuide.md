@@ -142,9 +142,8 @@ Format: `help`
 Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`<br>
-Parameter Constraints: Parameters should follow the constraints listed [here](#parameter-constraints)
 
-* Refer to the list of valid parameters of each input for more details.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * When HEIGHT and/or WEIGHT is specified to be 0, no height/weight will be added to the client.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
   * `add n/Tom p/123 w/85 65`
