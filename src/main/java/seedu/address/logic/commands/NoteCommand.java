@@ -36,7 +36,9 @@ public class NoteCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
+        //@@author bgopi23
         assert (model != null);
+        //@@author
         List<Person> lastShownList = model.getFilteredPersonList();
 
         if (this.index.getZeroBased() >= lastShownList.size()) {

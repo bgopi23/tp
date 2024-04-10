@@ -8,11 +8,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
-import java.util.HashSet;
-
 import org.junit.jupiter.api.Test;
 
-import javafx.util.Pair;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.DeleteCommand;
@@ -30,15 +27,10 @@ import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.predicates.AddressContainsSubstringPredicate;
 import seedu.address.model.person.predicates.AlwaysTruePredicate;
 import seedu.address.model.person.predicates.CombinedPredicates;
-import seedu.address.model.person.predicates.EmailContainsSubstringPredicate;
-import seedu.address.model.person.predicates.HeightContainsRangePredicate;
 import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
-import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
-import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 import seedu.address.testutil.PersonBuilder;
 import seedu.address.testutil.PersonUtil;
@@ -89,13 +81,12 @@ public class AddressBookParserTest {
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("Alex");
         PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
-        EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
-        AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
+        AlwaysTruePredicate emailPredicate = new AlwaysTruePredicate();
+        AlwaysTruePredicate addressPredicate = new AlwaysTruePredicate();
         AlwaysTruePredicate weightPredicate = new AlwaysTruePredicate();
-        HeightContainsRangePredicate heightPredicate = new HeightContainsRangePredicate(
-                new Pair<>(0f, Float.MAX_VALUE));
-        NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
-        TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
+        AlwaysTruePredicate heightPredicate = new AlwaysTruePredicate();
+        AlwaysTruePredicate notePredicate = new AlwaysTruePredicate();
+        AlwaysTruePredicate tagsPredicate = new AlwaysTruePredicate();
         FindCommand expectedCommand = new FindCommand(new CombinedPredicates(
                 namePredicate, phonePredicate, emailPredicate, addressPredicate,
                 weightPredicate, heightPredicate, notePredicate, tagsPredicate));
