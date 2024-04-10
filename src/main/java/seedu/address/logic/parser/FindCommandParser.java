@@ -56,33 +56,33 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         SearchPredicate<?> emailPredicate = argMultimap.contains(PREFIX_EMAIL)
                 ? new EmailContainsSubstringPredicate(ParserUtil.parseSearchString(
-                argMultimap.getStringValue(PREFIX_EMAIL)))
+                    argMultimap.getStringValue(PREFIX_EMAIL)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> addressPredicate = argMultimap.contains(PREFIX_ADDRESS)
                 ? new AddressContainsSubstringPredicate(ParserUtil.parseSearchString(
-                argMultimap.getStringValue(PREFIX_ADDRESS)))
+                    argMultimap.getStringValue(PREFIX_ADDRESS)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> weightPredicate = argMultimap.contains(PREFIX_WEIGHT)
                 ? new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(
-                argMultimap.getValue(PREFIX_WEIGHT)))
+                    argMultimap.getValue(PREFIX_WEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> heightPredicate = argMultimap.contains(PREFIX_HEIGHT)
                 ? new HeightContainsRangePredicate(ParserUtil.parseSearchRange(
-                argMultimap.getValue(PREFIX_HEIGHT)))
+                    argMultimap.getValue(PREFIX_HEIGHT)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> notePredicate = argMultimap.contains(PREFIX_NOTE)
                 ? new NoteContainsSubstringPredicate(ParserUtil.parseSearchString(
-                argMultimap.getStringValue(PREFIX_NOTE)))
+                    argMultimap.getStringValue(PREFIX_NOTE)))
                 : alwaysTruePredicate;
 
         SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
                 ? argMultimap.getAllValues(PREFIX_TAG).toString().equals("[]")
-                ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
-                : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
+                    ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
+                    : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
                 : alwaysTruePredicate;
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,
