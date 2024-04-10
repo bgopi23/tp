@@ -264,25 +264,25 @@ The diagram highlights the four main components of FitBook, highlighted in their
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
 #### Weight tracking feature
-The weight tracking feature allows users to keep track of past weight measurements of a client. Since a client is a person, we have set a more-than-reasonable limit of 5000kg for `weight`.
+The weight tracking feature allows users to keep track of past weight measurements of a client. Refer to the list of valid parameters of each input for more details. <REPLACETHIS>
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `weight` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
 The activity diagram below illustrates what happens when a user enters a `weight` command.
 ![WeightCommandActivityDiagram](images/WeightCommandActivityDiagram.png)
 
 #### Height value of a client
-The  `height` feature allows users to track a client's height. Since a client's typically remains constant, we decided not to implement `height` as a trackable value (unlike [weight](#weight-tracking-feature)).
+The `height` feature allows users to track a client's height. Since a client's height typically remains constant, we decided not to implement `height` as a trackable value (unlike [weight](#weight-tracking-feature)).
 
-Since a client is a person, we have set a more-than-reasonable limit of 5000cm for `height`.
+* Refer to the list of valid parameters of each input for more details. <REPLACETHIS>
 
 The `height` field is similar to `note` field, except that the underlying data type is a `Float`, instead of a `String`.
 
 We can refer to the sequence diagram [here](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `height` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `height` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
