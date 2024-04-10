@@ -413,6 +413,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 <hr>
 
 ## Command summary
+
 | Command                                                           | Format, Examples                                                                                                                                                                                    |
 |-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
@@ -420,7 +421,7 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | [**Delete**](#deleting-a-client--delete)                          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
 | [**Edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
 | [**Exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                              |
-| [**Find**](#searching-clients--find)                              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
+| [**Find**](#finding-clients--find)                                | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
 | [**FitAdd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
 | [**FitDelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
 | [**List**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                              |
