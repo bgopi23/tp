@@ -44,8 +44,12 @@ public class FitAddCommandMessages extends Messages {
     public static final String MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING =
         String.format("Either exercise name parameter or default exercise prefix(es) must be supplied\n%1$s",
             MESSAGE_USAGE);
-    public static final String MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES =
+    public static final String MESSAGE_ADD_EXERCISE_NAME_CONFLICTING_PREFIXES =
         String.format("Exercise name parameter cannot be supplied together with default exercise prefix(es)\n%1$s",
+            MESSAGE_USAGE);
+
+    public static final String MESSAGE_ADD_EXERCISE_VALUES_CONFLICTING_PREFIXES =
+        String.format("Exercise value parameter(s) cannot be supplied together with default exercise prefix(es)\n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_ADD_EXERCISE_SUCCESS = "Successfully added exercise(s) for client";
 }

@@ -83,27 +83,4 @@ public class StringUtil {
         return true;
     }
 
-    /**
-     * Capitalizes the first letter in each word in the given string and lower-cases the rest of the letters.
-     *
-     * @return The newly processed string.
-     */
-    public static String capitalizeWords(String str) {
-        if (str == null || str.isEmpty()) {
-            return str;
-        }
-
-        String[] words = str.split("\\s+");
-        StringBuilder result = new StringBuilder();
-
-        for (String word : words) {
-            if (!word.isEmpty()) {
-                result.append(Character.toUpperCase(word.charAt(0)))
-                    .append(word.substring(1).toLowerCase())
-                    .append(" ");
-            }
-        }
-
-        return result.toString().trim();
-    }
 }
