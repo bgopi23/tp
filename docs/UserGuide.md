@@ -196,7 +196,7 @@ Examples:
 * `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
 * `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
 
-If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), after pressing the `Enter` key, `/edit` will be replaced with the existing note for editing convenience.
+If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be replaced with the existing note after pressing the `Enter` key. This provides greater convenience to the user when editing an existing note.
 
 > For example: Client at index 1 has the note "Wants to gain muscle".
 >
