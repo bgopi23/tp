@@ -268,7 +268,7 @@ The weight tracking feature allows users to keep track of past weight measuremen
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `weight` field interacts with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
 
 The activity diagram below illustrates what happens when a user enters a `weight` command.
 ![WeightCommandActivityDiagram](images/WeightCommandActivityDiagram.png)
