@@ -4,8 +4,9 @@ skinparam ActivityFontSize 15
 skinparam ArrowFontSize 12
 start
 :WeightCommandParser parses arguments;
-:ParseIndex gets index from parsed arguments;
-if () then ([Valid])
+:Parse index;
+if () then ([Valid Index])
+    :Parse weight;
 else ([Invalid index])
     :Display invalid index error;
     stop
