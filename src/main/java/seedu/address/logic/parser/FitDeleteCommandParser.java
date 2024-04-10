@@ -90,7 +90,6 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         Index index = parseIndex(argumentMultimap);
 
         verifyNoArgumentValueForPrefixes(argumentMultimap);
-        verifyNoDuplicatePrefixes(argumentMultimap);
 
         // Get existence of relevant prefixes
         boolean containsPrefixExerciseName = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
