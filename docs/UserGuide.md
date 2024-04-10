@@ -329,7 +329,8 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 
 * The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
 * `RANGE` allows the user to search for a value that falls within the specified `RANGE`. The syntax is as follows:
-    * `FROM, TO`. For example, to search for weights that fall between 70kg and 90kg, you can enter `w/70, 90`.
+    * `FROM, TO` Note that the comma must follow immediately after `FROM`.
+    * For example, to search for weights that fall between 70kg and 90kg, you can enter `w/70, 90`.
 * Any fields specified in the format above can be searched.
 * When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
@@ -342,7 +343,8 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * But `find t/fRieNd` will match the tag `friend`
 </div>
 
-<div markdown="span" class="alert alert-info">:bulb: **Tip:**
+<div markdown="block" class="alert alert-info">:bulb: **Tip:**
+
 * If no prefix is specified for the first argument, it will be used to search for a client's name.
     * e.g. `find roy t/friends` is allowed.
 * If no prefix is specified to search for a client's name, it must be the first field to search.
