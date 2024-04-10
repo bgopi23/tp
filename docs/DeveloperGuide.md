@@ -302,7 +302,7 @@ An exercise consists of a name, number of sets, number of reps and break time be
 
 #### Storing exercises
 
-A great deal of consideration that was made regarding how the custom exercises should be stored for each client.
+A great deal of consideration was made regarding how the custom exercises should be stored for each client.
 
 The following data structures were taken in consideration during the brainstorming and design process.
 
