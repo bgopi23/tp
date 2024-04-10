@@ -18,7 +18,7 @@ public class ExerciseToAdd {
      * Constructs an {@code Exercise}.
      *
      * @param name Name of the exercise.
-     * @param sets             Optional number of sets.
+     * @param sets Optional number of sets.
      * @param reps Optional number of repetitions per set.
      * @param breakBetweenSets Optional break time in seconds between sets.
      */
