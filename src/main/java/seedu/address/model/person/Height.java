@@ -9,8 +9,10 @@ import javafx.util.Pair;
  * Guarantees: immutable; is always valid.
  */
 public class Height extends Attribute<Float> {
+    public static final Float HEIGHT_MAX_VALUE = 5000f;
 
-    public static final String MESSAGE_CONSTRAINTS = "Height value can only be a positive number.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Height value can only be a number between 0 and 5000 (inclusive).";
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
@@ -27,7 +29,7 @@ public class Height extends Attribute<Float> {
      * Returns true if a given string is a valid height.
      */
     public static boolean isValidHeight(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && Float.valueOf(test) <= HEIGHT_MAX_VALUE;
     }
 
     /**
