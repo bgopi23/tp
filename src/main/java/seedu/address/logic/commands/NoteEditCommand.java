@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.messages.NoteCommandMessages.COMMAND_WORD;
 import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_EDIT_FEEDBACK_TO_USER;
 import static seedu.address.logic.messages.NoteCommandMessages.MESSAGE_INVALID_INDEX_NOTE;
 
@@ -49,7 +50,7 @@ public class NoteEditCommand extends NoteCommand {
         Person personToEdit = lastShownList.get(zeroBasedIndex);
         String noteToEdit = personToEdit.getNote().toString();
 
-        mainWindow.setCommandBoxText(NoteCommandMessages.COMMAND_WORD + " " + oneBasedIndex + " " + noteToEdit);
+        mainWindow.setCommandBoxText(COMMAND_WORD + " " + oneBasedIndex + " " + noteToEdit);
         mainWindow.moveCommandBoxCursorToEnd();
         return new CommandResult(MESSAGE_EDIT_FEEDBACK_TO_USER + oneBasedIndex);
     }
