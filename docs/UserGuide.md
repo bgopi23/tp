@@ -404,4 +404,4 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 **1. Restrict the number of weight entries per day**
 
-Having multiple weight entries within a day distorts the weight-tracking graph while providing no additional value.
+Since the variance of a client's weight values in a day is negligible, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day also distorts the weight-tracking graph.
