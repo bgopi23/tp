@@ -10,13 +10,15 @@ import seedu.address.model.person.Attribute;
  * Guarantees: immutable; is always valid.
  */
 public class Weight extends Attribute<Float> {
+    public static final Float WEIGHT_MAX_VALUE = 5000f;
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a positive number.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Weight value can only be a number between 0 and 5000 (inclusive).";
     public static final String MESSAGE_CONSTRAINTS_DATE = "Date value is invalid. Should follow the format "
         + "YYYY-MM-DDTHH:mm:ss, e.g. 2024-03-27T10:15:30";
     public static final String MESSAGE_JSON_KEY_NOT_FOUND = "Key value not found in JSON file.";
     public static final String MESSAGE_JSON_EMPTY_WEIGHT = "Weight value specified in JSON cannot be an empty string.";
-
+    
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
@@ -33,7 +35,7 @@ public class Weight extends Attribute<Float> {
      * Returns true if a given string is a valid weight.
      */
     public static boolean isValidWeight(String test) {
-        return test.matches(VALIDATION_REGEX);
+        return test.matches(VALIDATION_REGEX) && Float.valueOf(test) <= WEIGHT_MAX_VALUE;
     }
 
     @Override
