@@ -101,7 +101,7 @@ Java is a versatile programming language used for developing various application
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Features
 
@@ -260,7 +260,9 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
-### Searching clients : `find`
+<hr>
+
+### Finding clients : `find`
 
 Finds all clients that match the specified attributes.
 
@@ -347,13 +349,20 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g.,
 
 ![QrCodeContactCard](images/QrCodeContactCard.png)
 
-To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact.
+To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
+
+<div markdown="block" class="alert alert-warning">:warning:
+Due to the limited availability of mobile devices for testing, this feature has only been tested on the following devices:
+* iPhone 15 Pro Max running iOS 17.4.1
+* Samsung S23 Ultra running OneUI 6.0
+
+While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
+</div>
 
 <img src="images/QRScanning.png" height="480">
 <img src="images/QRContact.png" height="480">
-<hr>
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## FAQ
 
@@ -376,13 +385,15 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+1. **When scanning a client's QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
+
+<hr>
 
 ## Command summary
 
