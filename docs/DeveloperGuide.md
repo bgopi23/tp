@@ -292,6 +292,44 @@ The following activity diagram summarizes what happens when a client is added or
 
 ![AddAndEditCommandSequenceDiagram](images/AddAndEditCommandActivityDiagram.png)
 
+### Specialised error messages for commands
+When typing in commands, error messages guide the user on what is missing or wrong with their command format.
+
+Let's take the `add` command as an example.
+
+The correct format is as follows : `add n/NAME p/PHONE`
+
+|    Command     |            Error Message            |
+|:--------------:|:-----------------------------------:|
+|     `add`      |     _No parameters specified!_      |
+|  `add n/NAME`  |  _Phone number parameter missing!_  |
+| `add p/PHONE`  |      _Name parameter missing!_      |
+|   `add NAME`   |     _Invalid command format!_     |
+
+Now lets look at the `delete` command for another example
+
+The correct format is as follows : `delete INDEX`
+
+|   Command    |                        Error Message                         |
+|:------------:|:------------------------------------------------------------:|
+|   `delete`   |                    _No index specified!_                     |
+| `delete two` |                  _Invalid index provided._                   |
+|   `delet`    | _Unknown command, please type 'help' for possible commands!_ |
+| `delete -1`  |                  _Invalid index specified!_                  |
+
+
+**_How the feature was implemented._** <br>
+The specialised error messages was implemented by improving the parsing of commands in the respective
+command parsers (AddCommandParser, DeleteCommandParser). 
+
+**_Why it is implemented that way._** <br>
+We anticipated possible erroneous user inputs and crafted specialised outputs as we wanted to prompt the user in a 
+certain direction towards the correct command format instead of just telling them the format was wrong.
+
+**_Alternatives considered._** <br>
+Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
+was trivial.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
