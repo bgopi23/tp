@@ -148,8 +148,8 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [
 
 
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
-  * add n/Tom p/123 w/85 65
-  * add n/Tom p/123 h/180 175
+  * `add n/Tom p/123 w/85 65`
+  * `add n/Tom p/123 h/180 175`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
@@ -182,8 +182,8 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
-  * add n/Tom p/123 w/85 65
-  * add n/Tom p/123 h/180 175* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
+  * `add n/Tom p/123 w/85 65`
+  * `add n/Tom p/123 h/180 175`
 * When WEIGHT is specified to be 0, the **latest** weight (if any) will be removed from the client.
 * Similarly, when HEIGHT is specified to be 0, the height value will be removed from the client.
 * When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
