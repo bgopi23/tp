@@ -35,7 +35,7 @@ On the other hand, these boxes indicate when you should pay extra attention to a
 
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
 
-Lastly, these boxes contain warnings about potential negative outcomes. 
+Lastly, these boxes contain warnings about potential negative outcomes.
 
 (e.g. irreversible loss of data)
 </div>
@@ -87,14 +87,14 @@ Java is a versatile programming language used for developing various application
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
- 
+
    * `add n/John p/98765432` Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
 
    * `delete 3` : Deletes the third client shown in the list.
-   
+
    * `exit` : Exits the app.
 
    * `list` : Lists all clients.
@@ -248,13 +248,13 @@ You must either specify an exercise name, or use one or more of the default supp
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied 
+If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied
 exercise value(s), or a default set of exercise values (ie. `sets`: 1, `reps`: 1, `break`: 0) for the exercise value(s) that are not supplied.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined 
+Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined
 default exercises already exists for the client.
 
 For example, if client with `INDEX` 1 already has an exercise named `push-ups` with `sets`: 20, `reps`: 5 and `break`: 60,
