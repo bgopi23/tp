@@ -11,10 +11,19 @@ import java.util.Objects;
 public class Exercise {
 
     public static final String NAME_CONSTRAINT = "Exercise name should not be empty";
-    public static final String SETS_CONSTRAINT = "Number of sets should be a number greater than 0";
-    public static final String REPS_CONSTRAINT = "Number of repetitions should be a number greater than 0";
+    public static final int SETS_LIMIT = 1_000_000;
+    public static final String SETS_CONSTRAINT =
+        String.format("Number of sets should be a number greater than 0 and less than or equals to %d", SETS_LIMIT);
+    public static final int REPS_LIMIT = 1_000_000;
+    public static final String REPS_CONSTRAINT =
+        String.format("Number of reps should be a number greater than 0 and less than or equals to %d", REPS_LIMIT);
+    public static final int BREAK_LIMIT = 1_000_000;
+
     public static final String BREAK_CONSTRAINT =
-        "Break time in seconds between sets should be a number greater or equals to 0";
+        String.format(
+            "Break time in seconds between sets should be a number greater or equal to 0 and less than or equals to %d",
+            BREAK_LIMIT);
+
 
     public static final Integer DEFAULT_SETS = 1;
     public static final Integer DEFAULT_REPS = 1;
@@ -70,7 +79,7 @@ public class Exercise {
      * @return true if the number of sets is valid, false otherwise.
      */
     public static boolean isValidSets(Integer sets) {
-        return sets > 0;
+        return sets > 0 && sets <= SETS_LIMIT;
     }
 
     /**
@@ -80,7 +89,7 @@ public class Exercise {
      * @return true if the number of reps is valid, false otherwise.
      */
     public static boolean isValidReps(Integer reps) {
-        return reps > 0;
+        return reps > 0 && reps <= REPS_LIMIT;
     }
 
     /**
@@ -90,7 +99,7 @@ public class Exercise {
      * @return true if the break time is valid, false otherwise.
      */
     public static boolean isValidBreakBetweenSets(Integer breakBetweenSets) {
-        return breakBetweenSets >= 0;
+        return breakBetweenSets >= 0 && breakBetweenSets <= BREAK_LIMIT;
     }
 
     /**
@@ -152,6 +161,6 @@ public class Exercise {
     @Override
     public String toString() {
         return String.format("%s: %d sets of %d reps, %d min break between sets",
-                this.name, this.sets, this.reps, this.breakBetweenSets);
+            this.name, this.sets, this.reps, this.breakBetweenSets);
     }
 }
