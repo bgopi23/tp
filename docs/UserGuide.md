@@ -446,6 +446,16 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 1. **When scanning a client's QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
 
+1. **When trying to scan the QR code of a client with a lot of information stored**, the QR code may become too dense and difficult to scan. The remedy is to reduce the amount of information stored in the client.
+
+> We have verified that the QR code can still be scanned for clients with no more than 100 characters in each of the following fields:
+>
+> * Name
+> * Phone Number
+> * Address
+> * Email
+> * Notes
+
 <hr>
 
 ## Command summary
