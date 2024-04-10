@@ -634,7 +634,7 @@ testers are expected to do more *exploratory* testing.
 1. _{ more test cases …​ }_
 
 
-## **Appendix: Planned Enhancements**
+## Appendix: Planned Enhancements
 FitBook's team size is 5.
 
 1. **Allow for more flexible weight management:** The current implementation of tracking client's weights only allow users to add or modify the latest weight value at the current date and time. They can also delete the latest weight value from the client. We plan to make this feature more flexible by allowing users to add/modify a client's weight at specified date and time of their choice.
