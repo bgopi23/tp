@@ -64,7 +64,8 @@ public class WeightCommand extends Command {
         Person personToEdit = lastShownList.get(listIndex);
 
         NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
-        if (this.weightEntry.getValue().getValue().isZero()) {
+        Weight weight = this.weightEntry.getValue().getValue();
+        if (weight.isZero()) {
             if (toEditWeightMap.isEmpty()) {
                 throw new CommandException(MESSAGE_EMPTY_WEIGHT_MAP);
             }
