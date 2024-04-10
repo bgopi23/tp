@@ -9,9 +9,8 @@ public class WeightCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "weight";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weight (in kilograms) of the person identified "
-            + "by the index number used in the last person listing.\n"
-            + "Existing weight will be overwritten by the input.\n"
+            + ": Adds a weight (in kg) to the client specified by the index number used in the client list.\n"
+            + "If no weight or '0' is specified, the latest weight value will be removed from the client.\n"
             + "Parameters: INDEX (must be a positive float) "
             + "Example: " + COMMAND_WORD + " 1 "
             + "70.0";
