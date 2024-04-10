@@ -62,17 +62,12 @@ public class FindCommandParserTest {
             "");
     private static final PhoneContainsSubstringPredicate PHONE_PREDICATE_EMPTY = new PhoneContainsSubstringPredicate(
             "");
-    private static final EmailContainsSubstringPredicate EMAIL_PREDICATE_EMPTY = new EmailContainsSubstringPredicate(
-            "");
-    private static final AddressContainsSubstringPredicate ADDRESS_PREDICATE_EMPTY =
-            new AddressContainsSubstringPredicate("");
+    private static final AlwaysTruePredicate EMAIL_PREDICATE_EMPTY = new AlwaysTruePredicate();
+    private static final AlwaysTruePredicate ADDRESS_PREDICATE_EMPTY = new AlwaysTruePredicate();
     private static final AlwaysTruePredicate WEIGHT_PREDICATE_EMPTY = new AlwaysTruePredicate();
-    private static final HeightContainsRangePredicate HEIGHT_PREDICATE_EMPTY = new HeightContainsRangePredicate(
-            new Pair<>(0f, Float.MAX_VALUE));
-    private static final NoteContainsSubstringPredicate NOTE_PREDICATE_EMPTY = new NoteContainsSubstringPredicate(
-            "");
-    private static final TagSetContainsAllTagsPredicate TAGS_PREDICATE_EMPTY = new TagSetContainsAllTagsPredicate(
-            new HashSet<>());
+    private static final AlwaysTruePredicate HEIGHT_PREDICATE_EMPTY = new AlwaysTruePredicate();
+    private static final AlwaysTruePredicate NOTE_PREDICATE_EMPTY = new AlwaysTruePredicate();
+    private static final AlwaysTruePredicate TAGS_PREDICATE_EMPTY = new AlwaysTruePredicate();
 
     private FindCommandParser parser = new FindCommandParser();
 
