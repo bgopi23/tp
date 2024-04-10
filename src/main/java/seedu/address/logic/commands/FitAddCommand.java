@@ -85,23 +85,6 @@ public class FitAddCommand extends Command {
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
         for (Exercise exerciseToAdd : this.exercisesToAdd) {
-            if (updatedExercises.contains(exerciseToAdd)) {
-                for (Exercise e : updatedExercises) {
-                    if (e.equals(exerciseToAdd)) {
-                        String name = exerciseToAdd.getName();
-                        Integer sets =
-                            exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
-                        Integer reps =
-                            exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
-                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != Exercise.DEFAULT_BREAK
-                            ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
-
-                        exerciseToAdd = new Exercise(name, sets, reps, breakBetweenSets);
-                        break;
-                    }
-                }
-            }
-
             updatedExercises.remove(exerciseToAdd);
             updatedExercises.add(exerciseToAdd);
         }

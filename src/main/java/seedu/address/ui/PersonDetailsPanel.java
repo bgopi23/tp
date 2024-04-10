@@ -34,7 +34,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.util.DateTimeUtil;
-import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.person.Person;
@@ -218,7 +217,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 final String exerciseAttrValueStyle =
                     "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
 
-                Label exerciseName = new Label(StringUtil.capitalizeWords(exercise.getName()));
+                Label exerciseName = new Label(exercise.getName());
 
                 exerciseName.setWrapText(true);
                 exerciseName.setUnderline(true);

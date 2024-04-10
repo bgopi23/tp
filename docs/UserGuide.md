@@ -221,21 +221,51 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds the specified exercise(s) to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values (sets: 1, reps: 1, break: 0) if not supplied.
+* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* `EXERCISE_NAME` is **case-insensitive**.
+* Overwrites the specified exercise and its values if the exercise already exists for the client.
+* An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
-Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
+Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
 
+| Prefix     | Exercises                                                                                                                                             |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/arms`      | `bicep curls` - `sets`: 3, `reps`: 10, `break`: 60<br/>`tricep dips` - `sets`: 3, `reps`: 12, `break`: 60<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90           |
+| `/legs`      | `squats` - `sets`: 4, `reps`: 15, `break`: 90<br/>`lunges` - `sets`: 3, `reps`: 12, `break`: 60<br/>`calf raises` - `sets`: 3, `reps`: 20, `break`: 60                  |
+| `/chest`     | `bench press` - `sets`: 4, `reps`: 8, `break`: 120<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90<br/>`chest fly` - `sets`: 3, `reps`: 10, `break`: 90             |
+| `/back`      | `pull-ups` - `sets`: 3, `reps`: 8, `break`: 120<br/>`bent-over rows` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lat pull-downs` - `sets`: 3, `reps`: 12, `break`: 60     |
+| `/shoulders` | `shoulder press` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lateral raises` - `sets`: 3, `reps`: 12, `break`: 60<br/>`front raises` - `sets`: 3, `reps`: 10, `break`: 60 |
+| `/abs`       | `crunches` - `sets`: 3, `reps`: 20, `break`: 60<br/>`plank` - `sets`: 3, `reps`: 60, `break`: 90<br/>`russian twists` - `sets`: 3, `reps`: 15, `break`: 60              |
+| `/all`       | A combination of all exercises from the other prefixes                                                                                                |
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or use a number of default supported prefixes, but not both together.
+You must either specify an exercise name, or use one or more of the default supported prefixes, but not both together.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied 
+exercise value(s), or a default set of exercise values (ie. `sets`: 1, `reps`: 1, `break`: 0) for the exercise value(s) that are not supplied.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined 
+default exercises already exists for the client.
+
+For example, if client with `INDEX` 1 already has an exercise named `push-ups` with `sets`: 20, `reps`: 5 and `break`: 60,
+entering the command `fitadd 1 /arms`, will overwrite the `push-ups` exercise values to `sets`: 3, `reps`: 15 and `break`: 90.
+
+As per the default exercises table above.
 </div>
 
 Examples:
 
-* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetition of 1 and 0 seconds break time between sets.
+* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, default repetition of 1 and default 0 seconds break time between sets.
+* `fitadd 1 n/burpees r/5` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetitions of 5 and default 0 seconds break time between sets.
 * `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
 * `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
 * `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
@@ -243,14 +273,20 @@ Examples:
 
 ### Deleting exercise(s) of clients : `fitdelete`
 
-Format: `fitdelete INDEX n/EXERCISE_NAME [/all]`
+Format: `fitdelete INDEX n/EXERCISE_NAME`
 
-* Deletes the specified exercises(s) from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Supplying the `/all` prefix deletes all exercise(s) from the specified client.
- 
+* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* `EXERCISE_NAME` is **case-insensitive**.
+
+Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
+
+Format: `fitdelete INDEX /all`
+
+* Supplying the `/all` prefix more than once will be treated as if it was only supplied once.
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or the `/all` prefix, but not both together.
+You must either specify an exercise name or the `/all` prefix, but not both together.
 </div>
 
 Examples:
