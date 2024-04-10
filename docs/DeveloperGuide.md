@@ -322,7 +322,7 @@ Apart from this, the `Set` interface exposes the `contains` method to check for 
 #### Detecting duplicate exercises
 
 Another point of consideration was with regard to how we should determine whether two exercises belonging to the same client
-is considered a duplicate since an exercise has multiple fields.
+are considered duplicates since an exercise has multiple fields.
 
 To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
 However, this may be changed in the future. For example, the same exercise may have a different number of sets, reps and break for different
