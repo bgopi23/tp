@@ -716,4 +716,4 @@ The client list will always show the most important information at a glance. To 
   * Tags
   * Phone Number
 
-Fields that exceed the length of the entry would be clipped. Complete information can always be viewed in the client details panel.
+Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
