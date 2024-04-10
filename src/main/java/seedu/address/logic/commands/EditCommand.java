@@ -30,9 +30,10 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.PhoneMessages;
+import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
-import seedu.address.model.person.weight.WeightMap;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -79,7 +80,7 @@ public class EditCommand extends Command {
 
             // If there are no more weight values to be removed
             if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
-                throw new CommandException(WeightMap.MESSAGE_EMPTY_WEIGHT_MAP);
+                throw new CommandException(WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP);
             }
 
             toEditWeightMap.pollLastEntry();
@@ -111,7 +112,7 @@ public class EditCommand extends Command {
         boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(Messages.MESSAGE_WARN, Phone.MESSAGE_EXPECTED);
+            return String.format(Messages.MESSAGE_WARN, PhoneMessages.MESSAGE_EXPECTED);
         }
 
         return "";
