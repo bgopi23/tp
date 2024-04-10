@@ -294,7 +294,7 @@ The following activity diagram summarizes what happens when a client is added or
 
 ### Adding, editing or deleting exercises for a client
 FitBook enables our target user (personal trainers) to add, edit and delete custom exercises for each of their clients.
-The management of these custom exercises are performed using the `fitadd` and `fitdelete` commands.
+The management of these custom exercises is performed using the `fitadd` and `fitdelete` commands.
 
 An exercise consists of a name, number of sets, number of reps and break time between sets (in seconds).
 
