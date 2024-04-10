@@ -8,23 +8,30 @@ import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENT
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
 import static seedu.address.testutil.TypicalPersons.ALICE;
+import static seedu.address.testutil.TypicalPersons.ALICE_WITHOUT_EMAIL;
 import static seedu.address.testutil.TypicalPersons.BENSON;
+import static seedu.address.testutil.TypicalPersons.BENSON_WITHOUT_EMAIL;
 import static seedu.address.testutil.TypicalPersons.CARL;
+import static seedu.address.testutil.TypicalPersons.CARL_WITHOUT_EMAIL;
 import static seedu.address.testutil.TypicalPersons.DANIEL;
 import static seedu.address.testutil.TypicalPersons.ELLE;
 import static seedu.address.testutil.TypicalPersons.FIONA;
 import static seedu.address.testutil.TypicalPersons.GEORGE;
 import static seedu.address.testutil.TypicalPersons.HOON;
 import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalPersons.getTypicalAddressBookSomeWithoutEmail;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Optional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.parser.ParserUtil;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -35,6 +42,7 @@ import seedu.address.model.person.predicates.NameContainsSubstringPredicate;
 import seedu.address.model.person.predicates.NoteContainsSubstringPredicate;
 import seedu.address.model.person.predicates.PhoneContainsSubstringPredicate;
 import seedu.address.model.person.predicates.TagSetContainsAllTagsPredicate;
+import seedu.address.model.person.predicates.WeightMapContainsWeightRangePredicate;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -44,6 +52,10 @@ import seedu.address.model.tag.Tag;
 public class FindCommandTest {
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model modelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(),
+            new UserPrefs());
+    private Model expectedModelWithoutSomeAttributes = new ModelManager(getTypicalAddressBookSomeWithoutEmail(),
+            new UserPrefs());
 
     @BeforeEach
     public void resetModels() {
@@ -79,50 +91,91 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_searchEmpty_allPersonsFound() {
+    public void execute_searchEmptyName_allPersonsFound() {
         String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
 
         NameContainsSubstringPredicate namePredicate = new NameContainsSubstringPredicate("");
-        PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
-        EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
-        AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
-        TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
-        NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
 
         // Empty name
         FindCommand command = new FindCommand(new CombinedPredicates(namePredicate));
         assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_searchEmptyPhone_allPersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 7);
+
+        PhoneContainsSubstringPredicate phonePredicate = new PhoneContainsSubstringPredicate("");
 
         // Empty phone
-        command = new FindCommand(new CombinedPredicates(phonePredicate));
+        FindCommand command = new FindCommand(new CombinedPredicates(phonePredicate));
         assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
         assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+    }
 
-        // Empty email
-        command = new FindCommand(new CombinedPredicates(emailPredicate));
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+    @Test
+    public void execute_searchEmptyEmail_somePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
 
-        // Empty address
-        command = new FindCommand(new CombinedPredicates(addressPredicate));
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+        EmailContainsSubstringPredicate emailPredicate = new EmailContainsSubstringPredicate("");
+        FindCommand command = new FindCommand(new CombinedPredicates(emailPredicate));
+        this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(emailPredicate);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(DANIEL, ELLE), this.modelWithoutSomeAttributes.getFilteredPersonList());
+    }
 
-        // Empty tags
-        command = new FindCommand(new CombinedPredicates(tagsPredicate));
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+    @Test
+    public void execute_searchEmptyAddress_somePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 3);
 
-        // Empty note
-        command = new FindCommand(new CombinedPredicates(notePredicate));
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+        AddressContainsSubstringPredicate addressPredicate = new AddressContainsSubstringPredicate("");
+        FindCommand command = new FindCommand(new CombinedPredicates(addressPredicate));
+        this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(addressPredicate);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(CARL_WITHOUT_EMAIL, DANIEL, ELLE),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
+    }
 
-        // Empty multiple
-        command = new FindCommand(new CombinedPredicates(namePredicate, phonePredicate));
-        assertCommandSuccess(command, this.model, expectedMessage, this.expectedModel);
-        assertEquals(getTypicalAddressBook().getPersonList(), this.model.getFilteredPersonList());
+    @Test
+    public void execute_searchEmptyTag_somePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+
+        TagSetContainsAllTagsPredicate tagsPredicate = new TagSetContainsAllTagsPredicate(new HashSet<>());
+        FindCommand command = new FindCommand(new CombinedPredicates(tagsPredicate));
+        this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(tagsPredicate);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(BENSON_WITHOUT_EMAIL, DANIEL),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_searchEmptyNote_somePersonsFound() {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+
+        NoteContainsSubstringPredicate notePredicate = new NoteContainsSubstringPredicate("");
+        FindCommand command = new FindCommand(new CombinedPredicates(notePredicate));
+        this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(notePredicate);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(ALICE_WITHOUT_EMAIL, DANIEL),
+                this.modelWithoutSomeAttributes.getFilteredPersonList());
+    }
+
+    @Test
+    public void execute_searchEmptyWeight_somePersonsFound() throws ParseException {
+        String expectedMessage = String.format(MESSAGE_PERSONS_FOUND_OVERVIEW, 2);
+
+        WeightMapContainsWeightRangePredicate weightPredicate =
+                new WeightMapContainsWeightRangePredicate(ParserUtil.parseSearchRange(Optional.empty()));
+        FindCommand command = new FindCommand(new CombinedPredicates(weightPredicate));
+        this.expectedModelWithoutSomeAttributes.updateFilteredPersonList(weightPredicate);
+        assertCommandSuccess(command, this.modelWithoutSomeAttributes, expectedMessage,
+                this.expectedModelWithoutSomeAttributes);
+        assertEquals(Arrays.asList(DANIEL, ELLE), this.modelWithoutSomeAttributes.getFilteredPersonList());
     }
 
     @Test

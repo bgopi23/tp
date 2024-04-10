@@ -101,7 +101,7 @@ Java is a versatile programming language used for developing various application
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Features
 
@@ -142,6 +142,9 @@ Format: `help`
 Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
+* Refer to the list of valid parameters of each input for more details.
+
+* When HEIGHT and/or WEIGHT is specified to be 0, no height/weight will be added to the client.
 
 
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
@@ -175,11 +178,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Refer to the list of valid parameters of each input for more details.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
   * add n/Tom p/123 w/85 65
   * add n/Tom p/123 h/180 175* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
+* When WEIGHT is specified to be 0, the **latest** weight (if any) will be removed from the client.
+* Similarly, when HEIGHT is specified to be 0, the height value will be removed from the client.
+* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -210,7 +217,7 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of
 > Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
-### Adding or overriding exercise(s) of clients : `fitadd`
+### Adding or overwriting exercise(s) of clients : `fitadd`
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
@@ -252,7 +259,7 @@ Examples:
 * `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
 <hr>
 
-### Adding a weight value to a client : `weight`
+### Adding or removing weight of a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
 
@@ -260,7 +267,8 @@ Format: `weight INDEX [WEIGHT] `
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
   * For example, `weight 1 85 95` only adds the weight value of `85` to the first client in the list. The value of `95` will be ignored.
-* If no weight value is given, the latest weight for the client at the specified index will be deleted.
+* If no weight value is given, or the weight value entered is 0, the latest weight for the client at the specified index will be deleted.
+* Refer to the list of valid parameters of each input for more details.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
 
@@ -269,7 +277,9 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
-### Searching clients : `find`
+<hr>
+
+### Finding clients : `find`
 
 Finds all clients that match the specified attributes.
 
@@ -279,9 +289,9 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * `RANGE` allows the user to search for a value that falls within the specified `RANGE`. The syntax is as follows:
     * `FROM, TO`. For example, to search for weights that fall between 70kg and 90kg, you can enter `w/70, 90`.
 * Any fields specified in the format above can be searched.
-* When an empty input is specified an optional field, only users that have value(s) available for that field will be showed. (e.g. `find w/` returns all clients that have at least one weight value associated to them).
+* When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
-    * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name **contains** `wendy` and phone number **contains** `91234567`)
+    * All fields must match (e.g `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
@@ -348,7 +358,7 @@ Advanced users are welcome to update data directly by editing that data file.
 <div markdown="block" class="alert alert-warning">:warning: **Warning:**
 If your changes to the data file make its format invalid, FitBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
 
-Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range, or an invalid field is specified). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or an invalid field is specified). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 <hr>
 
@@ -356,13 +366,20 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g.,
 
 ![QrCodeContactCard](images/QrCodeContactCard.png)
 
-To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact.
+To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
+
+<div markdown="block" class="alert alert-warning">:warning:
+Due to the limited availability of mobile devices for testing, this feature has only been tested on the following devices:
+* iPhone 15 Pro Max running iOS 17.4.1
+* Samsung S23 Ultra running OneUI 6.0
+
+While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
+</div>
 
 <img src="images/QRScanning.png" height="480">
 <img src="images/QRContact.png" height="480">
-<hr>
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## FAQ
 
@@ -385,27 +402,28 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+1. **When scanning a client's QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
+
+<hr>
 
 ## Command summary
-
-| Action        | Format, Examples                                                                                                                                                                                    |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
-| **Clear**     | `clear`                                                                                                                                                                                             |
-| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
-| **FitAdd**    | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
-| **FitDelete** | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
-| **List**      | `list`                                                                                                                                                                                              |
-| **Help**      | `help`                                                                                                                                                                                              |
-| **Note**      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
-
+| Command                                                           | Format, Examples                                                                                                                                                                                    |
+|-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**Add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
+| [**Clear**](#clearing-all-entries--clear)                         | `clear`                                                                                                                                                                                             |
+| [**Delete**](#deleting-a-client--delete)                          | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
+| [**Edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
+| [**Exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                              |
+| [**Find**](#searching-clients--find)                              | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
+| [**FitAdd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
+| [**FitDelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
+| [**List**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                              |
+| [**Help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                              |
+| [**Note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
+| [**Weight**](#adding-or-removing-weight-of-a-client--weight)      | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
