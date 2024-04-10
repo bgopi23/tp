@@ -262,7 +262,7 @@ Examples:
 
 <hr>
 
-### Searching clients : `find`
+### Finding clients : `find`
 
 Finds all clients that match the specified attributes.
 
@@ -356,7 +356,7 @@ Due to the limited availability of mobile devices for testing, this feature has 
 * iPhone 15 Pro Max running iOS 17.4.1
 * Samsung S23 Ultra running OneUI 6.0
 
-Other mobile devices may not support this feature.
+While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
 </div>
 
 <img src="images/QRScanning.png" height="480">
@@ -391,7 +391,7 @@ Other mobile devices may not support this feature.
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
-1. **When scanning a contact QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
+1. **When scanning a client's QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
 
 <hr>
 
