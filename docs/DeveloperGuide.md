@@ -717,3 +717,7 @@ The client list will always show the most important information at a glance. To 
   * Phone Number
 
 Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
+
+6. **Restrict the number of weight entries per day to 1**
+
+Since the variance of a client's weight values in a day is negligible, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would distort the weight-tracking graph.
