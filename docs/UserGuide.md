@@ -385,8 +385,7 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
-
-| Action                                                            | Format, Examples                                                                                                                                                                                    |
+| Command                                                           | Format, Examples                                                                                                                                                                                    |
 |-------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
 | [**Clear**](#clearing-all-entries--clear)                         | `clear`                                                                                                                                                                                             |
@@ -400,4 +399,3 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 | [**Help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                              |
 | [**Note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
 | [**Weight**](#adding-a-weight-value-to-a-client--weight)          | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
-
