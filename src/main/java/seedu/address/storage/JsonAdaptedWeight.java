@@ -8,7 +8,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.person.messages.TagMessages;
+import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 
@@ -51,19 +51,19 @@ class JsonAdaptedWeight {
 
             // Invalid weight modification in JSON file
             if (!Weight.isValidWeight(this.weightValue)) {
-                throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS);
+                throw new IllegalValueException(WeightMessages.MESSAGE_CONSTRAINTS);
             }
 
             return new WeightEntry(new AbstractMap.SimpleEntry<>(date, new Weight(Float.valueOf(this.weightValue))));
         } catch (DateTimeParseException e) {
             // Invalid date modification in JSON file
-            throw new IllegalValueException(Weight.MESSAGE_CONSTRAINTS_DATE);
+            throw new IllegalValueException(WeightMessages.MESSAGE_CONSTRAINTS_DATE);
         } catch (NullPointerException e) {
             // Date or weight key not found in JSON file
-            throw new IllegalValueException(Weight.MESSAGE_JSON_KEY_NOT_FOUND);
+            throw new IllegalValueException(WeightMessages.MESSAGE_JSON_KEY_NOT_FOUND);
         } catch (NumberFormatException e) {
             // Weight specified to be an empty string. In the case of parsing from JSON, this is not allowed
-            throw new IllegalValueException(Weight.MESSAGE_JSON_EMPTY_WEIGHT);
+            throw new IllegalValueException(WeightMessages.MESSAGE_JSON_EMPTY_WEIGHT);
         }
     }
 }
