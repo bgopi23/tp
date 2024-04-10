@@ -720,4 +720,4 @@ Fields that exceed the length of the line would be truncated. Complete informati
 
 6. **Restrict the number of weight entries per day to 1**
 
-Since the variance of a client's weight values in a day is negligible, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would distort the weight-tracking graph.
+Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
