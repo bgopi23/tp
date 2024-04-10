@@ -282,7 +282,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 </div>
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 * If no prefix is specified for the first argument, it will be used to search for a clients name
-* If prefix no prefix is specified to search for a client's name, it must be the first field to search
+* If no prefix is specified to search for a client's name, it must be the first field to search
 * E.g `find roy t/friends` is allowed
 * But `find t/friends roy` will result in an error
 </div>
