@@ -347,7 +347,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * If no prefix is specified to search for a client's name, it must be the first field to search.
 * If name prefix is specified it will take precedence over the non-prefixed argument.
     * (e.g. `find roy t/friends` is allowed)
-    * (e.g. `find t/friends roy` will result in an error.)
+    * (e.g. `find t/friends roy` will result in an error)
     * (e.g. `find roys n/roy` will use n/roy to search for a client's name instead of roys)
 </div>
 
