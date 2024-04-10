@@ -264,7 +264,7 @@ The diagram highlights the four main components of FitBook, highlighted in their
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
 #### Weight tracking feature
-The weight tracking feature allows users to keep track of past weight measurements of a client. Since a client is a person, we have set a more-than-reasonable limit of 5000kg for `weight`.
+The weight tracking feature allows users to keep track of past weight measurements of a client. Refer to the list of valid parameters of each input for more details. <REPLACETHIS>
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
