@@ -253,7 +253,7 @@ Format: `weight INDEX [WEIGHT] `
 
 * Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
-* A reasonable maximum value of 5000 is allowed. Although some decimal values of 5000 are allowed (e.g. 5000.000001), the value will still rounded off to the nearest 1 decimal place (i.e. 5000.0).
+* Refer to the list of valid parameters of each input for more details.
 * If no weight value is given, the latest weight for the client at the specified index will be deleted.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
