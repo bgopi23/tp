@@ -274,7 +274,7 @@ The activity diagram below illustrates what happens when a user enters a `weight
 ![WeightCommandActivityDiagram](images/WeightCommandActivityDiagram.png)
 
 #### Height value of a client
-The  `height` feature allows users to track a client's height. Since a client's typically remains constant, we decided not to implement `height` as a trackable value (unlike [weight](#weight-tracking-feature)).
+The `height` feature allows users to track a client's height. Since a client's height typically remains constant, we decided not to implement `height` as a trackable value (unlike [weight](#weight-tracking-feature)).
 
 Since a client is a person, we have set a more-than-reasonable limit of 5000cm for `height`.
 
