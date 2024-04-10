@@ -637,7 +637,7 @@ testers are expected to do more *exploratory* testing.
 
 Team size: 5
 
-1. **Always show details of client being modified**
+1. **Always display details of client being modified**
 
 To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
 
