@@ -60,10 +60,14 @@ public class ExerciseTest {
         // invalid sets
         assertFalse(Exercise.isValidSets(0)); // zero sets
         assertFalse(Exercise.isValidSets(-1)); // negative sets
+        assertFalse(Exercise.isValidSets(1_000_001)); // over limit
+        assertFalse(Exercise.isValidSets(1_000_002)); // over limit
 
         // valid sets
         assertTrue(Exercise.isValidSets(1));
         assertTrue(Exercise.isValidSets(10));
+        assertTrue(Exercise.isValidSets(999_999)); // within limit
+        assertTrue(Exercise.isValidSets(1_000_000)); // within limit
     }
 
     @Test
@@ -71,20 +75,28 @@ public class ExerciseTest {
         // invalid reps
         assertFalse(Exercise.isValidReps(0)); // zero reps
         assertFalse(Exercise.isValidReps(-1)); // negative reps
+        assertFalse(Exercise.isValidReps(1_000_001)); // over limit
+        assertFalse(Exercise.isValidReps(1_000_002)); // over limit
 
         // valid reps
         assertTrue(Exercise.isValidReps(1));
         assertTrue(Exercise.isValidReps(20));
+        assertTrue(Exercise.isValidReps(999_999)); // within limit
+        assertTrue(Exercise.isValidReps(1_000_000)); // within limit
     }
 
     @Test
     public void isValidBreakBetweenSets() {
         // invalid break
         assertFalse(Exercise.isValidBreakBetweenSets(-1)); // negative break
+        assertFalse(Exercise.isValidBreakBetweenSets(1_000_001)); // over limit
+        assertFalse(Exercise.isValidBreakBetweenSets(1_000_002)); // over limit
 
         // valid break
         assertTrue(Exercise.isValidBreakBetweenSets(0));
         assertTrue(Exercise.isValidBreakBetweenSets(60));
+        assertTrue(Exercise.isValidBreakBetweenSets(999_999)); // within limit
+        assertTrue(Exercise.isValidBreakBetweenSets(1_000_000)); // within limit
     }
 
     @Test
