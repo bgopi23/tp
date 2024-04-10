@@ -297,11 +297,12 @@ Format: `delete INDEX`
 * The index refers to the index number shown in the displayed client list.
 * The index **must be a single positive integer** (e.g. 1, 2, 3…​).
 * Anything after `delete` is treated as the index.
-* The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
+* The index cannot be followed by any text.
 
 Examples:
 * `list` followed by `delete 2` deletes the second client in the list.
 * `find Betsy` followed by `delete 1` deletes the first client in the results of the `find` command.
+* `delete 1 2` will be regarded as an invalid index.
 
 <hr>
 
