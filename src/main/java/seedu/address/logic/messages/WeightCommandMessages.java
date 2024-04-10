@@ -1,21 +1,17 @@
 package seedu.address.logic.messages;
 
-import seedu.address.logic.parser.CliSyntax;
-
 /**
- * Messages used by ListCommand and associated classes.
+ * Messages used by WeightCommand and associated classes.
  */
 public class WeightCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "weight";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Edits the weight (in kilograms) of the person identified "
-            + "by the index number used in the last person listing.\n"
-            + "Existing weight will be overwritten by the input.\n"
-            + "Parameters: INDEX (must be a positive float) "
-            + CliSyntax.PREFIX_WEIGHT + "WEIGHT\n"
+            + ": Adds a weight (in kg) to the client specified by the index number used in the client list.\n"
+            + "If no weight or '0' is specified, the latest weight value will be removed from the client.\n"
+            + "Parameters: INDEX [WEIGHT] (must be a number between 0 and 5000)\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_WEIGHT + "72.5";
+            + "70.0";
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
             "Successfully added weight to client!" + MESSAGE_RESULT_DIVIDER;
     public static final String MESSAGE_DELETE_WEIGHT_SUCCESS =
