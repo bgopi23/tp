@@ -57,7 +57,7 @@ public class Height extends Attribute<Float> {
                 + "Should have been handled in Parser class";
 
         // if a client has no height value
-        if (this.getValue() == 0) {
+        if (this.getValue() == 0f) {
             return false;
         }
 
