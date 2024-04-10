@@ -27,7 +27,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PARAMETER_FORMAT;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_NAME_PARAMETER_MISSING;
 import static seedu.address.logic.messages.Messages.MESSAGE_NO_PARAMETERS;
 import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_PARAMETER_MISSING;
@@ -159,7 +159,7 @@ public class AddCommandParserTest {
     public void parse_compulsoryFieldMissing_failure() {
         // preamble and phone number e.g (add lala p/98989898)
         assertParseFailure(this.parser, VALID_NAME_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
-                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommandMessages.MESSAGE_USAGE));
 
         // missing phone prefix e.g (add n/John)
         assertParseFailure(this.parser, NAME_DESC_BOB + VALID_PHONE_BOB + EMAIL_DESC_BOB + ADDRESS_DESC_BOB,
@@ -171,7 +171,7 @@ public class AddCommandParserTest {
 
         // all prefixes missing e.g (add name 99898888)
         assertParseFailure(this.parser, VALID_NAME_BOB + VALID_PHONE_BOB + VALID_EMAIL_BOB + VALID_ADDRESS_BOB,
-                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommandMessages.MESSAGE_USAGE));
     }
 
     @Test
@@ -195,7 +195,7 @@ public class AddCommandParserTest {
         // non-empty preamble
         assertParseFailure(this.parser, PREAMBLE_NON_EMPTY + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND + TAG_DESC_FRIEND,
-                String.format(MESSAGE_INVALID_PARAMETER_FORMAT, AddCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommandMessages.MESSAGE_USAGE));
 
         // empty preamble (add)
         assertParseFailure(this.parser, PREAMBLE_EMPTY,

@@ -168,15 +168,18 @@ class JsonAdaptedPerson {
         }
 
         if (this.height == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Height.class.getSimpleName()));
         }
         if (!this.height.isEmpty() && !Height.isValidHeight(this.height)) {
             throw new IllegalValueException(HeightMessages.MESSAGE_CONSTRAINTS);
         }
+        if (this.height.isEmpty()) {
+            throw new IllegalValueException(Height.MESSAGE_JSON_EMPTY_HEIGHT);
+        }
         final Height modelHeight = new Height(Float.valueOf(this.height));
 
         if (this.note == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Note.class.getSimpleName()));
         }
         final Note modelNote = new Note(this.note);
 

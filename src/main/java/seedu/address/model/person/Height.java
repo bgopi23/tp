@@ -14,6 +14,11 @@ import javafx.util.Pair;
 public class Height extends Attribute<Float> {
     public static final Float HEIGHT_MAX_VALUE = 5000f;
 
+    public static final String MESSAGE_JSON_EMPTY_HEIGHT = "Height value specified in JSON cannot be an empty string.";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Height value can only be a number between 0 and 5000 (inclusive).";
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
+    
     /**
      * Constructs a {@code height}.
      *
@@ -56,7 +61,7 @@ public class Height extends Attribute<Float> {
 
         assert (secondVal - firstVal >= 0) : MESSAGE_RANGE;
         // if a client has no height value
-        if (this.getValue() == 0) {
+        if (this.getValue() == 0f) {
             return false;
         }
 
