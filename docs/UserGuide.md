@@ -153,6 +153,10 @@ Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [
 A client can have 0 or more tags.
 </div>
 
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow addition of [duplicate clients](#duplicate-clients).
+</div>
+
 Examples:
 * `add n/John Doe p/98765432 e/johnd@gmail.com a/John street, block 123, #01-01 nt/john from school`
 * `add n/Betsy Crowe t/friend e/betsycrowe@hotmail.com a/Newgate Prison p/1234567 nt/likes donuts t/criminal`
@@ -202,6 +206,10 @@ Format: `note INDEX [NOTE] `
 * If no note is given, the note for the client at the specified index will be deleted.
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
+
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
+</div>
 
 Examples:
 
@@ -332,7 +340,6 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * E.g `find t/fri` will not match the tag `friend`
 * But `find t/fRieNd` will match the tag `friend`
 </div>
-
 
 Examples:
 * `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
@@ -487,3 +494,15 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | **Weight (kg)**  | <li> Must be a positive number (`w/0` will be treated as `w/`) <br> <li>For `weight`, a reasonable maximum value of 5000 is allowed. <li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the weight values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
 | **Height (cm)**  | <li> Must be a positive number (`h/0` will be treated as `h/`) <br> <li>For `height`, a reasonable maximum value of 5000 is allowed. <li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | **Index**        | Must be a positive number corresponding to the client in the list                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
+
+### Duplicate Clients
+FitBook does not allow duplicate clients. Clients are considered duplicates if they have the same values for the all of the following fields.
+* Name (case insensitive)
+* Phone number
+
+> Examples:
+>
+> 1. Using the `add` command to add a client that already exists in the Fitbook.
+> 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
+>
+> Any command that would result in duplicate clients will result in the error *"This person already exists in the address book"*.
