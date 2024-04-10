@@ -11,7 +11,7 @@ public class WeightCommandMessages extends Messages {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Adds a weight (in kg) to the client specified by the index number used in the client list.\n"
             + "If no weight or '0' is specified, the latest weight value will be removed from the client.\n"
-            + "Parameters: INDEX (must be a positive float) "
+            + "Parameters: INDEX [WEIGHT] (must be a number between 0 and 5000)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "70.0";
     public static final String WEIGHT_VALUE_HEADER = "Weight: ";
