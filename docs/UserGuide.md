@@ -143,7 +143,7 @@ Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
-* When HEIGHT and/or WEIGHT is specified to be 0, the values will not be added to the client's details.
+* When HEIGHT and/or WEIGHT is specified to be 0, no weight/height will be added to the client.
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
