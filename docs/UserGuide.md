@@ -157,9 +157,6 @@ A client can have 0 or more tags.
 
 <div markdown="block" class="alert alert-warning">:warning: **Note:**
 FitBook does not allow addition of [duplicate clients](#duplicate-clients).
-
-An attempt to add a duplicate client will result in the following error.
-![duplicate-add-client-error](images/DuplicateAddClientError.png)
 </div>
 
 Examples:
@@ -213,10 +210,7 @@ Format: `note INDEX [NOTE] `
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
 
 <div markdown="block" class="alert alert-warning">:warning: **Note:**
-FitBook does not allow [duplicate clients](#duplicate-clients).
-
-Any edits that would result in duplicate clients will result in the following error.
-![duplicate-edit-client-error](images/DuplicateEditClientError.png)
+FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
 </div>
 
 Examples:
@@ -486,11 +480,11 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | [**List**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                              |
 | [**Help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                              |
 | [**Note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| [**Weight**](#adding-or-removing-weight-of-a-client--weight)      | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`
-                                                                                                                                           |
+| [**Weight**](#adding-or-removing-weight-of-a-client--weight)      | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                          |
+
 ## Parameter Constraints
 ### Duplicate Clients
-FitBook detects for duplicate client entries and does not allow duplicate clients. Clients are considered duplicates if they have the same values for the following fields.
+FitBook does not allow duplicate clients. Clients are considered duplicates if they have the same values for the all of the following fields.
 * Name (case insensitive)
 * Phone number
 
@@ -498,3 +492,6 @@ FitBook detects for duplicate client entries and does not allow duplicate client
 >
 > 1. Using the `add` command to add a client that already exists in the Fitbook.
 > 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
+>
+> Any command that would result in duplicate clients will result in the following error.
+![duplicate-edit-client-error](images/DuplicateEditClientError.png)
