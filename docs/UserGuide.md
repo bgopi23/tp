@@ -274,6 +274,8 @@ Alternatively, you can use the `/all` prefix to delete all exercises from the sp
 
 Format: `fitdelete INDEX /all`
 
+* Supplying the `/all` prefix more than once will be treated as if it was only supplied once.
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
 You must either specify an exercise name or the `/all` prefix, but not both together.
