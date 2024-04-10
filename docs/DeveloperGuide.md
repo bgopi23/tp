@@ -231,7 +231,7 @@ This approach was also taken for the editing/deleting of QR codes.
 
 #### QR Code Image File Naming
 
-QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format: 
+QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format:
 
 * [HASHCODE].png, where [HASHCODE] is the result of the `hashCode()` function of a `Person`.
 
@@ -242,11 +242,11 @@ The activity diagram below illustrates what happens when a client is deleted fro
 ![DeleteCommandActivityDiagram](images/DeleteCommandActivityDiagram.png)
 
 ### Additional user details in FitBook
-On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status.
+On top of what AB3 has to offer, FitBook allows users to add additional details to each client to better track their health status. Some key features include:
 
-This includes:
-* [Weight tracking feature](#weight-tracking-feature)
 * [Note](#note-feature-in-fitbook)
+* [Weight tracking feature](#weight-tracking-feature)
+* [Height](#height-value-of-a-client)
 
 #### Note feature in FitBook
 The `note` feature allows users to add any relevant health information to each client.
@@ -264,13 +264,25 @@ The diagram highlights the four main components of FitBook, highlighted in their
 > The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
 
 #### Weight tracking feature
-The weight tracking feature allows users to keep track of past weight measurements of a client.
+The weight tracking feature allows users to keep track of past weight measurements of a client. Refer to the list of valid parameters of each input for more details. <REPLACETHIS>
 
 We can refer to the sequence diagram [above](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `weight` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `weight` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
-#### Viewing weight history of a client
+The activity diagram below illustrates what happens when a user enters a `weight` command.
+![WeightCommandActivityDiagram](images/WeightCommandActivityDiagram.png)
+
+#### Height value of a client
+The `height` feature allows users to track a client's height. Since a client's height typically remains constant, we decided not to implement `height` as a trackable value (unlike [weight](#weight-tracking-feature)).
+
+* Refer to the list of valid parameters of each input for more details. <REPLACETHIS>
+
+The `height` field is similar to `note` field, except that the underlying data type is a `Float`, instead of a `String`.
+
+We can refer to the sequence diagram [here](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
+
+For more details on how the `height` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
@@ -291,6 +303,44 @@ Therefore, to define how an attribute is being searched, one would simply take t
 The following activity diagram summarizes what happens when a client is added or edited in FitBook.
 
 ![AddAndEditCommandSequenceDiagram](images/AddAndEditCommandActivityDiagram.png)
+
+### Specialised error messages for commands
+When typing in commands, error messages guide the user on what is missing or wrong with their command format.
+
+Let's take the `add` command as an example.
+
+The correct format is as follows : `add n/NAME p/PHONE`
+
+|    Command     |            Error Message            |
+|:--------------:|:-----------------------------------:|
+|     `add`      |     _No parameters specified!_      |
+|  `add n/NAME`  |  _Phone number parameter missing!_  |
+| `add p/PHONE`  |      _Name parameter missing!_      |
+|   `add NAME`   |     _Invalid command format!_     |
+
+Now lets look at the `delete` command for another example
+
+The correct format is as follows : `delete INDEX`
+
+|   Command    |                        Error Message                         |
+|:------------:|:------------------------------------------------------------:|
+|   `delete`   |                    _No index specified!_                     |
+| `delete two` |                  _Invalid index provided._                   |
+|   `delet`    | _Unknown command, please type 'help' for possible commands!_ |
+| `delete -1`  |                  _Invalid index specified!_                  |
+
+
+**_How the feature was implemented._** <br>
+The specialised error messages was implemented by improving the parsing of commands in the respective
+command parsers (AddCommandParser, DeleteCommandParser).
+
+**_Why it is implemented that way._** <br>
+We anticipated possible erroneous user inputs and crafted specialised outputs as we wanted to prompt the user in a
+certain direction towards the correct command format instead of just telling them the format was wrong.
+
+**_Alternatives considered._** <br>
+Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
+was trivial.
 
 ### \[Proposed\] Undo/redo feature
 
@@ -548,7 +598,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 1. Should be optimized to run smoothly on low-end devices with limited processing power and memory. Users on older hardware should be able to use the application as long as it meets [this requirement](#nfr-1).
 1. Should provide full offline functionality. Users should be able to access all functionality of FitBook even when the device is not connected to the internet.
 
-### Glossary
+## Glossary
 
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
@@ -632,3 +682,38 @@ testers are expected to do more *exploratory* testing.
     1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
 
 1. _{ more test cases …​ }_
+
+
+## Appendix: Planned Enhancements
+
+FitBook's team size is 5.
+
+1. **Allow for more flexible weight management**
+
+The current implementation of tracking clients' weights only allows users to add, modify or delete the latest weight value at the current date and time. We plan to make this feature more flexible by allowing users to add/modify a client's weight at a specified date and time of their choice.
+
+2. **Provide more specific error messages**
+
+When removing optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages when a client edits a field that has not changed / has nothing to remove, where the error message will be similar to the one seen in the `weight` field.
+
+3. **Always display details of client being modified**
+
+To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
+
+> Some examples where this could be implemented:
+>
+> * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
+> * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
+
+4. **Better keyboard navigation support**
+
+For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
+
+5. **Adaptive client list entries**
+
+The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+  * Name
+  * Tags
+  * Phone Number
+
+Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.

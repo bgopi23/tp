@@ -80,6 +80,8 @@ public class CommandTestUtil {
     public static final String INVALID_PHONE_DESC = " " + PREFIX_PHONE + "911a"; // 'a' not allowed in phones
     public static final String INVALID_EMAIL_DESC = " " + PREFIX_EMAIL + "bob!yahoo"; // missing '@' symbol
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
+    public static final String INVALID_WEIGHT_OVER_LIMIT = " " + "9999999"; // Limit to 5000
+    public static final String INVALID_WEIGHT_NEGATIVE = " " + "-1"; // No negative numbers
 
     public static final String VALID_EXERCISE_NAME = "Push Ups";
     public static final String VALID_EXERCISE_SETS = "3";
