@@ -2,8 +2,8 @@ package seedu.address.model.tag;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-import static seedu.address.model.person.messages.TagMessages.MESSAGE_CONSTRAINTS;
-import static seedu.address.model.person.messages.TagMessages.VALIDATION_REGEX;
+
+import java.util.Set;
 
 import seedu.address.model.person.Attribute;
 
@@ -14,6 +14,10 @@ import seedu.address.model.person.Attribute;
  */
 public class Tag extends Attribute<String> {
 
+    public static final String MESSAGE_CONSTRAINTS = "Tags names should be alphanumeric";
+    public static final String VALIDATION_REGEX = "\\p{Alnum}+";
+    public static final Set<Tag> EMPTY_TAG_SET = Set.of(new Tag(false));
+
     /**
      * Constructs a {@code Tag}.
      *
@@ -23,6 +27,15 @@ public class Tag extends Attribute<String> {
         super(tagName);
         requireNonNull(tagName);
         checkArgument(isValidTagName(tagName), MESSAGE_CONSTRAINTS);
+    }
+
+    /**
+     * Constructs an empty tag "[]"
+     *
+     * @param bool any boolean
+     */
+    private Tag(boolean bool) {
+        super("");
     }
 
     /**
