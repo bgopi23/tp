@@ -295,7 +295,7 @@ Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a single positive integer** 1, 2, 3, …​
+* The index **must be a single positive integer** 1, 2, 3…​
 * Anything after `delete` is treated as the index.
 * The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
 
