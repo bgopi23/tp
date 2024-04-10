@@ -13,7 +13,7 @@ import javafx.util.Pair;
  */
 public class Height extends Attribute<Float> {
     public static final Float HEIGHT_MAX_VALUE = 5000f;
-    
+
     /**
      * Constructs a {@code height}.
      *
