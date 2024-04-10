@@ -38,11 +38,11 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Parses client's input into command for execution.
+     * Parses user's input into command for execution.
      *
-     * @param userInput full client input string
-     * @return the command based on the client's input
-     * @throws ParseException if the client's input does not conform the expected format
+     * @param userInput full user input string
+     * @return the command based on the user's input
+     * @throws ParseException if the user's input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
