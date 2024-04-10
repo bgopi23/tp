@@ -282,7 +282,7 @@ The `height` field is similar to `note` field, except that the underlying data t
 
 We can refer to the sequence diagram [here](#interacting-with-the-note-command) to see how the addition of such fields to clients interact with the components of FitBook.
 
-For more details on how the `height` field interact with the `add` and `edit` command, refer [here](#adding-or-editing-a-client).
+For more details on how the `height` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
 ### Searching Clients
 Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
