@@ -29,7 +29,13 @@ public abstract class SearchPredicate<T extends Object> implements Predicate<Per
 
     @Override
     public boolean test(Person person) {
-        return person.getAttribute(this.attribute).isMatch(this.searchValue);
+        String attributeString = person.getAttribute(this.attribute).toString();
+
+        if (searchValue.toString().isEmpty()) {
+            return !attributeString.isEmpty();
+        } else {
+            return person.getAttribute(this.attribute).isMatch(this.searchValue);
+        }
     }
 
     @Override

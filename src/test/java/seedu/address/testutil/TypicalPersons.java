@@ -65,18 +65,31 @@ public class TypicalPersons {
         .withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
         .build();
 
-    public static final Person ALICE_WITHOUT_EMAIL = new PersonBuilder().withName("Alice Pauline")
-        .withAddress("").withEmail("")
+    public static final Person ALICE_WITHOUT_EMAIL = new PersonBuilder()
+        .withName("Alice Pauline")
         .withPhone("94351253")
-        .withTags()
-        .withNote("Best friend").build();
-
-    public static final Person BENSON_WITHOUT_EMAIL = new PersonBuilder().withName("Benson Meier")
+        .withEmail("")
         .withAddress("")
-        .withEmail("").withPhone("98765432")
-        .withTags().build();
+        .withNote("Best friend")
+        .withWeights(new String[0])
+        .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final Person BENSON_WITHOUT_EMAIL = new PersonBuilder()
+        .withName("Benson Meier")
+        .withPhone("98765432")
+        .withEmail("")
+        .withAddress("")
+        .withWeights(new String[0])
+        .withTags("Friend")
+        .build();
+
+    public static final Person CARL_WITHOUT_EMAIL = new PersonBuilder()
+        .withName("Carl Kurz")
+        .withPhone("95352563")
+        .withEmail("")
+        .withAddress("wall street")
+        .withWeights(new String[0])
+        .build();
 
     private TypicalPersons() {
     } // prevents instantiation
@@ -92,10 +105,20 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Gets a typical List of Person objects
+     *
+     * @return a list of people without any special attribute restrictions
+     */
     public static List<Person> getTypicalPersons() {
         return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
     }
 
+    /**
+     * Gets a typical List of Person objects the without email attribute
+     *
+     * @returns an AddressBook where every person does not have any email
+     */
     public static AddressBook getTypicalAddressBookWithoutEmail() {
         AddressBook ab = new AddressBook();
         for (Person person : getTypicalPersonsWithoutEmail()) {
@@ -104,6 +127,24 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Gets a typical List of Person objects some of which don't have an email attribute
+     *
+     * @return a list of people some of whom don't have an email address
+     */
+    public static AddressBook getTypicalAddressBookSomeWithoutEmail() {
+        AddressBook ab = new AddressBook();
+        for (Person person : getSomeTypicalPersonsWithoutEmail()) {
+            ab.addPerson(person);
+        }
+        return ab;
+    }
+
+    /**
+     * Gets a AddressBook with a single typical person object
+     *
+     * @returns an AddressBook object
+     */
     public static AddressBook getTypicalAddressBookWithSinglePerson() {
         AddressBook ab = new AddressBook();
         for (Person person : getSingleTypicalPerson()) {
@@ -112,6 +153,11 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Gets an AddressBook object that has no one
+     *
+     * @returns an AddressBook with no people inside
+     */
     public static AddressBook getTypicalAddressBookWithNothing() {
         AddressBook ab = new AddressBook();
         for (Person person : getEmptyTypicalPerson()) {
@@ -120,14 +166,39 @@ public class TypicalPersons {
         return ab;
     }
 
+    /**
+     * Gets a list of people without any email
+     *
+     * @returns a list of Person Objects that do not have any email attribute associated with them
+     */
     public static List<Person> getTypicalPersonsWithoutEmail() {
         return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL, BENSON_WITHOUT_EMAIL));
     }
 
+    /**
+     * Gets a list of people, some of whom do not have an email
+     *
+     * @returns a list of people where only some of them do not have an email
+     */
+    public static List<Person> getSomeTypicalPersonsWithoutEmail() {
+        return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL, BENSON_WITHOUT_EMAIL, CARL_WITHOUT_EMAIL, DANIEL,
+                ELLE));
+    }
+
+    /**
+     * Gets a list of single typical person
+     *
+     * @returns a list containing a single typical person object
+     */
     public static List<Person> getSingleTypicalPerson() {
         return new ArrayList<>(Arrays.asList(ALICE_WITHOUT_EMAIL));
     }
 
+    /**
+     * Gets a list without any people inside
+     *
+     * @returns a list containing no person objects
+     */
     public static List<Person> getEmptyTypicalPerson() {
         return new ArrayList<>(Arrays.asList());
     }

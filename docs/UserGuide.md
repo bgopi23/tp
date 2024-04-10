@@ -35,7 +35,7 @@ On the other hand, these boxes indicate when you should pay extra attention to a
 
 <div markdown="block" class="alert alert-danger">:rotating_light: **Caution**
 
-Lastly, these boxes contain warnings about potential negative outcomes. 
+Lastly, these boxes contain warnings about potential negative outcomes.
 
 (e.g. irreversible loss of data)
 </div>
@@ -87,21 +87,21 @@ Java is a versatile programming language used for developing various application
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
- 
+
    * `add n/John p/98765432` Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
 
    * `delete 3` : Deletes the third client shown in the list.
-   
+
    * `exit` : Exits the app.
 
    * `list` : Lists all clients.
 
 1. Refer to the [Features](#features) below for details of each command.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Features
 
@@ -141,10 +141,20 @@ Format: `help`
 
 Adds a client to the FitBook.
 
-Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
+Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`<br>
+
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+* When HEIGHT and/or WEIGHT is specified to be 0, no height/weight will be added to the client.
+* HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
+  * `add n/Tom p/123 w/85 65`
+  * `add n/Tom p/123 h/180 175`
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow addition of [duplicate clients](#duplicate-clients).
 </div>
 
 Examples:
@@ -170,9 +180,15 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
+* Refer to the list of valid parameters of each input for more details.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
-* When editing tags, the existing tags of the client will be removed i.e adding of tags is not cumulative.
+* HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
+  * `add n/Tom p/123 w/85 65`
+  * `add n/Tom p/123 h/180 175`
+* When WEIGHT is specified to be 0, the **latest** weight (if any) will be removed from the client.
+* Similarly, when HEIGHT is specified to be 0, the height value will be removed from the client.
+* When editing tags, all existing tags of the client will be removed before new specified tags are added.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
@@ -191,37 +207,71 @@ Format: `note INDEX [NOTE] `
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
 
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
+</div>
+
 Examples:
 
 * `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
 * `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
 
-If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), the contents of the command box will be replaced with a note command whose NOTE field is pre-loaded with the note of the client at the specified index.
+If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be replaced with the existing note after pressing the `Enter` key. This provides greater convenience to the user when editing an existing note.
 
 > For example: Client at index 1 has the note "Wants to gain muscle".
 >
 > Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
-### Adding or overriding exercise(s) of clients : `fitadd`
+### Adding or overwriting exercise(s) of clients : `fitadd`
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds the specified exercise(s) to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* If an exercise with same name already exists for the client, the old exercise will be overwritten with the newly supplied field values, or a default set of values (sets: 1, reps: 1, break: 0) if not supplied.
+* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* `EXERCISE_NAME` is **case-insensitive**.
+* Overwrites the specified exercise and its values if the exercise already exists for the client.
+* An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
-Alternatively, you can use any one of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
+Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
 Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
 
+| Prefix     | Exercises                                                                                                                                             |
+|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `/arms`      | `bicep curls` - `sets`: 3, `reps`: 10, `break`: 60<br/>`tricep dips` - `sets`: 3, `reps`: 12, `break`: 60<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90           |
+| `/legs`      | `squats` - `sets`: 4, `reps`: 15, `break`: 90<br/>`lunges` - `sets`: 3, `reps`: 12, `break`: 60<br/>`calf raises` - `sets`: 3, `reps`: 20, `break`: 60                  |
+| `/chest`     | `bench press` - `sets`: 4, `reps`: 8, `break`: 120<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90<br/>`chest fly` - `sets`: 3, `reps`: 10, `break`: 90             |
+| `/back`      | `pull-ups` - `sets`: 3, `reps`: 8, `break`: 120<br/>`bent-over rows` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lat pull-downs` - `sets`: 3, `reps`: 12, `break`: 60     |
+| `/shoulders` | `shoulder press` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lateral raises` - `sets`: 3, `reps`: 12, `break`: 60<br/>`front raises` - `sets`: 3, `reps`: 10, `break`: 60 |
+| `/abs`       | `crunches` - `sets`: 3, `reps`: 20, `break`: 60<br/>`plank` - `sets`: 3, `reps`: 60, `break`: 90<br/>`russian twists` - `sets`: 3, `reps`: 15, `break`: 60              |
+| `/all`       | A combination of all exercises from the other prefixes                                                                                                |
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or use a number of default supported prefixes, but not both together.
+You must either specify an exercise name, or use one or more of the default supported prefixes, but not both together.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied
+exercise value(s), or a default set of exercise values (ie. `sets`: 1, `reps`: 1, `break`: 0) for the exercise value(s) that are not supplied.
+</div>
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined
+default exercises already exists for the client.
+
+For example, if client with `INDEX` 1 already has an exercise named `push-ups` with `sets`: 20, `reps`: 5 and `break`: 60,
+entering the command `fitadd 1 /arms`, will overwrite the `push-ups` exercise values to `sets`: 3, `reps`: 15 and `break`: 90.
+
+As per the default exercises table above.
 </div>
 
 Examples:
 
-* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetition of 1 and 0 seconds break time between sets.
+* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, default repetition of 1 and default 0 seconds break time between sets.
+* `fitadd 1 n/burpees r/5` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetitions of 5 and default 0 seconds break time between sets.
 * `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
 * `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
 * `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
@@ -229,14 +279,20 @@ Examples:
 
 ### Deleting exercise(s) of clients : `fitdelete`
 
-Format: `fitdelete INDEX n/EXERCISE_NAME [/all]`
+Format: `fitdelete INDEX n/EXERCISE_NAME`
 
-* Deletes the specified exercises(s) from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
-* Supplying the `/all` prefix deletes all exercise(s) from the specified client.
- 
+* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* `EXERCISE_NAME` is **case-insensitive**.
+
+Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
+
+Format: `fitdelete INDEX /all`
+
+* Supplying the `/all` prefix more than once will be treated as if it was only supplied once.
+
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
-You must either specify a specific exercise name or the `/all` prefix, but not both together.
+You must either specify an exercise name or the `/all` prefix, but not both together.
 </div>
 
 Examples:
@@ -245,13 +301,16 @@ Examples:
 * `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
 <hr>
 
-### Adding a weight value to a client : `weight`
+### Adding or removing weight of a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
 
 * Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
-* If no weight value is given, the latest weight for the client at the specified index will be deleted.
+* If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
+  * For example, `weight 1 85 95` only adds the weight value of `85` to the first client in the list. The value of `95` will be ignored.
+* If no weight value is given, or the weight value entered is 0, the latest weight for the client at the specified index will be deleted.
+* Refer to the list of valid parameters of each input for more details.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
 
@@ -260,24 +319,36 @@ Examples:
 * `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
 * `weight 2` - Deletes the latest weight value of the client at index 2.
 
-### Searching clients : `find`
+<hr>
+
+### Finding clients : `find`
 
 Finds all clients that match the specified attributes.
 
 Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/NOTE] [t/TAG]…​`
 
 * The search is case-insensitive for inputs that accept characters (i.e. `NAME, PHONE, EMAIL, ADDRESS, NOTE, TAG`). e.g `hans` will match `Hans`
-* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. The syntax is as follows:
-    * `FROM, TO`. For example, to search for weights that fall between 70kg and 90kg, you can enter `w/70, 90`.
+* `RANGE` allows the user to search for a value that falls within the specified `RANGE`. Refer to the [parameter constraints](#parameter-constraints) for more info.
 * Any fields specified in the format above can be searched.
-* When an empty input is specified an optional field, only users that have value(s) available for that field will be showed. (e.g. `find w/` returns all clients that have at least one weight value associated to them).
+* When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
-    * All fields must match (e.g `find n/Wendy p/91234567` will match with a contact whose name **contains** `wendy` and phone number **contains** `91234567`)
+    * All fields must match (e.g `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
 * All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
+
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
 * E.g `find t/fri` will not match the tag `friend`
 * But `find t/fRieNd` will match the tag `friend`
+</div>
+
+<div markdown="block" class="alert alert-info">:bulb: **Tip:**
+
+* If no prefix is specified for the first argument, it will be used to search for a client's name.
+    * e.g. `find roy t/friends` is allowed.
+* If no prefix is specified to search for a client's name, it must be the first field to search.
+    * e.g. `find t/friends roy` will result in an error.
+* If name prefix is specified it will take precedence over the non-prefixed argument.
+    * e.g. `find roys n/roy` will use n/roy to search for a client's name instead of roys.
 </div>
 
 
@@ -295,7 +366,9 @@ Format: `delete INDEX`
 
 * Deletes the client at the specified `INDEX`.
 * The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* The index **must be a single positive integer** (e.g. 1, 2, 3…​).
+* Anything after `delete` is treated as the index.
+* The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
 
 Examples:
 * `list` followed by `delete 2` deletes the second client in the list.
@@ -339,7 +412,7 @@ Advanced users are welcome to update data directly by editing that data file.
 <div markdown="block" class="alert alert-warning">:warning: **Warning:**
 If your changes to the data file make its format invalid, FitBook will discard all data and start with an empty data file at the next run. Hence, it is recommended to make a backup of the file before editing it.
 
-Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g., if a value entered is outside of the acceptable range, or an invalid field is specified). Therefore, edit the data file only if you are confident that you can update it correctly.
+Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. if a value entered is outside of the acceptable range, or an invalid field is specified). Therefore, edit the data file only if you are confident that you can update it correctly.
 </div>
 <hr>
 
@@ -347,13 +420,20 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g.,
 
 ![QrCodeContactCard](images/QrCodeContactCard.png)
 
-To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact.
+To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
+
+<div markdown="block" class="alert alert-warning">:warning:
+Due to the limited availability of mobile devices for testing, this feature has only been tested on the following devices:
+* iPhone 15 Pro Max running iOS 17.4.1
+* Samsung S23 Ultra running OneUI 6.0
+
+While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
+</div>
 
 <img src="images/QRScanning.png" height="480">
 <img src="images/QRContact.png" height="480">
-<hr>
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## FAQ
 
@@ -376,27 +456,71 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 
 1. Run `java -jar FitBook.jar` to launch FitBook.
 
---------------------------------------------------------------------------------------------------------------------
+<hr>
 
 ## Known issues
 
 1. **When using multiple screens**, if you move the application to a secondary screen, and later switch to using only the primary screen, the GUI will open off-screen. The remedy is to delete the `preferences.json` file created by the application before running the application again.
 
---------------------------------------------------------------------------------------------------------------------
+1. **When scanning a client's QR code with the Google Lens app**, an irrelevant country code might be added to the front of the phone number. The remedy is to use your phone's default camera app to scan the QR code.
+
+1. **When trying to scan the QR code of a client with a lot of information stored**, the QR code may become too dense and difficult to scan. The remedy is to reduce the amount of information stored in the client.
+
+> We have verified that the QR code can still be scanned for clients with no more than 100 characters in each of the following fields:
+>
+> * Name
+> * Phone Number
+> * Address
+> * Email
+> * Notes
+
+<hr>
 
 ## Command summary
 
-| Action        | Format, Examples                                                                                                                                                                                    |
-|---------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Add**       | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​` <br> e.g., `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas t/friend t/colleague` |
-| **Clear**     | `clear`                                                                                                                                                                                             |
-| **Delete**    | `delete INDEX`<br> e.g., `delete 3`                                                                                                                                                                 |
-| **Edit**      | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`                                                               |
-| **Find**      | `find KEYWORD [MORE_KEYWORDS]`<br> e.g., `find James Jake`                                                                                                                                          |
-| **FitAdd**    | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br> e.g., `fitadd 1 n/burpees s/3 r/5 b/30`       |
-| **FitDelete** | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
-| **List**      | `list`                                                                                                                                                                                              |
-| **Help**      | `help`                                                                                                                                                                                              |
-| **Note**      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| **Weight**    | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
+| Command                                                           | Format, Examples                                                                                                                                                                                                                       |
+|-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [**add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br><br>e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas w/70 h/170 t/friend t/colleague` |
+| [**clear**](#clearing-all-entries--clear)                         | `clear`                                                                                                                                                                                                                                |
+| [**delete**](#deleting-a-client--delete)                          | `delete INDEX`<br><br>e.g. `delete 3`                                                                                                                                                                                                  |
+| [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| [**exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                                                                 |
+| [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>e.g. `find n/Alex w/40,80 nt/Wants to build muscle t/family`                                                                     |
+| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br><br>e.g. `fitadd 1 n/burpees s/3 r/5 b/30`<br>`fitadd 1 /arms /abs`               |
+| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br><br>e.g. `fitdelete 1 n/burpees`<br>`fitdelete 1 /all`                                                                                                                                   |
+| [**list**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                                                                 |
+| [**help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                                                                 |
+| [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE] [/edit]`<br><br>e.g. `note 2 Sprained right ankle in the past`<br>`note 1 /edit`                                                                                                                                    |
+| [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> e.g. `weight 3 70`                                                                                                                                                                                     |
 
+## Parameter Constraints
+
+| Parameter          | Constraints                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+|--------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Name**           | Must only contain alphanumeric characters, spaces, and cannot be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| **Phone Number**   | Must only contains digits with a minimum length of 1 (spaces between numbers will be removed).                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Email**          | Must follow `local-part@domain`. Each segment adheres to the following constraints: <br><br> **Local-Part:** {::nomarkdown}<ul><li><b>Allowed Characters:</b> The local-part can contain alphanumeric characters (letters and numbers) and these special characters: {:/}`+`, `_`, `.`, `-`{::nomarkdown}.</li><li><b>Restrictions:</b> The local-part cannot begin or end with any of the special characters ({:/}`+`, `_`, `.`, `-`{::nomarkdown}).</li></ul> <b>Domain:</b> <ul><li>The domain follows the {:/}`@`{::nomarkdown} symbol and consists of domain labels separated by periods ({:/}`.`{::nomarkdown}).</li><li><b>Domain Label Constraints:</b> <ul><li><b>Ending Label Length:</b> The final domain label must be at least 2 characters long.</li><li><b>Character Use:</b> Each domain label must start and end with alphanumeric characters.</li><li><b>Internal Characters:</b> Within a domain label, only hyphens ({:/}`-`{::nomarkdown}) are allowed to separate alphanumeric characters.</li></ul></li></ul>{:/} |
+| **Address**        | Any text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Note**           | Any text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Tag**            | Must only contains alphanumeric characters, with no spaces and cannot be blank.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| **Weight (kg)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`w/0` will be treated as `w/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the weight values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| **Height (cm)**    | {::nomarkdown}<ul><li> Must be a positive number. ({:/}`h/0` will be treated as `h/`{::nomarkdown})</li><li> A reasonable maximum value of 5000 is allowed.</li><li> Although some decimal values of 5000 are allowed (e.g. 5000.000001), the height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Index**          | Must be a positive number corresponding to the client in the list.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+| **Range**          | Format: `FROM, TO`{::nomarkdown}<ul><li>Note that the comma must follow immediately after <code>FROM</code>.</li><li>For example, to search for weights that fall between 70kg and 90kg, you can enter <code>w/70, 90</code>.</li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              |
+| **Exercise Name**  | Any non-empty text is allowed.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Exercise Sets**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+| **Exercise Reps**  | {::nomarkdown}<ul><li> Must be a positive integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| **Exercise Break** | {::nomarkdown}<ul><li> Must be a non-negative integer. </li> <li> A reasonable maximum value of 1000000 is allowed. </li></ul>{:/}                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    |
+
+### Duplicate Clients
+
+FitBook does not allow duplicate clients. Clients are considered duplicates if they have the same values for the all of the following fields.
+* Name (case-insensitive)
+* Phone number
+
+> Examples:
+>
+> 1. Using the `add` command to add a client that already exists in the Fitbook.
+> 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
+>
+> Any command that would result in duplicate clients will result in the error *"This person already exists in the address book"*.
