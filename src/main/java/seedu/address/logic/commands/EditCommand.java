@@ -75,8 +75,7 @@ public class EditCommand extends Command {
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
 
         // Get the weight map of the person we are editing.
-        NavigableMap<LocalDateTime, Weight> toEditWeightMap =
-                new TreeMap<>(personToEdit.getWeights());
+        NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
 
         // We only modify the weight map if user has specified the weight prefix.
         if (editPersonDescriptor.getWeight().isPresent()) {

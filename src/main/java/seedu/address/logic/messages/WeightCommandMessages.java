@@ -1,9 +1,7 @@
 package seedu.address.logic.messages;
 
-import seedu.address.logic.parser.CliSyntax;
-
 /**
- * Messages used by ListCommand and associated classes.
+ * Messages used by WeightCommand and associated classes.
  */
 public class WeightCommandMessages extends Messages {
 
