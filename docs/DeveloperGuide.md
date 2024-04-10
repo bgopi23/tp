@@ -304,7 +304,7 @@ The correct format is as follows : `add n/NAME p/PHONE`
 |     `add`      |     _No parameters specified!_      |
 |  `add n/NAME`  |  _Phone number parameter missing!_  |
 | `add p/PHONE`  |      _Name parameter missing!_      |
-|   `add NAME`   |     _Invalid parameter format!_     |
+|   `add NAME`   |     _Invalid command format!_     |
 
 Now lets look at the `delete` command for another example
 
