@@ -494,4 +494,4 @@ FitBook does not allow duplicate clients. Clients are considered duplicates if t
 > 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
 >
 > Any command that would result in duplicate clients will result in the following error.
->![duplicate-client-error](images/DuplicateClientError.png)
+> ![duplicate-client-error](images/DuplicateClientError.png)
