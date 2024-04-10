@@ -45,7 +45,7 @@ public class AddCommandParser implements Parser<AddCommand> {
      * and returns an AddCommand object for execution.
      *
      * @param args the string to be parsed
-     * @returns an AddCommand object with the client that will be added to FitBook
+     * @return an AddCommand object with the client that will be added to FitBook
      * @throws ParseException if the client's input does not conform the expected format
      **/
     public AddCommand parse(String args) throws ParseException {
