@@ -1,6 +1,9 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEIGHT_NEGATIVE;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_WEIGHT_OVER_LIMIT;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_AMY;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WEIGHT_BOB;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_PARAMETER_WEIGHT;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_NO_PARAMETER_WEIGHT;

@@ -12,7 +12,8 @@ import seedu.address.model.person.Attribute;
 public class Weight extends Attribute<Float> {
     public static final Float WEIGHT_MAX_VALUE = 5000f;
 
-    public static final String MESSAGE_CONSTRAINTS = "Weight value can only be a number between 0 and 5000 (inclusive).";
+    public static final String MESSAGE_CONSTRAINTS =
+            "Weight value can only be a number between 0 and 5000 (inclusive).";
     public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
