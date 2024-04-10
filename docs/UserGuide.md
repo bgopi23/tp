@@ -493,4 +493,4 @@ FitBook does not allow duplicate clients. Clients are considered duplicates if t
 > 1. Using the `add` command to add a client that already exists in the Fitbook.
 > 1. Using the `edit` command to modify an existing client to have the same name and phone number as another client in Fitbook.
 >
-> Any command that would result in duplicate clients will result in the error "This person already exists in the address book".
+> Any command that would result in duplicate clients will result in the error *"This person already exists in the address book"*.
