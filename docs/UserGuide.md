@@ -474,13 +474,3 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | [**Help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                              |
 | [**Note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
 | [**Weight**](#adding-or-removing-weight-of-a-client--weight)      | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
-## **Appendix: Planned Enhancements**
-
-**1. Adaptive client list entries**
-
-The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
-  * Name
-  * Tags
-  * Phone Number
-
-Fields that exceed the length of the entry would be clipped. Complete information can always be viewed in the client details panel.
