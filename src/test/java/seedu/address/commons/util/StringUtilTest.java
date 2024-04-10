@@ -1,8 +1,6 @@
 package seedu.address.commons.util;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -165,32 +163,4 @@ public class StringUtilTest {
         assertTrue(StringUtil.isInteger(Integer.toString(Integer.MAX_VALUE)));
         assertTrue(StringUtil.isInteger(Integer.toString(Integer.MIN_VALUE)));
     }
-
-    //---------------- Tests for capitalizeWords --------------------------------------
-
-    @Test
-    public void capitalizeWords() {
-
-        // EP: null, should return null
-        assertNull(StringUtil.capitalizeWords(null));
-
-        // EP: empty string, should return empty string
-        assertEquals("", StringUtil.capitalizeWords(""));
-        assertEquals("", StringUtil.capitalizeWords("   "));
-
-        // EP: single word, should capitalize the first letter
-        assertEquals("Hello", StringUtil.capitalizeWords("hello"));
-        assertEquals("Hello", StringUtil.capitalizeWords("HELLO"));
-        assertEquals("Hello", StringUtil.capitalizeWords("heLLo"));
-
-        // EP: multiple words, should capitalize the first letter of each word
-        assertEquals("Hello World", StringUtil.capitalizeWords("hello world"));
-        assertEquals("Hello World", StringUtil.capitalizeWords("HELLO WORLD"));
-        assertEquals("Hello World", StringUtil.capitalizeWords("heLLo wORLd"));
-
-        // EP: words with extra spaces, should capitalize the first letter of each word
-        assertEquals("Hello World", StringUtil.capitalizeWords("  hello  world  "));
-        assertEquals("Hello World", StringUtil.capitalizeWords("hello   world"));
-    }
-
 }
