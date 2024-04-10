@@ -19,7 +19,7 @@ public class ExerciseToAdd {
      *
      * @param name             Name of the exercise.
      * @param sets             Optional number of sets.
-     * @param reps             Optional number of repetitions per set.
+     * @param reps Optional number of repetitions per set.
      * @param breakBetweenSets Optional break time in seconds between sets.
      */
     public ExerciseToAdd(String name, Optional<Integer> sets, Optional<Integer> reps,
