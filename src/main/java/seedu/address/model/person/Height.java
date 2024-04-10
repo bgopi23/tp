@@ -1,6 +1,9 @@
 package seedu.address.model.person;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.model.person.messages.HeightMessages.MESSAGE_NO_HEIGHT;
+import static seedu.address.model.person.messages.HeightMessages.MESSAGE_RANGE;
+import static seedu.address.model.person.messages.HeightMessages.VALIDATION_REGEX;
 
 import javafx.util.Pair;
 
@@ -10,10 +13,6 @@ import javafx.util.Pair;
  */
 public class Height extends Attribute<Float> {
     public static final Float HEIGHT_MAX_VALUE = 5000f;
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Height value can only be a number between 0 and 5000 (inclusive).";
-    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code height}.
@@ -55,9 +54,7 @@ public class Height extends Attribute<Float> {
         Float firstVal = (Float) pair.getKey();
         Float secondVal = (Float) pair.getValue();
 
-        assert (secondVal - firstVal >= 0) : "Range should be more than or equals to zero."
-                + "Should have been handled in Parser class";
-
+        assert (secondVal - firstVal >= 0) : MESSAGE_RANGE;
         // if a client has no height value
         if (this.getValue() == 0) {
             return false;
@@ -77,7 +74,7 @@ public class Height extends Attribute<Float> {
      */
     public String getFormattedHeight() {
         if (this.getValue() == 0f) {
-            return "Height: N/A";
+            return MESSAGE_NO_HEIGHT;
         }
         return "Height: " + this.getValue().toString() + " cm";
     }
