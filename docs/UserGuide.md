@@ -245,7 +245,7 @@ Examples:
 * `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
 <hr>
 
-### Adding a weight value to a client : `weight`
+### Adding or removing weight of a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
 
@@ -398,4 +398,4 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 | [**List**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                              |
 | [**Help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                              |
 | [**Note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
-| [**Weight**](#adding-a-weight-value-to-a-client--weight)          | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
+| [**Weight**](#adding-or-removing-weight-of-a-client--weight)      | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
