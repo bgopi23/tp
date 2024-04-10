@@ -410,6 +410,6 @@ To save a contact to your mobile phone from FitBook, simply scan the QR code nex
 | [**FitDelete**](#fitdelete) | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br> e.g., `fitdelete 1 n/burpees`                                                                                                                        |
 | [**List**](#list)           | `list`                                                                                                                                                                                              |
 | [**Help**](#help)           | `help`                                                                                                                                                                                              |
-| [**Note**](#note)           | `note INDEX [NOTE]` <br> e.g. <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
+| [**Note**](#note)           | `note INDEX [NOTE]` <br> e.g., <br> `note 2 Sprained right ankle in the past`                                                                                                                        |
 | [**Weight**](#weight)       | `WEIGHT INDEX [WEIGHT]` <br> e.g. <br> `weight 3 70`                                                                                                                                                |
 
