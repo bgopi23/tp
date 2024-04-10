@@ -316,7 +316,7 @@ The following factors were taken into consideration when selecting a suitable da
 - The requirement to easily detect duplicate exercises
 - The requirement to flexibly modify the logic for detecting duplicate exercises
 
-Upon listing out our requirements, we found that Java `HashSet` to be the most suitable one, it implements the Java `Set` interface.
+Upon listing out our requirements, we found that Java `HashSet` to be the most suitable one because it implements the Java `Set` interface.
 Apart from the `Set` interface exposing the `contains` method to check for duplicates.
 
 #### Detecting duplicate exercises
