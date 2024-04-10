@@ -13,9 +13,8 @@ public class WeightCommandMessages extends Messages {
             + "by the index number used in the last person listing.\n"
             + "Existing weight will be overwritten by the input.\n"
             + "Parameters: INDEX (must be a positive float) "
-            + CliSyntax.PREFIX_WEIGHT + "WEIGHT\n"
             + "Example: " + COMMAND_WORD + " 1 "
-            + CliSyntax.PREFIX_WEIGHT + "72.5";
+            + "70.0";
     public static final String WEIGHT_VALUE_HEADER = "Weight: ";
     public static final String WEIGHT_DATE_HEADER = "Date Recorded: ";
     public static final String MESSAGE_ADD_WEIGHT_SUCCESS =
