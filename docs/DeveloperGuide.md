@@ -326,7 +326,7 @@ are considered duplicates since an exercise has multiple fields.
 
 To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
 However, this may change in the future. For example, the same exercise may have different numbers of sets, reps, and break times for different
-days of the week. To modify the detection of duplicate exercises we can simply modify the logic for the `equals` method 
+days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method 
 in our `Exercise` class, this is made possible because of our decision to store the exercises in a Java `Set`.
 
 ### \[Proposed\] Undo/redo feature
