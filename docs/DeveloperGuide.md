@@ -321,7 +321,7 @@ Apart from this, the `Set` interface exposes the `contains` method to check for 
 
 #### Detecting duplicate exercises
 
-Another point of consideration was with regard on how we should determine whether two exercises belonging to the same client
+Another point of consideration was with regard to how we should determine whether two exercises belonging to the same client
 is considered a duplicate since an exercise has multiple fields.
 
 To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
