@@ -142,8 +142,7 @@ Format: `help`
 Adds a client to the FitBook.
 
 Format: `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
-* For `height` and `weight`, a reasonable maximum value of 5000 is allowed. Although some decimal values of 5000 are allowed (e.g. 5000.000001), the weight and height values will still rounded off to the nearest 1 decimal place (i.e. 5000.0).
-
+* Refer to the list of valid parameters of each input for more details.
 
 <div markdown="span" class="alert alert-info">:bulb: **Tip:**
 A client can have 0 or more tags.
