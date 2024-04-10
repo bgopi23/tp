@@ -188,7 +188,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
   * `add n/Tom p/123 h/180 175`
 * When WEIGHT is specified to be 0, the **latest** weight (if any) will be removed from the client.
 * Similarly, when HEIGHT is specified to be 0, the height value will be removed from the client.
-* When editing tags, the existing tags of the client will be removed i.e. adding of tags is not cumulative.
+* When editing tags, all existing tags of the client will be removed before new specified tags are added.
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
