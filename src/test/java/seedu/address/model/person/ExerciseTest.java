@@ -18,26 +18,6 @@ public class ExerciseTest {
     }
 
     @Test
-    public void constructor_invalidName_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Exercise("", 1, 1, 0));
-    }
-
-    @Test
-    public void constructor_invalidSets_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Exercise("Exercise", 0, 1, 0));
-    }
-
-    @Test
-    public void constructor_invalidReps_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Exercise("Exercise", 1, 0, 0));
-    }
-
-    @Test
-    public void constructor_invalidBreak_throwsIllegalArgumentException() {
-        assertThrows(IllegalArgumentException.class, () -> new Exercise("Exercise", 1, 1, -1));
-    }
-
-    @Test
     public void isValidName() {
         // null name
         assertThrows(NullPointerException.class, () -> Exercise.isValidName(null));

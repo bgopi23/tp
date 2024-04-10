@@ -15,7 +15,6 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.exercise.Exercise;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
@@ -227,13 +226,13 @@ public class ParserUtilTest {
 
     @Test
     public void parseExerciseName_validValueWithoutWhitespace_returnsExerciseName() throws Exception {
-        assertEquals(VALID_EXERCISE_NAME, ParserUtil.parseExerciseName(Optional.of(VALID_EXERCISE_NAME)));
+        assertEquals(VALID_EXERCISE_NAME.toLowerCase(), ParserUtil.parseExerciseName(Optional.of(VALID_EXERCISE_NAME)));
     }
 
     @Test
     public void parseExerciseName_validValueWithWhitespace_returnsTrimmedExerciseName() throws Exception {
         String exerciseNameWithWhitespace = WHITESPACE + VALID_EXERCISE_NAME + WHITESPACE;
-        assertEquals(VALID_EXERCISE_NAME,
+        assertEquals(VALID_EXERCISE_NAME.toLowerCase(),
             ParserUtil.parseExerciseName(Optional.of(exerciseNameWithWhitespace)));
     }
 
@@ -245,14 +244,15 @@ public class ParserUtilTest {
     @Test
     public void parseExerciseSets_validValueWithoutWhitespace_returnsExerciseSets() throws Exception {
         Integer expectedExerciseSets = Integer.valueOf(VALID_EXERCISE_SETS);
-        assertEquals(expectedExerciseSets, ParserUtil.parseExerciseSets(Optional.of(VALID_EXERCISE_SETS)));
+        assertEquals(Optional.of(expectedExerciseSets), ParserUtil.parseExerciseSets(Optional.of(VALID_EXERCISE_SETS)));
     }
 
     @Test
     public void parseExerciseSets_validValueWithWhitespace_returnsTrimmedExerciseSets() throws Exception {
         String exerciseSetsWithWhitespace = WHITESPACE + VALID_EXERCISE_SETS + WHITESPACE;
         Integer expectedExerciseSets = Integer.valueOf(VALID_EXERCISE_SETS);
-        assertEquals(expectedExerciseSets, ParserUtil.parseExerciseSets(Optional.of(exerciseSetsWithWhitespace)));
+        assertEquals(Optional.of(expectedExerciseSets),
+            ParserUtil.parseExerciseSets(Optional.of(exerciseSetsWithWhitespace)));
     }
 
     @Test
@@ -263,14 +263,15 @@ public class ParserUtilTest {
     @Test
     public void parseExerciseReps_validValueWithoutWhitespace_returnsExerciseReps() throws Exception {
         Integer expectedExerciseReps = Integer.valueOf(VALID_EXERCISE_REPS);
-        assertEquals(expectedExerciseReps, ParserUtil.parseExerciseReps(Optional.of(VALID_EXERCISE_REPS)));
+        assertEquals(Optional.of(expectedExerciseReps), ParserUtil.parseExerciseReps(Optional.of(VALID_EXERCISE_REPS)));
     }
 
     @Test
     public void parseExerciseReps_validValueWithWhitespace_returnsTrimmedExerciseReps() throws Exception {
         String exerciseRepsWithWhitespace = WHITESPACE + VALID_EXERCISE_REPS + WHITESPACE;
         Integer expectedExerciseReps = Integer.valueOf(VALID_EXERCISE_REPS);
-        assertEquals(expectedExerciseReps, ParserUtil.parseExerciseReps(Optional.of(exerciseRepsWithWhitespace)));
+        assertEquals(Optional.of(expectedExerciseReps),
+            ParserUtil.parseExerciseReps(Optional.of(exerciseRepsWithWhitespace)));
     }
 
     @Test
@@ -283,7 +284,7 @@ public class ParserUtilTest {
     public void parseExerciseBreakBetweenSets_validValueWithoutWhitespace_returnsExerciseBreakBetweenSets()
             throws Exception {
         Integer expectedExerciseBreakBetweenSets = Integer.valueOf(VALID_EXERCISE_BREAK);
-        assertEquals(expectedExerciseBreakBetweenSets,
+        assertEquals(Optional.of(expectedExerciseBreakBetweenSets),
             ParserUtil.parseExerciseBreakBetweenSets(Optional.of(VALID_EXERCISE_BREAK)));
     }
 
@@ -292,16 +293,7 @@ public class ParserUtilTest {
             throws Exception {
         String exerciseBreakWithWhitespace = WHITESPACE + VALID_EXERCISE_BREAK + WHITESPACE;
         Integer expectedExerciseBreakBetweenSets = Integer.valueOf(VALID_EXERCISE_BREAK);
-        assertEquals(expectedExerciseBreakBetweenSets,
+        assertEquals(Optional.of(expectedExerciseBreakBetweenSets),
             ParserUtil.parseExerciseBreakBetweenSets(Optional.of(exerciseBreakWithWhitespace)));
-    }
-
-    @Test
-    public void parseExercise_validValues_returnsExercise() throws Exception {
-        Exercise expectedExercise = new Exercise(VALID_EXERCISE_NAME, Integer.valueOf(VALID_EXERCISE_SETS),
-            Integer.valueOf(VALID_EXERCISE_REPS), Integer.valueOf(VALID_EXERCISE_BREAK));
-        assertEquals(expectedExercise,
-            ParserUtil.parseExercise(VALID_EXERCISE_NAME, Integer.valueOf(VALID_EXERCISE_SETS),
-                Integer.valueOf(VALID_EXERCISE_REPS), Integer.valueOf(VALID_EXERCISE_BREAK)));
     }
 }

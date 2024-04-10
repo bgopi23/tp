@@ -111,7 +111,7 @@ public class FitDeleteCommandTest {
 
         assertCommandFailure(fitDeleteCommand, this.model,
             String.format(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST,
-                invalidExerciseName.toLowerCase()));
+                invalidExerciseName));
     }
 
     @Test

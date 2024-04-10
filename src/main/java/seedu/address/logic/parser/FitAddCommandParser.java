@@ -14,6 +14,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SETS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SHOULDER;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +22,7 @@ import seedu.address.logic.commands.FitAddCommand;
 import seedu.address.logic.messages.FitAddCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseToAdd;
 
 /**
  * Parses input arguments and creates a new FitAddCommand object
@@ -96,19 +97,19 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         }
     }
 
-    private Exercise parseExercise(ArgumentMultimap argumentMultimap) throws ParseException {
+    private ExerciseToAdd parseExerciseToAdd(ArgumentMultimap argumentMultimap) throws ParseException {
         // If individual exercise details are provided, add that exercise
         String exerciseName = ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME));
-        Integer exerciseSets = ParserUtil.parseExerciseSets(argumentMultimap.getValue(PREFIX_EXERCISE_SETS));
-        Integer exerciseReps = ParserUtil.parseExerciseReps(argumentMultimap.getValue(PREFIX_EXERCISE_REPS));
-        Integer exerciseBreakBetweenSets =
+        Optional<Integer> exerciseSets = ParserUtil.parseExerciseSets(argumentMultimap.getValue(PREFIX_EXERCISE_SETS));
+        Optional<Integer> exerciseReps = ParserUtil.parseExerciseReps(argumentMultimap.getValue(PREFIX_EXERCISE_REPS));
+        Optional<Integer> exerciseBreakBetweenSets =
             ParserUtil.parseExerciseBreakBetweenSets(argumentMultimap.getValue(PREFIX_EXERCISE_BREAK_BETWEEN_SETS));
 
-        return ParserUtil.parseExercise(exerciseName, exerciseSets, exerciseReps, exerciseBreakBetweenSets);
+        return new ExerciseToAdd(exerciseName, exerciseSets, exerciseReps, exerciseBreakBetweenSets);
     }
 
-    private Set<Exercise> getDefaultExercises(ArgumentMultimap argumentMultimap) {
-        Set<Exercise> defaultExercises = new HashSet<>();
+    private Set<ExerciseToAdd> getDefaultExercises(ArgumentMultimap argumentMultimap) {
+        Set<ExerciseToAdd> defaultExercises = new HashSet<>();
 
         if (argumentMultimap.contains(PREFIX_EXERCISE_ALL)) {
             defaultExercises.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
@@ -141,11 +142,11 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         return defaultExercises;
     }
 
-    private Set<Exercise> getExercisesToAdd(ArgumentMultimap argumentMultimap, boolean hasExerciseNamePrefix)
+    private Set<ExerciseToAdd> getExercisesToAdd(ArgumentMultimap argumentMultimap, boolean hasExerciseNamePrefix)
             throws ParseException {
-        Set<Exercise> exercisesToAdd = new HashSet<>();
+        Set<ExerciseToAdd> exercisesToAdd = new HashSet<>();
         if (hasExerciseNamePrefix) {
-            exercisesToAdd.add(parseExercise(argumentMultimap));
+            exercisesToAdd.add(parseExerciseToAdd(argumentMultimap));
         } else {
             exercisesToAdd.addAll(getDefaultExercises(argumentMultimap));
         }
