@@ -7,8 +7,7 @@ public class WeightCommandMessages extends Messages {
 
     public static final String COMMAND_WORD = "weight";
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Adds a weight to a client if no existing weight has been added on the same day; "
-            + "otherwise, the existing entry will be overwritten.\n"
+            + ": Adds a weight (in kg) to a client. If no weight or '0' is specified, the latest weight value will be removed from the client.\n"
             + "Parameters: INDEX [WEIGHT] (must be a positive float)\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + "70.0";
