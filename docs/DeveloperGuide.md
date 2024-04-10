@@ -231,7 +231,7 @@ This approach was also taken for the editing/deleting of QR codes.
 
 #### QR Code Image File Naming
 
-QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format: 
+QR codes associated with a client are saved in the `data/qrcodes` folder as `.png` files, and named according to the following format:
 
 * [HASHCODE].png, where [HASHCODE] is the result of the `hashCode()` function of a `Person`.
 
@@ -332,10 +332,10 @@ The correct format is as follows : `delete INDEX`
 
 **_How the feature was implemented._** <br>
 The specialised error messages was implemented by improving the parsing of commands in the respective
-command parsers (AddCommandParser, DeleteCommandParser). 
+command parsers (AddCommandParser, DeleteCommandParser).
 
 **_Why it is implemented that way._** <br>
-We anticipated possible erroneous user inputs and crafted specialised outputs as we wanted to prompt the user in a 
+We anticipated possible erroneous user inputs and crafted specialised outputs as we wanted to prompt the user in a
 certain direction towards the correct command format instead of just telling them the format was wrong.
 
 **_Alternatives considered._** <br>
@@ -699,12 +699,21 @@ When removing optional fields of a client, we should provide more detailed error
 3. **Always display details of client being modified**
 
 To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
-    
+
 > Some examples where this could be implemented:
-> 
+>
 > * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
 > * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
 
 4. **Better keyboard navigation support**
 
 For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
+
+5. **Adaptive client list entries**
+
+The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+  * Name
+  * Tags
+  * Phone Number
+
+Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
