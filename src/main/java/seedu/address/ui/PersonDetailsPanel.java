@@ -169,21 +169,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         this.updateTabView();
 
-        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
-        // Bind manageability (presence) of node based on presence of value for optional fields
-        this.address.setVisible(!person.getAddress().getValue().isEmpty());
-        this.email.setVisible(!person.getEmail().getValue().isEmpty());
-        this.note.setVisible(!person.getNote().getValue().isEmpty());
-        this.weightDate.setVisible(latestWeight.isPresent());
-        this.weightValue.setVisible(latestWeight.isPresent());
-        this.height.setVisible(person.getHeight().isValid());
+        this.updateNodeVisibility();
 
-        this.address.managedProperty().bind(this.address.visibleProperty());
-        this.email.managedProperty().bind(this.email.visibleProperty());
-        this.weightDate.managedProperty().bind(this.weightDate.visibleProperty());
-        this.weightValue.managedProperty().bind(this.weightValue.visibleProperty());
-        this.height.managedProperty().bind(this.height.visibleProperty());
-        this.note.managedProperty().bind(this.note.visibleProperty());
 
         logger.info("Displayed details of person: " + person);
     }
@@ -389,5 +376,29 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 this.exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
             }
         }
+    }
+
+    /**
+     * Update the visibility of nodes based on the presence of valid values in the person object.
+     */
+    private void updateNodeVisibility() {
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
+
+        // Set visibility based on presence of valid values
+        this.address.setVisible(!this.person.getAddress().getValue().isEmpty());
+        this.email.setVisible(!this.person.getEmail().getValue().isEmpty());
+        this.note.setVisible(!this.person.getNote().getValue().isEmpty());
+        this.weightDate.setVisible(latestWeight.isPresent());
+        this.weightValue.setVisible(latestWeight.isPresent());
+        this.height.setVisible(this.person.getHeight().isValid());
+
+        // Bind visibility of nodes to managed properties
+        this.address.managedProperty().bind(this.address.visibleProperty());
+        this.email.managedProperty().bind(this.email.visibleProperty());
+        this.weightDate.managedProperty().bind(this.weightDate.visibleProperty());
+        this.weightValue.managedProperty().bind(this.weightValue.visibleProperty());
+        this.height.managedProperty().bind(this.height.visibleProperty());
+        this.note.managedProperty().bind(this.note.visibleProperty());
+
     }
 }
