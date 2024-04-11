@@ -379,8 +379,8 @@ certain direction towards the correct command format instead of just telling the
 Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
 was trivial.
 
-**_Activity diagram for AddCommandParser_**
-![UndoRedoState0](images/SpecialisedErrorMessagesDiagram.png)
+**_Activity diagram for specialised error message outputs by AddCommandParser_**
+![SpecialisedErrorMessages](diagrams/SpecialisedErrorMessagesDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
