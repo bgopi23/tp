@@ -104,6 +104,21 @@ public class FitAddCommand extends Command {
         return new CommandResult(FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS);
     }
 
+    private static Exercise getUpdatedExercise(ExerciseToAdd exerciseToAdd, Exercise existingExercise,
+                                               Exercise newExercise) {
+        if (existingExercise.equals(newExercise)) {
+            String newName = exerciseToAdd.getName();
+            Integer newSets = exerciseToAdd.getSets().orElse(existingExercise.getSets());
+            Integer newReps = exerciseToAdd.getReps().orElse(existingExercise.getReps());
+            Integer newBreakBetweenSets =
+                exerciseToAdd.getBreakBetweenSets().orElse(existingExercise.getBreakBetweenSets());
+
+            return new Exercise(newName, newSets, newReps, newBreakBetweenSets);
+        }
+
+        return newExercise;
+    }
+
     private static Exercise getExercise(ExerciseToAdd exerciseToAdd, Set<Exercise> updatedExercises) {
         String name = exerciseToAdd.getName();
         Integer sets = exerciseToAdd.getSets().orElse(Exercise.DEFAULT_SETS);
@@ -115,15 +130,7 @@ public class FitAddCommand extends Command {
 
         if (updatedExercises.contains(newExercise)) {
             for (Exercise existingExercise : updatedExercises) {
-                if (existingExercise.equals(newExercise)) {
-                    String newName = exerciseToAdd.getName();
-                    Integer newSets = exerciseToAdd.getSets().orElse(existingExercise.getSets());
-                    Integer newReps = exerciseToAdd.getReps().orElse(existingExercise.getReps());
-                    Integer newBreakBetweenSets =
-                        exerciseToAdd.getBreakBetweenSets().orElse(existingExercise.getBreakBetweenSets());
-
-                    newExercise = new Exercise(newName, newSets, newReps, newBreakBetweenSets);
-                }
+                newExercise = getUpdatedExercise(exerciseToAdd, existingExercise, newExercise);
             }
         }
         return newExercise;
