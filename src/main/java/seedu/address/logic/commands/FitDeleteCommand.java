@@ -50,11 +50,13 @@ public class FitDeleteCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(
-            String.format(
-                this.exerciseName.isPresent() ? String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS,
-                    this.exerciseName.get())
-                    : FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS));
+        String commandResult = FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS;
+        if (this.exerciseName.isPresent()) {
+            commandResult =
+                String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, this.exerciseName.get());
+        }
+
+        return new CommandResult(commandResult);
     }
 
     private Person getEditedPerson(Person personToEdit) throws CommandException {
