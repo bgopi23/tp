@@ -38,18 +38,6 @@ public class WeightCommand extends Command {
         this.weightEntry = weight;
     }
 
-    /**
-     * @param index of the person in the filtered person list to edit the weight
-     * @param weight of the person to be updated to
-     * @param timeOfExecution of the weight
-     */
-    public WeightCommand(Index index, WeightEntry weight, LocalDateTime timeOfExecution) {
-        requireAllNonNull(index, weight, timeOfExecution);
-        this.index = index;
-        this.weightEntry = weight;
-        this.timeOfExecution = timeOfExecution;
-    }
-
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
