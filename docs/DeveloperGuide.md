@@ -304,6 +304,43 @@ The following activity diagram summarizes what happens when a client is added or
 
 ![AddAndEditCommandSequenceDiagram](images/AddAndEditCommandActivityDiagram.png)
 
+### Adding, editing or deleting exercises for a client
+FitBook enables our target user (personal trainers) to add, edit and delete custom exercises for each of their clients.
+The management of these custom exercises is performed using the `fitadd` and `fitdelete` commands.
+
+An exercise consists of a name, number of sets, number of reps and break time between sets (in seconds).
+
+![ClientExercises](images/ClientExercises.png)
+
+#### Storing exercises
+
+A great deal of consideration was made regarding how the custom exercises should be stored for each client.
+
+The following data structures were taken into consideration during the brainstorming and design process.
+
+1. ArrayList
+1. Plain JSON without deserialization 
+1. Java Set
+
+The following factors were taken into consideration when selecting a suitable data structure.
+
+- The requirement to store multiple exercises
+- The requirement to easily detect duplicate exercises
+- The requirement to flexibly modify the logic for detecting duplicate exercises
+
+Upon listing out our requirements, we found that Java `HashSet` to be the most suitable one because it implements the Java `Set` interface.
+Apart from this, the `Set` interface exposes the `contains` method to check for duplicates.
+
+#### Detecting duplicate exercises
+
+Another point of consideration was with regard to how we should determine whether two exercises belonging to the same client
+are considered duplicates since an exercise has multiple fields.
+
+To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
+However, this may change in the future. For example, the same exercise may have different numbers of sets, reps, and break times for different
+days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method 
+in our `Exercise` class, this is made possible because of our decision to store the exercises in a Java `Set`.
+
 ### Specialised error messages for commands
 When typing in commands, error messages guide the user on what is missing or wrong with their command format.
 
