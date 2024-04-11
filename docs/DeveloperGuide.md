@@ -10,12 +10,21 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-| Module                                  | Description                               |
-|-----------------------------------------|-------------------------------------------|
-| [JavaFX](https://openjfx.io/)                   | UI generation for Java             |
-| [Jackson](https://github.com/FasterXML/jackson) | Json processing library for Java         |
-| [JUnit5](https://github.com/junit-team/junit5)  | Automated testing library for Java |
+**Module Acknowledgements**
+
+| Module                                          | Description                               |
+|-------------------------------------------------|-------------------------------------------|
+| [JavaFX](https://openjfx.io/)                   | UI generation for Java                    |
+| [Jackson](https://github.com/FasterXML/jackson) | Json processing library for Java          |
+| [JUnit5](https://github.com/junit-team/junit5)  | Automated testing library for Java        |
 | [ZXing](https://github.com/zxing/zxing)         | Barcode image processing library for Java |
+
+**AI Tools Acknowledgements**
+
+| Tool    | Name            | Extent of use                             |
+|---------|-----------------|-------------------------------------------|
+| GPT-4   | Baskar Gopinath | JavaDocs (FitAddCommandParser)            |
+| Codeium | Dillon          | <li> JavaDocs <li> Full-line autocomplete |
 
 --------------------------------------------------------------------------------------------------------------------
 
