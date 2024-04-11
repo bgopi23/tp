@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
-import static seedu.address.model.exercise.Exercise.DEFAULT_BREAK;
 
 import java.util.Arrays;
 import java.util.HashSet;

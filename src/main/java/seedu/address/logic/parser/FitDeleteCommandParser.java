@@ -1,7 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE;

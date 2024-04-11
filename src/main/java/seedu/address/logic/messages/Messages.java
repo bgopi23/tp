@@ -1,6 +1,6 @@
 package seedu.address.logic.messages;
 
-import static seedu.address.model.person.Phone.MESSAGE_EXPECTED;
+import static seedu.address.model.person.messages.PhoneMessages.MESSAGE_EXPECTED;
 
 import java.util.Set;
 import java.util.stream.Collectors;
