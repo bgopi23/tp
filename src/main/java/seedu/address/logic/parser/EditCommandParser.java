@@ -48,7 +48,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         // (edit 1 name) or (edit name 1)
-        if (!argMultimap.isPreambleAlone()) {
+        if (!argMultimap.hasOnlyOnePreambleSegment()) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_EDIT);
         }
 

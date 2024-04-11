@@ -71,7 +71,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      * @throws ParseException If the client index is not the only segment in the preamble.
      */
     private void verifyClientIndexSingleSegment(ArgumentMultimap argumentMultimap) throws ParseException {
-        if (!argumentMultimap.isPreambleAlone()) {
+        if (!argumentMultimap.hasOnlyOnePreambleSegment()) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITADD);
         }
     }

@@ -32,7 +32,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
     }
 
     private void verifyClientIndexSingleSegment(ArgumentMultimap argumentMultimap) throws ParseException {
-        if (!argumentMultimap.isPreambleAlone()) {
+        if (!argumentMultimap.hasOnlyOnePreambleSegment()) {
             throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE);
         }
     }

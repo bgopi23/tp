@@ -167,7 +167,7 @@ public class ArgumentMultimap {
      *
      * @return true if the preamble is by itself
      */
-    public boolean isPreambleAlone() {
+    public boolean hasOnlyOnePreambleSegment() {
         return (getPreambleSegmentNumber() == 1);
     }
 }
