@@ -82,6 +82,11 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private VBox exercisesBox;
 
     /**
+     * The person being displayed.
+     */
+    private Person person;
+
+    /**
      * Creates a new PersonDetailsPanel and clears all fields.
      * Labels in the {@code .FXML} file contain text with the field name for convenience.
      */
@@ -155,6 +160,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
      * @param person the Person object containing the information to update the fields with.
      */
     public void update(Person person) {
+        this.person = person;
         this.detailsPane.setVisible(true);
 
         // Set fields with information from the person
