@@ -46,6 +46,9 @@ import seedu.address.model.tag.Tag;
 public class PersonDetailsPanel extends UiPart<Region> {
     public static final String FXML = "PersonDetailsPanel.fxml";
     private static final Logger logger = LogsCenter.getLogger(PersonDetailsPanel.class);
+    private static final String EXERCISE_ATTR_DESC_STYLE = "-fx-text-fill: white; -fx-font-size: 12px;";
+    private static final String EXERCISE_ATTR_VALUE_STYLE =
+            "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
 
     @FXML
     private VBox detailsPane;
@@ -166,11 +169,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.updateLabels();
         this.updateTags();
         this.updateQrCode();
-
         this.updateTabView();
-
         this.updateNodeVisibility();
-
 
         logger.info("Displayed details of person: " + person);
     }
@@ -333,49 +333,54 @@ public class PersonDetailsPanel extends UiPart<Region> {
                     .collect(Collectors.toList());
 
             for (Exercise exercise : sortedExercises) {
-                final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
-                final String exerciseAttrValueStyle =
-                        "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: "
-                                + "12px;";
+                Label exerciseName = this.generateExerciseNameLabel(exercise);
+                HBox exerciseBox = this.generateExerciseHbox(exercise);
 
-                Label exerciseName = new Label(exercise.getName());
-
-                exerciseName.setWrapText(true);
-                exerciseName.setUnderline(true);
-                exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
-                exerciseName.setPadding(new Insets(10, 0, 0, 0));
-
-                Label setsLabel = new Label("Sets:");
-                setsLabel.setStyle(exerciseAttrDescStyle);
-                Label setsValue = new Label(String.valueOf(exercise.getSets()));
-                setsValue.setStyle(exerciseAttrValueStyle);
-
-                Label repsLabel = new Label("Reps:");
-                repsLabel.setStyle(exerciseAttrDescStyle);
-                Label repsValue = new Label(String.valueOf(exercise.getReps()));
-                repsValue.setStyle(exerciseAttrValueStyle);
-
-                Label breakLabel = new Label("Break between sets:");
-                breakLabel.setStyle(exerciseAttrDescStyle);
-                Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
-                breakValue.setStyle(exerciseAttrValueStyle);
-
-                HBox setsBox = new HBox(10, setsLabel, setsValue);
-                HBox repsBox = new HBox(10, repsLabel, repsValue);
-                HBox breakBox = new HBox(10, breakLabel, breakValue);
-
-                setsBox.setPadding(new Insets(10, 0, 10, 0));
-                repsBox.setPadding(new Insets(10, 0, 10, 0));
-                breakBox.setPadding(new Insets(10, 0, 10, 0));
-
-                setsBox.setPrefWidth(130);
-                repsBox.setPrefWidth(130);
-                breakBox.setPrefWidth(250);
-
-                HBox exerciseBox = new HBox(setsBox, repsBox, breakBox);
                 this.exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
             }
         }
+    }
+
+    private Label generateExerciseNameLabel(Exercise exercise) {
+        Label exerciseName = new Label(exercise.getName());
+
+        exerciseName.setWrapText(true);
+        exerciseName.setUnderline(true);
+        exerciseName.setStyle("-fx-text-fill: white; -fx-font-size: 15px;");
+        exerciseName.setPadding(new Insets(10, 0, 0, 0));
+
+        return exerciseName;
+    }
+
+    private HBox generateExerciseHbox(Exercise exercise) {
+        Label setsLabel = new Label("Sets:");
+        setsLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label setsValue = new Label(String.valueOf(exercise.getSets()));
+        setsValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        Label repsLabel = new Label("Reps:");
+        repsLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label repsValue = new Label(String.valueOf(exercise.getReps()));
+        repsValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        Label breakLabel = new Label("Break between sets:");
+        breakLabel.setStyle(EXERCISE_ATTR_DESC_STYLE);
+        Label breakValue = new Label(exercise.getBreakBetweenSets() + " seconds");
+        breakValue.setStyle(EXERCISE_ATTR_VALUE_STYLE);
+
+        HBox setsBox = new HBox(10, setsLabel, setsValue);
+        HBox repsBox = new HBox(10, repsLabel, repsValue);
+        HBox breakBox = new HBox(10, breakLabel, breakValue);
+
+        setsBox.setPadding(new Insets(10, 0, 10, 0));
+        repsBox.setPadding(new Insets(10, 0, 10, 0));
+        breakBox.setPadding(new Insets(10, 0, 10, 0));
+
+        setsBox.setPrefWidth(130);
+        repsBox.setPrefWidth(130);
+        breakBox.setPrefWidth(250);
+
+        return new HBox(setsBox, repsBox, breakBox);
     }
 
     /**
