@@ -230,12 +230,12 @@ public class ParserUtil {
     public static String parseExerciseName(Optional<String> exerciseNameOpt) throws ParseException {
         requireNonNull(exerciseNameOpt);
 
-        String trimmedExerciseName = exerciseNameOpt.orElse("").trim();
-        if (!Exercise.isValidName(trimmedExerciseName)) {
+        String trimmedExerciseNameLowerCased = exerciseNameOpt.orElse("").trim().toLowerCase();
+        if (!Exercise.isValidName(trimmedExerciseNameLowerCased)) {
             throw new ParseException(Exercise.NAME_CONSTRAINT);
         }
 
-        return trimmedExerciseName;
+        return trimmedExerciseNameLowerCased;
     }
 
     /**
@@ -246,11 +246,11 @@ public class ParserUtil {
      * @return The parsed exercise sets value
      * @throws ParseException If the given {@code exerciseSetsOpt} is invalid
      */
-    public static Integer parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
+    public static Optional<Integer> parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
         requireNonNull(exerciseSetsOpt);
 
         if (exerciseSetsOpt.isEmpty()) {
-            return Exercise.DEFAULT_SETS;
+            return Optional.empty();
         }
 
         String exerciseSetsTrimmed = exerciseSetsOpt.get().trim();
@@ -263,7 +263,7 @@ public class ParserUtil {
             throw new ParseException(Exercise.SETS_CONSTRAINT);
         }
 
-        return exerciseSets;
+        return Optional.of(exerciseSets);
     }
 
     /**
@@ -274,11 +274,11 @@ public class ParserUtil {
      * @return The parsed exercise reps value
      * @throws ParseException If the given {@code exerciseRepsOpt} is invalid
      */
-    public static Integer parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
+    public static Optional<Integer> parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
         requireNonNull(exerciseRepsOpt);
 
         if (exerciseRepsOpt.isEmpty()) {
-            return Exercise.DEFAULT_REPS;
+            return Optional.empty();
         }
 
         String exerciseRepsTrimmed = exerciseRepsOpt.orElse("").trim();
@@ -292,7 +292,7 @@ public class ParserUtil {
         }
 
 
-        return exerciseReps;
+        return Optional.of(exerciseReps);
     }
 
     /**
@@ -303,12 +303,12 @@ public class ParserUtil {
      * @return The parsed exercise rest value
      * @throws ParseException If the given {@code exerciseBreakBetweenSetsOpt} is invalid
      */
-    public static Integer parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt)
+    public static Optional<Integer> parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt)
             throws ParseException {
         requireNonNull(exerciseBreakBetweenSetsOpt);
 
         if (exerciseBreakBetweenSetsOpt.isEmpty()) {
-            return Exercise.DEFAULT_BREAK;
+            return Optional.empty();
         }
 
         String exerciseRestTrimmed = exerciseBreakBetweenSetsOpt.orElse("").trim();
@@ -321,42 +321,7 @@ public class ParserUtil {
             throw new ParseException(Exercise.BREAK_CONSTRAINT);
         }
 
-        return exerciseBreakBetweenSets;
-    }
-
-    /**
-     * Parses the supplied values into a {@code Exercise}.
-     *
-     * @param name The name of the exercise
-     * @param sets The number of sets for the exercise
-     * @param reps The number of reps for the exercise
-     * @param rest The rest duration for the exercise
-     * @return The parsed Exercise object
-     * @throws ParseException If any of the supplied values are invalid
-     */
-    public static Exercise parseExercise(String name, Integer sets, Integer reps, Integer rest) throws ParseException {
-        requireNonNull(name);
-        requireNonNull(sets);
-        requireNonNull(reps);
-        requireNonNull(rest);
-
-        if (!Exercise.isValidName(name)) {
-            throw new ParseException(Exercise.NAME_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidSets(sets)) {
-            throw new ParseException(Exercise.SETS_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidSets(reps)) {
-            throw new ParseException(Exercise.REPS_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidBreakBetweenSets(rest)) {
-            throw new ParseException(Exercise.BREAK_CONSTRAINT);
-        }
-
-        return new Exercise(name, sets, reps, rest);
+        return Optional.of(exerciseBreakBetweenSets);
     }
 
     /**

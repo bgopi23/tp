@@ -1,12 +1,11 @@
 package seedu.address.model.exercise;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.Objects;
 
 /**
- * Represents an Exercise in the address book.
+ * Represents an exercise in FitBook.
  */
 public class Exercise {
 
@@ -49,14 +48,7 @@ public class Exercise {
         requireNonNull(reps);
         requireNonNull(breakBetweenSets);
 
-        String nameLowerCase = name.toLowerCase();
-
-        checkArgument(isValidName(nameLowerCase), NAME_CONSTRAINT);
-        checkArgument(isValidSets(sets), SETS_CONSTRAINT);
-        checkArgument(isValidReps(reps), REPS_CONSTRAINT);
-        checkArgument(isValidBreakBetweenSets(breakBetweenSets), BREAK_CONSTRAINT);
-
-        this.name = nameLowerCase;
+        this.name = name;
         this.sets = sets;
         this.reps = reps;
         this.breakBetweenSets = breakBetweenSets;

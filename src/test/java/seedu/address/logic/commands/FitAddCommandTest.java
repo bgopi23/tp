@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -25,6 +26,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
+import seedu.address.model.exercise.ExerciseToAdd;
 import seedu.address.model.person.Person;
 
 public class FitAddCommandTest {
@@ -34,8 +36,10 @@ public class FitAddCommandTest {
     @Test
     public void execute_validIndexAndExercise_success() {
         Person personToEdit = this.model.getFilteredPersonList().get(INDEX_FIRST_PERSON.getZeroBased());
-        Exercise exerciseToAdd = new Exercise("Test Exercise", 3, 10, 60);
-        Set<Exercise> exercisesToAdd = new HashSet<>(List.of(exerciseToAdd));
+        Exercise newExercise = new Exercise("Test Exercise", 3, 10, 60);
+        ExerciseToAdd exerciseToAdd =
+            new ExerciseToAdd("Test Exercise", Optional.of(3), Optional.of(10), Optional.of(60));
+        Set<ExerciseToAdd> exercisesToAdd = new HashSet<>(List.of(exerciseToAdd));
         FitAddCommand fitAddCommand = new FitAddCommand(INDEX_FIRST_PERSON, exercisesToAdd);
 
         String expectedMessage = FitAddCommandMessages.MESSAGE_ADD_EXERCISE_SUCCESS;
@@ -45,7 +49,7 @@ public class FitAddCommandTest {
         Person editedPerson = new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
             personToEdit.getAddress(), personToEdit.getWeights(), personToEdit.getHeight(),
             personToEdit.getNote(), personToEdit.getTags(),
-            new ExerciseSet(new HashSet<>(List.of(exerciseToAdd))));
+            new ExerciseSet(new HashSet<>(List.of(newExercise))));
 
         expectedModel.setPerson(personToEdit, editedPerson);
 
@@ -55,7 +59,7 @@ public class FitAddCommandTest {
     @Test
     public void execute_invalidPersonIndexUnfilteredList_failure() {
         Index outOfBoundIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
-        Set<Exercise> exercisesToAdd = new HashSet<>();
+        Set<ExerciseToAdd> exercisesToAdd = new HashSet<>();
         FitAddCommand fitAddCommand = new FitAddCommand(outOfBoundIndex, exercisesToAdd);
 
         assertCommandFailure(fitAddCommand, this.model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
@@ -68,7 +72,7 @@ public class FitAddCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < this.model.getAddressBook().getPersonList().size());
 
-        Set<Exercise> exercisesToAdd = new HashSet<>();
+        Set<ExerciseToAdd> exercisesToAdd = new HashSet<>();
         FitAddCommand fitAddCommand = new FitAddCommand(outOfBoundIndex, exercisesToAdd);
 
         assertCommandFailure(fitAddCommand, this.model, FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD);
@@ -76,10 +80,11 @@ public class FitAddCommandTest {
 
     @Test
     public void equals() {
-        Set<Exercise> exercisesToAdd1 = new HashSet<>(Arrays.asList(
-            new Exercise("Exercise 1", 3, 10, 60)));
-        Set<Exercise> exercisesToAdd2 = new HashSet<>(Arrays.asList(
-            new Exercise("Exercise 2", 4, 12, 90)));
+        Set<ExerciseToAdd> exercisesToAdd1 = new HashSet<>(Arrays.asList(
+            new ExerciseToAdd("Exercise 1", Optional.of(3), Optional.of(10), Optional.of(60))));
+        Set<ExerciseToAdd> exercisesToAdd2 = new HashSet<>(Arrays.asList(
+            new ExerciseToAdd("Exercise 2", Optional.of(4), Optional.of(12), Optional.of(90))));
+
         FitAddCommand addExercise1Command = new FitAddCommand(INDEX_FIRST_PERSON, exercisesToAdd1);
         FitAddCommand addExercise2Command = new FitAddCommand(INDEX_SECOND_PERSON, exercisesToAdd2);
 
