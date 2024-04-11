@@ -329,14 +329,14 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     private void updateExercisesTab() {
         this.initializeExercisesTab();
-        Set<Exercise> exercises = this.person.getExerciseSet().getValue();
-        this.populateExercisesTab(exercises);
+        this.populateExercisesTab();
     }
 
     /**
      * Populates the exercises tab with the given set of exercises.
      */
-    private void populateExercisesTab(Set<Exercise> exercises) {
+    private void populateExercisesTab() {
+        Set<Exercise> exercises = this.person.getExerciseSet().getValue();
         if (!exercises.isEmpty()) {
             this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
