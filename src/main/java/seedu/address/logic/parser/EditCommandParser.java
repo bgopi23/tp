@@ -5,10 +5,6 @@ import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_INVALID_C
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_INVALID_INDEX_EDIT;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_NO_INDEX_EDIT;
-import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_USAGE;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_INDEX;
-import static seedu.address.logic.messages.Messages.MESSAGE_NO_INDEX;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.ALL_PREFIXES_EXCEPT_TAG;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
