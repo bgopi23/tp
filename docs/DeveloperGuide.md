@@ -24,7 +24,7 @@ title: Developer Guide
 | Tool    | Name            | Extent of use                             |
 |---------|-----------------|-------------------------------------------|
 | GPT-4   | Baskar Gopinath | JavaDocs (FitAddCommandParser)            |
-| Codeium | Dillon          | <li> JavaDocs <li> Full-line autocomplete |
+| Codeium | Dillon          | {::nomarkdown}<ul><li>JavaDocs</li><li>Full-line autocomplete</li></ul>{:/} |
 
 --------------------------------------------------------------------------------------------------------------------
 
