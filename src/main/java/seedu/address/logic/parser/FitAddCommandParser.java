@@ -38,7 +38,8 @@ import seedu.address.model.exercise.ExerciseToAdd;
 public class FitAddCommandParser implements Parser<FitAddCommand> {
 
     /**
-     * Parses the input arguments to create an {@link ArgumentMultimap} which maps each prefix to its respective arguments.
+     * Parses the input arguments to create an {@link ArgumentMultimap}
+     * which maps each prefix to its respective arguments.
      *
      * @param args The string of arguments to be tokenized and mapped.
      * @return An {@link ArgumentMultimap} object representing the mapping of prefixes to their arguments.
