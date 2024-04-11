@@ -28,7 +28,7 @@ import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses client input.
+ * Parses user input.
  */
 public class AddressBookParser {
 
