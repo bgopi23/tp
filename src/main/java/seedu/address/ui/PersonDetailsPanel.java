@@ -113,41 +113,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Initialize tab pane
         this.trackableFieldsTabPane.setStyle("-fx-open-tab-animation: NONE; -fx-close-tab-animation: NONE;");
 
-        // Initialize weight chart
-        CategoryAxis xAxis = new CategoryAxis();
-        this.weightYAxis = new NumberAxis();
-
-        xAxis.setAnimated(false); // fixes the collapsed categories bug
-        xAxis.setLabel("Date");
-        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-
-        this.weightYAxis.setAnimated(false);
-        this.weightYAxis.setAutoRanging(false);
-        this.weightYAxis.setLabel("Weight (kg)");
-        this.weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
-
-        this.weightChart = new LineChart<>(xAxis, this.weightYAxis);
-        this.weightChart.setAnimated(false);
-        this.weightChart.setHorizontalGridLinesVisible(false);
-        this.weightChart.setVerticalGridLinesVisible(false);
-        this.weightChart.setTitle("Weight Tracking");
-        this.weightChart.setLegendVisible(false);
-        this.weightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
-        this.weightChart.setPrefHeight(200);
-        this.weightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
-        this.weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
-        this.weightChart.requestLayout();
-
-        // Initialize notes box
-        this.exercisesBox = new VBox();
-        this.exercisesBox.setPadding(new Insets(10, 10, 10, 10));
-        this.exercisesBox.setPrefHeight(200);
-
-        // Create a scroll pane and set the notes box as its content
-        ScrollPane exerciseScrollPane = new ScrollPane(this.exercisesBox);
-        exerciseScrollPane.setFitToWidth(true);
-        exerciseScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
-        exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        this.initializeWeightChart();
+        ScrollPane exerciseScrollPane = this.generateExercisesScrollPane();
 
         // Add charts and notes scroll pane to respective tabs
         this.weightTab = this.getWeightTab();
@@ -430,5 +397,47 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.height.managedProperty().bind(this.height.visibleProperty());
         this.note.managedProperty().bind(this.note.visibleProperty());
 
+    }
+
+    private void initializeWeightChart() {
+        // Initialize weight chart
+        CategoryAxis xAxis = new CategoryAxis();
+        this.weightYAxis = new NumberAxis();
+
+        xAxis.setAnimated(false); // fixes the collapsed categories bug
+        xAxis.setLabel("Date");
+        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        this.weightYAxis.setAnimated(false);
+        this.weightYAxis.setAutoRanging(false);
+        this.weightYAxis.setLabel("Weight (kg)");
+        this.weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+
+        this.weightChart = new LineChart<>(xAxis, this.weightYAxis);
+        this.weightChart.setAnimated(false);
+        this.weightChart.setHorizontalGridLinesVisible(false);
+        this.weightChart.setVerticalGridLinesVisible(false);
+        this.weightChart.setTitle("Weight Tracking");
+        this.weightChart.setLegendVisible(false);
+        this.weightChart.lookup(".chart-title").setStyle("-fx-text-fill: white;");
+        this.weightChart.setPrefHeight(200);
+        this.weightChart.lookup(".chart-horizontal-grid-lines").setStyle("-fx-stroke: white;");
+        this.weightChart.lookup(".chart-vertical-grid-lines").setStyle("-fx-stroke: white;");
+        this.weightChart.requestLayout();
+    }
+
+    private ScrollPane generateExercisesScrollPane() {
+        // Initialize exercises box
+        this.exercisesBox = new VBox();
+        this.exercisesBox.setPadding(new Insets(10, 10, 10, 10));
+        this.exercisesBox.setPrefHeight(200);
+
+        // Create a scroll pane and set the exercises box as its content
+        ScrollPane exerciseScrollPane = new ScrollPane(this.exercisesBox);
+        exerciseScrollPane.setFitToWidth(true);
+        exerciseScrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+        exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        return exerciseScrollPane;
     }
 }
