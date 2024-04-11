@@ -314,17 +314,15 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.weightChart.getData().add(weightSeries);
         }
 
-        // Display exercises
-        Label exercisesTitle = new Label("Exercises");
-        exercisesTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
-        exercisesTitle.setMaxWidth(Double.MAX_VALUE);
-        exercisesTitle.setAlignment(Pos.CENTER);
-
-        this.exercisesBox.getChildren().clear();
-        this.exercisesBox.getChildren().add(exercisesTitle);
-
+        this.initializeExercisesTab();
         Set<Exercise> exercises = this.person.getExerciseSet().getValue();
+        this.populateExercisesTab(exercises);
+    }
 
+    /**
+     * Populates the exercises tab with the given set of exercises.
+     */
+    private void populateExercisesTab(Set<Exercise> exercises) {
         if (!exercises.isEmpty()) {
             this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
@@ -339,6 +337,19 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 this.exercisesBox.getChildren().addAll(exerciseName, exerciseBox, new Separator());
             }
         }
+    }
+
+    /**
+     * Initialize the Exercises tab by setting the title label and adding it to the exercises box.
+     */
+    private void initializeExercisesTab() {
+        Label exercisesTitle = new Label("Exercises");
+        exercisesTitle.setStyle("-fx-text-fill: white; -fx-font-size: 18px;");
+        exercisesTitle.setMaxWidth(Double.MAX_VALUE);
+        exercisesTitle.setAlignment(Pos.CENTER);
+
+        this.exercisesBox.getChildren().clear();
+        this.exercisesBox.getChildren().add(exercisesTitle);
     }
 
     private Label generateExerciseNameLabel(Exercise exercise) {
