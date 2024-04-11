@@ -91,17 +91,15 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
         verifyNoArgumentValueForPrefixes(argumentMultimap);
 
-        // Get existence of relevant prefixes
         boolean containsPrefixExerciseName = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
         boolean containsPrefixExerciseDeleteAll = argumentMultimap.contains(PREFIX_FITDELETE_DELETE_ALL);
 
         verifyNoConflictingPrefixes(containsPrefixExerciseName, containsPrefixExerciseDeleteAll);
         verifyNoMissingPrefixes(containsPrefixExerciseName, containsPrefixExerciseDeleteAll);
 
-        Optional<String> exerciseNameOpt = Optional.ofNullable(
-            containsPrefixExerciseDeleteAll ? null
-                : ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME)));
+        Optional<String> exerciseNameToDelete = containsPrefixExerciseDeleteAll ? Optional.empty()
+            : Optional.of(ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME)));
 
-        return new FitDeleteCommand(index, exerciseNameOpt, containsPrefixExerciseDeleteAll);
+        return new FitDeleteCommand(index, exerciseNameToDelete);
     }
 }

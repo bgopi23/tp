@@ -152,7 +152,7 @@ public class Exercise {
 
     @Override
     public String toString() {
-        return String.format("%s: %d sets of %d reps, %d min break between sets",
+        return String.format("%s: %d sets of %d reps, %d seconds break between sets",
             this.name, this.sets, this.reps, this.breakBetweenSets);
     }
 }

@@ -18,7 +18,7 @@ import seedu.address.model.exercise.ExerciseToAdd;
 import seedu.address.model.person.Person;
 
 /**
- * Adds a new exercise or overwrites an existing exercise of a person in the address book.
+ * Adds a new exercise or overwrites an existing exercise of a person in FitBook.
  */
 public class FitAddCommand extends Command {
     public static final Set<ExerciseToAdd> DEFAULT_ARM_EXERCISES = new HashSet<>(Arrays.asList(

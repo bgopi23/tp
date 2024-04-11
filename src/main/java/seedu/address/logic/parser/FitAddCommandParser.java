@@ -50,7 +50,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
     }
 
     private Index parseIndex(ArgumentMultimap argumentMultimap) throws ParseException {
-        // Parse index of client to add exercise to
         Index index;
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
@@ -98,7 +97,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
     }
 
     private ExerciseToAdd parseExerciseToAdd(ArgumentMultimap argumentMultimap) throws ParseException {
-        // If individual exercise details are provided, add that exercise
         String exerciseName = ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME));
         Optional<Integer> exerciseSets = ParserUtil.parseExerciseSets(argumentMultimap.getValue(PREFIX_EXERCISE_SETS));
         Optional<Integer> exerciseReps = ParserUtil.parseExerciseReps(argumentMultimap.getValue(PREFIX_EXERCISE_REPS));
@@ -145,6 +143,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
     private Set<ExerciseToAdd> getExercisesToAdd(ArgumentMultimap argumentMultimap, boolean hasExerciseNamePrefix)
             throws ParseException {
         Set<ExerciseToAdd> exercisesToAdd = new HashSet<>();
+
         if (hasExerciseNamePrefix) {
             exercisesToAdd.add(parseExerciseToAdd(argumentMultimap));
         } else {
@@ -175,7 +174,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         verifyNoArgumentValueForPrefixes(argumentMultimap);
         verifyNoDuplicatePrefixes(argumentMultimap);
 
-        // Get existence of relevant prefixes
         boolean hasExerciseNamePrefix = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
         boolean hasExerciseValuesPrefix = argumentMultimap.containsAny(PREFIX_EXERCISE_SETS,
             PREFIX_EXERCISE_REPS, PREFIX_EXERCISE_BREAK_BETWEEN_SETS);
