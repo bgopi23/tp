@@ -8,6 +8,7 @@ import static seedu.address.model.exercise.Exercise.DEFAULT_BREAK;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
@@ -15,49 +16,50 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
+import seedu.address.model.exercise.ExerciseToAdd;
 import seedu.address.model.person.Person;
 
 /**
  * Adds a new exercise or overwrites an existing exercise of a person in the address book.
  */
 public class FitAddCommand extends Command {
-    public static final Set<Exercise> DEFAULT_ARM_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("bicep curls", 3, 10, 60),
-        new Exercise("tricep dips", 3, 12, 60),
-        new Exercise("push-ups", 3, 15, 90)
+    public static final Set<ExerciseToAdd> DEFAULT_ARM_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("bicep curls", Optional.of(3), Optional.of(10), Optional.of(60)),
+        new ExerciseToAdd("tricep dips", Optional.of(3), Optional.of(12), Optional.of(60)),
+        new ExerciseToAdd("push-ups", Optional.of(3), Optional.of(15), Optional.of(90))
     ));
 
-    public static final Set<Exercise> DEFAULT_LEG_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("squats", 4, 15, 90),
-        new Exercise("lunges", 3, 12, 60),
-        new Exercise("calf raises", 3, 20, 60)
+    public static final Set<ExerciseToAdd> DEFAULT_LEG_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("squats", Optional.of(4), Optional.of(15), Optional.of(90)),
+        new ExerciseToAdd("lunges", Optional.of(3), Optional.of(12), Optional.of(60)),
+        new ExerciseToAdd("calf raises", Optional.of(3), Optional.of(20), Optional.of(60))
     ));
 
-    public static final Set<Exercise> DEFAULT_CHEST_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("bench press", 4, 8, 120),
-        new Exercise("push-ups", 3, 15, 90),
-        new Exercise("chest fly", 3, 10, 90)
+    public static final Set<ExerciseToAdd> DEFAULT_CHEST_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("bench press", Optional.of(4), Optional.of(8), Optional.of(120)),
+        new ExerciseToAdd("push-ups", Optional.of(3), Optional.of(15), Optional.of(90)),
+        new ExerciseToAdd("chest fly", Optional.of(3), Optional.of(10), Optional.of(90))
     ));
 
-    public static final Set<Exercise> DEFAULT_BACK_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("pull-ups", 3, 8, 120),
-        new Exercise("bent-over rows", 3, 10, 90),
-        new Exercise("lat pull-downs", 3, 12, 60)
+    public static final Set<ExerciseToAdd> DEFAULT_BACK_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("pull-ups", Optional.of(3), Optional.of(8), Optional.of(120)),
+        new ExerciseToAdd("bent-over rows", Optional.of(3), Optional.of(10), Optional.of(90)),
+        new ExerciseToAdd("lat pull-downs", Optional.of(3), Optional.of(12), Optional.of(60))
     ));
 
-    public static final Set<Exercise> DEFAULT_SHOULDER_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("shoulder press", 3, 10, 90),
-        new Exercise("lateral raises", 3, 12, 60),
-        new Exercise("front raises", 3, 10, 60)
+    public static final Set<ExerciseToAdd> DEFAULT_SHOULDER_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("shoulder press", Optional.of(3), Optional.of(10), Optional.of(90)),
+        new ExerciseToAdd("lateral raises", Optional.of(3), Optional.of(12), Optional.of(60)),
+        new ExerciseToAdd("front raises", Optional.of(3), Optional.of(10), Optional.of(60))
     ));
 
-    public static final Set<Exercise> DEFAULT_ABS_EXERCISES = new HashSet<>(Arrays.asList(
-        new Exercise("crunches", 3, 20, 60),
-        new Exercise("plank", 3, 60, 90),
-        new Exercise("russian twists", 3, 15, 60)
+    public static final Set<ExerciseToAdd> DEFAULT_ABS_EXERCISES = new HashSet<>(Arrays.asList(
+        new ExerciseToAdd("crunches", Optional.of(3), Optional.of(20), Optional.of(60)),
+        new ExerciseToAdd("plank", Optional.of(3), Optional.of(60), Optional.of(90)),
+        new ExerciseToAdd("russian twists", Optional.of(3), Optional.of(15), Optional.of(60))
     ));
     private final Index index;
-    private final Set<Exercise> exercisesToAdd;
+    private final Set<ExerciseToAdd> exercisesToAdd;
 
     /**
      * Constructs a new FitAddCommand instance.
@@ -65,7 +67,7 @@ public class FitAddCommand extends Command {
      * @param index The index of the person in the filtered person list to add the exercise to
      * @param exercisesToAdd The set of exercises to be added to the person
      */
-    public FitAddCommand(Index index, Set<Exercise> exercisesToAdd) {
+    public FitAddCommand(Index index, Set<ExerciseToAdd> exercisesToAdd) {
         requireNonNull(index);
         requireNonNull(exercisesToAdd);
 
@@ -87,26 +89,11 @@ public class FitAddCommand extends Command {
 
         Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
-        for (Exercise exerciseToAdd : this.exercisesToAdd) {
-            if (updatedExercises.contains(exerciseToAdd)) {
-                for (Exercise e : updatedExercises) {
-                    if (e.equals(exerciseToAdd)) {
-                        String name = exerciseToAdd.getName();
-                        Integer sets =
-                            exerciseToAdd.getSets() != Exercise.DEFAULT_SETS ? exerciseToAdd.getSets() : e.getSets();
-                        Integer reps =
-                            exerciseToAdd.getReps() != Exercise.DEFAULT_REPS ? exerciseToAdd.getReps() : e.getReps();
-                        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets() != DEFAULT_BREAK
-                            ? exerciseToAdd.getBreakBetweenSets() : e.getBreakBetweenSets();
+        for (ExerciseToAdd exerciseToAdd : this.exercisesToAdd) {
+            Exercise newExercise = getExercise(exerciseToAdd, updatedExercises);
 
-                        exerciseToAdd = new Exercise(name, sets, reps, breakBetweenSets);
-                        break;
-                    }
-                }
-            }
-
-            updatedExercises.remove(exerciseToAdd);
-            updatedExercises.add(exerciseToAdd);
+            updatedExercises.remove(newExercise);
+            updatedExercises.add(newExercise);
         }
 
         ExerciseSet updatedExerciseSet = new ExerciseSet(updatedExercises);
@@ -118,6 +105,31 @@ public class FitAddCommand extends Command {
         model.setPerson(personToEdit, editedPerson);
 
         return new CommandResult(MESSAGE_ADD_EXERCISE_SUCCESS);
+    }
+
+    private static Exercise getExercise(ExerciseToAdd exerciseToAdd, Set<Exercise> updatedExercises) {
+        String name = exerciseToAdd.getName();
+        Integer sets = exerciseToAdd.getSets().orElse(Exercise.DEFAULT_SETS);
+        Integer reps = exerciseToAdd.getReps().orElse(Exercise.DEFAULT_REPS);
+        Integer breakBetweenSets = exerciseToAdd.getBreakBetweenSets().orElse(Exercise.DEFAULT_BREAK);
+
+        Exercise newExercise =
+            new Exercise(name, sets, reps, breakBetweenSets);
+
+        if (updatedExercises.contains(newExercise)) {
+            for (Exercise existingExercise : updatedExercises) {
+                if (existingExercise.equals(newExercise)) {
+                    String newName = exerciseToAdd.getName();
+                    Integer newSets = exerciseToAdd.getSets().orElse(existingExercise.getSets());
+                    Integer newReps = exerciseToAdd.getReps().orElse(existingExercise.getReps());
+                    Integer newBreakBetweenSets =
+                        exerciseToAdd.getBreakBetweenSets().orElse(existingExercise.getBreakBetweenSets());
+
+                    newExercise = new Exercise(newName, newSets, newReps, newBreakBetweenSets);
+                }
+            }
+        }
+        return newExercise;
     }
 
     @Override

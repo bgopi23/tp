@@ -8,7 +8,7 @@ import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_PARAMETER_WEIGHT;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_NO_PARAMETER_WEIGHT;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
-import static seedu.address.model.person.weight.Weight.MESSAGE_CONSTRAINTS;
+import static seedu.address.model.person.messages.WeightMessages.MESSAGE_CONSTRAINTS;
 
 import org.junit.jupiter.api.Test;
 

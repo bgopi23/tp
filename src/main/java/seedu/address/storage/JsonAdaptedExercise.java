@@ -47,16 +47,16 @@ class JsonAdaptedExercise {
      *                               the adapted exercise.
      */
     public Exercise toModelType() throws IllegalValueException {
-        if (!Exercise.isValidName(this.name)) {
+        if (this.name == null || !Exercise.isValidName(this.name)) {
             throw new IllegalValueException(Exercise.NAME_CONSTRAINT);
         }
-        if (!Exercise.isValidSets(this.sets)) {
+        if (this.sets == null || !Exercise.isValidSets(this.sets)) {
             throw new IllegalValueException(Exercise.SETS_CONSTRAINT);
         }
-        if (!Exercise.isValidReps(this.reps)) {
+        if (this.reps == null || !Exercise.isValidReps(this.reps)) {
             throw new IllegalValueException(Exercise.REPS_CONSTRAINT);
         }
-        if (!Exercise.isValidBreakBetweenSets(this.breakBetweenSets)) {
+        if (this.breakBetweenSets == null || !Exercise.isValidBreakBetweenSets(this.breakBetweenSets)) {
             throw new IllegalValueException(Exercise.BREAK_CONSTRAINT);
         }
         return new Exercise(this.name, this.sets, this.reps, this.breakBetweenSets);

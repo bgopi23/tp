@@ -5,7 +5,7 @@ import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_ADD_WEI
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.model.person.weight.WeightMap.MESSAGE_EMPTY_WEIGHT_MAP;
+import static seedu.address.model.person.messages.WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP;
 
 import java.time.LocalDateTime;
 import java.util.List;

@@ -25,6 +25,7 @@ import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSucces
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 import org.junit.jupiter.api.Test;
@@ -33,6 +34,7 @@ import seedu.address.logic.commands.FitAddCommand;
 import seedu.address.logic.messages.FitAddCommandMessages;
 import seedu.address.logic.messages.Messages;
 import seedu.address.model.exercise.Exercise;
+import seedu.address.model.exercise.ExerciseToAdd;
 
 public class FitAddCommandParserTest {
 
@@ -81,9 +83,11 @@ public class FitAddCommandParserTest {
 
     @Test
     public void parse_exerciseSpecified_success() {
-        Exercise exercise = new Exercise(VALID_EXERCISE_NAME, Integer.parseInt(VALID_EXERCISE_SETS),
-            Integer.parseInt(VALID_EXERCISE_REPS), Integer.parseInt(VALID_EXERCISE_BREAK));
-        Set<Exercise> exerciseSet = new HashSet<>();
+        ExerciseToAdd exercise =
+            new ExerciseToAdd(VALID_EXERCISE_NAME.toLowerCase(), Optional.of(Integer.parseInt(VALID_EXERCISE_SETS)),
+                Optional.of(Integer.parseInt(VALID_EXERCISE_REPS)),
+                Optional.of(Integer.parseInt(VALID_EXERCISE_BREAK)));
+        Set<ExerciseToAdd> exerciseSet = new HashSet<>();
         exerciseSet.add(exercise);
 
         // preamble with leading whitespace
@@ -119,7 +123,7 @@ public class FitAddCommandParserTest {
             new FitAddCommand(INDEX_FIRST_PERSON, FitAddCommand.DEFAULT_ABS_EXERCISES));
 
         // all exercises
-        Set<Exercise> allExercises = new HashSet<>();
+        Set<ExerciseToAdd> allExercises = new HashSet<>();
         allExercises.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
         allExercises.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
         allExercises.addAll(FitAddCommand.DEFAULT_CHEST_EXERCISES);

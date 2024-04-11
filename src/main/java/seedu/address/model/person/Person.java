@@ -1,6 +1,10 @@
 package seedu.address.model.person;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.model.person.messages.PersonMessages.MESSAGE_CANT_DELETE_QR;
+import static seedu.address.model.person.messages.PersonMessages.MESSAGE_DELETED_QR;
+import static seedu.address.model.person.messages.PersonMessages.MESSAGE_DOES_NOT_EXIST;
+import static seedu.address.model.person.messages.PersonMessages.MESSAGE_GENERATED_QR;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -162,7 +166,7 @@ public class Person {
     public void generateQrCode() {
         try {
             QrCodeGenerator.generateQrCode(this);
-            logger.info("Generated QR code for " + this);
+            logger.info(MESSAGE_GENERATED_QR + this);
         } catch (WriterException | IOException e) {
             logger.warning("Unable to generate QR code for " + this);
         }
@@ -234,13 +238,13 @@ public class Person {
         try {
             boolean result = Files.deleteIfExists(this.getQrCodePath());
             if (result) {
-                logger.info("Deleted QR code for " + this);
+                logger.info(MESSAGE_DELETED_QR + this);
             } else {
-                logger.info("Unable to delete QR code for " + this + " as it does not exist");
+                logger.info(String.format(MESSAGE_DOES_NOT_EXIST, this));
             }
             return result;
         } catch (IOException e) {
-            logger.warning("Unable to delete QR code for " + this);
+            logger.warning(String.format(MESSAGE_CANT_DELETE_QR, this));
             return false;
         }
     }

@@ -8,8 +8,6 @@ import static java.util.Objects.requireNonNull;
  */
 public class Note extends Attribute<String> {
 
-    public static final String MESSAGE_CONSTRAINTS = "Notes can take any values";
-
     /**
      * Constructs a {@code note}.
      *

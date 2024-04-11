@@ -20,6 +20,13 @@ import seedu.address.model.person.Height;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Phone;
+import seedu.address.model.person.messages.AddressMessages;
+import seedu.address.model.person.messages.EmailMessages;
+import seedu.address.model.person.messages.HeightMessages;
+import seedu.address.model.person.messages.NameMessages;
+import seedu.address.model.person.messages.PhoneMessages;
+import seedu.address.model.person.messages.TagMessages;
+import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.tag.Tag;
 
@@ -59,7 +66,7 @@ public class ParserUtil {
         requireNonNull(name);
         String trimmedName = name.trim();
         if (!Name.isValidName(trimmedName)) {
-            throw new ParseException(Name.MESSAGE_CONSTRAINTS);
+            throw new ParseException(NameMessages.MESSAGE_CONSTRAINTS);
         }
         return new Name(trimmedName);
     }
@@ -76,7 +83,7 @@ public class ParserUtil {
         requireNonNull(phone);
         String trimmedPhone = phone.replaceAll("\\s", "");
         if (!Phone.isValidPhone(trimmedPhone)) {
-            throw new ParseException(Phone.MESSAGE_CONSTRAINTS);
+            throw new ParseException(PhoneMessages.MESSAGE_CONSTRAINTS);
         }
         return new Phone(trimmedPhone);
     }
@@ -96,7 +103,7 @@ public class ParserUtil {
         if (address.isPresent() && !address.get().isEmpty()) {
             trimmedAddress = address.get().trim();
             if (!Address.isValidAddress(trimmedAddress)) {
-                throw new ParseException(Address.MESSAGE_CONSTRAINTS);
+                throw new ParseException(AddressMessages.MESSAGE_CONSTRAINTS);
             }
         }
 
@@ -118,7 +125,7 @@ public class ParserUtil {
         if (email.isPresent() && !email.get().isEmpty()) {
             trimmedEmail = email.get().trim();
             if (!Email.isValidEmail(trimmedEmail)) {
-                throw new ParseException(Email.MESSAGE_CONSTRAINTS);
+                throw new ParseException(EmailMessages.MESSAGE_CONSTRAINTS);
             }
         }
 
@@ -152,7 +159,7 @@ public class ParserUtil {
         if (!weight.isEmpty()) {
             String trimmedWeight = weight.get().trim();
             if (!Weight.isValidWeight(trimmedWeight)) {
-                throw new ParseException(Weight.MESSAGE_CONSTRAINTS);
+                throw new ParseException(WeightMessages.MESSAGE_CONSTRAINTS);
             }
             return trimmedWeight.isEmpty() ? new Weight(0f)
                 : new Weight(Float.valueOf(trimmedWeight));
@@ -174,7 +181,7 @@ public class ParserUtil {
         if (!height.isEmpty()) {
             String trimmedHeight = height.get().trim();
             if (!Height.isValidHeight(trimmedHeight)) {
-                throw new ParseException(Height.MESSAGE_CONSTRAINTS);
+                throw new ParseException(HeightMessages.MESSAGE_CONSTRAINTS);
             }
             return trimmedHeight.isEmpty() ? new Height(0f) : new Height(Float.valueOf(trimmedHeight));
         }
@@ -193,7 +200,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(TagMessages.MESSAGE_CONSTRAINTS);
         }
         return new Tag(trimmedTag);
     }
@@ -223,12 +230,12 @@ public class ParserUtil {
     public static String parseExerciseName(Optional<String> exerciseNameOpt) throws ParseException {
         requireNonNull(exerciseNameOpt);
 
-        String trimmedExerciseName = exerciseNameOpt.orElse("").trim();
-        if (!Exercise.isValidName(trimmedExerciseName)) {
+        String trimmedExerciseNameLowerCased = exerciseNameOpt.orElse("").trim().toLowerCase();
+        if (!Exercise.isValidName(trimmedExerciseNameLowerCased)) {
             throw new ParseException(Exercise.NAME_CONSTRAINT);
         }
 
-        return trimmedExerciseName;
+        return trimmedExerciseNameLowerCased;
     }
 
     /**
@@ -239,11 +246,11 @@ public class ParserUtil {
      * @return The parsed exercise sets value
      * @throws ParseException If the given {@code exerciseSetsOpt} is invalid
      */
-    public static Integer parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
+    public static Optional<Integer> parseExerciseSets(Optional<String> exerciseSetsOpt) throws ParseException {
         requireNonNull(exerciseSetsOpt);
 
         if (exerciseSetsOpt.isEmpty()) {
-            return Exercise.DEFAULT_SETS;
+            return Optional.empty();
         }
 
         String exerciseSetsTrimmed = exerciseSetsOpt.get().trim();
@@ -256,7 +263,7 @@ public class ParserUtil {
             throw new ParseException(Exercise.SETS_CONSTRAINT);
         }
 
-        return exerciseSets;
+        return Optional.of(exerciseSets);
     }
 
     /**
@@ -267,11 +274,11 @@ public class ParserUtil {
      * @return The parsed exercise reps value
      * @throws ParseException If the given {@code exerciseRepsOpt} is invalid
      */
-    public static Integer parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
+    public static Optional<Integer> parseExerciseReps(Optional<String> exerciseRepsOpt) throws ParseException {
         requireNonNull(exerciseRepsOpt);
 
         if (exerciseRepsOpt.isEmpty()) {
-            return Exercise.DEFAULT_REPS;
+            return Optional.empty();
         }
 
         String exerciseRepsTrimmed = exerciseRepsOpt.orElse("").trim();
@@ -285,7 +292,7 @@ public class ParserUtil {
         }
 
 
-        return exerciseReps;
+        return Optional.of(exerciseReps);
     }
 
     /**
@@ -296,12 +303,12 @@ public class ParserUtil {
      * @return The parsed exercise rest value
      * @throws ParseException If the given {@code exerciseBreakBetweenSetsOpt} is invalid
      */
-    public static Integer parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt)
+    public static Optional<Integer> parseExerciseBreakBetweenSets(Optional<String> exerciseBreakBetweenSetsOpt)
             throws ParseException {
         requireNonNull(exerciseBreakBetweenSetsOpt);
 
         if (exerciseBreakBetweenSetsOpt.isEmpty()) {
-            return Exercise.DEFAULT_BREAK;
+            return Optional.empty();
         }
 
         String exerciseRestTrimmed = exerciseBreakBetweenSetsOpt.orElse("").trim();
@@ -314,42 +321,7 @@ public class ParserUtil {
             throw new ParseException(Exercise.BREAK_CONSTRAINT);
         }
 
-        return exerciseBreakBetweenSets;
-    }
-
-    /**
-     * Parses the supplied values into a {@code Exercise}.
-     *
-     * @param name The name of the exercise
-     * @param sets The number of sets for the exercise
-     * @param reps The number of reps for the exercise
-     * @param rest The rest duration for the exercise
-     * @return The parsed Exercise object
-     * @throws ParseException If any of the supplied values are invalid
-     */
-    public static Exercise parseExercise(String name, Integer sets, Integer reps, Integer rest) throws ParseException {
-        requireNonNull(name);
-        requireNonNull(sets);
-        requireNonNull(reps);
-        requireNonNull(rest);
-
-        if (!Exercise.isValidName(name)) {
-            throw new ParseException(Exercise.NAME_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidSets(sets)) {
-            throw new ParseException(Exercise.SETS_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidSets(reps)) {
-            throw new ParseException(Exercise.REPS_CONSTRAINT);
-        }
-
-        if (!Exercise.isValidBreakBetweenSets(rest)) {
-            throw new ParseException(Exercise.BREAK_CONSTRAINT);
-        }
-
-        return new Exercise(name, sets, reps, rest);
+        return Optional.of(exerciseBreakBetweenSets);
     }
 
     /**

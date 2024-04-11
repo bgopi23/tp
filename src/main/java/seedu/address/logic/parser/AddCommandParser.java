@@ -1,6 +1,6 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_INVALID_PARAMETER_FORMAT_ADD;
+import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_ADD;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NAME_PARAMETER_MISSING_ADD;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_NO_PARAMETERS_ADD;
 import static seedu.address.logic.messages.AddCommandMessages.MESSAGE_PHONE_PARAMETER_MISSING_ADD;
@@ -56,9 +56,9 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(MESSAGE_NO_PARAMETERS_ADD);
         }
 
-        // (add John)
+        // (add dwelidjpojpd)
         if (!argMultimap.isPreambleEmpty()) {
-            throw new ParseException(MESSAGE_INVALID_PARAMETER_FORMAT_ADD);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_ADD);
         }
 
         // (add p/99898888)

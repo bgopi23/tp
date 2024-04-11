@@ -14,9 +14,6 @@ import seedu.address.model.person.Attribute;
  */
 public class WeightMap extends Attribute<NavigableMap<LocalDateTime, Weight>> {
 
-    public static final String MESSAGE_EMPTY_WEIGHT_MAP = "There are no more weight values to be removed. "
-            + "This client has no more weight values associated with them.";
-
     /**
      * Constructs a {@code WeightMap}
      *

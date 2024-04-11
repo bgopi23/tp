@@ -42,6 +42,6 @@ public class AddCommandMessages extends Messages {
             MESSAGE_USAGE);
     public static final String MESSAGE_PHONE_PARAMETER_MISSING_ADD = String.format(MESSAGE_PHONE_PARAMETER_MISSING,
             MESSAGE_USAGE);
-    public static final String MESSAGE_INVALID_PARAMETER_FORMAT_ADD = String.format(MESSAGE_INVALID_PARAMETER_FORMAT,
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_ADD = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MESSAGE_USAGE);
 }
