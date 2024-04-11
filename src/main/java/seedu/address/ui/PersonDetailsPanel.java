@@ -158,7 +158,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Set fields with information from the person.
+     * Updates the PersonDetailsPanel with the details of the given Person.
      *
      * @param person the Person object containing the information to update the fields with.
      */
@@ -192,6 +192,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.trackableFieldsTabPane.getTabs().clear();
     }
 
+    /**
+     * Generates a weight series for a given person based on their weights.
+     * Used for displaying the weight graph.
+     */
     private XYChart.Series<String, Number> generateWeightSeries(Person p) {
         Float minWeight = Float.MAX_VALUE;
         Float maxWeight = Float.MIN_VALUE;
@@ -222,6 +226,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         return weightSeries;
     }
 
+    /**
+     * Represents a custom Node for displaying data thresholds on a chart.
+     * This Node displays a label with the data threshold value when hovered over.
+     */
     private static class HoveredThresholdNode extends StackPane {
         private final Label label = this.createDataThresholdLabel();
         private final Node point = this.createDataPoint();
@@ -263,7 +271,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Set fields with information from the person. Weight is updated separately as some logic is involved.
+     * Set fields with information from the person.
      */
     private void updateLabels() {
         // Set fields with information from the person
