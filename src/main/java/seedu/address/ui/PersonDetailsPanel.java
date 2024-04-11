@@ -87,7 +87,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
      */
     public PersonDetailsPanel() {
         super(FXML);
-        clear();
+        this.clear();
     }
 
     private Tab getWeightTab() {
@@ -142,10 +142,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
         exerciseScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
 
         // Add charts and notes scroll pane to respective tabs
-        this.weightTab = getWeightTab();
+        this.weightTab = this.getWeightTab();
         this.weightTab.setContent(this.weightChart);
 
-        this.exerciseTab = getExerciseTab();
+        this.exerciseTab = this.getExerciseTab();
         this.exerciseTab.setContent(exerciseScrollPane);
     }
 
@@ -188,7 +188,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Display weights graph
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = generateWeightSeries(person);
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(person);
 
             this.weightChart.getData().clear();
             this.weightChart.getData().add(weightSeries);
@@ -322,26 +322,26 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private static class HoveredThresholdNode extends StackPane {
-        private final Label label = createDataThresholdLabel();
-        private final Node point = createDataPoint();
+        private final Label label = this.createDataThresholdLabel();
+        private final Node point = this.createDataPoint();
 
         /**
          * Creates a new HoveredThresholdNode.
          */
         public HoveredThresholdNode(String value, String prefix, String postfix) {
-            setPrefSize(10, 10);
+            this.setPrefSize(10, 10);
 
-            setOnMouseEntered(event -> {
-                getChildren().setAll(this.point, this.label);
+            this.setOnMouseEntered(event -> {
+                this.getChildren().setAll(this.point, this.label);
                 this.label.setText(String.format("%s%s%s", prefix, value, postfix));
-                toFront();
+                this.toFront();
             });
-            setOnMouseExited(event -> {
-                getChildren().setAll(this.point);
+            this.setOnMouseExited(event -> {
+                this.getChildren().setAll(this.point);
             });
 
-            setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
-            getChildren().setAll(this.point);
+            this.setStyle("-fx-background-color: white; -fx-background-radius: 5px; -fx-padding: 2px;");
+            this.getChildren().setAll(this.point);
         }
 
         private Node createDataPoint() {
