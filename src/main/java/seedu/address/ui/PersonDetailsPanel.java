@@ -163,17 +163,15 @@ public class PersonDetailsPanel extends UiPart<Region> {
         this.person = person;
         this.detailsPane.setVisible(true);
 
-        // Set fields with information from the person
-        this.name.setText(person.getName().toString());
-        this.phone.setText(person.getPhone().toString());
-        this.address.setText(person.getAddress().toString());
-        this.email.setText(person.getEmail().toString());
+        this.updateLabels();
 
         // Clear tags and set new ones
         this.tags.getChildren().clear();
         person.getTags().stream()
-            .sorted(Comparator.comparing(Tag::toString))
-            .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+                .sorted(Comparator.comparing(Tag::toString))
+                .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+
+        this.qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isPresent()) {
@@ -181,12 +179,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
             String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
             this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
             this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
-                + latestWeight.get().getValue().toString() + " kg");
+                    + latestWeight.get().getValue().toString() + " kg");
         }
-
-        this.height.setText(person.getHeight().getFormattedHeight());
-        this.note.setText(person.getNote().toString());
-        this.qrcode.setImage(new Image(person.getQrCodePath().toUri().toString()));
 
         // Clear tabs
         this.trackableFieldsTabPane.getTabs().clear();
@@ -215,13 +209,14 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
             List<Exercise> sortedExercises = exercises.stream()
-                .sorted(Comparator.comparing(Exercise::getName))
-                .collect(Collectors.toList());
+                    .sorted(Comparator.comparing(Exercise::getName))
+                    .collect(Collectors.toList());
 
             for (Exercise exercise : sortedExercises) {
                 final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
                 final String exerciseAttrValueStyle =
-                    "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
+                        "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: "
+                                + "12px;";
 
                 Label exerciseName = new Label(exercise.getName());
 
@@ -365,5 +360,15 @@ public class PersonDetailsPanel extends UiPart<Region> {
             label.setMinSize(Label.USE_PREF_SIZE, Label.USE_PREF_SIZE);
             return label;
         }
+    }
+
+    private void updateLabels() {
+        // Set fields with information from the person
+        this.name.setText(this.person.getName().toString());
+        this.phone.setText(this.person.getPhone().toString());
+        this.address.setText(this.person.getAddress().toString());
+        this.email.setText(this.person.getEmail().toString());
+        this.height.setText(this.person.getHeight().getFormattedHeight());
+        this.note.setText(this.person.getNote().toString());
     }
 }
