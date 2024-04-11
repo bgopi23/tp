@@ -1,7 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_EDIT;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_INVALID_INDEX_EDIT;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_NOT_EDITED;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_NO_INDEX_EDIT;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_USAGE;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_INDEX;
@@ -45,21 +48,19 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         // (edit) or (edit n/John)
         if (args.isEmpty() || argMultimap.isPreambleEmpty()) {
-            throw new ParseException(
-                    String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_NO_INDEX_EDIT);
         }
 
         // (edit 1 name) or (edit name 1)
         if (!argMultimap.isPreambleAlone()) {
-            throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_EDIT);
         }
 
         Index index;
         try {
             index = ParserUtil.parseIndex(argMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_INDEX_EDIT, pe);
         }
 
         argMultimap.verifyNoDuplicatePrefixesFor(ALL_PREFIXES_EXCEPT_TAG);
@@ -90,7 +91,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
 
         if (!editPersonDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(String.format(MESSAGE_NOT_EDITED, MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(index, editPersonDescriptor);

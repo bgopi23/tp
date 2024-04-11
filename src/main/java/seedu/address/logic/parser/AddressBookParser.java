@@ -22,6 +22,7 @@ import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.FitAddCommandMessages;
 import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
+import seedu.address.logic.messages.ListCommandMessages;
 import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -79,7 +80,7 @@ public class AddressBookParser {
         case WeightCommandMessages.COMMAND_WORD:
             return new WeightCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommandMessages.COMMAND_WORD:
             return new ListCommand();
 
         case ExitCommandMessages.COMMAND_WORD:

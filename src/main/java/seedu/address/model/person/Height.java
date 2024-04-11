@@ -56,7 +56,7 @@ public class Height extends Attribute<Float> {
 
         assert (secondVal - firstVal >= 0) : MESSAGE_RANGE;
         // if a client has no height value
-        if (this.getValue() == 0f) {
+        if (this.isZero()) {
             return false;
         }
 
@@ -82,7 +82,7 @@ public class Height extends Attribute<Float> {
      * Empty height values (i.e. 0f) will be formatted as "N/A" for better clarity.
      */
     public String getFormattedHeight() {
-        if (this.getValue() == 0f) {
+        if (this.isZero()) {
             return MESSAGE_NO_HEIGHT;
         }
         return "Height: " + this.getValue().toString() + " cm";

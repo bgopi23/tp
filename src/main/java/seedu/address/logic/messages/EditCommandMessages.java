@@ -35,5 +35,8 @@ public class EditCommandMessages extends Messages {
     public static final String MESSAGE_NOT_EDITED = String.format("At least one field to edit must be provided.\n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_INVALID_INDEX_EDIT = String.format(MESSAGE_INVALID_INDEX, MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EDIT = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MESSAGE_USAGE);
+    public static final String MESSAGE_NO_INDEX_EDIT = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
 
 }

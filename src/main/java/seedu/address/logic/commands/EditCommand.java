@@ -115,7 +115,7 @@ public class EditCommand extends Command {
         boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(MESSAGE_PHONE_WARN);
+            return MESSAGE_PHONE_WARN;
         }
 
         return "";

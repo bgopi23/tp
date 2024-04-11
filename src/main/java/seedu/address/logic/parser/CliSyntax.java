@@ -76,5 +76,10 @@ public class CliSyntax {
         PREFIX_EXERCISE_ABS,
         PREFIX_EXERCISE_ALL
     };
+    public static final Prefix[] EXERCISE_VALUE_PREFIXES = {
+        PREFIX_EXERCISE_SETS,
+        PREFIX_EXERCISE_REPS,
+        PREFIX_EXERCISE_BREAK_BETWEEN_SETS
+    };
     public static final Prefix PREFIX_CLEAR_CONFIRM = new Prefix("/confirm");
 }
