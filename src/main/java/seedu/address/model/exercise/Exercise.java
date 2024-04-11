@@ -8,26 +8,23 @@ import java.util.Objects;
  * Represents an exercise in FitBook.
  */
 public class Exercise {
-
-    public static final String NAME_CONSTRAINT = "Exercise name should not be empty";
     public static final int SETS_LIMIT = 1_000_000;
-    public static final String SETS_CONSTRAINT =
-        String.format("Number of sets should be a number greater than 0 and less than or equals to %d", SETS_LIMIT);
     public static final int REPS_LIMIT = 1_000_000;
-    public static final String REPS_CONSTRAINT =
-        String.format("Number of reps should be a number greater than 0 and less than or equals to %d", REPS_LIMIT);
     public static final int BREAK_LIMIT = 1_000_000;
 
+    public static final String NAME_CONSTRAINT = "Exercise name should not be empty";
+    public static final String SETS_CONSTRAINT =
+        String.format("Number of sets should be a number greater than 0 and less than or equals to %d", SETS_LIMIT);
+    public static final String REPS_CONSTRAINT =
+        String.format("Number of reps should be a number greater than 0 and less than or equals to %d", REPS_LIMIT);
     public static final String BREAK_CONSTRAINT =
         String.format(
             "Break time in seconds between sets should be a number greater or equal to 0 and less than or equals to %d",
             BREAK_LIMIT);
 
-
     public static final Integer DEFAULT_SETS = 1;
     public static final Integer DEFAULT_REPS = 1;
     public static final Integer DEFAULT_BREAK = 0;
-
 
     private final String name;
     private final Integer sets;
