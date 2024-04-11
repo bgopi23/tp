@@ -364,7 +364,7 @@ The correct format is as follows : `delete INDEX`
 |   `delete`   |                    _No index specified!_                     |
 | `delete two` |                  _Invalid index provided!_                   |
 |   `delet`    | _Unknown command, please type 'help' for possible commands!_ |
-| `delete -1`  |                  _Invalid index specified!_                  |
+| `delete -1`  |                  _Invalid index provided!_                   |
 
 
 **_How the feature was implemented._** <br>
