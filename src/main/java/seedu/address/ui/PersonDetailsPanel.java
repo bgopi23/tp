@@ -300,12 +300,16 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private void updateTabView() {
-        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
-
         // Clear tabs
         this.trackableFieldsTabPane.getTabs().clear();
 
-        // Display weights graph
+        this.updateWeightTab();
+        this.updateExercisesTab();
+    }
+
+    private void updateWeightTab() {
+        Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
+
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
             XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
@@ -313,7 +317,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.weightChart.getData().clear();
             this.weightChart.getData().add(weightSeries);
         }
+    }
 
+    private void updateExercisesTab() {
         this.initializeExercisesTab();
         Set<Exercise> exercises = this.person.getExerciseSet().getValue();
         this.populateExercisesTab(exercises);
