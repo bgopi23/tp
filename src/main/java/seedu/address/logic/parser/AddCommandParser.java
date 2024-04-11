@@ -41,12 +41,11 @@ import seedu.address.model.tag.Tag;
 public class AddCommandParser implements Parser<AddCommand> {
 
     /**
-     * Parses a given string of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddCommand
      *
      * @param args the string to be parsed
-     * @return an AddCommand object with the client that will be added to FitBook
-     * @throws ParseException if the client's input does not conform the expected format
+     * @return an AddCommand object with the user's that will be added to FitBook
+     * @throws ParseException if the user's input does not conform the expected format
      **/
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap = ArgumentTokenizer.tokenize(args, ALL_PREFIXES);

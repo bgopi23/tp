@@ -17,7 +17,7 @@ public class AddCommand extends Command {
     private final Person toAdd;
 
     /**
-     * Constructs an AddCommand object to add the specified Person object
+     * Constructs an AddCommand to add the specified {@code Person}
      *
      * @param person object to add
      */
