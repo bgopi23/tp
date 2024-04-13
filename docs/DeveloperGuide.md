@@ -380,7 +380,7 @@ Alternatives such as hyper-specific error outputs were considered, but ultimatel
 was trivial.
 
 **_Activity diagram for specialised error message outputs by AddCommandParser_**
-![SpecialisedErrorMessages](diagrams/SpecialisedErrorMessagesDiagram.png)
+![SpecialisedErrorMessages](images/SpecialisedErrorMessagesDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
