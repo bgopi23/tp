@@ -7,7 +7,6 @@ import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_EXERCIS
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.DEFAULT_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.EXERCISE_VALUE_PREFIXES;
@@ -116,7 +115,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      */
     private void verifyNoArgumentValueForPrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
         if (argumentMultimap.hasArgumentValueForPrefixes(DEFAULT_EXERCISE_PREFIXES)) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITADD);
         }
     }
 
