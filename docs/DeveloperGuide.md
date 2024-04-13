@@ -319,7 +319,7 @@ A great deal of consideration was made regarding how the custom exercises should
 The following data structures were taken into consideration during the brainstorming and design process.
 
 1. ArrayList
-1. Plain JSON without deserialization 
+1. Plain JSON without deserialization
 1. Java Set
 
 The following factors were taken into consideration when selecting a suitable data structure.
@@ -338,7 +338,7 @@ are considered duplicates since an exercise has multiple fields.
 
 To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
 However, this may change in the future. For example, the same exercise may have different numbers of sets, reps, and break times for different
-days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method 
+days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method
 in our `Exercise` class, this is made possible because of our decision to store the exercises in a Java `Set`.
 
 ### Specialised error messages for commands
@@ -776,3 +776,9 @@ Fields that exceed the length of the line would be truncated. Complete informati
 6. **Restrict the number of weight entries per day to 1**
 
 Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+
+7. **Remove unnecessary prefixes in commands**
+
+Some commands require the use of unnecessary prefixes which might slightly inconvenience the user.
+
+For example, the `fitdelete` command currently has the format `fitdelete INDEX n/EXERCISE_NAME`. Removing the requirement of specifying the `n/` prefix will provide greater convenience to the user by requiring them to type less. Furthermore, it will address issues that come with specifying multiple `n/` prefixes.
