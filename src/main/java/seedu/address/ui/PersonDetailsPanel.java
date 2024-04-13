@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -10,6 +11,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -81,6 +83,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
     private Tab weightTab;
     private Tab exerciseTab;
     private LineChart<String, Number> weightChart;
+    private CategoryAxis weightXAxis;
     private NumberAxis weightYAxis;
     private VBox exercisesBox;
 
@@ -168,6 +171,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
         Float maxWeight = Float.MIN_VALUE;
 
         XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
+        HashSet<String> weightDates = new HashSet<>();
 
         for (Map.Entry<LocalDateTime, Weight> entry : p.getWeights().entrySet()) {
             LocalDateTime date = entry.getKey();
@@ -175,6 +179,9 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
             String dateString = date.format(DateTimeUtil.DATE_FORMATTER);
             Number weightNumber = weight.getValue();
+
+            weightDates.add(dateString);
+
             XYChart.Data<String, Number> weightData = new XYChart.Data<>(dateString, weightNumber);
             weightData.setNode(new HoveredThresholdNode(weightNumber.toString(), "", " kg"));
             weightSeries.getData().add(weightData);
@@ -186,6 +193,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 maxWeight = weight.getValue();
             }
         }
+
+        this.weightXAxis.setCategories(FXCollections.observableArrayList(weightDates));
 
         this.weightYAxis.setLowerBound(minWeight - 10);
         this.weightYAxis.setUpperBound(maxWeight + 10);
@@ -401,19 +410,19 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     private void initializeWeightChart() {
         // Initialize weight chart
-        CategoryAxis xAxis = new CategoryAxis();
+        this.weightXAxis = new CategoryAxis();
         this.weightYAxis = new NumberAxis();
 
-        xAxis.setAnimated(false); // fixes the collapsed categories bug
-        xAxis.setLabel("Date");
-        xAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
+        this.weightXAxis.setAnimated(false); // fixes the collapsed categories bug
+        this.weightXAxis.setLabel("Date");
+        this.weightXAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
         this.weightYAxis.setAnimated(false);
         this.weightYAxis.setAutoRanging(false);
         this.weightYAxis.setLabel("Weight (kg)");
         this.weightYAxis.lookup(".axis-label").setStyle("-fx-text-fill: white;");
 
-        this.weightChart = new LineChart<>(xAxis, this.weightYAxis);
+        this.weightChart = new LineChart<>(this.weightXAxis, this.weightYAxis);
         this.weightChart.setAnimated(false);
         this.weightChart.setHorizontalGridLinesVisible(false);
         this.weightChart.setVerticalGridLinesVisible(false);
