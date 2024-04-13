@@ -63,10 +63,11 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
     }
 
     /**
-     * Determine if the exercise set contains the specified exercise.
+     * Determines if the exercise set contains the specified exercise.
      *
      * @param otherValue Exercise to check against.
-     * @return True if exercise set contains the specified exercise, false otherwise.
+     * @return True if exercise set contains the specified exercise, false
+     *         otherwise.
      */
     public boolean contains(Object otherValue) {
         if (!(otherValue instanceof Exercise)) {
@@ -82,7 +83,8 @@ public class ExerciseSet extends Attribute<Set<Exercise>> {
      * Checks if the exercise set is equal to another object.
      *
      * @param other The object to compare with.
-     * @return True if the other object is an ExerciseSet with the same set of exercises, false otherwise.
+     * @return True if the other object is an ExerciseSet with the same set of
+     *         exercises, false otherwise.
      */
     @Override
     public boolean equals(Object other) {

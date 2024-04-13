@@ -103,7 +103,7 @@ public class Height extends Attribute<Float> {
     }
 
     /**
-     * Check if the value is valid (i.e. greater than 0).
+     * Checks if the value is valid (i.e. greater than 0).
      */
     public boolean isValid() {
         return this.getValue() != 0f;

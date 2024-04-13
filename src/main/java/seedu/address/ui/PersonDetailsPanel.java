@@ -74,7 +74,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private TabPane trackableFieldsTabPane;
 
-
     private Tab weightTab;
     private Tab exerciseTab;
     private LineChart<String, Number> weightChart;
@@ -83,7 +82,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
-     * Labels in the {@code .FXML} file contain text with the field name for convenience.
+     * Labels in the {@code .FXML} file contain text with the field name for
+     * convenience.
      */
     public PersonDetailsPanel() {
         super(FXML);
@@ -150,9 +150,10 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     /**
-     * Set fields with information from the person.
+     * Sets fields with information from the person.
      *
-     * @param person the Person object containing the information to update the fields with.
+     * @param person the Person object containing the information to update the
+     *               fields with.
      */
     public void update(Person person) {
         this.detailsPane.setVisible(true);
@@ -166,8 +167,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
         // Clear tags and set new ones
         this.tags.getChildren().clear();
         person.getTags().stream()
-            .sorted(Comparator.comparing(Tag::toString))
-            .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
+                .sorted(Comparator.comparing(Tag::toString))
+                .forEach(tag -> this.tags.getChildren().add(new Label(tag.toString())));
 
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = person.getLatestWeight();
         if (latestWeight.isPresent()) {
@@ -175,7 +176,7 @@ public class PersonDetailsPanel extends UiPart<Region> {
             String formattedDate = numericDate.format(DateTimeUtil.DATE_FORMATTER);
             this.weightDate.setText(WeightCommandMessages.WEIGHT_DATE_HEADER + formattedDate);
             this.weightValue.setText(WeightCommandMessages.WEIGHT_VALUE_HEADER
-                + latestWeight.get().getValue().toString() + " kg");
+                    + latestWeight.get().getValue().toString() + " kg");
         }
 
         this.height.setText(person.getHeight().getFormattedHeight());
@@ -209,13 +210,12 @@ public class PersonDetailsPanel extends UiPart<Region> {
             this.trackableFieldsTabPane.getTabs().add(this.exerciseTab);
 
             List<Exercise> sortedExercises = exercises.stream()
-                .sorted(Comparator.comparing(Exercise::getName))
-                .collect(Collectors.toList());
+                    .sorted(Comparator.comparing(Exercise::getName))
+                    .collect(Collectors.toList());
 
             for (Exercise exercise : sortedExercises) {
                 final String exerciseAttrDescStyle = "-fx-text-fill: white; -fx-font-size: 12px;";
-                final String exerciseAttrValueStyle =
-                    "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
+                final String exerciseAttrValueStyle = "-fx-background-color: #2E2E2E; -fx-padding: 2 5 2 5; -fx-text-fill: white; -fx-font-size: 12px;";
 
                 Label exerciseName = new Label(exercise.getName());
 
@@ -256,7 +256,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
             }
         }
 
-        // Bind manageability (presence) of node based on presence of value for optional fields
+        // Bind manageability (presence) of node based on presence of value for optional
+        // fields
         this.address.setVisible(!person.getAddress().getValue().isEmpty());
         this.email.setVisible(!person.getEmail().getValue().isEmpty());
         this.note.setVisible(!person.getNote().getValue().isEmpty());

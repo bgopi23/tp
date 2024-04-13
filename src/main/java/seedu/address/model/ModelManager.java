@@ -43,7 +43,8 @@ public class ModelManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
-    //=========== UserPrefs ==================================================================================
+    // =========== UserPrefs
+    // ==================================================================================
 
     @Override
     public void setUserPrefs(ReadOnlyUserPrefs userPrefs) {
@@ -78,7 +79,8 @@ public class ModelManager implements Model {
         this.userPrefs.setAddressBookFilePath(addressBookFilePath);
     }
 
-    //=========== AddressBook ================================================================================
+    // =========== AddressBook
+    // ================================================================================
 
     @Override
     public void setAddressBook(ReadOnlyAddressBook addressBook) {
@@ -123,7 +125,7 @@ public class ModelManager implements Model {
     }
 
     /**
-     * Initialize QR codes for all persons in the address book.
+     * Initializes QR codes for all persons in the address book.
      */
     public void initQrCodes() {
         for (Person person : this.addressBook.getPersonList()) {
@@ -131,10 +133,11 @@ public class ModelManager implements Model {
         }
     }
 
-    //=========== Filtered Person List Accessors =============================================================
+    // =========== Filtered Person List Accessors ===========
 
     /**
-     * Returns an unmodifiable view of the list of {@code Person} backed by the internal list of
+     * Returns an unmodifiable view of the list of {@code Person} backed by the
+     * internal list of
      * {@code versionedAddressBook}
      */
     @Override

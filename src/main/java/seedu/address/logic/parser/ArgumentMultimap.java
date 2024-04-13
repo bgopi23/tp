@@ -13,8 +13,10 @@ import seedu.address.logic.parser.exceptions.ParseException;
 /**
  * Stores mapping of prefixes to their respective arguments.
  * Each key may be associated with multiple argument values.
- * Values for a given key are stored in a list, and the insertion ordering is maintained.
- * Keys are unique, but the list of argument values may contain duplicate argument values, i.e. the same argument value
+ * Values for a given key are stored in a list, and the insertion ordering is
+ * maintained.
+ * Keys are unique, but the list of argument values may contain duplicate
+ * argument values, i.e. the same argument value
  * can be inserted multiple times for the same prefix.
  */
 public class ArgumentMultimap {
@@ -26,9 +28,11 @@ public class ArgumentMultimap {
 
     /**
      * Associates the specified argument value with {@code prefix} key in this map.
-     * If the map previously contained a mapping for the key, the new value is appended to the list of existing values.
+     * If the map previously contained a mapping for the key, the new value is
+     * appended to the list of existing values.
      *
-     * @param prefix   Prefix key with which the specified argument value is to be associated
+     * @param prefix   Prefix key with which the specified argument value is to be
+     *                 associated
      * @param argValue Argument value to be associated with the specified prefix key
      */
     public void put(Prefix prefix, String argValue) {
@@ -46,7 +50,7 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Gets  Gets the value associated with the prefix or an empty string
+     * Gets the value associated with the prefix or an empty string
      *
      * @param prefix the associated prefix
      * @return a string value or empty string
@@ -56,7 +60,8 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Gets the value associated with the prefix or a preamble if the value does not exist
+     * Gets the value associated with the prefix or a preamble if the value does not
+     * exist
      *
      * @param prefix the associated prefix
      * @return the associated value or preamble
@@ -77,8 +82,10 @@ public class ArgumentMultimap {
 
     /**
      * Returns all values of {@code prefix}.
-     * If the prefix does not exist or has no values, this will return an empty list.
-     * Modifying the returned list will not affect the underlying data structure of the ArgumentMultimap.
+     * If the prefix does not exist or has no values, this will return an empty
+     * list.
+     * Modifying the returned list will not affect the underlying data structure of
+     * the ArgumentMultimap.
      */
     public List<String> getAllValues(Prefix prefix) {
         if (!this.argMultimap.containsKey(prefix)) {
@@ -88,7 +95,8 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Returns the preamble (text before the first valid prefix). Trims any leading/trailing spaces.
+     * Returns the preamble (text before the first valid prefix). Trims any
+     * leading/trailing spaces.
      */
     public String getPreamble() {
         return this.getValue(new Prefix("")).orElse("");
@@ -102,13 +110,14 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Throws a {@code ParseException} if any of the prefixes given in {@code prefixes} appeared more than
+     * Throws a {@code ParseException} if any of the prefixes given in
+     * {@code prefixes} appeared more than
      * once among the arguments.
      */
     public void verifyNoDuplicatePrefixesFor(Prefix... prefixes) throws ParseException {
         Prefix[] duplicatedPrefixes = Stream.of(prefixes).distinct()
-            .filter(prefix -> this.argMultimap.containsKey(prefix) && this.argMultimap.get(prefix).size() > 1)
-            .toArray(Prefix[]::new);
+                .filter(prefix -> this.argMultimap.containsKey(prefix) && this.argMultimap.get(prefix).size() > 1)
+                .toArray(Prefix[]::new);
 
         if (duplicatedPrefixes.length > 0) {
             throw new ParseException(Messages.getErrorMessageForDuplicatePrefixes(duplicatedPrefixes));
@@ -116,17 +125,19 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Checks if the argument multimap contains a non-empty value for any of the specified prefixes.
+     * Checks if the argument multimap contains a non-empty value for any of the
+     * specified prefixes.
      *
      * @param prefixes the prefixes to check for argument values
-     * @return {@code true} if at least one of the specified prefixes has a non-empty argument value,
-     *      {@code false} otherwise
+     * @return {@code true} if at least one of the specified prefixes has a
+     *         non-empty argument value,
+     *         {@code false} otherwise
      */
     public boolean hasArgumentValueForPrefixes(Prefix... prefixes) {
         Prefix[] prefixesWithValues = Stream.of(prefixes).distinct()
-            .filter(prefix -> this.argMultimap.containsKey(prefix) && !this.argMultimap.get(prefix).isEmpty()
-                && !this.argMultimap.get(prefix).stream().allMatch(String::isEmpty))
-            .toArray(Prefix[]::new);
+                .filter(prefix -> this.argMultimap.containsKey(prefix) && !this.argMultimap.get(prefix).isEmpty()
+                        && !this.argMultimap.get(prefix).stream().allMatch(String::isEmpty))
+                .toArray(Prefix[]::new);
 
         return prefixesWithValues.length > 0;
     }
@@ -139,7 +150,8 @@ public class ArgumentMultimap {
     }
 
     /**
-     * Checks if any number of the prefixes specified is present in the ArgumentMultimap object
+     * Checks if any number of the prefixes specified is present in the
+     * ArgumentMultimap object
      *
      * @param prefixes to check
      * @return true if prefix/s present and false otherwise
