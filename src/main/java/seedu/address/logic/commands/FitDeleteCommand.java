@@ -27,8 +27,8 @@ public class FitDeleteCommand extends Command {
     /**
      * Constructs a new FitDeleteCommand instance.
      *
-     * @param index        The index of the person in the filtered person list to delete the exercise from
-     * @param exerciseName The exercise name to be deleted from the person
+     * @param index The index of the person in the filtered person list to delete the exercise from
+     * @param exerciseName The optional exercise name to be deleted from the person
      */
     public FitDeleteCommand(Index index, Optional<String> exerciseName) {
         requireNonNull(index);
