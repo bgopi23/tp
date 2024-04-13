@@ -1,11 +1,11 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.logic.messages.DeleteCommandMessages.MESSAGE_INVALID_INDEX_DELETE;
+import static seedu.address.logic.messages.DeleteCommandMessages.MESSAGE_NO_INDEX_DELETE;
 import static seedu.address.logic.parser.ParserUtil.parseIndex;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.messages.DeleteCommandMessages;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -20,17 +20,14 @@ public class DeleteCommandParser implements Parser<DeleteCommand> {
      */
     public DeleteCommand parse(String args) throws ParseException {
         if (args.isEmpty()) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_NO_INDEX, DeleteCommandMessages.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_NO_INDEX_DELETE);
         }
 
         try {
             Index index = parseIndex(args);
             return new DeleteCommand(index);
         } catch (ParseException pe) {
-            throw new ParseException(
-                    String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-                            DeleteCommandMessages.MESSAGE_USAGE), pe);
+            throw new ParseException(MESSAGE_INVALID_INDEX_DELETE, pe);
         }
 
     }

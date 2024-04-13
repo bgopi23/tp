@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.messages.AddressBookParserMessages.MESSAGE_PARSE_EXCEPTION;
+import static seedu.address.logic.messages.HelpCommandMessages.INVALID_COMMAND_FORMAT_HELP;
 import static seedu.address.logic.messages.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.logging.Logger;
@@ -21,6 +22,7 @@ import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.FitAddCommandMessages;
 import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
+import seedu.address.logic.messages.ListCommandMessages;
 import seedu.address.logic.messages.NoteCommandMessages;
 import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -37,16 +39,16 @@ public class AddressBookParser {
     private static final Logger logger = LogsCenter.getLogger(AddressBookParser.class);
 
     /**
-     * Parses user input into command for execution.
+     * Parses user's input into command for execution.
      *
      * @param userInput full user input string
-     * @return the command based on the user input
-     * @throws ParseException if the user input does not conform the expected format
+     * @return the command based on the user's input
+     * @throws ParseException if the user's input does not conform the expected format
      */
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommandMessages.MESSAGE_USAGE));
+            throw new ParseException(INVALID_COMMAND_FORMAT_HELP);
         }
 
         final String commandWord = matcher.group("commandWord");
@@ -78,7 +80,7 @@ public class AddressBookParser {
         case WeightCommandMessages.COMMAND_WORD:
             return new WeightCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case ListCommandMessages.COMMAND_WORD:
             return new ListCommand();
 
         case ExitCommandMessages.COMMAND_WORD:
@@ -94,7 +96,7 @@ public class AddressBookParser {
             return new FitDeleteCommandParser().parse(arguments);
 
         default:
-            logger.finer("This user input caused a ParseException: " + userInput);
+            logger.finer(MESSAGE_PARSE_EXCEPTION + userInput);
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }
     }

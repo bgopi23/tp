@@ -14,6 +14,11 @@ public class ClearCommand extends Command {
 
     private final boolean confirmed;
 
+    /**
+     * Constructs a ClearCommand object to clear the person list.
+     *
+     * @param confirmed confirmation that the user wants to clear the list
+     */
     public ClearCommand(boolean confirmed) {
         this.confirmed = confirmed;
     }

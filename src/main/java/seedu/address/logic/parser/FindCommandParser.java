@@ -81,8 +81,8 @@ public class FindCommandParser implements Parser<FindCommand> {
 
         SearchPredicate<?> tagsPredicate = argMultimap.contains(PREFIX_TAG)
                 ? argMultimap.getAllValues(PREFIX_TAG).toString().equals("[]")
-                    ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
-                    : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
+                        ? new TagSetContainsAllTagsPredicate(EMPTY_TAG_SET)
+                        : new TagSetContainsAllTagsPredicate(ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG)))
                 : alwaysTruePredicate;
 
         CombinedPredicates predicates = new CombinedPredicates(namePredicate, phonePredicate, emailPredicate,

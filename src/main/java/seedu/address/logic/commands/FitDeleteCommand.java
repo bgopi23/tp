@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
 
 import java.util.HashSet;
 import java.util.List;
@@ -40,12 +42,13 @@ public class FitDeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.index.getZeroBased();
 
-        if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE);
+        if (listIndex >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_FITDELETE);
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        Person personToEdit = lastShownList.get(listIndex);
         Person editedPerson = getEditedPerson(personToEdit);
 
         model.setPerson(personToEdit, editedPerson);
@@ -69,7 +72,7 @@ public class FitDeleteCommand extends Command {
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
             if (!updatedExercises.contains(exerciseToDelete)) {
-                throw new CommandException(String.format(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST,
+                throw new CommandException(String.format(MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST,
                     exerciseToDelete.getName()));
             }
 

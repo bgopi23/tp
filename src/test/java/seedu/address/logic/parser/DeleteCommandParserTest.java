@@ -28,7 +28,7 @@ public class DeleteCommandParserTest {
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(this.parser, "a", String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+        assertParseFailure(this.parser, "a", String.format(Messages.MESSAGE_INVALID_INDEX,
                 DeleteCommandMessages.MESSAGE_USAGE));
     }
 

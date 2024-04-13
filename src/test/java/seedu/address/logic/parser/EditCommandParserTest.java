@@ -78,11 +78,11 @@ public class EditCommandParserTest {
     public void parse_invalidPreamble_failure() {
         // negative index
         assertParseFailure(this.parser, "-5" + NAME_DESC_AMY,
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, EditCommandMessages.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_INDEX, EditCommandMessages.MESSAGE_USAGE));
 
         // zero index
         assertParseFailure(this.parser, "0" + NAME_DESC_AMY,
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, EditCommandMessages.MESSAGE_USAGE));
+                String.format(Messages.MESSAGE_INVALID_INDEX, EditCommandMessages.MESSAGE_USAGE));
 
         // invalid arguments being parsed as preamble
         assertParseFailure(this.parser, "1 random",

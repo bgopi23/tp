@@ -121,8 +121,10 @@ public class FitAddCommandParserTest {
         // abs exercises
         assertParseSuccess(this.parser, "1" + " " + PREFIX_EXERCISE_ABS,
             new FitAddCommand(INDEX_FIRST_PERSON, FitAddCommand.DEFAULT_ABS_EXERCISES));
+    }
 
-        // all exercises
+    @Test
+    public void parse_defaultExercisePrefixAll_success() {
         Set<ExerciseToAdd> allExercises = new HashSet<>();
         allExercises.addAll(FitAddCommand.DEFAULT_ARM_EXERCISES);
         allExercises.addAll(FitAddCommand.DEFAULT_LEG_EXERCISES);
