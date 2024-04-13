@@ -261,6 +261,7 @@ You must either specify an exercise name, or use one or more of the default supp
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+<a id="fitadd-overwrite-warning"></a>
 
 If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied
 exercise value(s). Exercise values that are not specified will remain unchanged.
@@ -287,23 +288,56 @@ exercise value(s). Exercise values that are not specified will remain unchanged.
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
+<a id="fitadd-prefix-warning"></a>
 
 Using the default supported prefixes will overwrite exercises with the predefined set of values, if any of those predefined
 default exercises already exists for the client.
 
-For example, if client with `INDEX` 1 already has an exercise named `push-ups` with `sets`: 20, `reps`: 5 and `break`: 60,
-entering the command `fitadd 1 /arms`, will overwrite the `push-ups` exercise values to `sets`: 3, `reps`: 15 and `break`: 90.
-
-As per the default exercises table above.
+> **For example:**
+>
+> Assume the following exercises already exists in the client at index `1`
+>
+> ![fitadd-push-ups](images/FitaddPushups.png)
+>
+> * `fitadd 1 /arms`
+>   * `bicep curls` added with default values.
+>   * `push-ups` updated to `Sets`: 3, `Reps`: 15, `Break between sets`: 90.
+>   * `tricep dips` added with default values.
+> ![fitadd-arms](images/FitaddArms.png)
 </div>
 
 Examples:
 
-* `fitadd 1 n/burpees` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, default repetition of 1 and default 0 seconds break time between sets.
-* `fitadd 1 n/burpees r/5` - Adds or overwrites the `burpees` exercise of the 1st client with a default set of 1, repetitions of 5 and default 0 seconds break time between sets.
-* `fitadd 1 n/burpees s/3 r/5 b/30` - Adds or overwrites the `burpees` exercise of the 1st client with sets of 3, repetitions of 5 and 30 seconds break time between sets.
-* `fitadd 2 /arms` - Adds or overwrites a default set of exercises from the `arms` category to the 2nd client.
-* `fitadd 2 /arms /legs` - Adds or overwrites a default set of exercises from the `arms` and `legs` category to the 2nd client.
+* `fitadd 1 n/burpees` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 1 (default value).
+  * `Reps`: 1 (default value).
+  * `Break between sets`: 0 seconds (default value).
+
+  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
+
+* `fitadd 1 n/burpees r/5` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 1 (default value).
+  * `Reps`: 5 (specified value).
+  * `Break between sets`: 0 seconds (default value).
+
+  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
+
+* `fitadd 1 n/burpees s/3 r/5 b/30` - Adds `burpees` exercise to the client at index `1` with the following values:
+  * `Sets`: 3 (specified value).
+  * `Reps`: 5 (specified value).
+  * `Break between sets`: 30 seconds (specified value).
+
+  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
+
+* `fitadd 2 /arms` - Adds a default set of exercises from the `arms` category to the client at index `2`.
+
+  If any of the exercises within the `arms` category already exists, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
+
+
+* `fitadd 2 /arms /legs` - Adds a default set of exercises from the `arms` and `legs` category to the client at index `2`.
+
+  If any of the exercises within the `arms` or `legs` category already exists, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
+
 <hr>
 
 ### Deleting exercise(s) of clients : `fitdelete`
