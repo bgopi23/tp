@@ -3,7 +3,6 @@ package seedu.address.ui;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Comparator;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -11,7 +10,6 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -287,19 +285,17 @@ public class PersonDetailsPanel extends UiPart<Region> {
     }
 
     private void updateWeightTab() {
+        this.initializeWeightChart();
+
         Optional<Map.Entry<LocalDateTime, Weight>> latestWeight = this.person.getLatestWeight();
 
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
+            this.weightTab = this.getWeightTab();
+            this.weightTab.setContent(this.weightChart);
 
             this.weightChart.getData().clear();
             XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
-
-            HashSet<String> weightDates = new HashSet<>();
-            weightSeries.getData().forEach(d -> weightDates.add(d.getXValue()));
-
-            this.weightXAxis.setCategories(FXCollections.observableArrayList(weightDates));
-
             this.weightChart.getData().add(weightSeries);
         }
     }
