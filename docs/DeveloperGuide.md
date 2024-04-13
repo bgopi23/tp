@@ -293,19 +293,44 @@ We can refer to the sequence diagram [here](#interacting-with-the-note-command) 
 
 For more details on how the `height` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
-### Searching Clients
-Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
+### Finding Clients
+Searching of clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
 
 The sequence diagram below shows the logic flow of executing the command `find n/wendy`.
 
 ![FindCommandSequenceDiagram-Logic](images/FindCommandSequenceDiagram-Logic.png)
 
-Note that the main searching logic is defined by creating a `Predicate`, which in turn calls the `isMatch()` method of the attribute.
+Note that the main searching logic is defined by creating a `Predicate` (`NameContainsSubstringPredicate` in this example), which in turn calls the `isMatch()` method of the attribute.
+
+`CombinedPredicates` is then used to allow for finding clients using multiple fields. Clients will only be matched if it passes the test for all specified `SearchPredicates` in `CombinedPredicates`. This is defined in the `FindCommandParser` class.
+
+#### Defining new methods of finding clients
+All attributes of a `Person` has been abstracted into an `Attribute` class. This `Attribute` class defines an abstract `isMatch()` method, thus, any attributes of a `Person` (new or existing), would be required to implement the `isMatch()` method to define how the attribute can be searched using the `find` command.
+
+This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
 1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g `Name::isMatch()`)
-1. Create a new class that extends `Predicate` (e.g `NameContainsSubstringPredicate`)
+1. Create a new class that extends `SearchPredicate` (e.g `NameContainsSubstringPredicate`)
 1. Update the `parse()` method in `FindCommandParser` to uses the new predicate
+
+#### Implementation Rationale
+We believe that filtering clients is one of the most important features of the application. With a large number of clients in the application, this feature will allow users to easily filter clients based on any information they have saved.
+
+Additionally, users have different requirements when searching for a client in FitBook. For example, some might simply wish to filter clients to by name, while others might wish to filter all clients within a certain weight range. This implementation of the `find` command provides flexibility to the user.
+
+For developers, the usage of the `SearchPredicate` and `CombinedPredicates` class, along with the enforcing of the `isMatch()` method within each attribute simplifies the process of defining how each attribute can be searched. Existing search methods can be easily modified by changing the implementation of the `isMatch()` method within the attribute while guaranteeing new attributes to be searchable as well.
+
+#### Alternative Implementation
+An alternative implementation of the `find` command was to simply create a `Predicate` for each attribute, defining the search methodology within the predicate itself.
+
+While this might be a simpler implementation, it has many restrictions such as:
+* Developers are required to have in-depth knowledge of how `Predicates` work.
+* Newly defined attributes are not guaranteed to be searchable since defining a `Predicate` for that attribute cannot be enforced.
+* Higher chance of regression of find feature if developer fails to properly integrate new and existing `Predicates`.
+* Messier code base.
+
+Due to the reasons stated above, we decided that the current implementation of the find command using the `SearchPredicate` class and `isMatch()` methods to better fit our vision for the feature, providing greater functionality to users while simplifing the development process for developers.
 
 ### Adding or editing a client
 
@@ -328,7 +353,7 @@ A great deal of consideration was made regarding how the custom exercises should
 The following data structures were taken into consideration during the brainstorming and design process.
 
 1. ArrayList
-1. Plain JSON without deserialization 
+1. Plain JSON without deserialization
 1. Java Set
 
 The following factors were taken into consideration when selecting a suitable data structure.
@@ -347,7 +372,7 @@ are considered duplicates since an exercise has multiple fields.
 
 To keep it simple for our initial iterations, we decided to only use lower-cased exercise names to determine duplicates.
 However, this may change in the future. For example, the same exercise may have different numbers of sets, reps, and break times for different
-days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method 
+days of the week. To modify the detection of duplicate exercises, we can simply modify the logic for the `equals` method
 in our `Exercise` class, this is made possible because of our decision to store the exercises in a Java `Set`.
 
 ### Specialised error messages for commands
