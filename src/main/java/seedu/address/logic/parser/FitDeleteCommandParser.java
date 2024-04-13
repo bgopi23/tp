@@ -1,6 +1,11 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
+import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_ALL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_FITDELETE_DELETE_ALL;
@@ -9,8 +14,6 @@ import java.util.Optional;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.FitDeleteCommand;
-import seedu.address.logic.messages.FitDeleteCommandMessages;
-import seedu.address.logic.messages.Messages;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
@@ -24,14 +27,13 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
 
     private void verifyClientIndexExists(ArgumentMultimap argumentMultimap) throws ParseException {
         if (argumentMultimap.isPreambleEmpty()) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_NO_INDEX_FITDELETE);
+            throw new ParseException(MESSAGE_NO_INDEX_FITDELETE);
         }
     }
 
     private void verifyClientIndexSingleSegment(ArgumentMultimap argumentMultimap) throws ParseException {
-        if (argumentMultimap.getPreambleSegmentNumber() != 1) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
+        if (!argumentMultimap.hasOnlyOnePreambleSegment()) {
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE);
         }
     }
 
@@ -40,7 +42,7 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
         } catch (ParseException pe) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE, pe);
+            throw new ParseException(MESSAGE_INVALID_INDEX_FITDELETE, pe);
         }
 
         return index;
@@ -53,21 +55,20 @@ public class FitDeleteCommandParser implements Parser<FitDeleteCommand> {
     private void verifyNoConflictingPrefixes(boolean containsPrefixExerciseName,
                                              boolean containsPrefixExerciseDeleteAll) throws ParseException {
         if (containsPrefixExerciseName && containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_CONCURRENT_PREFIX);
+            throw new ParseException(MESSAGE_CONCURRENT_PREFIX);
         }
     }
 
     private void verifyNoMissingPrefixes(boolean containsPrefixExerciseName, boolean containsPrefixExerciseDeleteAll)
             throws ParseException {
         if (!containsPrefixExerciseName && !containsPrefixExerciseDeleteAll) {
-            throw new ParseException(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
+            throw new ParseException(MESSAGE_EXERCISE_NAME_PARAMETER_AND_ALL_PREFIX_MISSING);
         }
     }
 
     private void verifyNoArgumentValueForPrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
         if (argumentMultimap.hasArgumentValueForPrefixes(PREFIX_FITDELETE_DELETE_ALL)) {
-            throw new ParseException(
-                String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, FitDeleteCommandMessages.MESSAGE_USAGE));
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITDELETE);
         }
     }
 
