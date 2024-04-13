@@ -89,7 +89,7 @@ Java is a versatile programming language used for developing various application
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
 
-   * `add n/John p/98765432` Adds a client named
+   * `add n/John p/98765432` : Adds a client named
    `John Doe` with the number `98765432` to FitBook.
 
    * `clear` : Clears all clients from the list.
@@ -119,7 +119,7 @@ Java is a versatile programming language used for developing various application
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
-* Parameters can be in any order.<br>
+* Parameters can be in any order (unless otherwise specified).<br>
   e.g. if the command specifies `n/NAME p/PHONE_NUMBER`, `p/PHONE_NUMBER n/NAME` is also acceptable.
 
 * Extraneous parameters for commands that do not take in parameters (such as `help`, `list`, `exit` and `clear`) will be ignored.<br>
