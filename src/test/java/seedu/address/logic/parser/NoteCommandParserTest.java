@@ -6,7 +6,7 @@ import static seedu.address.logic.commands.CommandTestUtil.EDIT_TAG_TRAILING_WHI
 import static seedu.address.logic.commands.CommandTestUtil.EDIT_TAG_WITH_MORE_WORDS;
 import static seedu.address.logic.commands.CommandTestUtil.NAME_DESC_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NOTE_NOT_EMPTY;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX;
+import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_INDEX;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
@@ -29,7 +29,7 @@ public class NoteCommandParserTest {
     public void parse_missingParts_failure() {
         // no index specified (note John)
         assertParseFailure(this.parser, VALID_NOTE_NOT_EMPTY,
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                String.format(Messages.MESSAGE_INVALID_INDEX,
                         NoteCommandMessages.MESSAGE_USAGE));
 
         // no index and no field specified (note)
@@ -41,15 +41,15 @@ public class NoteCommandParserTest {
     public void parse_invalidIndex_failure() {
         // negative index (note -5 n/John)
         assertParseFailure(this.parser, "-5" + NAME_DESC_AMY,
-                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
         // zero index (note 0 n/John)
         assertParseFailure(this.parser, "0" + NAME_DESC_AMY,
-                String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, NoteCommandMessages.MESSAGE_USAGE));
+                String.format(MESSAGE_INVALID_INDEX, NoteCommandMessages.MESSAGE_USAGE));
 
         // invalid index (note -5)
         assertParseFailure(this.parser, "-5",
-                String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
+                String.format(Messages.MESSAGE_INVALID_INDEX,
                         NoteCommandMessages.MESSAGE_USAGE));
     }
 

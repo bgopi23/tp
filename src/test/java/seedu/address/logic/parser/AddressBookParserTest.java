@@ -25,6 +25,7 @@ import seedu.address.logic.messages.EditCommandMessages;
 import seedu.address.logic.messages.ExitCommandMessages;
 import seedu.address.logic.messages.FindCommandMessages;
 import seedu.address.logic.messages.HelpCommandMessages;
+import seedu.address.logic.messages.ListCommandMessages;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.predicates.AlwaysTruePredicate;
@@ -101,8 +102,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(this.parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(this.parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertTrue(this.parser.parseCommand(ListCommandMessages.COMMAND_WORD) instanceof ListCommand);
+        assertTrue(this.parser.parseCommand(ListCommandMessages.COMMAND_WORD + " 3") instanceof ListCommand);
     }
 
     @Test
