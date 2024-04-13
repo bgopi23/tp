@@ -185,7 +185,7 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
-* Refer to the list of valid parameters of each input for more details.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * When no value is specified after a prefix, the value of that prefix will be removed from the client. (e.g. `edit 1 nt/` removes the note from the client at index 1).
     * Since WEIGHT can store multiple historical values, specifying an empty weight prefix removes the latest weight value from the client. Otherwise, the latest weight value will be replaced by the specified weight in this command.
 * HEIGHT and WEIGHT only take in one value each. For example, the following commands are invalid
@@ -197,30 +197,33 @@ Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGH
 * You can remove all the client’s tags by typing `t/` without
     specifying any tags after it.
 
+<div markdown="block" class="alert alert-warning">:warning: **Note:**
+FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
+</div>
+
+
 Examples:
-*  `edit 1 p/91234567 e/johndoe@example.com` Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
-*  `edit 2 n/Betsy Crower t/` Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
+*  `edit 1 p/91234567 e/johndoe@example.com` - Edits the phone number and email address of the 1st client to be `91234567` and `johndoe@example.com` respectively.
+*  `edit 2 n/Betsy Crower t/` - Edits the name of the 2nd client to be `Betsy Crower` and clears all existing tags.
 <hr>
 
 ### Adding a note to a client : `note`
 
 Format: `note INDEX [NOTE] `
 
-* Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * Existing note will be updated to the note specified.
 * If no note is given, the note for the client at the specified index will be deleted.
 
 > While this can also be done using the `edit` command, this `note` command serves as a faster way for users to directly modify a note.
-
-<div markdown="block" class="alert alert-warning">:warning: **Note:**
-FitBook does not allow any edits that might result in [duplicate clients](#duplicate-clients).
-</div>
 
 Examples:
 
 * `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
 * `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
 
+### `/edit` Prefix
 If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be replaced with the existing note after pressing the `Enter` key. This provides greater convenience to the user when editing an existing note.
 
 > For example: Client at index 1 has the note "Wants to gain muscle".
@@ -232,7 +235,8 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be
 
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
-* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* The index **must be a positive integer** 1, 2, 3, …​
 * `EXERCISE_NAME` is **case-insensitive**.
 * Overwrites the specified exercise and its values if the exercise already exists for the client.
 * An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
@@ -259,7 +263,27 @@ You must either specify an exercise name, or use one or more of the default supp
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
 If you are adding an exercise that already exists for the client, the exercise will be overwritten with the newly supplied
-exercise value(s), or a default set of exercise values (ie. `sets`: 1, `reps`: 1, `break`: 0) for the exercise value(s) that are not supplied.
+exercise value(s). Exercise values that are not specified will remain unchanged.
+
+> **For example:**
+>
+> Assume the following exercise already exists in the client at index `1`.
+>
+> ![fitadd-overwrite-prerequisite](images/FitaddOverwritePrerequisite.png)
+>
+> * `fitadd 1 n/squats`
+>   * Does nothing (All values unchanged).
+> ![fitadd-overwrite-prerequisite](images/FitaddOverwritePrerequisite.png)
+> * `fitadd 1 n/squats s/1`
+>   * `Sets` updated to `1`.
+>   * `Reps` remains unchanged at `15` .
+>   * `Break between sets` remains unchanged at `90 seconds`.
+> ![fitadd-overwrite-sets](images/FitaddOverwriteSets.png)
+> * `fitadd 1 n/squats r/10 b/60`
+>   * `Sets` remains changed at `10`.
+>   * `Reps` updated to `10`.
+>   * `Break between sets` updated to `60 seconds`.
+> ![fitadd-overwrite-reps-break](images/FitaddOverwriteRepsBreak.png)
 </div>
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
