@@ -131,10 +131,14 @@ Java is a versatile programming language used for developing various application
 ### Viewing help : `help`
 
 Launches the help menu depicted below. <br>
-Clicking `Open User Guide` leads to the User Guide website.
+Clicking `Open User Guide` will open the User Guide website on your default browser.
 
 ![help message](images/helpMessage.png)
 Format: `help`
+
+> Due to a limitation on Linux machines, the `Open User Guide` functionality is not working. Therefore, linux users will be greeted with a `Copy URL` button instead.
+>
+> ![linux-copy-url-message](images/helpMessageLinux.png)
 
 <hr>
 
