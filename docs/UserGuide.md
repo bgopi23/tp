@@ -182,7 +182,6 @@ Edits information tagged to an existing client.
 Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/WEIGHT] [h/HEIGHT] [nt/NOTE] [t/TAG]…​`
 
 * Edits the clients at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
 * At least one of the optional fields must be provided.
 * Existing values will be updated to the input values.
 * Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
@@ -212,7 +211,7 @@ Examples:
 Format: `note INDEX [NOTE] `
 
 * Edits the note of the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Existing note will be updated to the note specified.
 * If no note is given, the note for the client at the specified index will be deleted.
 
@@ -223,12 +222,14 @@ Examples:
 * `note 1 History of asthma` - Changes the note of the 1st client to `History of asthma`.
 * `note 2 Previously sprained both ankles` - Changes the note of the 2nd client to `Previously sprained both ankles`.
 
-### `/edit` Prefix
 If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be replaced with the existing note after pressing the `Enter` key. This provides greater convenience to the user when editing an existing note.
 
-> For example: Client at index 1 has the note "Wants to gain muscle".
+Format: `note INDEX /edit`
+
+> **For example:**
+> Assume client at index `1` has the note "Wants to gain muscle".
 >
-> Executing the command `note 1 /edit` will replace the contents of the command box with `note 1 Wants to gain muscle`.
+> * `note 1 /edit` - Replaces the contents of the command box with `note 1 Wants to gain muscle`.
 <hr>
 
 ### Adding or overwriting exercise(s) of clients : `fitadd`
@@ -236,8 +237,8 @@ If `/edit` is supplied instead of a note, (e.g. `note 1 /edit`), `/edit` will be
 Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`
 
 * Adds the specified exercise to the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
-* The index **must be a positive integer** 1, 2, 3, …​
 * `EXERCISE_NAME` is **case-insensitive**.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Overwrites the specified exercise and its values if the exercise already exists for the client.
 * An exercise is deemed to already exist if the case-insensitive user-supplied exercise name completely matches an existing exercise name of the client.
 
@@ -344,14 +345,25 @@ Examples:
 
 Format: `fitdelete INDEX n/EXERCISE_NAME`
 
-* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * `EXERCISE_NAME` is **case-insensitive**.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
+
+
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+
+If multiple `n/` prefixes are specified, only the last value will be deleted. All previous values will be ignored.
+
+> **For example:**
+> * `fitdelete 1 n/burpees n/squats` - Deletes `squats` from the client at index `1`. `burpees` (if exists) will remain unchanged.
+</div>
+
 
 Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
 
 Format: `fitdelete INDEX /all`
 
-* Supplying the `/all` prefix more than once will be treated as if it was only supplied once.
+* Supplying the `/all` prefix more than once will result in an invalid command.
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
@@ -360,27 +372,27 @@ You must either specify an exercise name or the `/all` prefix, but not both toge
 
 Examples:
 
-* `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the 1st client.
-* `fitdelete 2 /all` - Deletes all exercise(s) from the 2nd client.
+* `fitdelete 1 n/burpees` - Deletes the exercise with name `burpees` from the client at index `1`.
+* `fitdelete 2 /all` - Deletes all exercise(s) from the client at index `2`.
 <hr>
 
 ### Adding or removing weight of a client : `weight`
 
 Format: `weight INDEX [WEIGHT] `
 
-* Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
+* Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
   * For example, `weight 1 85 95` only adds the weight value of `85` to the first client in the list. The value of `95` will be ignored.
 * If no weight value is given, or the weight value entered is 0, the latest weight for the client at the specified index will be deleted.
-* Refer to the list of valid parameters of each input for more details.
 
 > While the `edit` command allows one to **edit** a client's latest weight value, this `weight` command serves as a way for users to **add** a client's weight.
 
 Examples:
 
-* `weight 1 90` - Adds a new weight value of 90 to the client at index 1.
-* `weight 2` - Deletes the latest weight value of the client at index 2.
+* `weight 1 90` - Adds a new weight value of 90 to the client at index `1`.
+* `weight 2` - Deletes the latest weight value of the client at index `2`.
 
 <hr>
 
@@ -396,7 +408,7 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * When an empty input is specified for an optional field, only users that have value(s) available for that field will be shown. (e.g. `find w/` returns all clients that have at least one weight value associated with them).
 * Multiple fields can be searched in one command.
     * All fields must match (e.g `find n/Wendy p/91234567` will match with a client whose name **contains** `wendy` and phone number **contains** `91234567`)
-* All fields except `TAG` will be matched based on substring (e.g `Wen` will match `Wendy`)
+* All fields except `TAG`, `WEIGHT` AND `HEIGHT` will be matched based on substring (e.g `Wen` will match `Wendy`)
 
 <div markdown="block" class="alert alert-warning">:warning: **Take note:**
 * Unlike other fields, `TAG` must be an exact match (case-insensitive)
@@ -411,13 +423,13 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 * If no prefix is specified to search for a client's name, it must be the first field to search.
     * e.g. `find t/friends roy` will result in an error.
 * If name prefix is specified it will take precedence over the non-prefixed argument.
-    * e.g. `find roys n/roy` will use n/roy to search for a client's name instead of roys.
+    * e.g. `find roys n/roy` will use `n/roy` to search for a client's name instead of `roys`.
 </div>
 
 
 Examples:
-* `find n/Wendy` returns `Wendy Son` and `Wendy Kim`
-* `find n/Wendy t/Lover` returns `Wendy` (`Name` contains `Wendy` and is tagged with `Lover`)
+* `find n/Wendy` - Finds all clients whose name contains `Wendy`
+* `find n/Wendy t/Lover` - Finds all clients who name contains `Wendy` and is tagged with `Lover`
 
 <hr>
 
@@ -427,15 +439,14 @@ Deletes the specified client from FitBook.
 
 Format: `delete INDEX`
 
-* Deletes the client at the specified `INDEX`.
-* The index refers to the index number shown in the displayed client list.
-* The index **must be a single positive integer** (e.g. 1, 2, 3…​).
+* Deletes the client at the specified `INDEX`. The index refers to the index number shown in the displayed client list.
+* Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Anything after `delete` is treated as the index.
 * The index cannot be followed by any text (`delete 1 2` will be regarded as an invalid index).
 
 Examples:
-* `list` followed by `delete 2` deletes the second client in the list.
-* `find Betsy` followed by `delete 1` deletes the first client in the results of the `find` command.
+* `list` followed by `delete 2` - Deletes the second client in the list.
+* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e Deletes the first client whose name contains `Betsy`).
 
 <hr>
 
@@ -543,18 +554,18 @@ While most modern smartphones are able to scan QR codes with the default camera 
 
 | Command                                                           | Format, Examples                                                                                                                                                                                                                       |
 |-------------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| [**add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br><br>e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas w/70 h/170 t/friend t/colleague` |
+| [**add**](#adding-a-client--add)                                  | `add n/NAME p/PHONE_NUMBER [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​` <br><br>Example: <br><li>`add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 nt/likes pizzas w/70 h/170 t/friend t/colleague`</li> |
 | [**clear**](#clearing-all-entries--clear)                         | `clear`                                                                                                                                                                                                                                |
-| [**delete**](#deleting-a-client--delete)                          | `delete INDEX`<br><br>e.g. `delete 3`                                                                                                                                                                                                  |
-| [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
+| [**delete**](#deleting-a-client--delete)                          | `delete INDEX`<br><br>Example: <br><li> `delete 3` </li>                                                                                                                                                                                                  |
+| [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>Example: <br> <li> `edit 2 n/James Lee e/jameslee@example.com` </li>                                                                         |
 | [**exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                                                                 |
-| [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>e.g. `find n/Alex w/40,80 nt/Wants to build muscle t/family`                                                                     |
-| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br><br>e.g. `fitadd 1 n/burpees s/3 r/5 b/30`<br>`fitadd 1 /arms /abs`               |
-| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br><br>e.g. `fitdelete 1 n/burpees`<br>`fitdelete 1 /all`                                                                                                                                   |
+| [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>Example: <br> <li> `find n/Alex w/40,80 nt/Wants to build muscle t/family` </li>                                                                     |
+| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`<br><br>Example: <br> <li> `fitadd 1 n/burpees s/3 r/5 b/30`</li><br><br>`fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`<br><br>Example: <br><li>`fitadd 1 /arms /abs`</li>               |
+| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX n/EXERCISE_NAM`<br><br>Example: <br> <li> `fitdelete 1 n/burpees`</li><br><br> `fitdelete INDEX /all` <br><br> Example: <br><li>`fitdelete 1 /all` </li>                                                                                                                                   |
 | [**list**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                                                                 |
 | [**help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                                                                 |
-| [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE] [/edit]`<br><br>e.g. `note 2 Sprained right ankle in the past`<br>`note 1 /edit`                                                                                                                                    |
-| [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> e.g. `weight 3 70`                                                                                                                                                                                     |
+| [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE]` <br><br> Example: <br><li> `note 2 Sprained right ankle in the past`</li> <br><br>`note INDEX /edit`<br><br>Example: <br> <li>`note 1 /edit`</li>                                                                                                                                    |
+| [**weight**](#adding-or-removing-weight-of-a-client--weight)      | `weight INDEX [WEIGHT]`<br><br> Example: <br> <li> `weight 3 70`</li>                                                                                                                                                                                   |
 
 ## Parameter Constraints
 
