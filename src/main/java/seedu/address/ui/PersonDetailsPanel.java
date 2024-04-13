@@ -171,7 +171,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
         Float maxWeight = Float.MIN_VALUE;
 
         XYChart.Series<String, Number> weightSeries = new XYChart.Series<>();
-        HashSet<String> weightDates = new HashSet<>();
 
         for (Map.Entry<LocalDateTime, Weight> entry : p.getWeights().entrySet()) {
             LocalDateTime date = entry.getKey();
@@ -179,8 +178,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
             String dateString = date.format(DateTimeUtil.DATE_FORMATTER);
             Number weightNumber = weight.getValue();
-
-            weightDates.add(dateString);
 
             XYChart.Data<String, Number> weightData = new XYChart.Data<>(dateString, weightNumber);
             weightData.setNode(new HoveredThresholdNode(weightNumber.toString(), "", " kg"));
@@ -193,8 +190,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
                 maxWeight = weight.getValue();
             }
         }
-
-        this.weightXAxis.setCategories(FXCollections.observableArrayList(weightDates));
 
         this.weightYAxis.setLowerBound(minWeight - 10);
         this.weightYAxis.setUpperBound(maxWeight + 10);
@@ -296,9 +291,15 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
         if (latestWeight.isPresent()) {
             this.trackableFieldsTabPane.getTabs().add(0, this.weightTab);
-            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
 
             this.weightChart.getData().clear();
+            XYChart.Series<String, Number> weightSeries = this.generateWeightSeries(this.person);
+
+            HashSet<String> weightDates = new HashSet<>();
+            weightSeries.getData().forEach(d -> weightDates.add(d.getXValue()));
+
+            this.weightXAxis.setCategories(FXCollections.observableArrayList(weightDates));
+
             this.weightChart.getData().add(weightSeries);
         }
     }
