@@ -7,11 +7,13 @@ import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.person.Person.PersonAttribute;
 
 /**
- * Tests that a {@code Person}'s {@code Height} falls within a range specified by a Pair.
+ * Tests that a {@code Person}'s {@code Height} falls within a range specified
+ * by a Pair.
  */
 public class HeightContainsRangePredicate extends SearchPredicate<Pair<Float, Float>> {
     /**
-     * Construct a predicate to test that a {@code Person}'s {@code Height} falls within a range specified by a Pair.
+     * Constructs a predicate to test that a {@code Person}'s {@code Height} falls
+     * within a range specified by a Pair.
      *
      * @param range range to test against
      */

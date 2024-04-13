@@ -33,7 +33,7 @@ public class Address extends Attribute<String> {
     }
 
     /**
-     * Determine if the address value stored is a match with a specified string.
+     * Determines if the address value stored is a match with a specified string.
      * Returns true if specified value is a substring of the address value stored.
      *
      * @param otherValue Other value to check against

@@ -30,7 +30,7 @@ public class Name extends Attribute<String> {
     }
 
     /**
-     * Determine if the name value stored is a match with a specified string.
+     * Determines if the name value stored is a match with a specified string.
      * Returns true if specified value is a substring of the name value stored.
      *
      * @param otherValue Other value to check against

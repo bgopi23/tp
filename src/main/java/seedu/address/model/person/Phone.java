@@ -5,6 +5,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 import static seedu.address.model.person.messages.PhoneMessages.EXPECTED_FORMAT_REGEX;
 import static seedu.address.model.person.messages.PhoneMessages.MESSAGE_CONSTRAINTS;
 import static seedu.address.model.person.messages.PhoneMessages.REQUIRED_REGEX;
+
 /**
  * Represents a Person's phone number in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidPhone(String)}
@@ -45,7 +46,7 @@ public class Phone extends Attribute<String> {
     }
 
     /**
-     * Determine if the phone value stored is a match with a specified string.
+     * Determines if the phone value stored is a match with a specified string.
      * Returns true if specified value is a substring of the phone value stored.
      *
      * @param otherValue Other value to check against
