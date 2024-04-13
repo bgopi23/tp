@@ -234,7 +234,9 @@ Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN
 
 Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
-Format: `fitadd INDEX {/arms} {/legs} {/chest} {/back} {/shoulders} {/abs} {/all}`
+Format: `fitadd INDEX [/arms] [/leg] [/chest] [/back] [/shoulders] [/abs] [/all]`
+
+* At least one or more of the default supported prefixes must be supplied.
 
 | Prefix     | Exercises                                                                                                                                             |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
