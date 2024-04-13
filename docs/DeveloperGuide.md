@@ -382,12 +382,12 @@ Let's take the `add` command as an example.
 
 The correct format is as follows : `add n/NAME p/PHONE`
 
-|    Command     |            Error Message            |
-|:--------------:|:-----------------------------------:|
-|     `add`      |     _No parameters specified!_      |
-|  `add n/NAME`  |  _Phone number parameter missing!_  |
-| `add p/PHONE`  |      _Name parameter missing!_      |
-|   `add NAME`   |     _Invalid command format!_     |
+|    Command    |           Error Message           |
+|:-------------:|:---------------------------------:|
+|     `add`     |    _No parameters specified!_     |
+| `add n/NAME`  | _Phone number parameter missing!_ |
+| `add p/PHONE` |     _Name parameter missing!_     |
+|  `add NAME`   |     _Invalid command format!_     |
 
 Now lets look at the `delete` command for another example
 
@@ -396,9 +396,9 @@ The correct format is as follows : `delete INDEX`
 |   Command    |                        Error Message                         |
 |:------------:|:------------------------------------------------------------:|
 |   `delete`   |                    _No index specified!_                     |
-| `delete two` |                  _Invalid index provided._                   |
+| `delete two` |                  _Invalid index provided!_                   |
 |   `delet`    | _Unknown command, please type 'help' for possible commands!_ |
-| `delete -1`  |                  _Invalid index specified!_                  |
+| `delete -1`  |                  _Invalid index provided!_                   |
 
 
 **_How the feature was implemented._** <br>
@@ -412,6 +412,9 @@ certain direction towards the correct command format instead of just telling the
 **_Alternatives considered._** <br>
 Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
 was trivial.
+
+**_Activity diagram for specialised error message outputs by AddCommandParser_**
+![SpecialisedErrorMessages](images/SpecialisedErrorMessagesDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
