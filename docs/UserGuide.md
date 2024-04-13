@@ -115,9 +115,6 @@ Java is a versatile programming language used for developing various application
 * Items in square brackets are optional.<br>
   e.g `n/NAME [t/TAG]` can be used as `n/John Doe t/friend` or as `n/John Doe`.
 
-* Items in curly brackets indicates at least one or more MUST be supplied.<br>
-  e.g `fitadd INDEX {/arms} {/legs} {/chest} ...` can be used as `fitadd 1 /arms` or `fitadd 1 /arms /chest` but NOT `fitadd 1`
-
 * Items with `…`​ after them can be used multiple times including zero times.<br>
   e.g. `[t/TAG]…​` can be used as ` ` (i.e. 0 times), `t/friend`, `t/friend t/family` etc.
 
@@ -237,7 +234,7 @@ Format: `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN
 
 Alternatively, you can use **one or more** of the supported prefixes to quickly add a predefined set of related exercises to the specified client.
 
-Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all]`
+Format: `fitadd INDEX {/arms} {/legs} {/chest} {/back} {/shoulders} {/abs} {/all}`
 
 | Prefix     | Exercises                                                                                                                                             |
 |------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -489,8 +486,10 @@ While most modern smartphones are able to scan QR codes with the default camera 
 | [**edit**](#editing-a-client--edit)                               | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [h/HEIGHT] [w/WEIGHT] [t/TAG]…​`<br><br>e.g. `edit 2 n/James Lee e/jameslee@example.com`                                                                         |
 | [**exit**](#exiting-the-program--exit)                            | `exit`                                                                                                                                                                                                                                 |
 | [**find**](#finding-clients--find)                                | `find [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [nt/NOTE] [t/TAG]…​ [h/RANGE] [w/RANGE]`<br><br>e.g. `find n/Alex w/40,80 nt/Wants to build muscle t/family`                                                                     |
-| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [n/EXERCISE_NAME] [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS] [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br><br>e.g. `fitadd 1 n/burpees s/3 r/5 b/30`<br>`fitadd 1 /arms /abs`               |
-| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX [n/EXERCISE_NAME] [/all]`<br><br>e.g. `fitdelete 1 n/burpees`<br>`fitdelete 1 /all`                                                                                                                                   |
+| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX n/EXERCISE_NAME [s/SETS] [r/REPS] [b/BREAK_BETWEEN_SETS_IN_SECONDS]`<br><br>e.g. `fitadd 1 n/burpees s/3 r/5 b/30`                                                                                                       |
+| [**fitadd**](#adding-or-overwriting-exercises-of-clients--fitadd) | `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all] `<br><br>e.g. `fitadd 1 /arms /abs`                                                                                                                          |
+| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX n/EXERCISE_NAME`<br><br>e.g. `fitdelete 1 n/burpees`                                                                                                                                                                  |
+| [**fitdelete**](#deleting-exercises-of-clients--fitdelete)        | `fitdelete INDEX /all`<br><br>e.g. `fitdelete 1 /all`                                                                                                                                                                                  |
 | [**list**](#listing-all-clients--list)                            | `list`                                                                                                                                                                                                                                 |
 | [**help**](#viewing-help--help)                                   | `help`                                                                                                                                                                                                                                 |
 | [**note**](#adding-a-note-to-a-client--note)                      | `note INDEX [NOTE] [/edit]`<br><br>e.g. `note 2 Sprained right ankle in the past`<br>`note 1 /edit`                                                                                                                                    |
