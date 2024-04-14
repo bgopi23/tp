@@ -3,7 +3,6 @@ package seedu.address.model.person;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.messages.HeightMessages.MESSAGE_NO_HEIGHT;
 import static seedu.address.model.person.messages.HeightMessages.MESSAGE_RANGE;
-import static seedu.address.model.person.messages.HeightMessages.VALIDATION_REGEX;
 
 import javafx.util.Pair;
 
@@ -13,6 +12,8 @@ import javafx.util.Pair;
  */
 public class Height extends Attribute<Float> {
     public static final Float HEIGHT_MAX_VALUE = 5000f;
+    /** Regular expression to check for a valid height value. */
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code height}.
