@@ -1,0 +1,30 @@
+@startuml
+skin rose
+skinparam ActivityFontSize 15
+skinparam ArrowFontSize 12
+start
+:User sends an 'add' command;
+:AddCommandParser parses the String argument;
+if () then ([Empty parameters])
+    :Throw CommandException \n (No Parameters Specified!);
+    stop
+else ([Non-empty parameters])
+    if () then ([Invalid parameters])
+        :Throw CommandException \n (Invalid command format!);
+        stop
+    else ([Valid parameters])
+        if () then ([Insufficient parameters])
+            if () then ([Only phone parameter supplied])
+                :Throw CommandException \n (Name parameter missing!);
+                stop
+            else ([Only name parameter supplied])
+                :Throw CommandException \n (Phone parameter missing!);
+                stop
+            endif
+        else ([Sufficient parameters])
+            :Client is added to FitBook;
+            stop
+        endif
+    endif
+endif
+@enduml

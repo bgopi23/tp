@@ -10,12 +10,21 @@ title: Developer Guide
 
 ## **Acknowledgements**
 
-| Module                                  | Description                               |
-|-----------------------------------------|-------------------------------------------|
-| [JavaFX](https://openjfx.io/)                   | UI generation for Java             |
-| [Jackson](https://github.com/FasterXML/jackson) | Json processing library for Java         |
-| [JUnit5](https://github.com/junit-team/junit5)  | Automated testing library for Java |
+**Module Acknowledgements**
+
+| Module                                          | Description                               |
+|-------------------------------------------------|-------------------------------------------|
+| [JavaFX](https://openjfx.io/)                   | UI generation for Java                    |
+| [Jackson](https://github.com/FasterXML/jackson) | Json processing library for Java          |
+| [JUnit5](https://github.com/junit-team/junit5)  | Automated testing library for Java        |
 | [ZXing](https://github.com/zxing/zxing)         | Barcode image processing library for Java |
+
+**AI Tools Acknowledgements**
+
+| Tool    | Name            | Extent of use                             |
+|---------|-----------------|-------------------------------------------|
+| GPT-4   | Baskar Gopinath | JavaDocs (FitAddCommandParser)            |
+| Codeium | Dillon          | {::nomarkdown}<ul><li>JavaDocs</li><li>Full-line autocomplete</li></ul>{:/} |
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -284,19 +293,44 @@ We can refer to the sequence diagram [here](#interacting-with-the-note-command) 
 
 For more details on how the `height` field interacts with the `add` and `edit` commands, refer [here](#adding-or-editing-a-client).
 
-### Searching Clients
-Search for clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
+### Finding Clients
+Searching of clients is done using the `find` command. The command has been designed to be extendable, allowing for developers to easily define how new fields (attributes) in the clients can be searched.
 
 The sequence diagram below shows the logic flow of executing the command `find n/wendy`.
 
 ![FindCommandSequenceDiagram-Logic](images/FindCommandSequenceDiagram-Logic.png)
 
-Note that the main searching logic is defined by creating a `Predicate`, which in turn calls the `isMatch()` method of the attribute.
+Note that the main searching logic is defined by creating a `Predicate` (`NameContainsSubstringPredicate` in this example), which in turn calls the `isMatch()` method of the attribute.
+
+`CombinedPredicates` is then used to allow for finding clients using multiple fields. Clients will only be matched if it passes the test for all specified `SearchPredicates` in `CombinedPredicates`. This is defined in the `FindCommandParser` class.
+
+#### Defining new methods of finding clients
+All attributes of a `Person` has been abstracted into an `Attribute` class. This `Attribute` class defines an abstract `isMatch()` method, thus, any attributes of a `Person` (new or existing), would be required to implement the `isMatch()` method to define how the attribute can be searched using the `find` command.
+
+This is what allows the `find` command to be extendable to any attribute of a `Person`. Each attribute can be defined to be searched in different ways. For example, searching a person's `Name` would test a substring against the `Name` attribute, searching a person's `Weight` would test the `Weight` attribute against a range specified (i.e `isMatch()` will return `true` if the person's weight falls within the specified range).
 
 Therefore, to define how an attribute is being searched, one would simply take the following steps:
 1. Define the implementation of the `isMatch()` method of the respective attribute. (e.g `Name::isMatch()`)
-1. Create a new class that extends `Predicate` (e.g `NameContainsSubstringPredicate`)
+1. Create a new class that extends `SearchPredicate` (e.g `NameContainsSubstringPredicate`)
 1. Update the `parse()` method in `FindCommandParser` to uses the new predicate
+
+#### Implementation Rationale
+We believe that filtering clients is one of the most important features of the application. With a large number of clients in the application, this feature will allow users to easily filter clients based on any information they have saved.
+
+Additionally, users have different requirements when searching for a client in FitBook. For example, some might simply wish to filter clients to by name, while others might wish to filter all clients within a certain weight range. This implementation of the `find` command provides flexibility to the user.
+
+For developers, the usage of the `SearchPredicate` and `CombinedPredicates` class, along with the enforcing of the `isMatch()` method within each attribute simplifies the process of defining how each attribute can be searched. Existing search methods can be easily modified by changing the implementation of the `isMatch()` method within the attribute while guaranteeing new attributes to be searchable as well.
+
+#### Alternative Implementation
+An alternative implementation of the `find` command was to simply create a `Predicate` for each attribute, defining the search methodology within the predicate itself.
+
+While this might be a simpler implementation, it has many restrictions such as:
+* Developers are required to have in-depth knowledge of how `Predicates` work.
+* Newly defined attributes are not guaranteed to be searchable since defining a `Predicate` for that attribute cannot be enforced.
+* Higher chance of regression of find feature if developer fails to properly integrate new and existing `Predicates`.
+* Messier code base.
+
+Due to the reasons stated above, we decided that the current implementation of the find command using the `SearchPredicate` class and `isMatch()` methods to better fit our vision for the feature, providing greater functionality to users while simplifing the development process for developers.
 
 ### Adding or editing a client
 
@@ -348,12 +382,12 @@ Let's take the `add` command as an example.
 
 The correct format is as follows : `add n/NAME p/PHONE`
 
-|    Command     |            Error Message            |
-|:--------------:|:-----------------------------------:|
-|     `add`      |     _No parameters specified!_      |
-|  `add n/NAME`  |  _Phone number parameter missing!_  |
-| `add p/PHONE`  |      _Name parameter missing!_      |
-|   `add NAME`   |     _Invalid command format!_     |
+|    Command    |           Error Message           |
+|:-------------:|:---------------------------------:|
+|     `add`     |    _No parameters specified!_     |
+| `add n/NAME`  | _Phone number parameter missing!_ |
+| `add p/PHONE` |     _Name parameter missing!_     |
+|  `add NAME`   |     _Invalid command format!_     |
 
 Now lets look at the `delete` command for another example
 
@@ -362,9 +396,9 @@ The correct format is as follows : `delete INDEX`
 |   Command    |                        Error Message                         |
 |:------------:|:------------------------------------------------------------:|
 |   `delete`   |                    _No index specified!_                     |
-| `delete two` |                  _Invalid index provided._                   |
+| `delete two` |                  _Invalid index provided!_                   |
 |   `delet`    | _Unknown command, please type 'help' for possible commands!_ |
-| `delete -1`  |                  _Invalid index specified!_                  |
+| `delete -1`  |                  _Invalid index provided!_                   |
 
 
 **_How the feature was implemented._** <br>
@@ -378,6 +412,9 @@ certain direction towards the correct command format instead of just telling the
 **_Alternatives considered._** <br>
 Alternatives such as hyper-specific error outputs were considered, but ultimately, we felt that the benefit it would add
 was trivial.
+
+**_Activity diagram for specialised error message outputs by AddCommandParser_**
+![SpecialisedErrorMessages](images/SpecialisedErrorMessagesDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

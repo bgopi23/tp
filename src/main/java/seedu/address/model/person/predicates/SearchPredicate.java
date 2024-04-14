@@ -19,7 +19,7 @@ public abstract class SearchPredicate<T extends Object> implements Predicate<Per
     }
 
     /**
-     * Get the search value of this predicate
+     * Gets the search value of this predicate
      *
      * @return Search value of this predicate
      */

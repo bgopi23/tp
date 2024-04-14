@@ -19,7 +19,7 @@ public class Note extends Attribute<String> {
     }
 
     /**
-     * Determine if the note value stored is a match with a specified string.
+     * Determines if the note value stored is a match with a specified string.
      * Returns true if specified value is a substring of the note value stored.
      *
      * @param otherValue Other value to check against

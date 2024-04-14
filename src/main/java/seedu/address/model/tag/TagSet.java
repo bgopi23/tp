@@ -31,7 +31,7 @@ public class TagSet extends Attribute<Set<Tag>> {
     }
 
     /**
-     * Determine if the tags stored is a match with a tags specified.
+     * Determines if the tags stored is a match with a tags specified.
      * Returns true if the other TagSet is a subset of this TagSet.
      *
      * @param other Other value to check against
@@ -46,7 +46,8 @@ public class TagSet extends Attribute<Set<Tag>> {
 
         Set<?> otherSet = ((Set<?>) other);
 
-        // If the set is empty, the user has not specified any tags. Return true to not match by any tags.
+        // If the set is empty, the user has not specified any tags. Return true to not
+        // match by any tags.
         if (otherSet.isEmpty()) {
             return true;
         }
@@ -64,7 +65,7 @@ public class TagSet extends Attribute<Set<Tag>> {
     }
 
     /**
-     * Determine if the tagset contains the specified tag
+     * Determines if the tagset contains the specified tag
      *
      * @param otherValue Tag to check against
      * @return True if tagset contains the specified tag, false otherwise

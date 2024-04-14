@@ -10,7 +10,7 @@ import seedu.address.model.person.Person.PersonAttribute;
  */
 public class PhoneContainsSubstringPredicate extends SearchPredicate<String> {
     /**
-     * Construct a predicate to test that a {@code Person}'s {@code Phone} contains
+     * Constructs a predicate to test that a {@code Person}'s {@code Phone} contains
      * a given substring
      *
      * @param substring Substring to test

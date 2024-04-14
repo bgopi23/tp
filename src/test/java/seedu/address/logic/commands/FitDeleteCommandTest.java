@@ -43,7 +43,7 @@ public class FitDeleteCommandTest {
             personToEdit.getNote(), personToEdit.getTags(), new ExerciseSet(updatedExercises));
         this.model.setPerson(personToEdit, editedPerson);
 
-        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(exerciseName), false);
+        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(exerciseName));
 
         String expectedMessage = String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, exerciseName);
 
@@ -70,7 +70,7 @@ public class FitDeleteCommandTest {
             personToEdit.getNote(), personToEdit.getTags(), new ExerciseSet(exercises));
         this.model.setPerson(personToEdit, editedPerson);
 
-        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty(), true);
+        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty());
 
         String expectedMessage = FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS;
 
@@ -86,7 +86,7 @@ public class FitDeleteCommandTest {
     @Test
     public void execute_invalidIndexUnfilteredList_throwsCommandException() {
         Index outOfBoundIndex = Index.fromOneBased(this.model.getFilteredPersonList().size() + 1);
-        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(outOfBoundIndex, Optional.empty(), false);
+        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(outOfBoundIndex, Optional.empty());
 
         assertCommandFailure(fitDeleteCommand, this.model, FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE);
     }
@@ -98,7 +98,7 @@ public class FitDeleteCommandTest {
         // ensures that outOfBoundIndex is still in bounds of address book list
         assertTrue(outOfBoundIndex.getZeroBased() < this.model.getAddressBook().getPersonList().size());
 
-        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(outOfBoundIndex, Optional.empty(), false);
+        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(outOfBoundIndex, Optional.empty());
 
         assertCommandFailure(fitDeleteCommand, this.model, FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE);
     }
@@ -107,7 +107,7 @@ public class FitDeleteCommandTest {
     public void execute_invalidExerciseName_throwsCommandException() {
         String invalidExerciseName = "Invalid Exercise";
         FitDeleteCommand fitDeleteCommand =
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(invalidExerciseName), false);
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(invalidExerciseName));
 
         assertCommandFailure(fitDeleteCommand, this.model,
             String.format(FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST,
@@ -122,7 +122,7 @@ public class FitDeleteCommandTest {
             personToEdit.getNote(), personToEdit.getTags(), new ExerciseSet(new HashSet<>()));
         this.model.setPerson(personToEdit, editedPerson);
 
-        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty(), true);
+        FitDeleteCommand fitDeleteCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty());
 
         assertCommandFailure(fitDeleteCommand, this.model,
                 FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
@@ -131,17 +131,17 @@ public class FitDeleteCommandTest {
     @Test
     public void equals() {
         FitDeleteCommand deleteFirstCommand =
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Exercise 1"), false);
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Exercise 1"));
         FitDeleteCommand deleteSecondCommand =
-            new FitDeleteCommand(INDEX_SECOND_PERSON, Optional.of("Exercise 2"), false);
-        FitDeleteCommand deleteAllCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty(), true);
+            new FitDeleteCommand(INDEX_SECOND_PERSON, Optional.of("Exercise 2"));
+        FitDeleteCommand deleteAllCommand = new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty());
 
         // same object -> returns true
         assertEquals(deleteFirstCommand, deleteFirstCommand);
 
         // same values -> returns true
         FitDeleteCommand deleteFirstCommandCopy =
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Exercise 1"), false);
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Exercise 1"));
         assertEquals(deleteFirstCommand, deleteFirstCommandCopy);
 
         // different types -> returns false
@@ -155,7 +155,7 @@ public class FitDeleteCommandTest {
 
         // different exercise name -> returns false
         FitDeleteCommand deleteFirstCommandDifferentExercise =
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Different Exercise"), false);
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of("Different Exercise"));
         assertNotEquals(deleteFirstCommand, deleteFirstCommandDifferentExercise);
 
         // different delete all flag -> returns false

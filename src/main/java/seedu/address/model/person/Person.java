@@ -53,7 +53,7 @@ public class Person {
      * Every field must be present and not null.
      */
     public Person(Name name, Phone phone, Email email, Address address, NavigableMap<LocalDateTime, Weight> weights,
-                  Height height, Note note, Set<Tag> tags, ExerciseSet exerciseSet) {
+            Height height, Note note, Set<Tag> tags, ExerciseSet exerciseSet) {
         requireAllNonNull(name, phone, email, address, weights, height, note, tags);
         this.name = name;
         this.phone = phone;
@@ -69,7 +69,7 @@ public class Person {
     }
 
     /**
-     * Get the value of the specified attribute.
+     * Gets the value of the specified attribute.
      *
      * @param attribute Attribute to retrieve
      * @return Value of the specified attribute
@@ -136,7 +136,6 @@ public class Person {
     public Note getNote() {
         return this.note;
     }
-
 
     /**
      * Returns an immutable tag set, which throws

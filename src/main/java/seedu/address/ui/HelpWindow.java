@@ -22,19 +22,19 @@ import seedu.address.commons.core.LogsCenter;
 public class HelpWindow extends UiPart<Stage> {
     public static final String USERGUIDE_URL = "https://ay2324s2-cs2103t-t17-3.github.io/tp/UserGuide.html";
     public static final String[][] COMMAND_DESCRIPTIONS = {
-        {"add", "Adds a client to FitBook."},
-        {"clear", "Clears all entries from FitBook. USE WITH CAUTION."},
-        {"delete", "Deletes the specified client from FitBook."},
-        {"edit", "Edits an existing client in FitBook."},
-        {"exit", "Exits FitBook."},
-        {"find", "Finds all clients whose specified attribute contains the specified keyword"
-                + " (Uses name attribute if none specified)."},
-        {"fitadd", "Adds exercise(s) to an existing client in FitBook."},
-        {"fitdelete", "Deletes exercise(s) from an existing client in FitBook."},
-        {"help", "Shows this window."},
-        {"list", "Shows a list of all clients saved in FitBook."},
-        {"note", "Adds a new note to a client."},
-        {"weight", "Adds a new weight value to a client."},
+            { "add", "Adds a client to FitBook." },
+            { "clear", "Clears all entries from FitBook. USE WITH CAUTION." },
+            { "delete", "Deletes the specified client from FitBook." },
+            { "edit", "Edits an existing client in FitBook." },
+            { "exit", "Exits FitBook." },
+            { "find", "Finds all clients whose specified attribute contains the specified keyword"
+                    + " (Uses name attribute if none specified)." },
+            { "fitadd", "Adds exercise(s) to an existing client in FitBook." },
+            { "fitdelete", "Deletes exercise(s) from an existing client in FitBook." },
+            { "help", "Shows this window." },
+            { "list", "Shows a list of all clients saved in FitBook." },
+            { "note", "Adds a new note to a client." },
+            { "weight", "Adds a new weight value to a client." },
     };
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
@@ -100,7 +100,7 @@ public class HelpWindow extends UiPart<Stage> {
             Label commandLabel = new Label(commandName);
             Label descriptionLabel = new Label(commandDescription);
 
-            commandLabel.setPrefWidth(50);
+            commandLabel.setPrefWidth(60);
 
             HBox commandBox = new HBox(10);
             commandBox.getChildren().addAll(commandLabel, descriptionLabel);
@@ -112,7 +112,8 @@ public class HelpWindow extends UiPart<Stage> {
     /**
      * Shows the help window.
      *
-     * @throws IllegalStateException <ul>
+     * @throws IllegalStateException
+     *                               <ul>
      *                               <li>
      *                               if this method is called on a thread other than
      *                               the JavaFX Application Thread.

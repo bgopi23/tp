@@ -1,9 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE;
-import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS;
-import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST;
 import static seedu.address.logic.messages.FitDeleteCommandMessages.MESSAGE_INVALID_INDEX_FITDELETE;
 
@@ -14,33 +11,31 @@ import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.messages.FitDeleteCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.exercise.Exercise;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Person;
 
 /**
- * Deletes an exercise from a person in the address book.
+ * Deletes an exercise from a person in FitBook.
  */
 public class FitDeleteCommand extends Command {
     private final Index index;
     private final Optional<String> exerciseName;
-    private final boolean deleteAll;
 
     /**
      * Constructs a new FitDeleteCommand instance.
      *
      * @param index The index of the person in the filtered person list to delete the exercise from
      * @param exerciseName The optional exercise name to be deleted from the person
-     * @param deleteAll The boolean indicating whether all exercises should be deleted from the person
      */
-    public FitDeleteCommand(Index index, Optional<String> exerciseName, boolean deleteAll) {
+    public FitDeleteCommand(Index index, Optional<String> exerciseName) {
         requireNonNull(index);
         requireNonNull(exerciseName);
 
         this.index = index;
         this.exerciseName = exerciseName;
-        this.deleteAll = deleteAll;
     }
 
     @Override
@@ -58,24 +53,21 @@ public class FitDeleteCommand extends Command {
 
         model.setPerson(personToEdit, editedPerson);
 
-        return new CommandResult(
-            String.format(this.deleteAll
-                ? MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
-                : String.format(MESSAGE_DELETE_EXERCISE_SUCCESS, this.exerciseName.orElse(""))));
+        String commandResult = FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_SUCCESS;
+        if (this.exerciseName.isPresent()) {
+            commandResult =
+                String.format(FitDeleteCommandMessages.MESSAGE_DELETE_EXERCISE_SUCCESS, this.exerciseName.get());
+        }
+
+        return new CommandResult(commandResult);
     }
 
     private Person getEditedPerson(Person personToEdit) throws CommandException {
         ExerciseSet updatedExerciseSet = new ExerciseSet(new HashSet<>());
 
-        if (this.deleteAll) {
-            Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
-
-            if (updatedExercises.isEmpty()) {
-                throw new CommandException(MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
-            }
-        } else {
+        if (this.exerciseName.isPresent()) {
             Exercise exerciseToDelete =
-                new Exercise(this.exerciseName.orElse(""), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS,
+                new Exercise(this.exerciseName.get(), Exercise.DEFAULT_SETS, Exercise.DEFAULT_REPS,
                     Exercise.DEFAULT_BREAK);
             Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
 
@@ -86,6 +78,12 @@ public class FitDeleteCommand extends Command {
 
             updatedExercises.remove(exerciseToDelete);
             updatedExerciseSet = new ExerciseSet(updatedExercises);
+        } else {
+            Set<Exercise> updatedExercises = new HashSet<>(personToEdit.getExerciseSet().getValue());
+
+            if (updatedExercises.isEmpty()) {
+                throw new CommandException(FitDeleteCommandMessages.MESSAGE_DELETE_ALL_EXERCISES_FAILURE);
+            }
         }
 
         return new Person(personToEdit.getName(), personToEdit.getPhone(), personToEdit.getEmail(),
@@ -105,7 +103,6 @@ public class FitDeleteCommand extends Command {
 
         FitDeleteCommand otherFitDeleteCommand = (FitDeleteCommand) other;
         return this.index.equals(otherFitDeleteCommand.index)
-            && this.exerciseName.equals(otherFitDeleteCommand.exerciseName)
-            && this.deleteAll == otherFitDeleteCommand.deleteAll;
+            && this.exerciseName.equals(otherFitDeleteCommand.exerciseName);
     }
 }
