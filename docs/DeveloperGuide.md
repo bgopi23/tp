@@ -699,7 +699,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Usage instructions**: Documentation detailing FitBook's features and how to navigate about them
 * **User**: The person using FitBook
 * **UI (User Interface)**: Manages user interactions with graphic interface elements
-* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org).
+* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
 * **vCard**: A data format for contact information. Detailed information can be found in [RFC 6350](https://datatracker.ietf.org/doc/html/rfc6350).
 
 --------------------------------------------------------------------------------------------------------------------
