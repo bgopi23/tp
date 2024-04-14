@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_PERSONS_FOUND_OVERVIEW;
-import static seedu.address.logic.messages.FindCommandMessages.VALIDATION_REGEX_RANGE;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
@@ -16,6 +15,8 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
+    /** Represents a regular expression to test for a valid search range input. */
+    public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
     private final CombinedPredicates predicates;
 
     /**

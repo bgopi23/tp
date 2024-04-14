@@ -12,6 +12,7 @@ import seedu.address.model.person.Attribute;
  * Guarantees: immutable; is always valid.
  */
 public class Weight extends Attribute<Float> {
+    /** Represents a maximum value of a Weight. */
     public static final Float WEIGHT_MAX_VALUE = 5000f;
 
     /**
@@ -26,6 +27,9 @@ public class Weight extends Attribute<Float> {
 
     /**
      * Returns true if a given string is a valid weight.
+     *
+     * @param test String value to test whether it is a valid weight.
+     * @return True if input is a valid weight, false otherwise.
      */
     public static boolean isValidWeight(String test) {
         return test.matches(VALIDATION_REGEX) && Float.valueOf(test) <= WEIGHT_MAX_VALUE;
@@ -49,7 +53,6 @@ public class Weight extends Attribute<Float> {
      * Returns true if specified value is within weightRange.
      *
      * @param weightRange Range of weight to check against.
-     *
      * @return True if value is falls within weightRange, false otherwise.
      */
     @Override
