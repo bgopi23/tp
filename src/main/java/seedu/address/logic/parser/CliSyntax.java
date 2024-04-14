@@ -48,15 +48,38 @@ public class CliSyntax {
         PREFIX_WEIGHT,
         PREFIX_NOTE,
     };
-    public static final Prefix[] PREFIX_NAME_AND_PHONE = {
-        PREFIX_NAME,
-        PREFIX_PHONE,
-    };
     public static final Prefix[] PREFIXES_NAME_PHONE_EMAIL_ADDRESS = {
         PREFIX_NAME,
         PREFIX_PHONE,
         PREFIX_EMAIL,
         PREFIX_ADDRESS
+    };
+    public static final Prefix[] ALL_EXERCISE_PREFIXES = {
+        PREFIX_EXERCISE_NAME,
+        PREFIX_EXERCISE_SETS,
+        PREFIX_EXERCISE_REPS,
+        PREFIX_EXERCISE_BREAK_BETWEEN_SETS,
+        PREFIX_EXERCISE_ARM,
+        PREFIX_EXERCISE_LEG,
+        PREFIX_EXERCISE_CHEST,
+        PREFIX_EXERCISE_BACK,
+        PREFIX_EXERCISE_SHOULDER,
+        PREFIX_EXERCISE_ABS,
+        PREFIX_EXERCISE_ALL
+    };
+    public static final Prefix[] DEFAULT_EXERCISE_PREFIXES = {
+        PREFIX_EXERCISE_ARM,
+        PREFIX_EXERCISE_LEG,
+        PREFIX_EXERCISE_CHEST,
+        PREFIX_EXERCISE_BACK,
+        PREFIX_EXERCISE_SHOULDER,
+        PREFIX_EXERCISE_ABS,
+        PREFIX_EXERCISE_ALL
+    };
+    public static final Prefix[] EXERCISE_VALUE_PREFIXES = {
+        PREFIX_EXERCISE_SETS,
+        PREFIX_EXERCISE_REPS,
+        PREFIX_EXERCISE_BREAK_BETWEEN_SETS
     };
     public static final Prefix PREFIX_CLEAR_CONFIRM = new Prefix("/confirm");
 }

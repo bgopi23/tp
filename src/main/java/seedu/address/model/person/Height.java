@@ -57,11 +57,20 @@ public class Height extends Attribute<Float> {
 
         assert (secondVal - firstVal >= 0) : MESSAGE_RANGE;
         // if a client has no height value
-        if (this.getValue() == 0f) {
+        if (this.isZero()) {
             return false;
         }
 
         return (this.getValue() >= firstVal && this.getValue() <= secondVal);
+    }
+
+    /**
+     * Checks if the height object has a value of 0
+     *
+     * @return true if the weight object has a value of 0 and false otherwise
+     */
+    public boolean isZero() {
+        return getValue() == 0f;
     }
 
     @Override
@@ -74,7 +83,7 @@ public class Height extends Attribute<Float> {
      * Empty height values (i.e. 0f) will be formatted as "N/A" for better clarity.
      */
     public String getFormattedHeight() {
-        if (this.getValue() == 0f) {
+        if (this.isZero()) {
             return MESSAGE_NO_HEIGHT;
         }
         return "Height: " + this.getValue().toString() + " cm";
@@ -106,6 +115,6 @@ public class Height extends Attribute<Float> {
      * Checks if the value is valid (i.e. greater than 0).
      */
     public boolean isValid() {
-        return this.getValue() != 0f;
+        return this.getValue() > 0f;
     }
 }

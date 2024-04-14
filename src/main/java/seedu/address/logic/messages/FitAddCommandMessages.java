@@ -16,6 +16,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_EXERCISE_SHOULDER;
  * Messages used by FitAddCommand and associated classes.
  */
 public class FitAddCommandMessages extends Messages {
+
     public static final String COMMAND_WORD = "fitadd";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds an exercise to the client identified "
@@ -37,19 +38,22 @@ public class FitAddCommandMessages extends Messages {
         + PREFIX_EXERCISE_SETS + "3 "
         + PREFIX_EXERCISE_REPS + "10 "
         + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "1";
-
     public static final String MESSAGE_NO_INDEX_FITADD = String.format(MESSAGE_NO_INDEX, MESSAGE_USAGE);
-    public static final String MESSAGE_INVALID_INDEX_FITADD = String.format(MESSAGE_INVALID_PERSON_DISPLAYED_INDEX,
-        MESSAGE_USAGE);
     public static final String MESSAGE_EXERCISE_NAME_PARAMETER_AND_DEFAULT_PREFIXES_MISSING =
         String.format("Either exercise name parameter or default exercise prefix(es) must be supplied\n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_ADD_EXERCISE_NAME_CONFLICTING_PREFIXES =
         String.format("Exercise name parameter cannot be supplied together with default exercise prefix(es)\n%1$s",
             MESSAGE_USAGE);
-
     public static final String MESSAGE_ADD_EXERCISE_VALUES_CONFLICTING_PREFIXES =
         String.format("Exercise value parameter(s) cannot be supplied together with default exercise prefix(es)\n%1$s",
             MESSAGE_USAGE);
     public static final String MESSAGE_ADD_EXERCISE_SUCCESS = "Successfully added exercise(s) for client";
+    public static final String MESSAGE_ADD_EXERCISE_CONFLICTING_PREFIXES =
+            String.format("Exercise name parameter cannot be supplied together with default exercise prefix(es)\n%1$s",
+                    MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_INDEX_FITADD = String.format(MESSAGE_INVALID_INDEX,
+        MESSAGE_USAGE);
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_FITADD = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+            MESSAGE_USAGE);
 }

@@ -1,8 +1,11 @@
 package seedu.address.logic.commands;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS;
+import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS;
 import static seedu.address.logic.messages.WeightCommandMessages.MESSAGE_INVALID_INDEX_WEIGHT;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.messages.WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -11,10 +14,8 @@ import java.util.TreeMap;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.WeightCommandMessages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 
@@ -28,12 +29,13 @@ public class WeightCommand extends Command {
     private LocalDateTime timeOfExecution = null;
 
     /**
+     * Constructs a WeightCommand object with a person list index and weight
+     *
      * @param index of the person in the filtered person list to edit the weight
      * @param weight of the person to be updated to
      */
     public WeightCommand(Index index, WeightEntry weight) {
         requireAllNonNull(index, weight);
-
         this.index = index;
         this.weightEntry = weight;
     }
@@ -41,18 +43,19 @@ public class WeightCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws CommandException {
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.index.getZeroBased();
 
-        if (this.index.getZeroBased() >= lastShownList.size()) {
+        if (listIndex >= lastShownList.size()) {
             throw new CommandException(MESSAGE_INVALID_INDEX_WEIGHT);
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        Person personToEdit = lastShownList.get(listIndex);
 
         NavigableMap<LocalDateTime, Weight> toEditWeightMap = new TreeMap<>(personToEdit.getWeights());
-        Float weight = this.weightEntry.getValue().getValue().getValue();
-        if (weight == 0f) {
+        Weight weight = this.weightEntry.getValue().getValue();
+        if (weight.isZero()) {
             if (toEditWeightMap.isEmpty()) {
-                throw new CommandException(WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP);
+                throw new CommandException(MESSAGE_EMPTY_WEIGHT_MAP);
             }
             toEditWeightMap.pollLastEntry();
         } else {
@@ -81,9 +84,9 @@ public class WeightCommand extends Command {
      * {@code personToEdit}.
      */
     private String generateSuccessMessage(Person personToEdit) {
-        String message = !(this.weightEntry.getValue().getValue().getValue() == 0f)
-                ? WeightCommandMessages.MESSAGE_ADD_WEIGHT_SUCCESS
-                : WeightCommandMessages.MESSAGE_DELETE_WEIGHT_SUCCESS;
+        String message = !(this.weightEntry.getValue().getValue().isZero())
+                ? MESSAGE_ADD_WEIGHT_SUCCESS
+                : MESSAGE_DELETE_WEIGHT_SUCCESS;
         return String.format(message, personToEdit.getFormattedMessage());
     }
 

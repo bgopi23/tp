@@ -283,6 +283,7 @@ Format: `fitdelete INDEX n/EXERCISE_NAME`
 
 * Deletes the specified exercise from the client specified by `INDEX`. The index refers to the index number shown in the displayed client list. The index **must be a positive integer** 1, 2, 3, …​
 * `EXERCISE_NAME` is **case-insensitive**.
+* If the `n/` prefix is supplied more than once, only the last one will be used. For example `fitdelete 1 n/exercise-1 n/exercise-2` will attempt to delete the exercise with name `exericse-2` from the 1st client
 
 Alternatively, you can use the `/all` prefix to delete all exercises from the specified client.
 

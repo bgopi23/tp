@@ -2,14 +2,13 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.DeleteCommandMessages.MESSAGE_DELETE_PERSON_SUCCESS;
-import static seedu.address.logic.messages.DeleteCommandMessages.MESSAGE_USAGE;
+import static seedu.address.logic.messages.DeleteCommandMessages.MESSAGE_INVALID_INDEX_DELETE;
 
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.person.Person;
 
@@ -20,6 +19,12 @@ public class DeleteCommand extends Command {
 
     private final Index targetIndex;
 
+    /**
+     * Creates a DeleteCommand object with the index of
+     * the person we want to delete as specified by the person list
+     *
+     * @param targetIndex the index of the person to delete
+     */
     public DeleteCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
@@ -28,12 +33,13 @@ public class DeleteCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.targetIndex.getZeroBased();
 
-        if (this.targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
+        if (listIndex >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_DELETE);
         }
 
-        Person personToDelete = lastShownList.get(this.targetIndex.getZeroBased());
+        Person personToDelete = lastShownList.get(listIndex);
         model.deletePerson(personToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_PERSON_SUCCESS,
                 personToDelete.getFormattedMessage()));

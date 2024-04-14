@@ -26,11 +26,11 @@ public class FitDeleteCommandParserTest {
     public void parse_validArgs_returnsFitDeleteCommand() {
         // add specific exercise
         assertParseSuccess(this.parser, PREAMBLE_WHITESPACE + "1" + VALID_EXERCISE_NAME_DESC,
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(VALID_EXERCISE_NAME.toLowerCase()), false));
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.of(VALID_EXERCISE_NAME.toLowerCase())));
 
         // delete all exercises
         assertParseSuccess(this.parser, PREAMBLE_WHITESPACE + "1" + " " + PREFIX_FITDELETE_DELETE_ALL,
-            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty(), true));
+            new FitDeleteCommand(INDEX_FIRST_PERSON, Optional.empty()));
     }
 
     @Test

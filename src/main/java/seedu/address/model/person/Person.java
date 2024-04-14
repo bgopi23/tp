@@ -274,7 +274,7 @@ public class Person {
             sb.append(" | Latest Weight: ").append(this.getLatestWeight().get().getValue().toString());
         }
 
-        if (!(this.height.getValue() == 0f)) {
+        if (!(this.height.isZero())) {
             sb.append(" | Height: ").append(this.height);
         }
 

@@ -3,8 +3,10 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_DUPLICATE_PERSON;
 import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_EDIT_PERSON_SUCCESS;
-import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_USAGE;
+import static seedu.address.logic.messages.EditCommandMessages.MESSAGE_INVALID_INDEX_EDIT;
+import static seedu.address.logic.messages.Messages.MESSAGE_PHONE_WARN;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
+import static seedu.address.model.person.messages.WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP;
 
 import java.time.LocalDateTime;
 import java.util.Collections;
@@ -20,7 +22,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.messages.Messages;
 import seedu.address.model.Model;
 import seedu.address.model.exercise.ExerciseSet;
 import seedu.address.model.person.Address;
@@ -30,8 +31,6 @@ import seedu.address.model.person.Name;
 import seedu.address.model.person.Note;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Phone;
-import seedu.address.model.person.messages.PhoneMessages;
-import seedu.address.model.person.messages.WeightMessages;
 import seedu.address.model.person.weight.Weight;
 import seedu.address.model.person.weight.WeightEntry;
 import seedu.address.model.tag.Tag;
@@ -44,6 +43,10 @@ public class EditCommand extends Command {
     private final EditPersonDescriptor editPersonDescriptor;
 
     /**
+     * Constructs an EditCommand object with the
+     * index of the person, and information to edit
+     *
+     *
      * @param index of the person in the filtered person list to edit
      * @param editPersonDescriptor details to edit the person with
      */
@@ -79,13 +82,13 @@ public class EditCommand extends Command {
             Weight updatedWeight = editPersonDescriptor.getWeight().get();
 
             // If there are no more weight values to be removed
-            if (updatedWeight.getValue() == 0f && toEditWeightMap.isEmpty()) {
-                throw new CommandException(WeightMessages.MESSAGE_EMPTY_WEIGHT_MAP);
+            if (updatedWeight.isZero() && toEditWeightMap.isEmpty()) {
+                throw new CommandException(MESSAGE_EMPTY_WEIGHT_MAP);
             }
 
             toEditWeightMap.pollLastEntry();
 
-            if (updatedWeight.getValue() != 0f) {
+            if (!updatedWeight.isZero()) {
                 toEditWeightMap.put(WeightEntry.getTimeOfExecution(), updatedWeight);
             }
         }
@@ -112,7 +115,7 @@ public class EditCommand extends Command {
         boolean isPhoneOfExpectedFormat = editedPerson.getPhone().isExpectedFormat();
 
         if (!isPhoneOfExpectedFormat) {
-            return String.format(Messages.MESSAGE_WARN, PhoneMessages.MESSAGE_EXPECTED);
+            return MESSAGE_PHONE_WARN;
         }
 
         return "";
@@ -122,12 +125,13 @@ public class EditCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         List<Person> lastShownList = model.getFilteredPersonList();
+        int listIndex = this.index.getZeroBased();
 
-        if (this.index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(String.format(Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX, MESSAGE_USAGE));
+        if (listIndex >= lastShownList.size()) {
+            throw new CommandException(MESSAGE_INVALID_INDEX_EDIT);
         }
 
-        Person personToEdit = lastShownList.get(this.index.getZeroBased());
+        Person personToEdit = lastShownList.get(listIndex);
 
         Person editedPerson = createEditedPerson(personToEdit, this.editPersonDescriptor);
 
