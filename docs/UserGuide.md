@@ -81,9 +81,12 @@ Java is a versatile programming language used for developing various application
     * If that doesn't work, try the steps found [here](#why-doesnt-fitbook-start-when-i-double-click).
 
 
-1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.<br>
+1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.
 
-    ![Ui](images/UGUI.png)
+<figure style="text-align: center;">
+    <img src="images/UGUI.png">
+    <figcaption><i>FitBook Graphical User Interface</i></figcaption>
+</figure>
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
@@ -132,7 +135,11 @@ Java is a versatile programming language used for developing various application
 Launches the help menu depicted below. <br>
 Clicking `Open User Guide` leads to the User Guide website.
 
-![help message](images/helpMessage.png)
+<figure style="text-align: center;">
+    <img src="images/helpMessage.png">
+    <figcaption><i>Help Window</i></figcaption>
+</figure>
+
 Format: `help`
 
 <hr>
@@ -421,7 +428,11 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. 
 
 ### Save contact to phone
 
-![QrCodeContactCard](images/QrCodeContactCard.png)
+<figure style="text-align: center;">
+    <img src="images/QrCodeContactCard.png">
+    <figcaption><i>QR Code Contact Card</i></figcaption>
+</figure>
+
 
 To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
 
@@ -433,8 +444,14 @@ Due to the limited availability of mobile devices for testing, this feature has 
 While most modern smartphones are able to scan QR codes with the default camera app, we are unable to provide any guarantee that it will work with all smartphones.
 </div>
 
-<img src="images/QRScanning.png" height="480">
-<img src="images/QRContact.png" height="480">
+<figure style="text-align: center;">
+    <div>
+        <img src="images/QRScanning.png" height="480">
+        <img src="images/QRContact.png" height="480">
+    </div>
+    <figcaption><i>QR Code Demo</i></figcaption>
+</figure>
+
 
 <hr>
 
