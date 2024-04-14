@@ -26,6 +26,11 @@ public class FitAddCommandMessages extends Messages {
         + "[" + PREFIX_EXERCISE_SETS + "SETS] "
         + "[" + PREFIX_EXERCISE_REPS + "REPETITIONS] "
         + "[" + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "REST_TIME]\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_EXERCISE_NAME + "squats "
+        + PREFIX_EXERCISE_SETS + "3 "
+        + PREFIX_EXERCISE_REPS + "10 "
+        + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "1\n"
         + "Parameters: INDEX (must be a positive integer) "
         + "[" + PREFIX_EXERCISE_ARM + "] "
         + "[" + PREFIX_EXERCISE_LEG + "] "
@@ -34,11 +39,6 @@ public class FitAddCommandMessages extends Messages {
         + "[" + PREFIX_EXERCISE_SHOULDER + "] "
         + "[" + PREFIX_EXERCISE_ABS + "] "
         + "[" + PREFIX_EXERCISE_ALL + "]\n"
-        + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_EXERCISE_NAME + "squats "
-        + PREFIX_EXERCISE_SETS + "3 "
-        + PREFIX_EXERCISE_REPS + "10 "
-        + PREFIX_EXERCISE_BREAK_BETWEEN_SETS + "1\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_EXERCISE_ARM;
 

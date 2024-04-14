@@ -14,10 +14,10 @@ public class FitDeleteCommandMessages extends Messages {
         + "by their corresponding index.\n"
         + "Parameters: INDEX (must be a positive integer) "
         + PREFIX_EXERCISE_NAME + "EXERCISE_NAME\n"
-        + "Parameters: INDEX (must be a positive integer) "
-        + PREFIX_FITDELETE_DELETE_ALL + "\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_EXERCISE_NAME + "squats\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + PREFIX_FITDELETE_DELETE_ALL + "\n"
         + "Example: " + COMMAND_WORD + " 1 "
         + PREFIX_FITDELETE_DELETE_ALL;
 
