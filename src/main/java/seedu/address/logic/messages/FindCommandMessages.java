@@ -17,14 +17,14 @@ public class FindCommandMessages extends Messages {
     public static final String COMMAND_WORD = "find";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Lists all clients whose specified attribute contains the specified keyword.\n"
+            + ": Finds all clients that match the specified attributes.\n"
             + "Parameters: "
             + "[" + PREFIX_NAME + "NAME] "
             + "[" + PREFIX_PHONE + "PHONE] "
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
-            + "[" + PREFIX_WEIGHT + "WEIGHT] "
-            + "[" + PREFIX_HEIGHT + "HEIGHT] "
+            + "[" + PREFIX_WEIGHT + "RANGE] "
+            + "[" + PREFIX_HEIGHT + "RANGE] "
             + "[" + PREFIX_NOTE + "NOTE] "
             + "[" + PREFIX_TAG + "TAG] "
             + "\nExample: " + COMMAND_WORD + " "
