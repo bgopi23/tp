@@ -686,7 +686,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3b. User enters an invalid command
     * 3b1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case resumes
+    * Step 3b1 is repeated until the user enters a valid command.
+    * Use case resumes at step 4.
   
 * 3c. User tries to edit a client's identifying details to match another client that already exists in FitBook
     * 3c1. FitBook alerts the user that a client with that name and details already exists
