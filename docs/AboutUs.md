@@ -14,7 +14,7 @@ We are a team based in the [School of Computing, National University of Singapor
 <img src="images/dillontkh.png" width="200px">
 
 [[github](https://github.com/dillontkh)]
-[[portfolio](team/johndoe.md)]
+[[linkedin](https://www.linkedin.com/in/dillontkh/)]
 
 - Role: Team Lead
 - Responsible for overall project coordination.
