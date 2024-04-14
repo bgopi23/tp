@@ -691,7 +691,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   
 * 3c. User tries to edit a client's identifying details to match another client that already exists in FitBook
     * 3c1. FitBook alerts the user that a client with that name and details already exists
-    * Use case resumes
+    * Step 3c1 is repeated until the user specifies a valid edit that will not result in a duplicate client.
+    * Use case resumes at step 4.
 
 <hr>
 
