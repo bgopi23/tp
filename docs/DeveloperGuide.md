@@ -271,7 +271,7 @@ For more details on how the `note` field interacts with the `add` and `edit` com
 
 ##### Interacting with the `note` command
 
-The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 nt/Likes to eat`.
+The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 Likes to eat`.
 
 ![AddNoteSequenceDiagram](images/AddNoteSequenceDiagram.png)
 
