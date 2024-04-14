@@ -579,23 +579,20 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view list
-1. FitBook shows a list of clients
-1. User requests to delete a specific client in the list
-1. FitBook deletes the client from the list
-1. Use case ends
+1. User requests to view list.
+1. FitBook shows a list of clients.
+1. User requests to delete a specific client in the list.
+1. FitBook deletes the client from the list.
+1. Use case ends.
 
 **Extensions**
 
 * 2a. The list is empty.
-
-  Use case ends.
+    * Use case ends.
 
 * 3a. The given index is invalid.
-
     * 3a1. FitBook shows an error message.
-
-      Use case resumes at step 2
+    * Use case resumes at step 2.
 
 <hr>
 
@@ -607,10 +604,10 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view usage instructions
-1. FitBook displays the usage instructions such as how to add, edit, delete or search for clients
-1. User reads the instructions to understand how to use the FitBook
-1. Use case ends
+1. User requests to view usage instructions.
+1. FitBook displays the usage instructions such as how to add, edit, delete or search for clients.
+1. User reads the instructions to understand how to use the FitBook.
+1. Use case ends.
 
 <hr>
 
@@ -622,19 +619,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add a new client
-1. FitBook displays a success message after the new client is successfully added
-1. Use case ends
+1. User requests to add a new client.
+1. FitBook displays a success message after the new client is successfully added.
+1. Use case ends.
 
 **Extensions**
 
-* 1a. User enters an invalid command
-    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case resumes
-* 1b. User tries to add a client that already exists in FitBook
-    * 1b1. FitBook alerts the user that a client with that name and details already exists
-    * 1b2. FitBook provides possible solutions (use different details if the client name is the same)
-    * Use case resumes
+* 1a. User enters an invalid command.
+    * 1a1. FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case resumes.
+* 1b. User tries to add a client that already exists in FitBook.
+    * 1b1. FitBook alerts the user that a client with that name and details already exists.
+    * Use case resumes.
 
 <hr>
 
@@ -646,16 +642,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to see a list of all clients
-1. FitBook displays a success message followed by the list of clients
-1. User views the list
-1. Use case ends
+1. User requests to see a list of all clients.
+1. FitBook displays a success message followed by the list of clients.
+1. User views the list.
+1. Use case ends.
 
 **Extensions**
 
-* 2a. User enters an invalid command
-    * 2b1. FitBook alerts the user that the command is invalid and displays the correct format
-    * Use case resumes
+* 2a. User enters an invalid command.
+    * 2b1. FitBook alerts the user that the command is invalid and displays the correct format.
+    * Use case resumes.
 
 <hr>
 
@@ -667,9 +663,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to add or overwrite an exercise for a specific client
-2. FitBook updates the client's exercise information and displays a success message
-3. Use case ends
+1. User requests to add or overwrite an exercise for a specific client.
+2. FitBook updates the client's exercise information and displays a success message.
+3. Use case ends.
 
 **Extensions**
 
