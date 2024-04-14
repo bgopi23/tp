@@ -654,10 +654,37 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **Extensions**
 
 * 2a. User enters an invalid command
-    * 2b1. FitBook alerts the user that the command is invalid and displays the correct format
+    * 2a1. FitBook alerts the user that the command is invalid and displays the correct format
     * Use case resumes
 
 <hr>
+
+**System**: FitBook
+
+**Use case**: UC05 - Find a client
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to find a client by an attribute.
+1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
+1. Use case Ends
+
+**Extensions**
+* 1a. User does not specify any attribute to filter by.
+  * 1a1. Fitbook alerts the user that the command is invalid and displays the correct command format
+  * Step 1a1 is repeated until the user specifies an attribute to filter by.
+  * Use case resumes at step 2.
+
+* 1b. User specifies a filter that does not match any clients in Fitbook.
+  * 1b1. Fitbook displays a no client found message and displays an empty list of clients.
+  * Use case ends.
+
+* 1c. User specifies a parameter in an invalid format.
+  * 1c1. Fitbook alerts the user that the parameter format is invalid and displays the correct parameter format.
+  * Step 1c1 is repeated until the user specifies a correct parameter format.
+  * Use case resumes at step 2.
 
 ### Non-Functional Requirements
 
