@@ -674,20 +674,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Glossary
 
+* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
+* **API(Application Programming Interface)**: Defines how software components interact with each other
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
 * **Archive**: Moving a contact to a secondary space in FitBook that is of less importance
-* **API(Application Programming Interface)**: Defines how software components interact with each other
+* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Client**: A personal training customer of the target user (ie. people engaging the services of a Personal Trainer)
 * **Contact**: A person whose details are stored in FitBook
-* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Fit**: In good health, especially because of regular exercise
-* **Fitness**: The condition of being physically fit and healthy
 * **FitBook**: An address book with additional capabilities for managing personal training clients
+* **Fitness**: The condition of being physically fit and healthy
 * **GUI (Graphical User Interface)**: The visual interface of FitBook that users interact with
 * **Healthy**: In a good physical or mental condition
-* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **JSON (JavaScript Object Notation)**:  A lightweight data-interchange format used for storing and transporting data
+* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **Low-end devices**: Computers with lesser than average hardware resources such as processing power and memory
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Personal Health Information**: Details such as weight, body mass index, allergies, medical history etc.
@@ -696,10 +697,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Responsive performance**: No noticeable delay of FitBook during user interaction
 * **Sequence Diagram**: A UML diagram that depicts how objects interact with each other in a sequence
+* **UI (User Interface)**: Manages user interactions with graphic interface elements
 * **Usage instructions**: Documentation detailing FitBook's features and how to navigate about them
 * **User**: The person using FitBook
-* **UI (User Interface)**: Manages user interactions with graphic interface elements
-* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
 * **vCard**: A data format for contact information. Detailed information can be found in [RFC 6350](https://datatracker.ietf.org/doc/html/rfc6350).
 
 --------------------------------------------------------------------------------------------------------------------
