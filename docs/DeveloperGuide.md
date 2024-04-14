@@ -681,7 +681,8 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
     * 3a1. FitBook shows an error message.
-    * Use case resumes at step 2
+    * Step 3a1 is repeated until the user gives a valid index.
+    * Use case resumes at step 4.
 
 * 3b. User enters an invalid command
     * 3b1. FitBook alerts the user that the command is invalid and displays the correct format
