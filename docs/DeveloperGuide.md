@@ -667,12 +667,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view list of all clients
-1. FitBook shows a list of clients
-1. User requests to edit the details of a specific client in the list
-1. FitBook edits the details of a client in the list
-1. FitBook displays a success message after the details of the client is successfully edited
-1. Use case ends
+1. User requests to view list of all clients.
+1. FitBook shows a list of clients.
+1. User requests to edit the details of a specific client in the list.
+1. FitBook edits the details of a client in the list.
+1. FitBook displays a success message after the details of the client is successfully edited.
+1. Use case ends.
 
 **Extensions**
 
@@ -684,13 +684,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Step 3a1 is repeated until the user gives a valid index.
     * Use case resumes at step 4.
 
-* 3b. User enters an invalid command
-    * 3b1. FitBook alerts the user that the command is invalid and displays the correct format
+* 3b. User enters an invalid command.
+    * 3b1. FitBook alerts the user that the command is invalid and displays the correct format.
     * Step 3b1 is repeated until the user enters a valid command.
     * Use case resumes at step 4.
   
-* 3c. User tries to edit a client's identifying details to match another client that already exists in FitBook
-    * 3c1. FitBook alerts the user that a client with that name and details already exists
+* 3c. User tries to edit a client's identifying details to match another client that already exists in FitBook.
+    * 3c1. FitBook alerts the user that a client with that name and details already exists.
     * Step 3c1 is repeated until the user specifies a valid edit that will not result in a duplicate client.
     * Use case resumes at step 4.
 
