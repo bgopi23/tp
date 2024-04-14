@@ -21,10 +21,10 @@ public class FitDeleteCommandMessages extends Messages {
             + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
 
     public static final String MESSAGE_DELETE_ALL_EXERCISES_FAILURE = "Client does not have any existing exercises";
-    public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST = "Exercise name '%s' does not exist for the client";
+    public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST =
+            "Exercise name '%s' does not exist for the client";
     public static final String MESSAGE_DELETE_EXERCISE_SUCCESS = "Successfully removed exercise '%s' for client";
-    public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS
-            = "Successfully removed all exercise(s) for client";
+    public static final String MESSAGE_DELETE_ALL_EXERCISES_SUCCESS = "Successfully removed all exercise(s) for client";
     public static final String MESSAGE_CONCURRENT_PREFIX = String.format(
             "Exercise name parameter cannot be supplied together with '/all' prefix\n%1$s",
             MESSAGE_USAGE);
