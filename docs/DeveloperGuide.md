@@ -675,7 +675,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ## Glossary
 
 * **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
-* **API(Application Programming Interface)**: Defines how software components interact with each other
+* **API (Application Programming Interface)**: Defines how software components interact with each other
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
 * **Archive**: Moving a contact to a secondary space in FitBook that is of less importance
