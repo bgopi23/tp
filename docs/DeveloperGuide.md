@@ -813,3 +813,7 @@ Fields that exceed the length of the line would be truncated. Complete informati
 6. **Restrict the number of weight entries per day to 1**
 
 Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+
+7. **Allow names containing non-alphanumeric characters**
+
+Clients may have non-English names, or whose legal names contain non-alphanumeric characters. We should allow users to enter names that contain non-alphanumeric characters to make FitBook more inclusive.
