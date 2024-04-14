@@ -667,7 +667,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **MSS**
 
-1. User requests to view list
+1. User requests to view list of all clients
 1. FitBook shows a list of clients
 1. User requests to edit the details of a specific client in the list
 1. FitBook edits the details of a client in the list
