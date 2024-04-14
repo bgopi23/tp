@@ -1,9 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_CLIENTS_FOUND_OVERVIEW;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_NO_CLIENTS_FOUND;
 import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_ONE_CLIENT_FOUND;
-import static seedu.address.logic.messages.FindCommandMessages.MESSAGE_CLIENTS_FOUND_OVERVIEW;
 
 import seedu.address.commons.util.ToStringBuilder;
 import seedu.address.model.Model;
