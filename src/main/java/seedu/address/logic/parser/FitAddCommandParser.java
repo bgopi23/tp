@@ -7,7 +7,6 @@ import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_EXERCIS
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_COMMAND_FORMAT_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_INVALID_INDEX_FITADD;
 import static seedu.address.logic.messages.FitAddCommandMessages.MESSAGE_NO_INDEX_FITADD;
-import static seedu.address.logic.messages.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.ALL_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.DEFAULT_EXERCISE_PREFIXES;
 import static seedu.address.logic.parser.CliSyntax.EXERCISE_VALUE_PREFIXES;
@@ -85,7 +84,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      * @throws ParseException If the client index is invalid or cannot be parsed.
      */
     private Index parseIndex(ArgumentMultimap argumentMultimap) throws ParseException {
-        // Parse index of client to add exercise to
         Index index;
         try {
             index = ParserUtil.parseIndex(argumentMultimap.getPreamble());
@@ -116,7 +114,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      */
     private void verifyNoArgumentValueForPrefixes(ArgumentMultimap argumentMultimap) throws ParseException {
         if (argumentMultimap.hasArgumentValueForPrefixes(DEFAULT_EXERCISE_PREFIXES)) {
-            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT);
+            throw new ParseException(MESSAGE_INVALID_COMMAND_FORMAT_FITADD);
         }
     }
 
@@ -166,7 +164,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
      * @throws ParseException If the parsing of exercise parameters fails.
      */
     private ExerciseToAdd parseExerciseToAdd(ArgumentMultimap argumentMultimap) throws ParseException {
-        // If individual exercise details are provided, add that exercise
         String exerciseName = ParserUtil.parseExerciseName(argumentMultimap.getValue(PREFIX_EXERCISE_NAME));
         Optional<Integer> exerciseSets = ParserUtil.parseExerciseSets(argumentMultimap.getValue(PREFIX_EXERCISE_SETS));
         Optional<Integer> exerciseReps = ParserUtil.parseExerciseReps(argumentMultimap.getValue(PREFIX_EXERCISE_REPS));
@@ -232,6 +229,7 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
     private Set<ExerciseToAdd> getExercisesToAdd(ArgumentMultimap argumentMultimap, boolean hasExerciseNamePrefix)
             throws ParseException {
         Set<ExerciseToAdd> exercisesToAdd = new HashSet<>();
+
         if (hasExerciseNamePrefix) {
             exercisesToAdd.add(parseExerciseToAdd(argumentMultimap));
         } else {
@@ -262,7 +260,6 @@ public class FitAddCommandParser implements Parser<FitAddCommand> {
         verifyNoArgumentValueForPrefixes(argumentMultimap);
         verifyNoDuplicatePrefixes(argumentMultimap);
 
-        // Get existence of relevant prefixes
         boolean hasExerciseNamePrefix = argumentMultimap.contains(PREFIX_EXERCISE_NAME);
         boolean hasExerciseValuesPrefix = argumentMultimap.containsAny(EXERCISE_VALUE_PREFIXES);
         boolean hasDefaultExercisePrefixes = argumentMultimap.containsAny(DEFAULT_EXERCISE_PREFIXES);
