@@ -314,30 +314,28 @@ Examples:
   * `Reps`: 1 (default value).
   * `Break between sets`: 0 seconds (default value).
 
-  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
-
 * `fitadd 1 n/burpees r/5` - Adds `burpees` exercise to the client at index `1` with the following values:
   * `Sets`: 1 (default value).
   * `Reps`: 5 (specified value).
   * `Break between sets`: 0 seconds (default value).
-
-  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
 
 * `fitadd 1 n/burpees s/3 r/5 b/30` - Adds `burpees` exercise to the client at index `1` with the following values:
   * `Sets`: 3 (specified value).
   * `Reps`: 5 (specified value).
   * `Break between sets`: 30 seconds (specified value).
 
-  If `burpees` already exists, please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of this command.
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+If `burpees` already exists for the 3 examples above, , please refer to this [warning](#fitadd-overwrite-warning) for the behaviour of the commands.
+</div>
 
 * `fitadd 2 /arms` - Adds a default set of exercises from the `arms` category to the client at index `2`.
 
-  If any of the exercises within the `arms` category already exists, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
-
-
 * `fitadd 2 /arms /legs` - Adds a default set of exercises from the `arms` and `legs` category to the client at index `2`.
 
-  If any of the exercises within the `arms` or `legs` category already exists, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
+<div markdown="block" class="alert alert-warning">:warning: **Warning**
+If any of the exercises within the `arms` or `legs` category already exists for the above 2 commands, please refer to this [warning](#fitadd-prefix-warning) for the behaviour of this command.
+</div>
+
 
 <hr>
 
