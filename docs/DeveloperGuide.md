@@ -97,10 +97,17 @@ in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
-inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
-visible GUI.
+The UI consists of a `MainWindow` that is made up of parts:
+
+* `CommandBox`
+* `ResultDisplay`
+* `PersonListPanel`
+* `PersonDetailsPanel`
+* `StatusBarFooter`
+
+There is also a `HelpWindow` that is not always displayed and is not part of the `MainWindow`.
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
