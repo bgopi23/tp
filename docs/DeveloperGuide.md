@@ -277,7 +277,7 @@ The sequence diagram below shows how the components interact with each other whe
 
 The diagram highlights the four main components of FitBook, highlighted in their respective colors. For more information regarding the four main components, see [Main components of the architecture](#main-components-of-the-architecture).
 
-> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
+> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`).
 
 #### Weight tracking feature
 The weight tracking feature allows users to keep track of past weight measurements of a client. You may refer to the [parameter constraints](#parameter-constraints) for more information.
