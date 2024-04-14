@@ -32,7 +32,8 @@ public class Height extends Attribute<Float> {
     }
 
     /**
-     * Determine if the height value stored is within the range specified in heightRange.
+     * Determines if the height value stored is within the range specified in
+     * heightRange.
      * Returns true if specified value is within heightRange.
      *
      * @param heightRange Range of height to check against.
@@ -111,7 +112,7 @@ public class Height extends Attribute<Float> {
     }
 
     /**
-     * Check if the value is valid (i.e. greater than 0).
+     * Checks if the value is valid (i.e. greater than 0).
      */
     public boolean isValid() {
         return this.getValue() > 0f;

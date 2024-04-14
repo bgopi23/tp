@@ -15,8 +15,8 @@ import seedu.address.model.tag.Tag;
  */
 public class TagSetContainsAllTagsPredicate extends SearchPredicate<Set<Tag>> {
     /**
-     * Construct a predicate to test that a {@code Person}'s {@code TagSet} contains
-     * any tags in a given TagSet.
+     * Constructs a predicate to test that a {@code Person}'s {@code TagSet}
+     * contains any tags in a given TagSet.
      *
      * @param tags tags to test against
      */

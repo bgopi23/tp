@@ -77,7 +77,6 @@ public class PersonDetailsPanel extends UiPart<Region> {
     @FXML
     private TabPane trackableFieldsTabPane;
 
-
     private Tab weightTab;
     private Tab exerciseTab;
     private LineChart<String, Number> weightChart;
@@ -91,7 +90,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
 
     /**
      * Creates a new PersonDetailsPanel and clears all fields.
-     * Labels in the {@code .FXML} file contain text with the field name for convenience.
+     * Labels in the {@code .FXML} file contain text with the field name for
+     * convenience.
      */
     public PersonDetailsPanel() {
         super(FXML);
@@ -127,7 +127,8 @@ public class PersonDetailsPanel extends UiPart<Region> {
     /**
      * Updates the PersonDetailsPanel with the details of the given Person.
      *
-     * @param person the Person object containing the information to update the fields with.
+     * @param person the Person object containing the information to update the
+     *               fields with.
      */
     public void update(Person person) {
         this.person = person;
