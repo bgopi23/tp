@@ -378,7 +378,7 @@ Examples:
 
 Format: `weight INDEX [WEIGHT] `
 
-* Adds a weight value to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
+* Adds a weight value (kg) to a client specified by `INDEX`. The index refers to the index number shown in the displayed client list.
 * Refer to the [valid parameter table](#parameter-constraints) for more details about input restrictions.
 * Weight values specified in this command will be added as a new weight value to the specified client. To edit the latest weight of the client, use the [`edit`](#editing-a-client--edit) command.
 * If more than one value is entered, only the first value will be parsed. Extraneous parameters after the first value will be ignored.
