@@ -659,6 +659,38 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
+**Use case**: UC05 - Add or overwrite exercise for a client
+
+**System**: FitBook
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to add or overwrite an exercise for a specific client
+2. FitBook updates the client's exercise information and displays a success message
+3. Use case ends
+
+**Extensions**
+
+* 1a. The specified index does not exist.
+    * 1a1. FitBook shows an error message.
+    * Use case ends.
+
+* 1b. The exercise information is incomplete or incorrect.
+    * 1b1. FitBook alerts the user about the incorrect format and displays the correct format.
+    * Use case resumes at step 1.
+
+* 2a. The specified exercise does not exist yet.
+  * 2a1.FitBook adds an exercise with the specified exercise values (sets, reps, and break time). Any exercise value not specified will be given a default value.
+  * Use case resumes.
+
+* 2b. The specified exercise already exists.
+  * 2b1. FitBook overwrites the exercise values of the exercise with the specified exercise values. Any exercise values not specified will remain the same.
+  * Use case resumes.
+
+<hr>
+
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
