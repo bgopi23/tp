@@ -669,7 +669,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 1. User requests to find a client by an attribute.
 1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
-1. Use case Ends
+1. Use case ends.
 
 **Extensions**
 * 1a. User does not specify any attribute to filter by.
