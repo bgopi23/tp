@@ -820,4 +820,4 @@ FitBook's team size is 5.
     
 1. **Implement usage of escape characters to allow input of prefixes into certain fields**
 
-    Users might want to enter keywords that coincides with the prefixes to be used with commands such as `note`, `address` or `fitadd`. For example, `add n/Tom p/123 a/LazyTown p/o box number 999` is currently not allowed as `p/` in `p/o` is treated as a prefix for phone number. Hence, we intend to implement the usage escape characters to allow for such inputs.
+    Users might want to enter text in certain fields (e.g. `note`, `address`) that coincide with the prefixes for other attributes. For example, `add n/Tom p/123 a/LazyTown p/o box number 999` is currently not allowed as `p/` in `p/o` is treated as a prefix for phone number. Hence, we intend to implement the usage of escape characters to allow for such inputs.
