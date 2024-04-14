@@ -428,8 +428,8 @@ Format: `find [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [w/RANGE] [h/RANGE] [nt/N
 
 
 Examples:
-* `find n/Wendy` - Finds all clients whose name contains `Wendy`
-* `find n/Wendy t/Lover` - Finds all clients who name contains `Wendy` and is tagged with `Lover`
+* `find n/Wendy` - Finds all clients whose names contain `Wendy`
+* `find n/Wendy t/Lover` - Finds all clients whose names contain `Wendy` and are tagged with `Lover`
 
 <hr>
 
