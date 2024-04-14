@@ -787,34 +787,42 @@ FitBook's team size is 5.
 
 1. **Allow for more flexible weight management**
 
-The current implementation of tracking clients' weights only allows users to add, modify or delete the latest weight value at the current date and time. We plan to make this feature more flexible by allowing users to add/modify a client's weight at a specified date and time of their choice.
+    The current implementation of tracking clients' weights only allows users to add, modify or delete the latest weight value at the current date and time. We plan to make this feature more flexible by allowing users to add/modify a client's weight at a specified date and time of their choice.
 
-2. **Provide more specific error messages**
+1. **Provide more specific error messages**
 
-When removing optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages when a client edits a field that has not changed / has nothing to remove, where the error message will be similar to the one seen in the `weight` field.
+    When removing optional fields of a client, we should provide more detailed error messages. This is currently only available for the `weight` field, where removing a weight value from a client that has no weight value associated with them prompts the error message, `There are no more weight values to be removed. This client has no more weight values associated with them.`. We plan to provide more specific error messages when a client edits a field that has not changed / has nothing to remove, where the error message will be similar to the one seen in the `weight` field.
 
-3. **Always display details of client being modified**
+1. **Always display details of client being modified**
 
-To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
+    To improve clarity for users, the details pane should always show the information of the client that is being modified/had just been modified.
 
-> Some examples where this could be implemented:
->
-> * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
-> * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
+    > Some examples where this could be implemented:
+    >
+    > * Modifying exercises using `fitadd` changes the tab back to weight, if there is a weight tab. It should show the exercises tab.
+    > * Using `note 1 /edit` while client 2 is selected would edit client 1's note, but the details pane still shows client 2.
 
-4. **Better keyboard navigation support**
+1. **Better keyboard navigation support**
 
-For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
+    For advanced users, we can provide a better keyboard navigation experience by making the element being selected with `Tab` clearer. We also plan to remove unnecessary `Tab` presses between elements of interest. e.g. to get from the command input box to the client list requires 2 `Tab`s even though the user cannot interact with the result response box.
 
-5. **Adaptive client list entries**
+1. **Adaptive client list entries**
 
-The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
-  * Name
-  * Tags
-  * Phone Number
+    The client list will always show the most important information at a glance. To reduce clutter, each entry of the client list will only show the following fields, each in a single line.
+      * Name
+      * Tags
+      * Phone Number
 
-Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
+    Fields that exceed the length of the line would be truncated. Complete information can always be viewed in the client details panel.
 
-6. **Restrict the number of weight entries per day to 1**
+1. **Restrict the number of weight entries per day to 1**
 
-Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+    Since a client's weight won't change much within a day, we can restrict the number of weight entries per day to 1. Having multiple weight entries within a day would also distort the weight-tracking graph.
+
+1. **Allow names containing non-alphanumeric characters**
+
+    Clients may have non-English names, or whose legal names contain non-alphanumeric characters. We should allow users to enter names that contain non-alphanumeric characters to make FitBook more inclusive.
+    
+1. **Implement usage of escape characters to allow input of prefixes into certain fields**
+
+    Users might want to enter text in certain fields (e.g. `note`, `address`) that coincide with the prefixes for other attributes. For example, `add n/Tom p/123 a/LazyTown p/o box number 999` is currently not allowed as `p/` in `p/o` is treated as a prefix for phone number. Hence, we intend to implement the usage of escape characters to allow for such inputs.
