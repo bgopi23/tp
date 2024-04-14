@@ -52,8 +52,8 @@ Given below is a quick overview of main components and how they interact with ea
 **Main components of the architecture**<a name="main-components-of-the-architecture"></a>
 
 **`Main`** (consisting of
-classes [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java)
-and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java)) is
+classes [`Main`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/Main.java)
+and [`MainApp`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/MainApp.java)) is
 in charge of the app launch and shut down.
 
 * At app launch, it initializes the other components in the correct sequence, and connects them up with each other.
@@ -93,20 +93,27 @@ The sections below give more details of each component.
 ### UI component
 
 The **API** of this component is specified
-in [`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+in [`Ui.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/ui/Ui.java)
 
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
-The UI consists of a `MainWindow` that is made up of parts
-e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`,
-inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the
-visible GUI.
+The UI consists of a `MainWindow` that is made up of parts:
+
+* `CommandBox`
+* `ResultDisplay`
+* `PersonListPanel`
+* `PersonDetailsPanel`
+* `StatusBarFooter`
+
+There is also a `HelpWindow` that is not always displayed and is not part of the `MainWindow`.
+
+All these, including the `MainWindow`, inherit from the abstract `UiPart` class which captures the commonalities between classes that represent parts of the visible GUI.
 
 The `UI` component uses the JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that
 are in the `src/main/resources/view` folder. For example, the layout of
-the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
+the [`MainWindow`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/ui/MainWindow.java)
 is specified
-in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+in [`MainWindow.fxml`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -117,7 +124,7 @@ The `UI` component,
 
 ### Logic component
 
-**API** : [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+**API** : [`Logic.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
 Here's a (partial) class diagram of the `Logic` component:
 
@@ -157,7 +164,7 @@ How the parsing works:
 
 ### Model component
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/model/Model.java)
 
 <img src="images/ModelClassDiagram.png" width="450" />
 
@@ -182,7 +189,7 @@ The `Model` component,
 
 ### Storage component
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2324S2-CS2103T-T17-3/tp/tree/master/src/main/java/seedu/address/storage/Storage.java)
 
 <img src="images/StorageClassDiagram.png" width="550" />
 
@@ -264,13 +271,13 @@ For more details on how the `note` field interacts with the `add` and `edit` com
 
 ##### Interacting with the `note` command
 
-The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 nt/Likes to eat`.
+The sequence diagram below shows how the components interact with each other when the user inputs the command `note 1 Likes to eat`.
 
 ![AddNoteSequenceDiagram](images/AddNoteSequenceDiagram.png)
 
 The diagram highlights the four main components of FitBook, highlighted in their respective colors. For more information regarding the four main components, see [Main components of the architecture](#main-components-of-the-architecture).
 
-> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`, or `note 1 nt/`).
+> The above sequence diagram also applies to the removal of a note from an existing client when no input string or prefix is entered for the `note` command. (i.e. `note 1`).
 
 #### Weight tracking feature
 The weight tracking feature allows users to keep track of past weight measurements of a client. You may refer to the [parameter constraints](#parameter-constraints) for more information.
@@ -515,13 +522,6 @@ The following activity diagram summarizes what happens when a user executes a ne
     * Pros: Will use less memory (e.g. for `delete`, just save the client being deleted).
     * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -674,20 +674,21 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 ## Glossary
 
+* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org), upon which FitBook is built.
+* **API (Application Programming Interface)**: Defines how software components interact with each other
 * **Above average typing speed**: Typing speed of more than 40 words per minute
 * **Architecture**: The high-level design and code structure of FitBook
 * **Archive**: Moving a contact to a secondary space in FitBook that is of less importance
-* **API(Application Programming Interface)**: Defines how software components interact with each other
+* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Client**: A personal training customer of the target user (ie. people engaging the services of a Personal Trainer)
 * **Contact**: A person whose details are stored in FitBook
-* **CLI (Command Line Interface)**: A user interface that is based on interaction with the terminal or console
 * **Fit**: In good health, especially because of regular exercise
-* **Fitness**: The condition of being physically fit and healthy
 * **FitBook**: An address book with additional capabilities for managing personal training clients
+* **Fitness**: The condition of being physically fit and healthy
 * **GUI (Graphical User Interface)**: The visual interface of FitBook that users interact with
 * **Healthy**: In a good physical or mental condition
-* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **JSON (JavaScript Object Notation)**:  A lightweight data-interchange format used for storing and transporting data
+* **JavaFX**: A set of graphics and media packages that enables developers to design, create, test and debug applications
 * **Low-end devices**: Computers with lesser than average hardware resources such as processing power and memory
 * **Mainstream OS**: Windows, Linux, Unix, MacOS
 * **Personal Health Information**: Details such as weight, body mass index, allergies, medical history etc.
@@ -696,10 +697,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 * **Private contact detail**: A contact detail that is not meant to be shared with others
 * **Responsive performance**: No noticeable delay of FitBook during user interaction
 * **Sequence Diagram**: A UML diagram that depicts how objects interact with each other in a sequence
+* **UI (User Interface)**: Manages user interactions with graphic interface elements
 * **Usage instructions**: Documentation detailing FitBook's features and how to navigate about them
 * **User**: The person using FitBook
-* **UI (User Interface)**: Manages user interactions with graphic interface elements
-* **AB3**: [AddressBook-Level3](https://github.com/se-edu/addressbook-level3), a project created by the [SE-EDU initiative](https://se-education.org).
 * **vCard**: A data format for contact information. Detailed information can be found in [RFC 6350](https://datatracker.ietf.org/doc/html/rfc6350).
 
 --------------------------------------------------------------------------------------------------------------------
@@ -729,8 +729,6 @@ testers are expected to do more *exploratory* testing.
     1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
-
 ### Deleting a client
 
 1. Deleting a client while all clients are being shown
@@ -747,15 +745,20 @@ testers are expected to do more *exploratory* testing.
     1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
        Expected: Similar to previous.
 
-1. _{ more test cases …​ }_
-
 ### Saving data
 
-1. Dealing with missing/corrupted data files
+1. Dealing with corrupted data files
 
-    1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Open the data file at `data/addressbook.json`.
+   1. Delete a line containing the `"name"` attribute for a person.
+    
+       Before: <img src="images/CorruptingDataBefore.png" height="100"> 
 
-1. _{ more test cases …​ }_
+       After: <img src="images/CorruptingDataAfter.png" height="80">
+
+   1. Open FitBook
+   
+    Expected: FitBook starts with an empty address book. No clients are loaded.
 
 ## Parameter Constraints
 
