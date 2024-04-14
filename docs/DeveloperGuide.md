@@ -659,6 +659,40 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
+**System**: FitBook
+
+**Use case**: UC05 - Edit a client's details
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to view list
+1. FitBook shows a list of clients
+1. User requests to edit the details of a specific client in the list
+1. FitBook edits the details of a client in the list
+1. FitBook displays a success message after the details of the client is successfully edited
+1. Use case ends
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. FitBook shows an error message.
+    * Use case resumes at step 2
+
+* 3b. User enters an invalid command
+    * 3b1. FitBook alerts the user that the command is invalid and displays the correct format
+    * Use case resumes
+  
+* 3c. User tries to edit a client's identifying details to match another client that already exists in FitBook
+    * 3c1. FitBook alerts the user that a client with that name and details already exists
+    * Use case resumes
+
+<hr>
+
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
