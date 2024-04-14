@@ -687,6 +687,30 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 <hr>
 
+**Use case**: UC06 - Delete Exercise for a Client
+
+**System**: FitBook
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to delete an exercise from a specific client.
+2. FitBook deletes the specified exercise and displays a success message.
+3. Use case ends.
+
+**Extensions**
+
+* 1a. The specified index does not exist.
+    * 1a1. FitBook shows an error message.
+    * Use case ends.
+
+* 1b. The specified exercise does not exist.
+    * 1b1. FitBook alerts the user that the exercise is not found.
+    * Use case resumes at step 1.
+
+<hr>
+
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
