@@ -715,13 +715,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: FitBook
 
-**Use case**: UC07 - Find a client
+**Use case**: UC07 - Find clients
 
 **Actor**: User
 
 **MSS**
 
-1. User requests to find a client by an attribute.
+1. User requests to find clients by filtering based on attributes.
 1. Fitbook displays a success message with the number of clients found, along with the filtered list of clients.
 1. Use case ends.
 
