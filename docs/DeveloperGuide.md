@@ -661,7 +661,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 **System**: FitBook
 
-**Use case**: UC05 - Edit a client's details
+**Use case**: UC07 - Edit a client's details
 
 **Actor**: User
 
