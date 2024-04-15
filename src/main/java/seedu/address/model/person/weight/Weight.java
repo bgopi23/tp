@@ -2,7 +2,6 @@ package seedu.address.model.person.weight;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.model.person.messages.WeightMessages.MESSAGE_RANGE;
-import static seedu.address.model.person.messages.WeightMessages.VALIDATION_REGEX;
 
 import javafx.util.Pair;
 import seedu.address.model.person.Attribute;
@@ -13,6 +12,8 @@ import seedu.address.model.person.Attribute;
  */
 public class Weight extends Attribute<Float> {
     public static final Float WEIGHT_MAX_VALUE = 5000f;
+    /** Regular expression to check for a valid weight value. */
+    public static final String VALIDATION_REGEX = "^(?:[0-9]+(?:\\.[0-9]*)?|\\.[0-9]+)?$";
 
     /**
      * Constructs a {@code Weight}.
