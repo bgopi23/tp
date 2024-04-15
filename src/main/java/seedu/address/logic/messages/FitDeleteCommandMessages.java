@@ -11,8 +11,8 @@ public class FitDeleteCommandMessages extends Messages {
     public static final String COMMAND_WORD = "fitdelete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the specified exercise from the client identified "
-            + "by their corresponding index.\n"
+            + ": Deletes the exercise specified by name, "
+            + "from the client identified by their corresponding index.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_EXERCISE_NAME + "EXERCISE_NAME\n"
             + "Example: " + COMMAND_WORD + " 1 "
