@@ -453,7 +453,7 @@ Format: `delete INDEX`
 
 Examples:
 * `list` followed by `delete 2` - Deletes the second client in the list.
-* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e Deletes the first client whose name contains `Betsy`).
+* `find Betsy` followed by `delete 1`- Deletes the first client in the results of the `find` command (i.e. Deletes the first client whose name contains `Betsy`).
 
 <hr>
 
