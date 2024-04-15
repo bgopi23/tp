@@ -13,11 +13,13 @@ public class FitDeleteCommandMessages extends Messages {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes exercise(s) from the client identified "
         + "by their corresponding index.\n"
         + "Parameters: INDEX (must be a positive integer) "
-        + "[" + PREFIX_EXERCISE_NAME + "EXERCISE_NAME]"
-        + " [" + PREFIX_FITDELETE_DELETE_ALL + "]\n"
+        + PREFIX_EXERCISE_NAME + "EXERCISE_NAME\n"
         + "Example: " + COMMAND_WORD + " 1 "
-        + PREFIX_EXERCISE_NAME + "squats "
-        + "[" + PREFIX_FITDELETE_DELETE_ALL + "] ";
+        + PREFIX_EXERCISE_NAME + "squats\n"
+        + "Parameters: INDEX (must be a positive integer) "
+        + PREFIX_FITDELETE_DELETE_ALL + "\n"
+        + "Example: " + COMMAND_WORD + " 1 "
+        + PREFIX_FITDELETE_DELETE_ALL;
 
     public static final String MESSAGE_DELETE_ALL_EXERCISES_FAILURE = "Client does not have any existing exercises";
     public static final String MESSAGE_EXERCISE_NAME_DOES_NOT_EXIST =
