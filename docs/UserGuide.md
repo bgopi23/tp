@@ -505,7 +505,7 @@ Furthermore, certain edits can cause FitBook to behave in unexpected ways (e.g. 
 </figure>
 
 
-To save a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
+To save a client as a contact to your mobile phone from FitBook, simply scan the QR code next to the contact using your phone's default camera app!
 
 <div markdown="block" class="alert alert-warning">:warning:
 Due to the limited availability of mobile devices for testing, this feature has only been tested on the following devices:
