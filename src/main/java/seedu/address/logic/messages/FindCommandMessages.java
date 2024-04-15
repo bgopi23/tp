@@ -13,7 +13,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEIGHT;
  * Messages used by FindCommand and associated classes.
  */
 public class FindCommandMessages extends Messages {
-
     /** Represents a command word for the find command. */
     public static final String COMMAND_WORD = "find";
 
@@ -48,7 +47,7 @@ public class FindCommandMessages extends Messages {
             + "Parameters: FROM, TO (both of them must be a positive number greater than or equals to 0).\n"
             + "Example: " + COMMAND_WORD + " w/70, 80";
 
-    /** Represents a message to indicate the invalid command format for the find command. */
+    /** Represents a string to indicate the invalid usage of the find command. */
     public static final String MESSAGE_INVALID_COMMAND_FORMAT_FIND = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
             MESSAGE_USAGE);
 }

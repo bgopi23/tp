@@ -15,7 +15,7 @@ import seedu.address.model.person.predicates.CombinedPredicates;
  * Keyword matching is case-insensitive.
  */
 public class FindCommand extends Command {
-    /** Regular expression to check for a valid range input. */
+    /** Represents a regular expression to test for a valid search range input. */
     public static final String VALIDATION_REGEX_RANGE = "^\\d+(\\.\\d+)?,\\s*\\d+(\\.\\d+)?$";
     private final CombinedPredicates predicates;
 
