@@ -83,10 +83,10 @@ Java is a versatile programming language used for developing various application
 
 1. A GUI similar to the one depicted below should appear in a few seconds. The app contains some sample data for you to familiarize yourself with the UI.
 
-<figure style="text-align: center;">
-    <img src="images/UGUI.png">
-    <figcaption><i>FitBook Graphical User Interface</i></figcaption>
-</figure>
+    <figure style="text-align: center;">
+        <img src="images/UGUI.png">
+        <figcaption><i>FitBook Graphical User Interface</i></figcaption>
+    </figure>
 
 1. Read through `help`, type any command listed into the input box and press `enter` <br>
    These are some example commands you can try!
