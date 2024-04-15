@@ -740,6 +740,45 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
   * Step 1c1 is repeated until the user specifies a correct parameter format.
   * Use case resumes at step 2.
 
+  <hr>
+
+**System**: FitBook
+
+**Use case**: UC08 - Edit a client's details
+
+**Actor**: User
+
+**MSS**
+
+1. User requests to view list of all clients.
+1. FitBook shows a list of clients.
+1. User requests to edit the details of a specific client in the list.
+1. FitBook edits the details of a client in the list.
+1. FitBook displays a success message after the details of the client is successfully edited.
+1. Use case ends.
+
+**Extensions**
+
+* 2a. The list is empty.
+    * Use case ends.
+
+* 3a. The given index is invalid.
+    * 3a1. FitBook shows an error message.
+    * Step 3a1 is repeated until the user gives a valid index.
+    * Use case resumes at step 4.
+
+* 3b. User uses an invalid command format.
+    * 3b1. FitBook alerts the user that the command format is invalid and displays the correct format.
+    * Step 3b1 is repeated until the user enters a valid command.
+    * Use case resumes at step 4.
+  
+* 3c. User tries to edit a client's name and phone number which ends up matching another client that already exists in FitBook.
+    * 3c1. FitBook alerts the user that a client with that name and details already exists.
+    * Step 3c1 is repeated until the user specifies a valid edit that will not result in a duplicate client.
+    * Use case resumes at step 4.
+
+<hr>
+
 ### Non-Functional Requirements
 
 <a id="nfr-1"></a>
