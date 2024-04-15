@@ -685,7 +685,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * Use case resumes at step 4.
 
 * 3b. User uses an invalid command format.
-    * 3b1. FitBook alerts the user that the command is invalid and displays the correct format.
+    * 3b1. FitBook alerts the user that the command format is invalid and displays the correct format.
     * Step 3b1 is repeated until the user enters a valid command.
     * Use case resumes at step 4.
   
