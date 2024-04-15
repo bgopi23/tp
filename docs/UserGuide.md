@@ -255,15 +255,15 @@ Format: `fitadd INDEX [/arms] [/legs] [/chest] [/back] [/shoulders] [/abs] [/all
 
 * At least one or more of the default supported prefixes must be supplied.
 
-| Prefix     | Exercises                                                                                                                                             |
-|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Prefix       | Exercises                                                                                                                                                               |
+|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `/arms`      | `bicep curls` - `sets`: 3, `reps`: 10, `break`: 60<br/>`tricep dips` - `sets`: 3, `reps`: 12, `break`: 60<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90           |
 | `/legs`      | `squats` - `sets`: 4, `reps`: 15, `break`: 90<br/>`lunges` - `sets`: 3, `reps`: 12, `break`: 60<br/>`calf raises` - `sets`: 3, `reps`: 20, `break`: 60                  |
 | `/chest`     | `bench press` - `sets`: 4, `reps`: 8, `break`: 120<br/>`push-ups` - `sets`: 3, `reps`: 15, `break`: 90<br/>`chest fly` - `sets`: 3, `reps`: 10, `break`: 90             |
 | `/back`      | `pull-ups` - `sets`: 3, `reps`: 8, `break`: 120<br/>`bent-over rows` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lat pull-downs` - `sets`: 3, `reps`: 12, `break`: 60     |
 | `/shoulders` | `shoulder press` - `sets`: 3, `reps`: 10, `break`: 90<br/>`lateral raises` - `sets`: 3, `reps`: 12, `break`: 60<br/>`front raises` - `sets`: 3, `reps`: 10, `break`: 60 |
 | `/abs`       | `crunches` - `sets`: 3, `reps`: 20, `break`: 60<br/>`plank` - `sets`: 3, `reps`: 60, `break`: 90<br/>`russian twists` - `sets`: 3, `reps`: 15, `break`: 60              |
-| `/all`       | A combination of all exercises from the other prefixes                                                                                                |
+| `/all`       | A combination of all exercises from the other prefixes                                                                                                                  |
 
 <div markdown="block" class="alert alert-warning">:warning: **Warning**
 
